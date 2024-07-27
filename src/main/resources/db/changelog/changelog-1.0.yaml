@@ -4,6 +4,8 @@ databaseChangeLog:
       author: JakubPavlicek
       changes:
 
+        # SEQUENCES
+
         - createSequence:
             sequenceName: movie_id_seq
             startValue: 1
@@ -28,6 +30,8 @@ databaseChangeLog:
             sequenceName: cast_id_seq
             startValue: 1
             incrementBy: 1
+
+        # TABLES
 
         - createTable:
             tableName: movie
@@ -83,12 +87,6 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: country_id
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-                    unique: true
-              - column:
                   name: name
                   type: varchar(15)
                   constraints:
@@ -105,12 +103,6 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-              - column:
-                  name: genre_id
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-                    unique: true
               - column:
                   name: name
                   type: varchar(15)
@@ -129,12 +121,6 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: director_id
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-                    unique: true
-              - column:
                   name: name
                   type: varchar(50)
                   constraints:
@@ -151,12 +137,6 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
-              - column:
-                  name: cast_id
-                  type: varchar(255)
-                  constraints:
-                    nullable: false
-                    unique: true
               - column:
                   name: name
                   type: varchar(50)
@@ -264,3 +244,304 @@ databaseChangeLog:
             constraintName: fk_cast
             referencedTableName: cast
             referencedColumnNames: id
+
+  # INSERT DATA
+
+  - changeSet:
+      id: 2
+      author: JakubPavlicek
+      changes:
+
+        # INSERT GENRES
+
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Action'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Adventure'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Animation'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Biography'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Comedy'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Crime'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Documentary'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Drama'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Family'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Fantasy'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Film-Noir'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'History'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Horror'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Music'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Musical'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Mystery'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Romance'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Sci-Fi'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Sport'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Superhero'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Thriller'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'War'
+        - insert:
+            tableName: genre
+            columns:
+              - column:
+                  name: name
+                  value: 'Western'
+
+        # INSERT COUNTRIES
+
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'United States'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Canada'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'United Kingdom'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Australia'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Germany'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'France'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Italy'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Spain'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Japan'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'China'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'India'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Brazil'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Russia'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Mexico'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'South Korea'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'South Africa'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Netherlands'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Sweden'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Norway'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Denmark'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Finland'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'New Zealand'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Argentina'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Belgium'
+        - insert:
+            tableName: country
+            columns:
+              - column:
+                  name: name
+                  value: 'Switzerland'
