@@ -27,7 +27,7 @@ databaseChangeLog:
             incrementBy: 1
 
         - createSequence:
-            sequenceName: cast_id_seq
+            sequenceName: actor_id_seq
             startValue: 1
             incrementBy: 1
 
@@ -128,12 +128,12 @@ databaseChangeLog:
                     unique: true
 
         - createTable:
-            tableName: cast
+            tableName: actor
             columns:
               - column:
                   name: id
                   type: bigint
-                  defaultValueSequenceNext: cast_id_seq
+                  defaultValueSequenceNext: actor_id_seq
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -179,7 +179,7 @@ databaseChangeLog:
                     foreignKeyName: fk_genre
 
         - createTable:
-            tableName: movie_cast
+            tableName: movie_actor
             columns:
               - column:
                   name: movie_id
@@ -188,11 +188,11 @@ databaseChangeLog:
                     nullable: false
                     foreignKeyName: fk_movie
               - column:
-                  name: cast_id
+                  name: actor_id
                   type: bigint
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_cast
+                    foreignKeyName: fk_actor
 
         # FOREIGN KEYS
 
@@ -232,17 +232,17 @@ databaseChangeLog:
             referencedColumnNames: id
 
         - addForeignKeyConstraint:
-            baseTableName: movie_cast
+            baseTableName: movie_actor
             baseColumnNames: movie_id
             constraintName: fk_movie
             referencedTableName: movie
             referencedColumnNames: id
 
         - addForeignKeyConstraint:
-            baseTableName: movie_cast
-            baseColumnNames: cast_id
-            constraintName: fk_cast
-            referencedTableName: cast
+            baseTableName: movie_actor
+            baseColumnNames: actor_id
+            constraintName: fk_actor
+            referencedTableName: actor
             referencedColumnNames: id
 
   # INSERT DATA

@@ -18,22 +18,22 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class Country {
+public class Director {
 
     @Id
     @SequenceGenerator(
-        name = "country_id_generator",
-        sequenceName = "country_id_seq",
+        name = "director_id_generator",
+        sequenceName = "director_id_seq",
         allocationSize = 1
     )
     @GeneratedValue(
-        generator = "country_id_generator",
+        generator = "director_id_generator",
         strategy = GenerationType.SEQUENCE
     )
     private Long id;
 
     @Column(
-        length = 15,
+        length = 50,
         nullable = false,
         unique = true
     )
