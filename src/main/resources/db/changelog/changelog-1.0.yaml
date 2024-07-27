@@ -1,0 +1,266 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: JakubPavlicek
+      changes:
+
+        - createSequence:
+            sequenceName: movie_id_seq
+            startValue: 1
+            incrementBy: 1
+
+        - createSequence:
+            sequenceName: country_id_seq
+            startValue: 1
+            incrementBy: 1
+
+        - createSequence:
+            sequenceName: genre_id_seq
+            startValue: 1
+            incrementBy: 1
+
+        - createSequence:
+            sequenceName: director_id_seq
+            startValue: 1
+            incrementBy: 1
+
+        - createSequence:
+            sequenceName: cast_id_seq
+            startValue: 1
+            incrementBy: 1
+
+        - createTable:
+            tableName: movie
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  defaultValueSequenceNext: movie_id_seq
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: movie_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: release
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: length
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(1000)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: director_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_director
+
+        - createTable:
+            tableName: country
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  defaultValueSequenceNext: country_id_seq
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: country_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+        - createTable:
+            tableName: genre
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  defaultValueSequenceNext: genre_id_seq
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: genre_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+        - createTable:
+            tableName: director
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  defaultValueSequenceNext: director_id_seq
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: director_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+        - createTable:
+            tableName: cast
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  defaultValueSequenceNext: cast_id_seq
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: cast_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+
+        # JOIN TABLES
+
+        - createTable:
+            tableName: movie_country
+            columns:
+              - column:
+                  name: movie_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_movie
+              - column:
+                  name: country_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_country
+
+        - createTable:
+            tableName: movie_genre
+            columns:
+              - column:
+                  name: movie_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_movie
+              - column:
+                  name: genre_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_genre
+
+        - createTable:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_movie
+              - column:
+                  name: cast_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_cast
+
+        # FOREIGN KEYS
+
+        - addForeignKeyConstraint:
+            baseTableName: movie
+            baseColumnNames: director_id
+            constraintName: fk_director
+            referencedTableName: director
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: movie_country
+            baseColumnNames: movie_id
+            constraintName: fk_movie
+            referencedTableName: movie
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: movie_country
+            baseColumnNames: country_id
+            constraintName: fk_country
+            referencedTableName: country
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: movie_genre
+            baseColumnNames: movie_id
+            constraintName: fk_movie
+            referencedTableName: movie
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: movie_genre
+            baseColumnNames: genre_id
+            constraintName: fk_genre
+            referencedTableName: genre
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: movie_cast
+            baseColumnNames: movie_id
+            constraintName: fk_movie
+            referencedTableName: movie
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: movie_cast
+            baseColumnNames: cast_id
+            constraintName: fk_cast
+            referencedTableName: cast
+            referencedColumnNames: id
