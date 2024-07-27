@@ -6,3 +6,8 @@ spring:
     driver-class-name: org.postgresql.Driver
   liquibase:
     change-log: classpath:db/changelog/changelog-root.yaml
+springdoc:
+  api-docs:
+    version: openapi_3_1
+  swagger-ui:
+    url: openapi.yaml

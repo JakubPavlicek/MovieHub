@@ -111,12 +111,12 @@ databaseChangeLog:
                     unique: true
 
         - createTable:
-            tableName: director
+            tableName: actor
             columns:
               - column:
                   name: id
                   type: bigint
-                  defaultValueSequenceNext: director_id_seq
+                  defaultValueSequenceNext: actor_id_seq
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -128,12 +128,12 @@ databaseChangeLog:
                     unique: true
 
         - createTable:
-            tableName: actor
+            tableName: director
             columns:
               - column:
                   name: id
                   type: bigint
-                  defaultValueSequenceNext: actor_id_seq
+                  defaultValueSequenceNext: director_id_seq
                   constraints:
                     primaryKey: true
                     nullable: false

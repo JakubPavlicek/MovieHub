@@ -10,6 +10,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +20,7 @@ import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @AllArgsConstructor
@@ -124,4 +126,11 @@ public class Movie {
         )
     )
     private List<Country> countries;
+
+    @PrePersist
+    private void generateMovieId() {
+        if (movieId == null) {
+            movieId = UUID.randomUUID().toString();
+        }
+    }
 }
