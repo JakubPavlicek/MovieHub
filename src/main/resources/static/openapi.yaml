@@ -1,4 +1,4 @@
-openapi: 3.1.0
+openapi: 3.0.0
 info:
   title: Movie Manager
   description: A movie manager API.
@@ -6,7 +6,198 @@ info:
 servers:
   - url: http://localhost:8080
     description: Local server
+
+components:
+
+  parameters:
+
+    movieId:
+      name: movieId
+      in: path
+      schema:
+        type: string
+      required: true
+      description: The movie ID.
+
+  schemas:
+
+    Movie:
+      type: object
+      properties:
+        movieId:
+          type: string
+          example: 872e1723-09ac-461d-9f54-d4c221269bed
+        name:
+          type: string
+          example: The conjuring
+        release:
+          type: string
+          format: date
+          example: 2024-07-29
+        length:
+          type: integer
+          format: int32
+          example: 112
+        description:
+          type: string
+          example: Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their farmhouse.
+        director:
+          $ref: '#/components/schemas/Director'
+        actors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Actor'
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+
+    Director:
+      type: object
+      properties:
+        name:
+          type: string
+          example: James Wan
+
+    Actor:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Patrick Wilson
+
+    Genre:
+      type: object
+      properties:
+        name:
+          type: string
+          enum:
+            - Action
+            - Adventure
+            - Animation
+            - Biography
+            - Comedy
+            - Crime
+            - Documentary
+            - Drama
+            - Family
+            - Fantasy
+            - Film-Noir
+            - History
+            - Horror
+            - Music
+            - Musical
+            - Mystery
+            - Romance
+            - Sci-Fi
+            - Sport
+            - Superhero
+            - Thriller
+            - War
+            - Western
+          example: Horror
+
+    Country:
+      type: object
+      properties:
+        name:
+          type: string
+          enum:
+            - United States
+            - Canada
+            - United Kingdom
+            - Australia
+            - Germany
+            - France
+            - Italy
+            - Spain
+            - Japan
+            - China
+            - India
+            - Brazil
+            - Russia
+            - Mexico
+            - South Korea
+            - South Africa
+            - Netherlands
+            - Sweden
+            - Norway
+            - Denmark
+            - Finland
+            - New Zealand
+            - Argentina
+            - Belgium
+            - Switzerland
+          example: Italy
+
+    MovieDTO:
+      type: object
+      properties:
+        name:
+          type: string
+          example: The conjuring
+        release:
+          type: string
+          format: date
+          example: 2024-07-29
+        length:
+          type: integer
+          format: int32
+          example: 112
+        description:
+          type: string
+          example: Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their farmhouse.
+        director:
+          $ref: '#/components/schemas/Director'
+        actors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Actor'
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+
 paths:
   /movies:
+    post:
+      description: Add movie to the database.
+      summary: Add movie
+      operationId: addMovie
+      tags:
+        - movies
+      requestBody:
+        description: A movie to be added to the database.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovieDTO'
+      responses:
+        '204':
+          description: Successfully added movie to the database.
+
+  /movies/{movieId}:
     get:
-      description: 'Returns all movies'
+      description: Retrieves detailed information about a movie with a given ID.
+      summary: Get movie details
+      operationId: getMovie
+      tags:
+        - movies
+      parameters:
+        - $ref: '#/components/parameters/movieId'
+      responses:
+        '200':
+          description: Successfully retrieved the movie details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movie'
