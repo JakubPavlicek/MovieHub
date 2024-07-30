@@ -1,4 +1,4 @@
-package com.kuba.movie_manager.entity;
+package com.movie_manager.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,22 +18,22 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class Director {
+public class Genre {
 
     @Id
     @SequenceGenerator(
-        name = "director_id_generator",
-        sequenceName = "director_id_seq",
+        name = "genre_id_generator",
+        sequenceName = "genre_id_seq",
         allocationSize = 1
     )
     @GeneratedValue(
-        generator = "director_id_generator",
+        generator = "genre_id_generator",
         strategy = GenerationType.SEQUENCE
     )
     private Long id;
 
     @Column(
-        length = 50,
+        length = 15,
         nullable = false,
         unique = true
     )

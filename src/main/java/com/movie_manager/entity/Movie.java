@@ -1,4 +1,4 @@
-package com.kuba.movie_manager.entity;
+package com.movie_manager.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,6 +12,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -57,6 +59,7 @@ public class Movie {
     @Column(
         nullable = false
     )
+    @Temporal(TemporalType.DATE)
     private Date release;
 
     @Column(

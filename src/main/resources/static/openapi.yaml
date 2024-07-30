@@ -160,7 +160,7 @@ components:
           example: Italy
           nullable: false
 
-    CreateMovieRequest:
+    AddMovieRequest:
       type: object
       required:
         - name
@@ -232,7 +232,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateMovieRequest'
+              $ref: '#/components/schemas/AddMovieRequest'
       responses:
         '204':
           description: Successfully added movie to the database.
