@@ -21,6 +21,30 @@ components:
 
   schemas:
 
+    MovieName:
+      type: string
+      example: The Conjuring
+      minLength: 1
+      maxLength: 100
+      nullable: false
+    MovieRelease:
+      type: string
+      format: date
+      example: 2024-07-29
+      nullable: false
+    MovieLength:
+      type: integer
+      format: int32
+      example: 112
+      minimum: 1
+      nullable: false
+    MovieDescription:
+      type: string
+      example: Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their farmhouse.
+      minLength: 1
+      maxLength: 1000
+      nullable: false
+
     Movie:
       type: object
       properties:
@@ -28,19 +52,13 @@ components:
           type: string
           example: 872e1723-09ac-461d-9f54-d4c221269bed
         name:
-          type: string
-          example: The conjuring
+          $ref: '#/components/schemas/MovieName'
         release:
-          type: string
-          format: date
-          example: 2024-07-29
+          $ref: '#/components/schemas/MovieRelease'
         length:
-          type: integer
-          format: int32
-          example: 112
+          $ref: '#/components/schemas/MovieLength'
         description:
-          type: string
-          example: Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their farmhouse.
+          $ref: '#/components/schemas/MovieDescription'
         director:
           $ref: '#/components/schemas/Director'
         actors:
@@ -62,6 +80,9 @@ components:
         name:
           type: string
           example: James Wan
+          minLength: 1
+          maxLength: 50
+          nullable: false
 
     Actor:
       type: object
@@ -69,6 +90,9 @@ components:
         name:
           type: string
           example: Patrick Wilson
+          minLength: 1
+          maxLength: 50
+          nullable: false
 
     Genre:
       type: object
@@ -100,6 +124,7 @@ components:
             - War
             - Western
           example: Horror
+          nullable: false
 
     Country:
       type: object
@@ -133,26 +158,53 @@ components:
             - Belgium
             - Switzerland
           example: Italy
+          nullable: false
 
-    MovieDTO:
+    CreateMovieRequest:
+      type: object
+      required:
+        - name
+        - release
+        - length
+        - description
+        - actors
+        - genres
+        - countries
+      properties:
+        name:
+          $ref: '#/components/schemas/MovieName'
+        release:
+          $ref: '#/components/schemas/MovieRelease'
+        length:
+          $ref: '#/components/schemas/MovieLength'
+        description:
+          $ref: '#/components/schemas/MovieDescription'
+        director:
+          $ref: '#/components/schemas/Director'
+        actors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Actor'
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/Genre'
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+
+    UpdateMovieRequest:
       type: object
       properties:
         name:
-          type: string
-          example: The conjuring
+          $ref: '#/components/schemas/MovieName'
         release:
-          type: string
-          format: date
-          example: 2024-07-29
+          $ref: '#/components/schemas/MovieRelease'
         length:
-          type: integer
-          format: int32
-          example: 112
+          $ref: '#/components/schemas/MovieLength'
         description:
-          type: string
-          example: Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their farmhouse.
-        director:
-          $ref: '#/components/schemas/Director'
+          $ref: '#/components/schemas/MovieDescription'
         actors:
           type: array
           items:
@@ -180,14 +232,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/MovieDTO'
+              $ref: '#/components/schemas/CreateMovieRequest'
       responses:
         '204':
           description: Successfully added movie to the database.
 
   /movies/{movieId}:
     get:
-      description: Retrieves detailed information about a movie with a given ID.
+      description: Retrieve detailed information about a movie with a given ID.
       summary: Get movie details
       operationId: getMovie
       tags:
@@ -201,3 +253,34 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Movie'
+    put:
+      description: Update details about a movie with a given ID.
+      summary: Update movie details
+      operationId: updateMovie
+      tags:
+        - movies
+      parameters:
+        - $ref: '#/components/parameters/movieId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMovieRequest'
+      responses:
+        '200':
+          description: Successfully updated the movie details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Movie'
+    delete:
+      description: Delete a movie with a given ID.
+      summary: Delete movie
+      operationId: deleteMovie
+      tags:
+        - movies
+      parameters:
+        - $ref: '#/components/parameters/movieId'
+      responses:
+        '204':
+          description: Successfully deleted the movie from the database.

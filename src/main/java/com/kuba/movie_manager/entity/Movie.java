@@ -74,7 +74,7 @@ public class Movie {
     @JoinColumn(
         name = "director_id",
         referencedColumnName = "id",
-        nullable = false,
+        nullable = true,
         foreignKey = @ForeignKey(name = "fk_director")
     )
     private Director director;

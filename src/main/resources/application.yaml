@@ -6,6 +6,9 @@ spring:
     driver-class-name: org.postgresql.Driver
   liquibase:
     change-log: classpath:db/changelog/changelog-root.yaml
+  jpa:
+    hibernate:
+      ddl-auto: validate
 springdoc:
   api-docs:
     version: openapi_3_1
