@@ -69,7 +69,7 @@ components:
       in: query
       schema:
         type: string
-        default: "gte:"
+        default: "gte:0"
         example: "gte:100"
         maxLength: 100
     description:
@@ -88,34 +88,34 @@ components:
         default: "eq:"
         example: "eq:James Wan"
         maxLength: 100
-    actor:
+    actors:
       name: actor
       in: query
       schema:
         type: array
+        default: [ "eq:" ]
         items:
           type: string
-          default: "eq:"
           example: "eq:James Wan"
           maxLength: 100
-    genre:
+    genres:
       name: genre
       in: query
       schema:
         type: array
+        default: [ "eq:" ]
         items:
           type: string
-          default: "eq:"
           example: "eq:Horror"
           maxLength: 100
-    country:
+    countries:
       name: country
       in: query
       schema:
         type: array
+        default: [ "eq:" ]
         items:
           type: string
-          default: "eq:"
           example: "eq:South Korea"
           maxLength: 100
 
@@ -464,9 +464,9 @@ paths:
         - $ref: '#/components/parameters/length'
         - $ref: '#/components/parameters/description'
         - $ref: '#/components/parameters/director'
-        - $ref: '#/components/parameters/actor'
-        - $ref: '#/components/parameters/genre'
-        - $ref: '#/components/parameters/country'
+        - $ref: '#/components/parameters/actors'
+        - $ref: '#/components/parameters/genres'
+        - $ref: '#/components/parameters/countries'
       responses:
         '200':
           description: Successfully retrieved a list of movies.

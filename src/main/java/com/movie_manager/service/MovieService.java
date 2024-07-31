@@ -7,7 +7,6 @@ import com.movie_manager.entity.Genre;
 import com.movie_manager.entity.Movie;
 import com.movie_manager.mapper.entity.MovieEntityMapper;
 import com.movie_manager.repository.MovieRepository;
-import com.movie_manager.specification.Criteria;
 import com.movie_manager.specification.MovieSpecification;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -106,11 +105,17 @@ public class MovieService {
         }
     }
 
-    public Page<Movie> getMovies(Integer page, Integer limit, String sort, String name, String release, String length, String description, String director, List<String> actor, List<String> genre, List<String> country) {
+    public Page<Movie> getMovies(Integer page, Integer limit, String sort, String name, String release, String length, String description, String director, List<String> actors, List<String> genres, List<String> countries) {
         Pageable pageable = PageRequest.of(page, limit, parseSort(sort));
 
         Specification<Movie> specification = Specification.where(parseName(name))
-                                                          .and(parseRelease(release));
+                                                          .and(parseRelease(release))
+                                                          .and(parseLength(length))
+                                                          .and(parseDescription(description))
+                                                          .and(parseDirector(director))
+                                                          .and(parseActors(actors))
+                                                          .and(parseGenres(genres))
+                                                          .and(parseCountries(countries));
 
         return movieRepository.findAll(specification, pageable);
     }
@@ -147,20 +152,88 @@ public class MovieService {
         return criteriaHandler.apply(criteria, value);
     }
 
+    private Specification<Movie> parseFilterList(List<String> filters, BiFunction<String, String, Specification<Movie>> criteriaHandler) {
+        // initialize with a valid specification
+        Specification<Movie> specification = MovieSpecification.conjunction();
+
+        for (String filter : filters) {
+            Specification<Movie> filterSpec = parseFilter(filter, criteriaHandler);
+            specification = specification.and(filterSpec);
+        }
+
+        return specification;
+    }
+
+    private Specification<Movie> handleInvalidCriteria(String criteria, String filter) {
+        throw new IllegalArgumentException("Invalid criteria: " + criteria + " in filter: " + filter);
+    }
+
     private Specification<Movie> parseName(String name) {
         return parseFilter(name, (criteria, value) -> switch (criteria) {
-            case "eq" -> MovieSpecification.hasName(value);
-            case "like" -> MovieSpecification.likeName(value);
-            default -> throw new IllegalArgumentException("Invalid criteria: " + criteria + " in filter: " + name);
+            case "eq" -> MovieSpecification.nameEqualTo(value);
+            case "like" -> MovieSpecification.nameContains(value);
+            default -> handleInvalidCriteria(criteria, name);
         });
     }
 
     private Specification<Movie> parseRelease(String release) {
         return parseFilter(release, (criteria, value) -> switch (criteria) {
-            case "eq" -> MovieSpecification.hasRelease(value);
-            case "lt" -> MovieSpecification.beforeRelease(value);
-            case "gt" -> MovieSpecification.afterRelease(value);
-            default -> throw new IllegalArgumentException("Invalid criteria: " + criteria + " in filter: " + release);
+            case "eq" -> MovieSpecification.releaseEqualTo(value);
+            case "lt" -> MovieSpecification.releaseBefore(value);
+            case "gt" -> MovieSpecification.releaseAfter(value);
+            default -> handleInvalidCriteria(criteria, release);
+        });
+    }
+
+    private Specification<Movie> parseLength(String length) {
+        return parseFilter(length, (criteria, value) -> switch (criteria) {
+            case "eq" -> MovieSpecification.lengthEqualTo(value);
+            case "neq" -> MovieSpecification.lengthNotEqualTo(value);
+            case "lt" -> MovieSpecification.lengthLessThan(value);
+            case "gr" -> MovieSpecification.lengthGreaterThan(value);
+            case "lte" -> MovieSpecification.lengthLessThanOrEqualTo(value);
+            case "gte" -> MovieSpecification.lengthGreaterThanOrEqualTo(value);
+            default -> handleInvalidCriteria(criteria, length);
+        });
+    }
+
+    private Specification<Movie> parseDescription(String description) {
+        return parseFilter(description, (criteria, value) -> switch (criteria) {
+            case "eq" -> MovieSpecification.descriptionEqualTo(value);
+            case "like" -> MovieSpecification.descriptionContains(value);
+            default -> handleInvalidCriteria(criteria, description);
+        });
+    }
+
+    private Specification<Movie> parseDirector(String director) {
+        return parseFilter(director, (criteria, value) -> switch (criteria) {
+            case "eq" -> MovieSpecification.directorEqualTo(value);
+            case "like" -> MovieSpecification.directorContains(value);
+            default -> handleInvalidCriteria(criteria, director);
+        });
+    }
+
+    private Specification<Movie> parseActors(List<String> actors) {
+        return parseFilterList(actors, (criteria, value) -> switch (criteria) {
+            case "eq" -> MovieSpecification.actorEqualTo(value);
+            case "like" -> MovieSpecification.actorContains(value);
+            default -> handleInvalidCriteria(criteria, criteria + ":" + value);
+        });
+    }
+
+    private Specification<Movie> parseGenres(List<String> genres) {
+        return parseFilterList(genres, (criteria, value) -> switch (criteria) {
+            case "eq" -> MovieSpecification.genreEqualTo(value);
+            case "like" -> MovieSpecification.genreContains(value);
+            default -> handleInvalidCriteria(criteria, criteria + ":" + value);
+        });
+    }
+
+    private Specification<Movie> parseCountries(List<String> countries) {
+        return parseFilterList(countries, (criteria, value) -> switch (criteria) {
+            case "eq" -> MovieSpecification.countryEqualTo(value);
+            case "like" -> MovieSpecification.countryContains(value);
+            default -> handleInvalidCriteria(criteria, criteria + ":" + value);
         });
     }
 
