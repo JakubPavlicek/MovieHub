@@ -2,6 +2,7 @@ package com.movie_manager.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,7 +21,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -60,7 +61,7 @@ public class Movie {
         nullable = false
     )
     @Temporal(TemporalType.DATE)
-    private Date release;
+    private LocalDate release;
 
     @Column(
         nullable = false
@@ -77,12 +78,13 @@ public class Movie {
     @JoinColumn(
         name = "director_id",
         referencedColumnName = "id",
-        nullable = true,
         foreignKey = @ForeignKey(name = "fk_director")
     )
     private Director director;
 
-    @ManyToMany
+    @ManyToMany(
+        fetch = FetchType.EAGER
+    )
     @JoinTable(
         name = "movie_actor",
         joinColumns = @JoinColumn(
@@ -98,7 +100,9 @@ public class Movie {
     )
     private List<Actor> actors;
 
-    @ManyToMany
+    @ManyToMany(
+        fetch = FetchType.EAGER
+    )
     @JoinTable(
         name = "movie_genre",
         joinColumns = @JoinColumn(
@@ -114,7 +118,9 @@ public class Movie {
     )
     private List<Genre> genres;
 
-    @ManyToMany
+    @ManyToMany(
+        fetch = FetchType.EAGER
+    )
     @JoinTable(
         name = "movie_country",
         joinColumns = @JoinColumn(

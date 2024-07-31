@@ -45,7 +45,7 @@ components:
       maxLength: 1000
       nullable: false
 
-    Movie:
+    MovieResponse:
       type: object
       properties:
         movieId:
@@ -60,21 +60,21 @@ components:
         description:
           $ref: '#/components/schemas/MovieDescription'
         director:
-          $ref: '#/components/schemas/Director'
+          $ref: '#/components/schemas/DirectorDTO'
         actors:
           type: array
           items:
-            $ref: '#/components/schemas/Actor'
+            $ref: '#/components/schemas/ActorDTO'
         genres:
           type: array
           items:
-            $ref: '#/components/schemas/Genre'
+            $ref: '#/components/schemas/GenreDTO'
         countries:
           type: array
           items:
-            $ref: '#/components/schemas/Country'
+            $ref: '#/components/schemas/CountryDTO'
 
-    Director:
+    DirectorDTO:
       type: object
       properties:
         name:
@@ -84,7 +84,7 @@ components:
           maxLength: 50
           nullable: false
 
-    Actor:
+    ActorDTO:
       type: object
       properties:
         name:
@@ -94,7 +94,7 @@ components:
           maxLength: 50
           nullable: false
 
-    Genre:
+    GenreDTO:
       type: object
       properties:
         name:
@@ -124,9 +124,8 @@ components:
             - War
             - Western
           example: Horror
-          nullable: false
 
-    Country:
+    CountryDTO:
       type: object
       properties:
         name:
@@ -180,19 +179,19 @@ components:
         description:
           $ref: '#/components/schemas/MovieDescription'
         director:
-          $ref: '#/components/schemas/Director'
+          $ref: '#/components/schemas/DirectorDTO'
         actors:
           type: array
           items:
-            $ref: '#/components/schemas/Actor'
+            $ref: '#/components/schemas/ActorDTO'
         genres:
           type: array
           items:
-            $ref: '#/components/schemas/Genre'
+            $ref: '#/components/schemas/GenreDTO'
         countries:
           type: array
           items:
-            $ref: '#/components/schemas/Country'
+            $ref: '#/components/schemas/CountryDTO'
 
     UpdateMovieRequest:
       type: object
@@ -208,15 +207,15 @@ components:
         actors:
           type: array
           items:
-            $ref: '#/components/schemas/Actor'
+            $ref: '#/components/schemas/ActorDTO'
         genres:
           type: array
           items:
-            $ref: '#/components/schemas/Genre'
+            $ref: '#/components/schemas/GenreDTO'
         countries:
           type: array
           items:
-            $ref: '#/components/schemas/Country'
+            $ref: '#/components/schemas/CountryDTO'
 
 paths:
   /movies:
@@ -234,8 +233,12 @@ paths:
             schema:
               $ref: '#/components/schemas/AddMovieRequest'
       responses:
-        '204':
+        '201':
           description: Successfully added movie to the database.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovieResponse'
 
   /movies/{movieId}:
     get:
@@ -252,7 +255,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Movie'
+                $ref: '#/components/schemas/MovieResponse'
     put:
       description: Update details about a movie with a given ID.
       summary: Update movie details
@@ -262,6 +265,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/movieId'
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -272,7 +276,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Movie'
+                $ref: '#/components/schemas/MovieResponse'
     delete:
       description: Delete a movie with a given ID.
       summary: Delete movie
