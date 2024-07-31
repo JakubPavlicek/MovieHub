@@ -18,6 +18,106 @@ components:
         type: string
       required: true
       description: The movie ID.
+    page:
+      name: page
+      in: query
+      description: The page number for pagination.
+      schema:
+        type: integer
+        format: int32
+        default: 0
+        minimum: 0
+    limit:
+      name: limit
+      in: query
+      description: The maximum number of items to return per page.
+      schema:
+        type: integer
+        minimum: 1
+        maximum: 50
+        default: 10
+    sort:
+      name: sort
+      in: query
+      description: |
+        A comma-separated list of sort keys.
+        Valid keys are 'name', 'release', 'length', 'description', 'director'.
+        Each key can be sorted by either: asc (ascending order) or desc (descending order).
+        Example usage: ?sort=name.desc,length.asc.
+      schema:
+        type: string
+        default: "name.asc"
+        maxLength: 200
+    name:
+      name: name
+      in: query
+      schema:
+        type: string
+        default: "eq:"
+        example: "eq:The Conjuring"
+        maxLength: 200
+    release:
+      name: release
+      in: query
+      schema:
+        type: string
+        default: "eq:"
+        example: "eq:2024-07-29"
+        maxLength: 100
+    length:
+      name: length
+      in: query
+      schema:
+        type: string
+        default: "gte:"
+        example: "gte:100"
+        maxLength: 100
+    description:
+      name: description
+      in: query
+      schema:
+        type: string
+        default: "like:"
+        example: "like:The"
+        maxLength: 1100
+    director:
+      name: director
+      in: query
+      schema:
+        type: string
+        default: "eq:"
+        example: "eq:James Wan"
+        maxLength: 100
+    actor:
+      name: actor
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+          default: "eq:"
+          example: "eq:James Wan"
+          maxLength: 100
+    genre:
+      name: genre
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+          default: "eq:"
+          example: "eq:Horror"
+          maxLength: 100
+    country:
+      name: country
+      in: query
+      schema:
+        type: array
+        items:
+          type: string
+          default: "eq:"
+          example: "eq:South Korea"
+          maxLength: 100
 
   schemas:
 
@@ -217,6 +317,116 @@ components:
           items:
             $ref: '#/components/schemas/CountryDTO'
 
+    Sort:
+      type: object
+      title: Sort
+      description: "Represents sorting information for ordering query results based on one or more criteria."
+      properties:
+        empty:
+          type: boolean
+          example: false
+          description: |
+            A boolean value indicating whether the sorting information is empty. 
+            If `true`, there are no sorting criteria defined for the query.
+        sorted:
+          type: boolean
+          example: true
+          description: |
+            A boolean value indicating whether the query results are sorted. 
+            If `true`, the query includes sorting criteria.
+        unsorted:
+          type: boolean
+          example: false
+          description: |
+            A boolean value indicating whether the query results are unsorted. 
+            If `true`, the query results are not sorted according to any criteria.
+            
+    Pageable:
+      type: object
+      title: Pageable
+      description: "Represents pagination and sorting information for querying a paginated dataset."
+      properties:
+        pageNumber:
+          type: integer
+          description: "The page number to retrieve."
+          example: 0
+        pageSize:
+          type: integer
+          description: "The maximum number of elements to be returned on each page."
+          example: 2
+        sort:
+          $ref: '#/components/schemas/Sort'
+        offset:
+          type: integer
+          format: int64
+          description: "The offset of the current page within the result set."
+          example: 0
+        paged:
+          type: boolean
+          description: |
+            A boolean value indicating whether the query results are paginated. 
+            If `true`, the query includes pagination criteria.
+          example: true
+        unpaged:
+          type: boolean
+          description: |
+            A boolean value indicating whether the query results are not paginated. 
+            If `true`, the query results are not subject to pagination.
+          example: false
+
+    MoviePage:
+      type: object
+      description: "Represents a page of movies, including pagination and sorting information."
+      properties:
+        content:
+          type: array
+          description: "List of movies."
+          items:
+            $ref: '#/components/schemas/MovieResponse'
+        pageable:
+          $ref: '#/components/schemas/Pageable'
+        last:
+          type: boolean
+          description: |
+            A boolean value indicating whether this is the last page of data.
+            If `true`, it is the last page; otherwise, it's not the last page.
+          example: false
+        totalElements:
+          type: integer
+          format: int64
+          description: "The total number of items."
+          example: 4
+        totalPages:
+          type: integer
+          description: "The total number of pages needed to display all the data based on the page size."
+          example: 2
+        first:
+          type: boolean
+          description: |
+            A boolean value indicating whether this is the first page of data.
+            If `true`, it is the first page; otherwise, it's not the first page.
+          example: true
+        size:
+          type: integer
+          description: "The maximum number of items contained on each page."
+          example: 2
+        number:
+          type: integer
+          description: "The page number for the current page."
+          example: 0
+        sort:
+          $ref: '#/components/schemas/Sort'
+        numberOfElements:
+          type: integer
+          description: "The number of items on the current page."
+          example: 2
+        empty:
+          type: boolean
+          description: |
+            A boolean value indicating whether the current page is empty.
+            If `true`, the page has no items; otherwise, it has content.
+          example: false
+
 paths:
   /movies:
     post:
@@ -239,6 +449,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MovieResponse'
+    get:
+      description: Retrieves a list of the movies.
+      summary: List movies
+      operationId: getMovies
+      tags:
+        - movies
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/sort'
+        - $ref: '#/components/parameters/name'
+        - $ref: '#/components/parameters/release'
+        - $ref: '#/components/parameters/length'
+        - $ref: '#/components/parameters/description'
+        - $ref: '#/components/parameters/director'
+        - $ref: '#/components/parameters/actor'
+        - $ref: '#/components/parameters/genre'
+        - $ref: '#/components/parameters/country'
+      responses:
+        '200':
+          description: Successfully retrieved a list of movies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoviePage'
 
   /movies/{movieId}:
     get:

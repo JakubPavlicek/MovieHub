@@ -2,14 +2,18 @@ package com.movie_manager.controller;
 
 import com.movie_manager.MoviesApi;
 import com.movie_manager.dto.AddMovieRequest;
+import com.movie_manager.dto.MoviePage;
 import com.movie_manager.dto.MovieResponse;
 import com.movie_manager.dto.UpdateMovieRequest;
 import com.movie_manager.entity.Movie;
-import com.movie_manager.mapper.MovieMapper;
+import com.movie_manager.mapper.dto.MovieMapper;
 import com.movie_manager.service.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -49,6 +53,14 @@ public class MovieController implements MoviesApi {
         MovieResponse movieResponse = movieMapper.map(movie);
 
         return ResponseEntity.ok(movieResponse);
+    }
+
+    @Override
+    public ResponseEntity<MoviePage> getMovies(Integer page, Integer limit, String sort, String name, String release, String length, String description, String director, List<String> actor, List<String> genre, List<String> country) {
+        Page<Movie> movies = movieService.getMovies(page, limit, sort, name, release, length, description, director, actor, genre, country);
+        MoviePage moviePage = movieMapper.map(movies);
+
+        return ResponseEntity.ok(moviePage);
     }
 
 }
