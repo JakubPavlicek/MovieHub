@@ -28,4 +28,9 @@ public class GenreService {
         return existingGenres;
     }
 
+    @Transactional
+    public List<Genre> getGenres() {
+        return genreRepository.findAll();
+    }
+
 }

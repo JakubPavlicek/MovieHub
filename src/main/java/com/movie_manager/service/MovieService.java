@@ -6,6 +6,7 @@ import com.movie_manager.entity.Director;
 import com.movie_manager.entity.Genre;
 import com.movie_manager.entity.Movie;
 import com.movie_manager.exception.FilterException;
+import com.movie_manager.exception.MovieNotFoundException;
 import com.movie_manager.exception.ParseException;
 import com.movie_manager.exception.SortException;
 import com.movie_manager.mapper.entity.MovieFieldMapper;
@@ -62,7 +63,7 @@ public class MovieService {
     @Transactional
     public Movie getMovie(String movieId) {
         return movieRepository.findByMovieId(movieId)
-                              .orElseThrow(() -> new RuntimeException("Movie with ID: " + movieId + " not found"));
+                              .orElseThrow(() -> new MovieNotFoundException("Movie with ID: " + movieId + " not found"));
     }
 
     @Transactional
@@ -179,17 +180,17 @@ public class MovieService {
 
     private Specification<Movie> parseName(String name) {
         return parseFilter(name, Map.of(
-            "eq", MovieSpecification::nameEqualTo,
+            "eq",   MovieSpecification::nameEqualTo,
             "like", MovieSpecification::nameContains
         ));
     }
 
     private Specification<Movie> parseReleaseDate(String release) {
         return parseFilter(release, Map.of(
-            "eq", value -> MovieSpecification.releaseDateEqualTo(parseDate(value)),
+            "eq",  value -> MovieSpecification.releaseDateEqualTo(parseDate(value)),
             "neq", value -> MovieSpecification.releaseDateNotEqualTo(parseDate(value)),
-            "lt", value -> MovieSpecification.releaseDateBefore(parseDate(value)),
-            "gt", value -> MovieSpecification.releaseDateAfter(parseDate(value)),
+            "lt",  value -> MovieSpecification.releaseDateBefore(parseDate(value)),
+            "gt",  value -> MovieSpecification.releaseDateAfter(parseDate(value)),
             "lte", value -> MovieSpecification.releaseDateBeforeOrEqualTo(parseDate(value)),
             "gte", value -> MovieSpecification.releaseDateAfterOrEqualTo(parseDate(value))
         ));
@@ -197,10 +198,10 @@ public class MovieService {
 
     private Specification<Movie> parseLength(String length) {
         return parseFilter(length, Map.of(
-            "eq", value -> MovieSpecification.lengthEqualTo(parseInteger(value)),
+            "eq",  value -> MovieSpecification.lengthEqualTo(parseInteger(value)),
             "neq", value -> MovieSpecification.lengthNotEqualTo(parseInteger(value)),
-            "lt", value -> MovieSpecification.lengthLessThan(parseInteger(value)),
-            "gt", value -> MovieSpecification.lengthGreaterThan(parseInteger(value)),
+            "lt",  value -> MovieSpecification.lengthLessThan(parseInteger(value)),
+            "gt",  value -> MovieSpecification.lengthGreaterThan(parseInteger(value)),
             "lte", value -> MovieSpecification.lengthLessThanOrEqualTo(parseInteger(value)),
             "gte", value -> MovieSpecification.lengthGreaterThanOrEqualTo(parseInteger(value))
         ));
@@ -208,21 +209,21 @@ public class MovieService {
 
     private Specification<Movie> parseDescription(String description) {
         return parseFilter(description, Map.of(
-            "eq", MovieSpecification::descriptionEqualTo,
+            "eq",   MovieSpecification::descriptionEqualTo,
             "like", MovieSpecification::descriptionContains
         ));
     }
 
     private Specification<Movie> parseDirector(String director) {
         return parseFilter(director, Map.of(
-            "eq", MovieSpecification::directorEqualTo,
+            "eq",   MovieSpecification::directorEqualTo,
             "like", MovieSpecification::directorContains
         ));
     }
 
     private Specification<Movie> parseActors(List<String> actors) {
         return parseFilterList(actors, Map.of(
-            "eq", MovieSpecification::actorEqualTo,
+            "eq",   MovieSpecification::actorEqualTo,
             "like", MovieSpecification::actorContains
         ));
     }

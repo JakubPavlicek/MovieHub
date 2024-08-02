@@ -11,8 +11,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.PrePersist;
-import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -20,10 +18,10 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @Entity
 @AllArgsConstructor
@@ -34,21 +32,8 @@ import java.util.UUID;
 public class Movie {
 
     @Id
-    @SequenceGenerator(
-        name = "movie_id_generator",
-        sequenceName = "movie_id_seq",
-        allocationSize = 1
-    )
-    @GeneratedValue(
-        generator = "movie_id_generator",
-        strategy = GenerationType.SEQUENCE
-    )
-    private Long id;
-
-    @Column(
-        nullable = false,
-        unique = true
-    )
+    @UuidGenerator(style = UuidGenerator.Style.RANDOM)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private String movieId;
 
     @Column(
@@ -77,7 +62,7 @@ public class Movie {
     @ManyToOne
     @JoinColumn(
         name = "director_id",
-        referencedColumnName = "id",
+        referencedColumnName = "directorId",
         foreignKey = @ForeignKey(name = "fk_director")
     )
     private Director director;
@@ -89,12 +74,12 @@ public class Movie {
         name = "movie_actor",
         joinColumns = @JoinColumn(
             name = "movie_id",
-            referencedColumnName = "id",
+            referencedColumnName = "movieId",
             foreignKey = @ForeignKey(name = "fk_movie")
         ),
         inverseJoinColumns = @JoinColumn(
             name = "actor_id",
-            referencedColumnName = "id",
+            referencedColumnName = "actorId",
             foreignKey = @ForeignKey(name = "fk_actor")
         )
     )
@@ -107,12 +92,12 @@ public class Movie {
         name = "movie_genre",
         joinColumns = @JoinColumn(
             name = "movie_id",
-            referencedColumnName = "id",
+            referencedColumnName = "movieId",
             foreignKey = @ForeignKey(name = "fk_movie")
         ),
         inverseJoinColumns = @JoinColumn(
             name = "genre_id",
-            referencedColumnName = "id",
+            referencedColumnName = "genreId",
             foreignKey = @ForeignKey(name = "fk_genre")
         )
     )
@@ -125,21 +110,15 @@ public class Movie {
         name = "movie_country",
         joinColumns = @JoinColumn(
             name = "movie_id",
-            referencedColumnName = "id",
+            referencedColumnName = "movieId",
             foreignKey = @ForeignKey(name = "fk_movie")
         ),
         inverseJoinColumns = @JoinColumn(
             name = "country_id",
-            referencedColumnName = "id",
+            referencedColumnName = "countryId",
             foreignKey = @ForeignKey(name = "fk_country")
         )
     )
     private List<Country> countries;
 
-    @PrePersist
-    private void generateMovieId() {
-        if (movieId == null) {
-            movieId = UUID.randomUUID().toString();
-        }
-    }
 }

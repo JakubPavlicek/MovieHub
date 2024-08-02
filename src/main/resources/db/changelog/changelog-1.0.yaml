@@ -4,32 +4,8 @@ databaseChangeLog:
       author: JakubPavlicek
       changes:
 
-        # SEQUENCES
-
-        - createSequence:
-            sequenceName: movie_id_seq
-            startValue: 1
-            incrementBy: 1
-
-        - createSequence:
-            sequenceName: country_id_seq
-            startValue: 1
-            incrementBy: 1
-
-        - createSequence:
-            sequenceName: genre_id_seq
-            startValue: 1
-            incrementBy: 1
-
-        - createSequence:
-            sequenceName: director_id_seq
-            startValue: 1
-            incrementBy: 1
-
-        - createSequence:
-            sequenceName: actor_id_seq
-            startValue: 1
-            incrementBy: 1
+        - sql:
+            sql: "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";"
 
         # TABLES
 
@@ -37,18 +13,13 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: id
-                  type: bigint
-                  defaultValueSequenceNext: movie_id_seq
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
                   name: movie_id
                   type: varchar(255)
+                  defaultValueComputed: uuid_generate_v4()
                   constraints:
-                    nullable: false
+                    primaryKey: true
                     unique: true
+                    nullable: false
               - column:
                   name: name
                   type: varchar(100)
@@ -71,7 +42,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: director_id
-                  type: bigint
+                  type: varchar(255)
                   constraints:
                     nullable: true
                     foreignKeyName: fk_director
@@ -80,11 +51,12 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: id
-                  type: bigint
-                  defaultValueSequenceNext: country_id_seq
+                  name: country_id
+                  type: varchar(255)
+                  defaultValueComputed: uuid_generate_v4()
                   constraints:
                     primaryKey: true
+                    unique: true
                     nullable: false
               - column:
                   name: name
@@ -97,11 +69,12 @@ databaseChangeLog:
             tableName: genre
             columns:
               - column:
-                  name: id
-                  type: bigint
-                  defaultValueSequenceNext: genre_id_seq
+                  name: genre_id
+                  type: varchar(255)
+                  defaultValueComputed: uuid_generate_v4()
                   constraints:
                     primaryKey: true
+                    unique: true
                     nullable: false
               - column:
                   name: name
@@ -114,11 +87,12 @@ databaseChangeLog:
             tableName: actor
             columns:
               - column:
-                  name: id
-                  type: bigint
-                  defaultValueSequenceNext: actor_id_seq
+                  name: actor_id
+                  type: varchar(255)
+                  defaultValueComputed: uuid_generate_v4()
                   constraints:
                     primaryKey: true
+                    unique: true
                     nullable: false
               - column:
                   name: name
@@ -131,11 +105,12 @@ databaseChangeLog:
             tableName: director
             columns:
               - column:
-                  name: id
-                  type: bigint
-                  defaultValueSequenceNext: director_id_seq
+                  name: director_id
+                  type: varchar(255)
+                  defaultValueComputed: uuid_generate_v4()
                   constraints:
                     primaryKey: true
+                    unique: true
                     nullable: false
               - column:
                   name: name
@@ -151,13 +126,13 @@ databaseChangeLog:
             columns:
               - column:
                   name: movie_id
-                  type: bigint
+                  type: varchar(255)
                   constraints:
                     nullable: false
                     foreignKeyName: fk_movie
               - column:
                   name: country_id
-                  type: bigint
+                  type: varchar(255)
                   constraints:
                     nullable: false
                     foreignKeyName: fk_country
@@ -167,13 +142,13 @@ databaseChangeLog:
             columns:
               - column:
                   name: movie_id
-                  type: bigint
+                  type: varchar(255)
                   constraints:
                     nullable: false
                     foreignKeyName: fk_movie
               - column:
                   name: genre_id
-                  type: bigint
+                  type: varchar(255)
                   constraints:
                     nullable: false
                     foreignKeyName: fk_genre
@@ -183,13 +158,13 @@ databaseChangeLog:
             columns:
               - column:
                   name: movie_id
-                  type: bigint
+                  type: varchar(255)
                   constraints:
                     nullable: false
                     foreignKeyName: fk_movie
               - column:
                   name: actor_id
-                  type: bigint
+                  type: varchar(255)
                   constraints:
                     nullable: false
                     foreignKeyName: fk_actor
@@ -201,49 +176,49 @@ databaseChangeLog:
             baseColumnNames: director_id
             constraintName: fk_director
             referencedTableName: director
-            referencedColumnNames: id
+            referencedColumnNames: director_id
 
         - addForeignKeyConstraint:
             baseTableName: movie_country
             baseColumnNames: movie_id
             constraintName: fk_movie
             referencedTableName: movie
-            referencedColumnNames: id
+            referencedColumnNames: movie_id
 
         - addForeignKeyConstraint:
             baseTableName: movie_country
             baseColumnNames: country_id
             constraintName: fk_country
             referencedTableName: country
-            referencedColumnNames: id
+            referencedColumnNames: country_id
 
         - addForeignKeyConstraint:
             baseTableName: movie_genre
             baseColumnNames: movie_id
             constraintName: fk_movie
             referencedTableName: movie
-            referencedColumnNames: id
+            referencedColumnNames: movie_id
 
         - addForeignKeyConstraint:
             baseTableName: movie_genre
             baseColumnNames: genre_id
             constraintName: fk_genre
             referencedTableName: genre
-            referencedColumnNames: id
+            referencedColumnNames: genre_id
 
         - addForeignKeyConstraint:
             baseTableName: movie_actor
             baseColumnNames: movie_id
             constraintName: fk_movie
             referencedTableName: movie
-            referencedColumnNames: id
+            referencedColumnNames: movie_id
 
         - addForeignKeyConstraint:
             baseTableName: movie_actor
             baseColumnNames: actor_id
             constraintName: fk_actor
             referencedTableName: actor
-            referencedColumnNames: id
+            referencedColumnNames: actor_id
 
   # INSERT DATA
 

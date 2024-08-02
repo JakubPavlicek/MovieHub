@@ -16,4 +16,12 @@ public class GlobalExceptionHandler {
         return problemDetail;
     }
 
+    @ExceptionHandler(MovieNotFoundException.class)
+    public ProblemDetail handleMovieNotFoundException(MovieNotFoundException e) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
+        problemDetail.setTitle("Movie Not Found");
+
+        return problemDetail;
+    }
+
 }

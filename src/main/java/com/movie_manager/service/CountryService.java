@@ -21,7 +21,7 @@ public class CountryService {
 
         countries.forEach(country -> {
             Country existingCountry = countryRepository.findByName(country.getName())
-                                                 .orElseGet(() -> countryRepository.save(country));
+                                                       .orElseGet(() -> countryRepository.save(country));
             existingCountries.add(existingCountry);
         });
 

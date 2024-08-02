@@ -236,6 +236,10 @@ components:
 
   schemas:
 
+    Uuid:
+      type: string
+      example: 872e1723-09ac-461d-9f54-d4c221269bed
+      nullable: false
     MovieName:
       type: string
       example: The Conjuring
@@ -260,37 +264,10 @@ components:
       maxLength: 1000
       nullable: false
 
-    MovieResponse:
+    DirectorNameRequest:
       type: object
-      properties:
-        movieId:
-          type: string
-          example: 872e1723-09ac-461d-9f54-d4c221269bed
-        name:
-          $ref: '#/components/schemas/MovieName'
-        releaseDate:
-          $ref: '#/components/schemas/MovieReleaseDate'
-        length:
-          $ref: '#/components/schemas/MovieLength'
-        description:
-          $ref: '#/components/schemas/MovieDescription'
-        director:
-          $ref: '#/components/schemas/DirectorDTO'
-        actors:
-          type: array
-          items:
-            $ref: '#/components/schemas/ActorDTO'
-        genres:
-          type: array
-          items:
-            $ref: '#/components/schemas/GenreDTO'
-        countries:
-          type: array
-          items:
-            $ref: '#/components/schemas/CountryDTO'
-
-    DirectorDTO:
-      type: object
+      required:
+        - name
       properties:
         name:
           type: string
@@ -299,8 +276,10 @@ components:
           maxLength: 50
           nullable: false
 
-    ActorDTO:
+    ActorNameRequest:
       type: object
+      required:
+        - name
       properties:
         name:
           type: string
@@ -309,8 +288,10 @@ components:
           maxLength: 50
           nullable: false
 
-    GenreDTO:
+    GenreNameRequest:
       type: object
+      required:
+        - name
       properties:
         name:
           type: string
@@ -339,9 +320,12 @@ components:
             - War
             - Western
           example: Horror
+          nullable: false
 
-    CountryDTO:
+    CountryNameRequest:
       type: object
+      required:
+        - name
       properties:
         name:
           type: string
@@ -374,17 +358,11 @@ components:
           example: Italy
           nullable: false
 
-    AddMovieRequest:
+    MovieResponse:
       type: object
-      required:
-        - name
-        - releaseDate
-        - length
-        - description
-        - actors
-        - genres
-        - countries
       properties:
+        movieId:
+          $ref: '#/components/schemas/Uuid'
         name:
           $ref: '#/components/schemas/MovieName'
         releaseDate:
@@ -408,6 +386,76 @@ components:
           items:
             $ref: '#/components/schemas/CountryDTO'
 
+    DirectorDTO:
+      type: object
+      properties:
+        directorId:
+          $ref: '#/components/schemas/Uuid'
+        name:
+          type: string
+          example: James Wan
+
+    ActorDTO:
+      type: object
+      properties:
+        actorId:
+          $ref: '#/components/schemas/Uuid'
+        name:
+          type: string
+          example: Patrick Wilson
+
+    GenreDTO:
+      type: object
+      properties:
+        genreId:
+          $ref: '#/components/schemas/Uuid'
+        name:
+          type: string
+          example: Horror
+
+    CountryDTO:
+      type: object
+      properties:
+        countryId:
+          $ref: '#/components/schemas/Uuid'
+        name:
+          type: string
+          example: Italy
+
+    AddMovieRequest:
+      type: object
+      required:
+        - name
+        - releaseDate
+        - length
+        - description
+        - actors
+        - genres
+        - countries
+      properties:
+        name:
+          $ref: '#/components/schemas/MovieName'
+        releaseDate:
+          $ref: '#/components/schemas/MovieReleaseDate'
+        length:
+          $ref: '#/components/schemas/MovieLength'
+        description:
+          $ref: '#/components/schemas/MovieDescription'
+        director:
+          $ref: '#/components/schemas/DirectorNameRequest'
+        actors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActorNameRequest'
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenreNameRequest'
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/CountryNameRequest'
+
     UpdateMovieRequest:
       type: object
       properties:
@@ -419,22 +467,23 @@ components:
           $ref: '#/components/schemas/MovieLength'
         description:
           $ref: '#/components/schemas/MovieDescription'
+        director:
+          $ref: '#/components/schemas/DirectorNameRequest'
         actors:
           type: array
           items:
-            $ref: '#/components/schemas/ActorDTO'
+            $ref: '#/components/schemas/ActorNameRequest'
         genres:
           type: array
           items:
-            $ref: '#/components/schemas/GenreDTO'
+            $ref: '#/components/schemas/GenreNameRequest'
         countries:
           type: array
           items:
-            $ref: '#/components/schemas/CountryDTO'
+            $ref: '#/components/schemas/CountryNameRequest'
 
     Sort:
       type: object
-      title: Sort
       description: "Represents sorting information for ordering query results based on one or more criteria."
       properties:
         empty:
@@ -458,7 +507,6 @@ components:
             
     Pageable:
       type: object
-      title: Pageable
       description: "Represents pagination and sorting information for querying a paginated dataset."
       properties:
         pageNumber:
@@ -541,6 +589,21 @@ components:
             A boolean value indicating whether the current page is empty.
             If `true`, the page has no items; otherwise, it has content.
           example: false
+
+    GenreResponse:
+      type: object
+      description: "Object containing list of movie genres."
+      properties:
+        genres:
+          description: "List of all possible genres for movies."
+          type: array
+          items:
+            $ref: '#/components/schemas/GenreDTO'
+          example:
+            - genreId: 525d0509-028c-45da-899f-db58ea520ca7
+              name: Action
+            - genreId: 1a96b16b-6a4c-4392-a892-fb5108d6245c
+              name: Horror
 
 paths:
   /movies:
@@ -638,3 +701,19 @@ paths:
       responses:
         '204':
           description: Successfully deleted the movie from the database.
+
+  /genres:
+    get:
+      description: List all possible genres for movies.
+      summary: List genres
+      operationId: getGenres
+      tags:
+        - genres
+      responses:
+        '200':
+          description: Successfully retrieved a list of all possible genres for movies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenreResponse'
+

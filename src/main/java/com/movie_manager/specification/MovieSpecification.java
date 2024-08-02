@@ -15,8 +15,6 @@ public class MovieSpecification {
     private MovieSpecification() {
     }
 
-    // TODO: catch exceptions when parsing
-
     public static Specification<Movie> nameEqualTo(String name) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.NAME), name);
     }

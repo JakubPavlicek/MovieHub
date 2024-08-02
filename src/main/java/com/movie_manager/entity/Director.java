@@ -5,12 +5,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.UuidGenerator;
 
 @Entity
 @AllArgsConstructor
@@ -21,16 +21,9 @@ import lombok.Setter;
 public class Director {
 
     @Id
-    @SequenceGenerator(
-        name = "director_id_generator",
-        sequenceName = "director_id_seq",
-        allocationSize = 1
-    )
-    @GeneratedValue(
-        generator = "director_id_generator",
-        strategy = GenerationType.SEQUENCE
-    )
-    private Long id;
+    @UuidGenerator(style = UuidGenerator.Style.RANDOM)
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private String directorId;
 
     @Column(
         length = 50,
