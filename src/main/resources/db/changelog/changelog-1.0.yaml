@@ -55,7 +55,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: release
+                  name: release_date
                   type: date
                   constraints:
                     nullable: false

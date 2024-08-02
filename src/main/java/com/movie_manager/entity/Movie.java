@@ -61,7 +61,7 @@ public class Movie {
         nullable = false
     )
     @Temporal(TemporalType.DATE)
-    private LocalDate release;
+    private LocalDate releaseDate;
 
     @Column(
         nullable = false

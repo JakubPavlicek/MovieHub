@@ -15,6 +15,8 @@ public class MovieSpecification {
     private MovieSpecification() {
     }
 
+    // TODO: catch exceptions when parsing
+
     public static Specification<Movie> nameEqualTo(String name) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.NAME), name);
     }
@@ -23,40 +25,52 @@ public class MovieSpecification {
         return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Movie_.NAME), "%" + name + "%");
     }
 
-    public static Specification<Movie> releaseEqualTo(String release) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.RELEASE), LocalDate.parse(release));
+    public static Specification<Movie> releaseDateEqualTo(LocalDate releaseDate) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.RELEASE_DATE), releaseDate);
     }
 
-    public static Specification<Movie> releaseBefore(String release) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThan(root.get(Movie_.RELEASE), LocalDate.parse(release));
+    public static Specification<Movie> releaseDateNotEqualTo(LocalDate releaseDate) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.notEqual(root.get(Movie_.RELEASE_DATE), releaseDate);
     }
 
-    public static Specification<Movie> releaseAfter(String release) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThan(root.get(Movie_.RELEASE), LocalDate.parse(release));
+    public static Specification<Movie> releaseDateBefore(LocalDate releaseDate) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThan(root.get(Movie_.RELEASE_DATE), releaseDate);
     }
 
-    public static Specification<Movie> lengthEqualTo(String length) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.LENGTH), Integer.parseInt(length));
+    public static Specification<Movie> releaseDateAfter(LocalDate releaseDate) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThan(root.get(Movie_.RELEASE_DATE), releaseDate);
     }
 
-    public static Specification<Movie> lengthNotEqualTo(String length) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.notEqual(root.get(Movie_.LENGTH), Integer.parseInt(length));
+    public static Specification<Movie> releaseDateBeforeOrEqualTo(LocalDate releaseDate) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get(Movie_.RELEASE_DATE), releaseDate);
     }
 
-    public static Specification<Movie> lengthLessThan(String length) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThan(root.get(Movie_.LENGTH), Integer.parseInt(length));
+    public static Specification<Movie> releaseDateAfterOrEqualTo(LocalDate releaseDate) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get(Movie_.RELEASE_DATE), releaseDate);
     }
 
-    public static Specification<Movie> lengthGreaterThan(String length) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThan(root.get(Movie_.LENGTH), Integer.parseInt(length));
+    public static Specification<Movie> lengthEqualTo(Integer length) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.LENGTH), length);
     }
 
-    public static Specification<Movie> lengthLessThanOrEqualTo(String length) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get(Movie_.LENGTH), Integer.parseInt(length));
+    public static Specification<Movie> lengthNotEqualTo(Integer length) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.notEqual(root.get(Movie_.LENGTH), length);
     }
 
-    public static Specification<Movie> lengthGreaterThanOrEqualTo(String length) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get(Movie_.LENGTH), Integer.parseInt(length));
+    public static Specification<Movie> lengthLessThan(Integer length) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThan(root.get(Movie_.LENGTH), length);
+    }
+
+    public static Specification<Movie> lengthGreaterThan(Integer length) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThan(root.get(Movie_.LENGTH), length);
+    }
+
+    public static Specification<Movie> lengthLessThanOrEqualTo(Integer length) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get(Movie_.LENGTH), length);
+    }
+
+    public static Specification<Movie> lengthGreaterThanOrEqualTo(Integer length) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get(Movie_.LENGTH), length);
     }
 
     public static Specification<Movie> descriptionEqualTo(String description) {
@@ -87,16 +101,8 @@ public class MovieSpecification {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.GENRES).get(Genre_.NAME), genre);
     }
 
-    public static Specification<Movie> genreContains(String genre) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Movie_.GENRES).get(Genre_.NAME), "%" + genre + "%");
-    }
-
     public static Specification<Movie> countryEqualTo(String country) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.COUNTRIES).get(Country_.NAME), country);
-    }
-
-    public static Specification<Movie> countryContains(String country) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Movie_.COUNTRIES).get(Country_.NAME), "%" + country + "%");
     }
 
     public static Specification<Movie> conjunction() {
