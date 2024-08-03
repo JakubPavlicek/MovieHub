@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface DirectorRepository extends JpaRepository<Director, Long> {
+public interface DirectorRepository extends JpaRepository<Director, String> {
 
     Optional<Director> findByName(String name);
 

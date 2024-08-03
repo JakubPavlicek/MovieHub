@@ -234,6 +234,15 @@ components:
           example: "eq:South Korea"
           maxLength: 100
 
+    genreId:
+      name: genreId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The genre ID.
+      example: 6b0de5bc-8e6c-4d4c-b13e-49450d7480a7
+
   schemas:
 
     Uuid:
@@ -716,4 +725,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenreResponse'
+
+  /genres/{genreId}/movies:
+    get:
+      description: List all movies with the given genre.
+      summary: List movies with genre
+      operationId: getMoviesWithGenre
+      tags:
+        - genres
+      parameters:
+        - $ref: '#/components/parameters/genreId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/sort'
+      responses:
+        '200':
+          description: Successfully retrieved a list of movies with the given genre.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoviePage'
 

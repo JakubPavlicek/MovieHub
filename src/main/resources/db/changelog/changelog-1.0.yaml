@@ -4,6 +4,8 @@ databaseChangeLog:
       author: JakubPavlicek
       changes:
 
+        # ENABLE uuid_generate_v4() FUNCTION
+
         - sql:
             sql: "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";"
 
