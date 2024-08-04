@@ -64,11 +64,13 @@ public class Movie {
     @Column(
         nullable = false
     )
+    @Builder.Default
     private Double rating = 0.0;
 
     @Column(
         nullable = false
     )
+    @Builder.Default
     private Integer reviewCount = 0;
 
     @Column(

@@ -29,6 +29,7 @@ public class Gender {
         length = 15,
         nullable = false
     )
-    private String gender;
+    @Builder.Default
+    private String name = "Unspecified";
 
 }

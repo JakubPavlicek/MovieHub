@@ -151,7 +151,7 @@ databaseChangeLog:
                   name: gender_id
                   type: varchar(255)
                   constraints:
-                    nullable: true
+                    nullable: false
                     foreignKeyName: fk_gender
 
         - createTable:
@@ -180,7 +180,7 @@ databaseChangeLog:
                   name: gender_id
                   type: varchar(255)
                   constraints:
-                    nullable: true
+                    nullable: false
                     foreignKeyName: fk_gender
 
         - createTable:
@@ -195,8 +195,9 @@ databaseChangeLog:
                     nullable: false
                     unique: true
               - column:
-                  name: gender
+                  name: name
                   type: varchar(15)
+                  defaultValue: 'Unspecified'
                   constraints:
                     nullable: false
                     unique: true
@@ -652,26 +653,26 @@ databaseChangeLog:
             tableName: gender
             columns:
               - column:
-                  name: gender
+                  name: name
                   value: 'Unspecified'
 
         - insert:
             tableName: gender
             columns:
               - column:
-                  name: gender
+                  name: name
                   value: 'Male'
 
         - insert:
             tableName: gender
             columns:
               - column:
-                  name: gender
+                  name: name
                   value: 'Female'
 
         - insert:
             tableName: gender
             columns:
               - column:
-                  name: gender
+                  name: name
                   value: 'Non-binary'

@@ -352,24 +352,44 @@ components:
       example: Detective
       nullable: false
 
-    DirectorNameRequest:
+    DirectorRequest:
       type: object
       required:
         - name
+        - gender
       properties:
         name:
           $ref: '#/components/schemas/ActorName'
+        gender:
+          $ref: '#/components/schemas/GenderRequest'
 
-    ActorNameAndRoleRequest:
+    ActorRequest:
       type: object
       required:
         - name
-        - role
+        - gender
+      nullable: false
       properties:
         name:
           $ref: '#/components/schemas/ActorName'
-        role:
-          $ref: '#/components/schemas/ActorRole'
+        gender:
+          $ref: '#/components/schemas/GenderRequest'
+
+    GenderRequest:
+      type: object
+      required:
+        - name
+      nullable: false
+      properties:
+        name:
+          type: string
+          enum:
+            - Unspecified
+            - Male
+            - Female
+            - Non-binary
+          example: Male
+          nullable: false
 
     MovieCastRequest:
       type: object
@@ -379,17 +399,11 @@ components:
       nullable: false
       properties:
         actor:
-          type: object
-          required:
-            - name
-          nullable: false
-          properties:
-            name:
-              $ref: '#/components/schemas/ActorName'
+          $ref: '#/components/schemas/ActorRequest'
         role:
           $ref: '#/components/schemas/ActorRole'
 
-    ProductionNameRequest:
+    ProductionRequest:
       type: object
       required:
         - name
@@ -400,10 +414,11 @@ components:
           maxLength: 100
           nullable: false
 
-    GenreNameRequest:
+    GenreRequest:
       type: object
       required:
         - name
+      nullable: false
       properties:
         name:
           type: string
@@ -434,10 +449,11 @@ components:
           example: Horror
           nullable: false
 
-    CountryNameRequest:
+    CountryRequest:
       type: object
       required:
         - name
+      nullable: false
       properties:
         name:
           type: string
@@ -518,6 +534,8 @@ components:
         name:
           type: string
           example: James Wan
+        gender:
+          $ref: '#/components/schemas/GenderDTO'
 
     MovieCastDTO:
       type: object
@@ -529,6 +547,8 @@ components:
               $ref: '#/components/schemas/Uuid'
             name:
               $ref: '#/components/schemas/ActorName'
+            gender:
+              $ref: '#/components/schemas/GenderDTO'
         role:
           $ref: '#/components/schemas/ActorRole'
 
@@ -559,6 +579,15 @@ components:
           type: string
           example: Italy
 
+    GenderDTO:
+      type: object
+      properties:
+        genderId:
+          $ref: '#/components/schemas/Uuid'
+        name:
+          type: string
+          example: Male
+
     AddMovieRequest:
       type: object
       required:
@@ -586,7 +615,7 @@ components:
         trailerUrl:
           $ref: '#/components/schemas/MovieTrailerUrl'
         director:
-          $ref: '#/components/schemas/DirectorNameRequest'
+          $ref: '#/components/schemas/DirectorRequest'
         cast:
           type: array
           items:
@@ -594,15 +623,15 @@ components:
         production:
           type: array
           items:
-            $ref: '#/components/schemas/ProductionNameRequest'
+            $ref: '#/components/schemas/ProductionRequest'
         genres:
           type: array
           items:
-            $ref: '#/components/schemas/GenreNameRequest'
+            $ref: '#/components/schemas/GenreRequest'
         countries:
           type: array
           items:
-            $ref: '#/components/schemas/CountryNameRequest'
+            $ref: '#/components/schemas/CountryRequest'
 
     UpdateMovieRequest:
       type: object
@@ -623,7 +652,7 @@ components:
         trailerUrl:
           $ref: '#/components/schemas/MovieTrailerUrl'
         director:
-          $ref: '#/components/schemas/DirectorNameRequest'
+          $ref: '#/components/schemas/DirectorRequest'
         cast:
           type: array # TODO: in ActorNameAndRoleRequest required may force both name and role in this update request (only one could be provided, which is ok)
           items:
@@ -631,15 +660,15 @@ components:
         production:
           type: array
           items:
-            $ref: '#/components/schemas/ProductionNameRequest'
+            $ref: '#/components/schemas/ProductionRequest'
         genres:
           type: array
           items:
-            $ref: '#/components/schemas/GenreNameRequest'
+            $ref: '#/components/schemas/GenreRequest'
         countries:
           type: array
           items:
-            $ref: '#/components/schemas/CountryNameRequest'
+            $ref: '#/components/schemas/CountryRequest'
 
     Sort:
       type: object
