@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
 @Service
 public class ParseService {
 
-    private static final String SORT_REGEX = "(name|releaseDate|length|description|director).(asc|desc)(?:,|$)";
+    private static final String SORT_REGEX = "(name|releaseDate|duration|description|director).(asc|desc)(?:,|$)";
 
     public Sort parseSort(String sort) {
         Pattern pattern = Pattern.compile(SORT_REGEX);
@@ -92,14 +92,14 @@ public class ParseService {
         ));
     }
 
-    public Specification<Movie> parseLength(String length) {
-        return parseFilter(length, Map.of(
-            "eq",  value -> MovieSpecification.lengthEqualTo(parseInteger(value)),
-            "neq", value -> MovieSpecification.lengthNotEqualTo(parseInteger(value)),
-            "lt",  value -> MovieSpecification.lengthLessThan(parseInteger(value)),
-            "gt",  value -> MovieSpecification.lengthGreaterThan(parseInteger(value)),
-            "lte", value -> MovieSpecification.lengthLessThanOrEqualTo(parseInteger(value)),
-            "gte", value -> MovieSpecification.lengthGreaterThanOrEqualTo(parseInteger(value))
+    public Specification<Movie> parseDuration(String duration) {
+        return parseFilter(duration, Map.of(
+            "eq",  value -> MovieSpecification.durationEqualTo(parseInteger(value)),
+            "neq", value -> MovieSpecification.durationNotEqualTo(parseInteger(value)),
+            "lt",  value -> MovieSpecification.durationLessThan(parseInteger(value)),
+            "gt",  value -> MovieSpecification.durationGreaterThan(parseInteger(value)),
+            "lte", value -> MovieSpecification.durationLessThanOrEqualTo(parseInteger(value)),
+            "gte", value -> MovieSpecification.durationGreaterThanOrEqualTo(parseInteger(value))
         ));
     }
 

@@ -1,14 +1,11 @@
 package com.movie_manager.service;
 
 import com.movie_manager.entity.Genre;
-import com.movie_manager.entity.Movie;
+import com.movie_manager.exception.GenreNotFoundException;
 import com.movie_manager.repository.GenreRepository;
 import com.movie_manager.repository.MovieRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,17 +18,15 @@ public class GenreService {
     private final GenreRepository genreRepository;
     private final MovieRepository movieRepository;
 
-    private final ParseService parseService;
-
     @Transactional
-    public List<Genre> getExistingGenres(List<Genre> genres) {
+    public List<Genre> getSavedGenres(List<Genre> genres) {
         List<Genre> existingGenres = new ArrayList<>();
 
-        genres.forEach(genre -> {
+        for (Genre genre : genres) {
             Genre existingGenre = genreRepository.findByName(genre.getName())
                                                  .orElseGet(() -> genreRepository.save(genre));
             existingGenres.add(existingGenre);
-        });
+        }
 
         return existingGenres;
     }
@@ -41,17 +36,10 @@ public class GenreService {
         return genreRepository.findAll();
     }
 
+    @Transactional
     public Genre getGenre(String genreId) {
         return genreRepository.findById(genreId)
-                              .orElseThrow(() -> new RuntimeException("Genre with ID: " + genreId + " not found"));
-    }
-
-    public Page<Movie> getMoviesWithGenre(String genreId, Integer page, Integer limit, String sort) {
-        Genre genre = getGenre(genreId);
-
-        Pageable pageable = PageRequest.of(page, limit, parseService.parseSort(sort));
-
-        return movieRepository.findAllByGenresContaining(genre, pageable);
+                              .orElseThrow(() -> new GenreNotFoundException("Genre with ID: " + genreId + " not found"));
     }
 
 }

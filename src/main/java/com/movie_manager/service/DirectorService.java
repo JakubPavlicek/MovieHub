@@ -13,7 +13,7 @@ public class DirectorService {
     private final DirectorRepository directorRepository;
 
     @Transactional
-    public Director getExistingDirector(Director director) {
+    public Director getSavedDirector(Director director) {
         if (director == null) {
             return null;
         }

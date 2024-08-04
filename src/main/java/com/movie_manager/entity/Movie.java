@@ -1,5 +1,6 @@
 package com.movie_manager.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -11,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
@@ -51,13 +53,33 @@ public class Movie {
     @Column(
         nullable = false
     )
-    private Integer length;
+    private Integer duration;
 
     @Column(
         length = 1000,
         nullable = false
     )
     private String description;
+
+    @Column(
+        nullable = false
+    )
+    private Double rating = 0.0;
+
+    @Column(
+        nullable = false
+    )
+    private Integer reviewCount = 0;
+
+    @Column(
+        nullable = false
+    )
+    private String posterUrl;
+
+    @Column(
+        nullable = false
+    )
+    private String trailerUrl;
 
     @ManyToOne
     @JoinColumn(
@@ -67,23 +89,29 @@ public class Movie {
     )
     private Director director;
 
+    @OneToMany(
+        mappedBy = "movie",
+        cascade = CascadeType.REMOVE
+    )
+    private List<MovieCast> cast;
+
     @ManyToMany(
         fetch = FetchType.EAGER
     )
     @JoinTable(
-        name = "movie_actor",
+        name = "movie_production",
         joinColumns = @JoinColumn(
             name = "movie_id",
             referencedColumnName = "movieId",
             foreignKey = @ForeignKey(name = "fk_movie")
         ),
         inverseJoinColumns = @JoinColumn(
-            name = "actor_id",
-            referencedColumnName = "actorId",
-            foreignKey = @ForeignKey(name = "fk_actor")
+            name = "company_id",
+            referencedColumnName = "companyId",
+            foreignKey = @ForeignKey(name = "fk_company")
         )
     )
-    private List<Actor> actors;
+    private List<ProductionCompany> production;
 
     @ManyToMany(
         fetch = FetchType.EAGER

@@ -24,4 +24,12 @@ public class GlobalExceptionHandler {
         return problemDetail;
     }
 
+    @ExceptionHandler(GenreNotFoundException.class)
+    public ProblemDetail handleGenreNotFoundException(GenreNotFoundException e) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());
+        problemDetail.setTitle("Genre Not Found");
+
+        return problemDetail;
+    }
+
 }

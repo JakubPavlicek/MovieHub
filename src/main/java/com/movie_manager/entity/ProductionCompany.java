@@ -2,14 +2,9 @@ package com.movie_manager.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,43 +12,24 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.util.List;
-
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Builder
-public class Actor {
+public class ProductionCompany {
 
     @Id
     @UuidGenerator(style = UuidGenerator.Style.RANDOM)
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String actorId;
+    private String companyId;
 
     @Column(
-        length = 50,
+        length = 100,
         nullable = false,
         unique = true
     )
     private String name;
-
-    private String bio;
-
-    @ManyToOne(
-        fetch = FetchType.EAGER
-    )
-    @JoinColumn(
-        name = "gender_id",
-        referencedColumnName = "genderId",
-        foreignKey = @ForeignKey(name = "fk_gender")
-    )
-    private Gender gender;
-
-    @OneToMany(
-        mappedBy = "actor"
-    )
-    private List<MovieCast> movieCasts;
 
 }

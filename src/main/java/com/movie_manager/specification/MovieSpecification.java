@@ -5,6 +5,7 @@ import com.movie_manager.entity.Country_;
 import com.movie_manager.entity.Director_;
 import com.movie_manager.entity.Genre_;
 import com.movie_manager.entity.Movie;
+import com.movie_manager.entity.MovieCast_;
 import com.movie_manager.entity.Movie_;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -47,28 +48,28 @@ public class MovieSpecification {
         return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get(Movie_.RELEASE_DATE), releaseDate);
     }
 
-    public static Specification<Movie> lengthEqualTo(Integer length) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.LENGTH), length);
+    public static Specification<Movie> durationEqualTo(Integer duration) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.DURATION), duration);
     }
 
-    public static Specification<Movie> lengthNotEqualTo(Integer length) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.notEqual(root.get(Movie_.LENGTH), length);
+    public static Specification<Movie> durationNotEqualTo(Integer duration) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.notEqual(root.get(Movie_.DURATION), duration);
     }
 
-    public static Specification<Movie> lengthLessThan(Integer length) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThan(root.get(Movie_.LENGTH), length);
+    public static Specification<Movie> durationLessThan(Integer duration) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThan(root.get(Movie_.DURATION), duration);
     }
 
-    public static Specification<Movie> lengthGreaterThan(Integer length) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThan(root.get(Movie_.LENGTH), length);
+    public static Specification<Movie> durationGreaterThan(Integer duration) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThan(root.get(Movie_.DURATION), duration);
     }
 
-    public static Specification<Movie> lengthLessThanOrEqualTo(Integer length) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get(Movie_.LENGTH), length);
+    public static Specification<Movie> durationLessThanOrEqualTo(Integer duration) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.lessThanOrEqualTo(root.get(Movie_.DURATION), duration);
     }
 
-    public static Specification<Movie> lengthGreaterThanOrEqualTo(Integer length) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get(Movie_.LENGTH), length);
+    public static Specification<Movie> durationGreaterThanOrEqualTo(Integer duration) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.greaterThanOrEqualTo(root.get(Movie_.DURATION), duration);
     }
 
     public static Specification<Movie> descriptionEqualTo(String description) {
@@ -88,11 +89,11 @@ public class MovieSpecification {
     }
 
     public static Specification<Movie> actorEqualTo(String actor) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.ACTORS).get(Actor_.NAME), actor);
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.CAST).get(MovieCast_.ACTOR).get(Actor_.NAME), actor);
     }
 
     public static Specification<Movie> actorContains(String actor) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Movie_.ACTORS).get(Actor_.NAME), "%" + actor + "%");
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Movie_.CAST).get(MovieCast_.ACTOR).get(Actor_.NAME), "%" + actor + "%");
     }
 
     public static Specification<Movie> genreEqualTo(String genre) {

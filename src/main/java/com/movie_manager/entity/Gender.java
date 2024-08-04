@@ -2,13 +2,9 @@ package com.movie_manager.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,30 +18,17 @@ import org.hibernate.annotations.UuidGenerator;
 @Getter
 @Setter
 @Builder
-public class Director {
+public class Gender {
 
     @Id
     @UuidGenerator(style = UuidGenerator.Style.RANDOM)
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String directorId;
+    private String genderId;
 
     @Column(
-        length = 50,
-        nullable = false,
-        unique = true
+        length = 15,
+        nullable = false
     )
-    private String name;
-
-    private String bio;
-
-    @ManyToOne(
-        fetch = FetchType.EAGER
-    )
-    @JoinColumn(
-        name = "gender_id",
-        referencedColumnName = "genderId",
-        foreignKey = @ForeignKey(name = "fk_gender")
-    )
-    private Gender gender;
+    private String gender;
 
 }

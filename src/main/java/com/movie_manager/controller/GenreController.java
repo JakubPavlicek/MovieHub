@@ -8,6 +8,7 @@ import com.movie_manager.entity.Movie;
 import com.movie_manager.mapper.dto.GenreMapper;
 import com.movie_manager.mapper.dto.MovieMapper;
 import com.movie_manager.service.GenreService;
+import com.movie_manager.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,7 @@ import java.util.List;
 public class GenreController implements GenresApi {
 
     private final GenreService genreService;
+    private final MovieService movieService;
     private final GenreMapper genreMapper;
     private final MovieMapper movieMapper;
 
@@ -33,7 +35,8 @@ public class GenreController implements GenresApi {
 
     @Override
     public ResponseEntity<MoviePage> getMoviesWithGenre(String genreId, Integer page, Integer limit, String sort) {
-        Page<Movie> movies = genreService.getMoviesWithGenre(genreId, page, limit, sort);
+        Genre genre = genreService.getGenre(genreId);
+        Page<Movie> movies = movieService.getMoviesByGenre(genre, page, limit, sort);
         MoviePage moviePage = movieMapper.map(movies);
 
         return ResponseEntity.ok(moviePage);

@@ -16,16 +16,16 @@ public class CountryService {
     private final CountryRepository countryRepository;
 
     @Transactional
-    public List<Country> getExistingCountries(List<Country> countries) {
-        List<Country> existingCountries = new ArrayList<>();
+    public List<Country> getSavedCountries(List<Country> countries) {
+        List<Country> savedCountries = new ArrayList<>();
 
-        countries.forEach(country -> {
+        for (Country country : countries) {
             Country existingCountry = countryRepository.findByName(country.getName())
                                                        .orElseGet(() -> countryRepository.save(country));
-            existingCountries.add(existingCountry);
-        });
+            savedCountries.add(existingCountry);
+        }
 
-        return existingCountries;
+        return savedCountries;
     }
 
 }

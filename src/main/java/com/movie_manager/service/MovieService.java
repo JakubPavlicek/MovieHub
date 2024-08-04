@@ -1,10 +1,11 @@
 package com.movie_manager.service;
 
-import com.movie_manager.entity.Actor;
 import com.movie_manager.entity.Country;
 import com.movie_manager.entity.Director;
 import com.movie_manager.entity.Genre;
 import com.movie_manager.entity.Movie;
+import com.movie_manager.entity.MovieCast;
+import com.movie_manager.entity.ProductionCompany;
 import com.movie_manager.exception.MovieNotFoundException;
 import com.movie_manager.repository.MovieRepository;
 import jakarta.transaction.Transactional;
@@ -24,7 +25,8 @@ public class MovieService {
     private final MovieRepository movieRepository;
 
     private final DirectorService directorService;
-    private final ActorService actorService;
+    private final MovieCastService movieCastService;
+    private final ProductionCompanyService productionService;
     private final CountryService countryService;
     private final GenreService genreService;
 
@@ -32,19 +34,24 @@ public class MovieService {
 
     @Transactional
     public Movie addMovie(Movie movie) {
-        Director existingDirector = directorService.getExistingDirector(movie.getDirector());
-        movie.setDirector(existingDirector);
+        Director savedDirector = directorService.getSavedDirector(movie.getDirector());
+        movie.setDirector(savedDirector);
 
-        List<Actor> existingActors = actorService.getExistingActors(movie.getActors());
-        movie.setActors(existingActors);
+        List<Country> savedCountries = countryService.getSavedCountries(movie.getCountries());
+        movie.setCountries(savedCountries);
 
-        List<Country> existingCountries = countryService.getExistingCountries(movie.getCountries());
-        movie.setCountries(existingCountries);
+        List<Genre> savedGenres = genreService.getSavedGenres(movie.getGenres());
+        movie.setGenres(savedGenres);
 
-        List<Genre> existingGenres = genreService.getExistingGenres(movie.getGenres());
-        movie.setGenres(existingGenres);
+        List<ProductionCompany> savedProduction = productionService.getSavedProduction(movie.getProduction());
+        movie.setProduction(savedProduction);
 
-        return movieRepository.save(movie);
+        Movie savedMovie = movieRepository.save(movie);
+
+        List<MovieCast> savedCast = movieCastService.getSavedMovieCasts(movie.getCast(), savedMovie);
+        savedMovie.setCast(savedCast);
+
+        return savedMovie;
     }
 
     @Transactional
@@ -60,52 +67,66 @@ public class MovieService {
     }
 
     @Transactional
-    public Movie updateMovie(String movieId, Movie movie) {
+    public Movie updateMovie(String movieId, Movie incomingMovie) {
         Movie existingMovie = getMovie(movieId);
 
-        updateMovieFields(movie, existingMovie);
-        updateMovieRelatedEntities(movie, existingMovie);
+        updateMovieFields(existingMovie, incomingMovie);
+        updateMovieRelatedEntities(existingMovie, incomingMovie);
 
         return movieRepository.save(existingMovie);
     }
 
-    private static void updateMovieFields(Movie movie, Movie existingMovie) {
-        if (movie.getName() != null)
-            existingMovie.setName(movie.getName());
-        if (movie.getReleaseDate() != null)
-            existingMovie.setReleaseDate(movie.getReleaseDate());
-        if (movie.getLength() != null)
-            existingMovie.setLength(movie.getLength());
-        if (movie.getDescription() != null)
-            existingMovie.setDescription(movie.getDescription());
+    private static void updateMovieFields(Movie existingMovie, Movie incomingMovie) {
+        if (incomingMovie.getName() != null) {
+            existingMovie.setName(incomingMovie.getName());
+        }
+        if (incomingMovie.getReleaseDate() != null) {
+            existingMovie.setReleaseDate(incomingMovie.getReleaseDate());
+        }
+        if (incomingMovie.getDuration() != null) {
+            existingMovie.setDuration(incomingMovie.getDuration());
+        }
+        if (incomingMovie.getDescription() != null) {
+            existingMovie.setDescription(incomingMovie.getDescription());
+        }
+        if (incomingMovie.getPosterUrl() != null) {
+            existingMovie.setPosterUrl(incomingMovie.getPosterUrl());
+        }
+        if (incomingMovie.getTrailerUrl() != null) {
+            existingMovie.setTrailerUrl(incomingMovie.getTrailerUrl());
+        }
     }
 
-    private void updateMovieRelatedEntities(Movie movie, Movie existingMovie) {
-        if (movie.getDirector() != null) {
-            Director existingDirector = directorService.getExistingDirector(movie.getDirector());
-            existingMovie.setDirector(existingDirector);
+    private void updateMovieRelatedEntities(Movie existingMovie, Movie incomingMovie) {
+        if (incomingMovie.getDirector() != null) {
+            Director savedDirector = directorService.getSavedDirector(incomingMovie.getDirector());
+            existingMovie.setDirector(savedDirector);
         }
-        if (movie.getActors() != null && !movie.getActors().isEmpty()) {
-            List<Actor> existingActors = actorService.getExistingActors(movie.getActors());
-            existingMovie.setActors(existingActors);
+        if (incomingMovie.getCast() != null && !incomingMovie.getCast().isEmpty()) {
+            List<MovieCast> savedMovieCasts = movieCastService.getSavedMovieCasts(incomingMovie.getCast(), existingMovie);
+            existingMovie.setCast(savedMovieCasts);
         }
-        if (movie.getCountries() != null && !movie.getCountries().isEmpty()) {
-            List<Country> existingCountries = countryService.getExistingCountries(movie.getCountries());
-            existingMovie.setCountries(existingCountries);
+        if (incomingMovie.getProduction() != null && !incomingMovie.getProduction().isEmpty()) {
+            List<ProductionCompany> savedProduction = productionService.getSavedProduction(incomingMovie.getProduction());
+            existingMovie.setProduction(savedProduction);
         }
-        if (movie.getGenres() != null && !movie.getGenres().isEmpty()) {
-            List<Genre> existingGenres = genreService.getExistingGenres(movie.getGenres());
-            existingMovie.setGenres(existingGenres);
+        if (incomingMovie.getCountries() != null && !incomingMovie.getCountries().isEmpty()) {
+            List<Country> savedCountries = countryService.getSavedCountries(incomingMovie.getCountries());
+            existingMovie.setCountries(savedCountries);
+        }
+        if (incomingMovie.getGenres() != null && !incomingMovie.getGenres().isEmpty()) {
+            List<Genre> savedGenres = genreService.getSavedGenres(incomingMovie.getGenres());
+            existingMovie.setGenres(savedGenres);
         }
     }
 
     @Transactional
-    public Page<Movie> getMovies(Integer page, Integer limit, String sort, String name, String releaseDate, String length, String description, String director, List<String> actors, List<String> genres, List<String> countries) {
+    public Page<Movie> getMovies(Integer page, Integer limit, String sort, String name, String releaseDate, String duration, String description, String director, List<String> actors, List<String> genres, List<String> countries) {
         Pageable pageable = PageRequest.of(page, limit, parseService.parseSort(sort));
 
         Specification<Movie> specification = Specification.where(parseService.parseName(name))
                                                           .and(parseService.parseReleaseDate(releaseDate))
-                                                          .and(parseService.parseLength(length))
+                                                          .and(parseService.parseDuration(duration))
                                                           .and(parseService.parseDescription(description))
                                                           .and(parseService.parseDirector(director))
                                                           .and(parseService.parseActors(actors))
@@ -113,6 +134,13 @@ public class MovieService {
                                                           .and(parseService.parseCountries(countries));
 
         return movieRepository.findAll(specification, pageable);
+    }
+
+    @Transactional
+    public Page<Movie> getMoviesByGenre(Genre genre, Integer page, Integer limit, String sort) {
+        Pageable pageable = PageRequest.of(page, limit, parseService.parseSort(sort));
+
+        return movieRepository.findAllByGenresContaining(genre, pageable);
     }
 
 }

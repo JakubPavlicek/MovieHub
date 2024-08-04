@@ -11,10 +11,15 @@ public class MovieFieldMapper {
         MOVIE_ID,
         NAME,
         RELEASE_DATE,
-        LENGTH,
+        DURATION,
         DESCRIPTION,
+        RATING,
+        REVIEW_COUNT,
+        POSTER_URL,
+        TRAILER_URL,
         DIRECTOR,
-        ACTORS,
+        CAST,
+        PRODUCTION,
         GENRES,
         COUNTRIES,
     }
@@ -27,10 +32,15 @@ public class MovieFieldMapper {
             case MOVIE_ID -> Movie_.MOVIE_ID;
             case NAME -> Movie_.NAME;
             case RELEASE_DATE -> Movie_.RELEASE_DATE;
-            case LENGTH -> Movie_.LENGTH;
+            case DURATION -> Movie_.DURATION;
             case DESCRIPTION -> Movie_.DESCRIPTION;
+            case RATING -> Movie_.RATING;
+            case REVIEW_COUNT -> Movie_.REVIEW_COUNT;
+            case POSTER_URL -> Movie_.POSTER_URL;
+            case TRAILER_URL -> Movie_.TRAILER_URL;
             case DIRECTOR -> Movie_.DIRECTOR;
-            case ACTORS -> Movie_.ACTORS;
+            case CAST -> Movie_.CAST;
+            case PRODUCTION -> Movie_.PRODUCTION;
             case GENRES -> Movie_.GENRES;
             case COUNTRIES -> Movie_.COUNTRIES;
         };
