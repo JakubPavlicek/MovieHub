@@ -28,7 +28,7 @@ public class GenreController implements GenresApi {
     @Override
     public ResponseEntity<GenreResponse> getGenres() {
         List<Genre> genres = genreService.getGenres();
-        GenreResponse genreResponse = genreMapper.map(genres);
+        GenreResponse genreResponse = genreMapper.mapToGenreResponse(genres);
 
         return ResponseEntity.ok(genreResponse);
     }

@@ -3,27 +3,50 @@ package com.movie_manager.mapper.dto;
 import com.movie_manager.dto.GenreDTO;
 import com.movie_manager.dto.GenreResponse;
 import com.movie_manager.entity.Genre;
-import lombok.AllArgsConstructor;
-import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-@AllArgsConstructor
 public class GenreMapper {
 
-    private final ModelMapper modelMapper;
+    private GenreMapper() {
+    }
 
-    public GenreResponse map(List<Genre> genres) {
+    public static List<Genre> mapToGenres(List<String> genres) {
+        return genres.stream()
+                     .map(genreName -> Genre.builder().name(genreName).build())
+                     .toList();
+    }
+
+    public static List<GenreDTO> mapToGenreDTOS(List<Genre> genres) {
+        return genres.stream()
+                     .map(GenreMapper::mapToGenreDTO)
+                     .toList();
+    }
+
+    public static GenreResponse mapToGenreResponse(List<Genre> genres) {
         List<GenreDTO> genreDTOS = genres.stream()
-                                         .map(genre -> modelMapper.map(genre, GenreDTO.class))
+                                         .map(GenreMapper::mapToGenreDTO)
                                          .toList();
 
         GenreResponse genreResponse = new GenreResponse();
         genreResponse.setGenres(genreDTOS);
 
         return genreResponse;
+    }
+
+    public static List<String> mapToGenreNames(List<Genre> genres) {
+        return genres.stream()
+                     .map(Genre::getName)
+                     .toList();
+    }
+
+    private static GenreDTO mapToGenreDTO(Genre genre) {
+        return GenreDTO.builder()
+                       .genreId(genre.getGenreId())
+                       .name(genre.getName())
+                       .build();
     }
 
 }

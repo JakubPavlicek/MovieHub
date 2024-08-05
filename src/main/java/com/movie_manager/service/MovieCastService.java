@@ -4,6 +4,7 @@ import com.movie_manager.entity.Actor;
 import com.movie_manager.entity.Movie;
 import com.movie_manager.entity.MovieCast;
 import com.movie_manager.repository.MovieCastRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,10 @@ public class MovieCastService {
 
     private final ActorService actorService;
 
+    @Transactional
     public List<MovieCast> getSavedMovieCasts(List<MovieCast> movieCasts, Movie movie) {
+        movieCastRepository.deleteAllByMovie(movie);
+
         List<MovieCast> existingMovieCasts = new ArrayList<>();
 
         for (MovieCast movieCast : movieCasts) {

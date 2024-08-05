@@ -2,6 +2,7 @@ package com.movie_manager.controller;
 
 import com.movie_manager.MoviesApi;
 import com.movie_manager.dto.AddMovieRequest;
+import com.movie_manager.dto.MovieDetailsResponse;
 import com.movie_manager.dto.MoviePage;
 import com.movie_manager.dto.MovieResponse;
 import com.movie_manager.dto.UpdateMovieRequest;
@@ -20,13 +21,12 @@ import java.util.List;
 public class MovieController implements MoviesApi {
 
     private final MovieService movieService;
-    private final MovieMapper movieMapper;
 
     @Override
     public ResponseEntity<MovieResponse> addMovie(AddMovieRequest addMovieRequest) {
-        Movie movie = movieMapper.map(addMovieRequest);
+        Movie movie = MovieMapper.mapToMovie(addMovieRequest);
         movie = movieService.addMovie(movie);
-        MovieResponse movieResponse = movieMapper.map(movie);
+        MovieResponse movieResponse = MovieMapper.mapToMovieResponse(movie);
 
         return ResponseEntity.ok(movieResponse);
     }
@@ -39,18 +39,18 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<MovieResponse> getMovie(String movieId) {
+    public ResponseEntity<MovieDetailsResponse> getMovie(String movieId) {
         Movie movie = movieService.getMovie(movieId);
-        MovieResponse movieResponse = movieMapper.map(movie);
+        MovieDetailsResponse movieDetailsResponse = MovieMapper.mapToMovieDetailsResponse(movie);
 
-        return ResponseEntity.ok(movieResponse);
+        return ResponseEntity.ok(movieDetailsResponse);
     }
 
     @Override
     public ResponseEntity<MovieResponse> updateMovie(String movieId, UpdateMovieRequest updateMovieRequest) {
-        Movie movie = movieMapper.map(updateMovieRequest);
+        Movie movie = MovieMapper.mapToMovie(updateMovieRequest);
         movie = movieService.updateMovie(movieId, movie);
-        MovieResponse movieResponse = movieMapper.map(movie);
+        MovieResponse movieResponse = MovieMapper.mapToMovieResponse(movie);
 
         return ResponseEntity.ok(movieResponse);
     }
@@ -58,7 +58,7 @@ public class MovieController implements MoviesApi {
     @Override
     public ResponseEntity<MoviePage> getMovies(Integer page, Integer limit, String sort, String name, String releaseDate, String duration, String description, String director, List<String> actors, List<String> genres, List<String> countries) {
         Page<Movie> movies = movieService.getMovies(page, limit, sort, name, releaseDate, duration, description, director, actors, genres, countries);
-        MoviePage moviePage = movieMapper.map(movies);
+        MoviePage moviePage = MovieMapper.map(movies);
 
         return ResponseEntity.ok(moviePage);
     }
