@@ -141,10 +141,20 @@ public class MovieService {
     }
 
     @Transactional
-    public Page<Movie> getMoviesByGenre(Genre genre, Integer page, Integer limit, String sort) {
+    public Page<Movie> getMoviesByGenre(String genreId, Integer page, Integer limit, String sort) {
+        Genre genre = genreService.getGenre(genreId);
+
         Pageable pageable = PageRequest.of(page, limit, parseService.parseSort(sort));
 
         return movieRepository.findAllByGenresContaining(genre, pageable);
+    }
+
+    public Page<Movie> getMoviesByCountry(String countryId, Integer page, Integer limit, String sort) {
+        Country country = countryService.getCountry(countryId);
+
+        Pageable pageable = PageRequest.of(page, limit, parseService.parseSort(sort));
+
+        return movieRepository.findAllByCountriesContaining(country, pageable);
     }
 
 }

@@ -87,7 +87,7 @@ public class MovieMapper {
                                    .build();
     }
 
-    public static MoviePage map(Page<Movie> movies) {
+    public static MoviePage mapToMoviePage(Page<Movie> movies) {
         return MoviePage.builder()
                         .content(mapToMovieDetailsReponseList(movies))
                         .pageable(PageableMapper.mapToPageableDTO(movies.getPageable()))

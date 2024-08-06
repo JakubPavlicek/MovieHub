@@ -289,6 +289,15 @@ components:
       description: The genre ID.
       example: 6b0de5bc-8e6c-4d4c-b13e-49450d7480a7
 
+    countryId:
+      name: countryId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The country ID.
+      example: d9ac0050-db90-44c1-a218-f93b0428a073
+
   responses:
 
     404MovieNotFound:
@@ -300,6 +309,13 @@ components:
 
     404GenreNotFound:
       description: Genre not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+
+    404CountryNotFound:
+      description: Country not found.
       content:
         application/json:
           schema:
@@ -738,6 +754,21 @@ components:
             - genreId: 1a96b16b-6a4c-4392-a892-fb5108d6245c
               name: Horror
 
+    CountryResponse:
+      type: object
+      description: Object containing list of movie countries.
+      properties:
+        countries:
+          description: List of all possible countries for movies.
+          type: array
+          items:
+            $ref: '#/components/schemas/CountryDTO'
+          example:
+            - countryId: 3d9e9db7-6544-4613-998e-88cdd6334ce1
+              name: Italy
+            - countryId: 21c9c051-0bf4-4e2b-8c96-7c19895ce72f
+              name: France
+
     ProblemDetail:
       type: object
       title: Problem Detail
@@ -924,6 +955,25 @@ paths:
               schema:
                 $ref: '#/components/schemas/GenreResponse'
 
+  /genres/{genreId}:
+    get:
+      description: Retrieve genre details by ID.
+      summary: Retrieve genre details
+      operationId: getGenreById
+      tags:
+        - genres
+      parameters:
+        - $ref: '#/components/parameters/genreId'
+      responses:
+        '200':
+          description: Successfully retrieved the genre details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenreDTO'
+        '404':
+          $ref: '#/components/responses/404GenreNotFound'
+
   /genres/{genreId}/movies:
     get:
       description: List all movies with the given genre.
@@ -946,3 +996,85 @@ paths:
         '404':
           $ref: '#/components/responses/404GenreNotFound'
 
+  /countries:
+    post:
+      description: Add country to the databse.
+      summary: Add country
+      operationId: addCountry
+      tags:
+        - countries
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  $ref: '#/components/schemas/CountryName'
+      responses:
+        '201':
+          description: Successfully added a country to the database.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountryDTO'
+        '409':
+          description: Country already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+    get:
+      description: List all possible countries for movies.
+      summary: List countries
+      operationId: getCountries
+      tags:
+        - countries
+      responses:
+        '200':
+          description: Successfully retrieved a list of all possible countries for movies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountryResponse'
+
+  /countries/{countryId}:
+    get:
+      description: Retrieve country details by ID.
+      summary: Retrieve country details
+      operationId: getCountryById
+      tags:
+        - countries
+      parameters:
+        - $ref: '#/components/parameters/countryId'
+      responses:
+        '200':
+          description: Successfully retrieved the country details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountryDTO'
+        '404':
+          $ref: '#/components/responses/404CountryNotFound'
+
+  /countries/{countryId}/movies:
+    get:
+      description: List all movies with the given country.
+      summary: List movies with country
+      operationId: getMoviesWithCountry
+      tags:
+        - countries
+      parameters:
+        - $ref: '#/components/parameters/countryId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/sort'
+      responses:
+        '200':
+          description: Successfully retrieved a list of movies with the given country.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoviePage'
+        '404':
+          $ref: '#/components/responses/404CountryNotFound'

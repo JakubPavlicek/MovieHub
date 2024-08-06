@@ -2,7 +2,6 @@ package com.movie_manager.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -41,9 +40,7 @@ public class Actor {
 
     private String bio;
 
-    @ManyToOne(
-        fetch = FetchType.LAZY
-    )
+    @ManyToOne
     @JoinColumn(
         name = "gender_id",
         referencedColumnName = "genderId",
@@ -52,8 +49,7 @@ public class Actor {
     private Gender gender;
 
     @OneToMany(
-        mappedBy = "actor",
-        fetch = FetchType.LAZY
+        mappedBy = "actor"
     )
     private Set<MovieCast> movieCasts;
 

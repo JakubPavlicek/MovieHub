@@ -1,6 +1,7 @@
 package com.movie_manager.mapper.dto;
 
 import com.movie_manager.dto.CountryDTO;
+import com.movie_manager.dto.CountryResponse;
 import com.movie_manager.entity.Country;
 
 import java.util.List;
@@ -30,11 +31,22 @@ public class CountryMapper {
                         .toList();
     }
 
-    private static CountryDTO mapToCountryDTO(Country country) {
+    public static CountryDTO mapToCountryDTO(Country country) {
         return CountryDTO.builder()
                          .countryId(country.getCountryId())
                          .name(country.getName())
                          .build();
+    }
+
+    public static CountryResponse mapToCountryResponse(List<Country> countries) {
+        List<CountryDTO> countryDTOS = countries.stream()
+                                                .map(CountryMapper::mapToCountryDTO)
+                                                .toList();
+
+        CountryResponse countryResponse = new CountryResponse();
+        countryResponse.setCountries(countryDTOS);
+
+        return countryResponse;
     }
 
 }

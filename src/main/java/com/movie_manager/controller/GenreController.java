@@ -27,6 +27,14 @@ public class GenreController implements GenresApi {
     private final MovieService movieService;
 
     @Override
+    public ResponseEntity<GenreDTO> addGenre(AddGenreRequest addGenreRequest) {
+        Genre genre = genreService.addGenre(addGenreRequest.getName());
+        GenreDTO genreDTO = GenreMapper.mapToGenreDTO(genre);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(genreDTO);
+    }
+
+    @Override
     public ResponseEntity<GenreResponse> getGenres() {
         List<Genre> genres = genreService.getGenres();
         GenreResponse genreResponse = GenreMapper.mapToGenreResponse(genres);
@@ -35,20 +43,19 @@ public class GenreController implements GenresApi {
     }
 
     @Override
-    public ResponseEntity<MoviePage> getMoviesWithGenre(String genreId, Integer page, Integer limit, String sort) {
+    public ResponseEntity<GenreDTO> getGenreById(String genreId) {
         Genre genre = genreService.getGenre(genreId);
-        Page<Movie> movies = movieService.getMoviesByGenre(genre, page, limit, sort);
-        MoviePage moviePage = MovieMapper.map(movies);
+        GenreDTO genreDTO = GenreMapper.mapToGenreDTO(genre);
 
-        return ResponseEntity.ok(moviePage);
+        return ResponseEntity.ok(genreDTO);
     }
 
     @Override
-    public ResponseEntity<GenreDTO> addGenre(AddGenreRequest addGenreRequest) {
-        Genre genre = genreService.addGenre(addGenreRequest.getName());
-        GenreDTO genreDTO = GenreMapper.mapToGenreDTO(genre);
+    public ResponseEntity<MoviePage> getMoviesWithGenre(String genreId, Integer page, Integer limit, String sort) {
+        Page<Movie> movies = movieService.getMoviesByGenre(genreId, page, limit, sort);
+        MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(genreDTO);
+        return ResponseEntity.ok(moviePage);
     }
 
 }
