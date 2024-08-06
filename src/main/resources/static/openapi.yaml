@@ -289,6 +289,22 @@ components:
       description: The genre ID.
       example: 6b0de5bc-8e6c-4d4c-b13e-49450d7480a7
 
+  responses:
+
+    404MovieNotFound:
+      description: Movie not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+
+    404GenreNotFound:
+      description: Genre not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+
   schemas:
 
     Uuid:
@@ -524,16 +540,16 @@ components:
       allOf:
         - $ref: '#/components/schemas/MovieRequest'
         - required:
-          - name
-          - releaseDate
-          - duration
-          - description
-          - posterUrl
-          - trailerUrl
-          - cast
-          - productionCompanies
-          - genres
-          - countries
+            - name
+            - releaseDate
+            - duration
+            - description
+            - posterUrl
+            - trailerUrl
+            - cast
+            - productionCompanies
+            - genres
+            - countries
 
     UpdateMovieRequest:
       description: Request body schema for updating a movie.
@@ -599,6 +615,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/MovieCastResponse'
+        productionCompanies:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductionCompanyName'
         genres:
           type: array
           items:
@@ -718,6 +738,42 @@ components:
             - genreId: 1a96b16b-6a4c-4392-a892-fb5108d6245c
               name: Horror
 
+    ProblemDetail:
+      type: object
+      title: Problem Detail
+      description: "A generic error."
+      properties:
+        type:
+          type: string
+          description: "A URI reference that identifies the problem type."
+          example: "http://localhost:8080/movie-not-found"
+        title:
+          type: string
+          description: "A short, human-readable summary of the problem type."
+          example: Document Not Found
+        status:
+          type: number
+          description: "The HTTP status code."
+          example: 404
+        detail:
+          type: string
+          description: "A human-readable explanation specific to this occurrence of the problem."
+          example: "Movie with ID: 11ae56ed-240e-4d4d-8d3c-f135d9394ab3 not found"
+        instance:
+          type: string
+          description: "A URI reference that identifies the specific occurrence of the problem."
+          example: "/movies/11ae56ed-240e-4d4d-8d3c-f135d9394ab3"
+        contextInfo:
+          type: object
+          description: "A free-form based object that contains additional context about the error."
+          properties:
+            messages:
+              type: array
+              description: "More details on the error."
+              items:
+                type: string
+              example: [ "Something went wrong", "Something else went wrong" ]
+
     # TODO: endpoints
 
 paths:
@@ -784,6 +840,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MovieDetailsResponse'
+        '404':
+          $ref: '#/components/responses/404MovieNotFound'
     put:
       description: |
         Update the details of an existing movie.
@@ -808,6 +866,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MovieResponse'
+        '404':
+          $ref: '#/components/responses/404MovieNotFound'
     delete:
       description: Delete a movie with a given ID.
       summary: Delete movie
@@ -819,8 +879,37 @@ paths:
       responses:
         '204':
           description: Successfully deleted the movie from the database.
+        '404':
+          $ref: '#/components/responses/404MovieNotFound'
 
   /genres:
+    post:
+      description: Add genre to the databse.
+      summary: Add genre
+      operationId: addGenre
+      tags:
+        - genres
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  $ref: '#/components/schemas/GenreName'
+      responses:
+        '201':
+          description: Successfully added a genre to the database.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenreDTO'
+        '409':
+          description: Genre already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
     get:
       description: List all possible genres for movies.
       summary: List genres
@@ -854,4 +943,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MoviePage'
+        '404':
+          $ref: '#/components/responses/404GenreNotFound'
 

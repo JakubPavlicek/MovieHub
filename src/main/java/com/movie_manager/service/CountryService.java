@@ -6,8 +6,9 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -16,16 +17,16 @@ public class CountryService {
     private final CountryRepository countryRepository;
 
     @Transactional
-    public List<Country> getSavedCountries(List<Country> countries) {
-        List<Country> savedCountries = new ArrayList<>();
-
-        for (Country country : countries) {
-            Country existingCountry = countryRepository.findByName(country.getName())
-                                                       .orElseGet(() -> countryRepository.save(country));
-            savedCountries.add(existingCountry);
-        }
-
-        return savedCountries;
+    public Set<Country> getSavedCountries(Set<Country> countries) {
+        return countries.stream()
+                        .map(this::getSavedCountry)
+                        .collect(Collectors.toCollection(HashSet::new));
     }
+
+    private Country getSavedCountry(Country country) {
+        return countryRepository.findByName(country.getName())
+                                .orElseGet(() -> countryRepository.save(country));
+    }
+
 
 }

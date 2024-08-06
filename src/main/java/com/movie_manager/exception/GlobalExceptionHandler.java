@@ -32,4 +32,12 @@ public class GlobalExceptionHandler {
         return problemDetail;
     }
 
+    @ExceptionHandler(GenreAlreadyExistsException.class)
+    public ProblemDetail handleGenreAlreadyExistsException(GenreAlreadyExistsException e) {
+        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, e.getMessage());
+        problemDetail.setTitle("Genre Already Exists");
+
+        return problemDetail;
+    }
+
 }

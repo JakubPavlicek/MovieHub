@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -42,7 +42,7 @@ public class Actor {
     private String bio;
 
     @ManyToOne(
-        fetch = FetchType.EAGER
+        fetch = FetchType.LAZY
     )
     @JoinColumn(
         name = "gender_id",
@@ -52,8 +52,9 @@ public class Actor {
     private Gender gender;
 
     @OneToMany(
-        mappedBy = "actor"
+        mappedBy = "actor",
+        fetch = FetchType.LAZY
     )
-    private List<MovieCast> movieCasts;
+    private Set<MovieCast> movieCasts;
 
 }

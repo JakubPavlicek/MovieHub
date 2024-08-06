@@ -62,6 +62,7 @@ public class MovieMapper {
                             .trailerUrl(movie.getTrailerUrl())
                             .director(movie.getDirector().getName())
                             .cast(MovieCastMapper.mapToMovieCastResponse(movie.getCast()))
+                            .productionCompanies(ProductionCompanyMapper.mapToProductionCompanyNames(movie.getProduction()))
                             .genres(GenreMapper.mapToGenreNames(movie.getGenres()))
                             .countries(CountryMapper.mapToCountryNames(movie.getCountries()))
                             .build();

@@ -14,12 +14,11 @@ public class GenderService {
 
     @Transactional
     public Gender getSavedGender(Gender gender) {
-        if (gender == null) {
-            return genderRepository.findByName(new Gender().getName()).get();
-        }
+        // gender can be null -> use default gender name
+        String genderName = gender == null ? new Gender().getName() : gender.getName();
 
-        return genderRepository.findByName(gender.getName())
-                               .orElseThrow(() -> new RuntimeException("Gender: " + gender.getName() + " not found"));
+        return genderRepository.findByName(genderName)
+                               .orElseThrow(() -> new RuntimeException("Gender: " + genderName + " not found"));
     }
 
 }

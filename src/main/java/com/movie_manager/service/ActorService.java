@@ -18,11 +18,14 @@ public class ActorService {
     @Transactional
     public Actor getSavedActor(Actor actor) {
         return actorRepository.findByName(actor.getName())
-                              .orElseGet(() -> {
-                                  Gender savedGender = genderService.getSavedGender(actor.getGender());
-                                  actor.setGender(savedGender);
-                                  return actorRepository.save(actor);
-                              });
+                              .orElseGet(() -> saveNewActor(actor));
+    }
+
+    private Actor saveNewActor(Actor actor) {
+        Gender savedGender = genderService.getSavedGender(actor.getGender());
+        actor.setGender(savedGender);
+
+        return actorRepository.save(actor);
     }
 
 }

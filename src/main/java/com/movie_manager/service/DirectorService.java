@@ -17,16 +17,20 @@ public class DirectorService {
 
     @Transactional
     public Director getSavedDirector(Director director) {
+        // director is optional
         if (director == null) {
             return null;
         }
 
         return directorRepository.findByName(director.getName())
-                                 .orElseGet(() -> {
-                                     Gender savedGender = genderService.getSavedGender(director.getGender());
-                                     director.setGender(savedGender);
-                                     return directorRepository.save(director);
-                                 });
+                                 .orElseGet(() -> saveNewDirector(director));
+    }
+
+    private Director saveNewDirector(Director director) {
+        Gender savedGender = genderService.getSavedGender(director.getGender());
+        director.setGender(savedGender);
+
+        return directorRepository.save(director);
     }
 
 }

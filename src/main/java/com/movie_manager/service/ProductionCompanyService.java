@@ -6,8 +6,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -16,16 +17,15 @@ public class ProductionCompanyService {
     private final ProductionCompanyRepository companyRepository;
 
     @Transactional
-    public List<ProductionCompany> getSavedProduction(List<ProductionCompany> companies) {
-        List<ProductionCompany> savedProduction = new ArrayList<>();
+    public Set<ProductionCompany> getSavedProduction(Set<ProductionCompany> companies) {
+        return companies.stream()
+                        .map(this::getSavedProductionCompany)
+                        .collect(Collectors.toCollection(HashSet::new));
+    }
 
-        for (ProductionCompany company : companies) {
-            ProductionCompany savedCompany = companyRepository.findByName(company.getName())
-                                                              .orElseGet(() -> companyRepository.save(company));
-            savedProduction.add(savedCompany);
-        }
-
-        return savedProduction;
+    private ProductionCompany getSavedProductionCompany(ProductionCompany company) {
+        return companyRepository.findByName(company.getName())
+                                .orElseGet(() -> companyRepository.save(company));
     }
 
 }

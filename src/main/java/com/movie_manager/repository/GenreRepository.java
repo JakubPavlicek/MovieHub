@@ -11,4 +11,6 @@ public interface GenreRepository extends JpaRepository<Genre, String> {
 
     Optional<Genre> findByName(String name);
 
+    boolean existsByName(String name);
+
 }

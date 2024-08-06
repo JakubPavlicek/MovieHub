@@ -8,8 +8,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -20,21 +21,22 @@ public class MovieCastService {
     private final ActorService actorService;
 
     @Transactional
-    public List<MovieCast> getSavedMovieCasts(List<MovieCast> movieCasts, Movie movie) {
+    public Set<MovieCast> getSavedMovieCasts(Set<MovieCast> movieCasts, Movie movie) {
+        return movieCasts.stream()
+                         .map(movieCast -> getSavedMovieCast(movieCast, movie))
+                         .collect(Collectors.toCollection(HashSet::new));
+    }
+
+    private MovieCast getSavedMovieCast(MovieCast movieCast, Movie movie) {
+        Actor savedActor = actorService.getSavedActor(movieCast.getActor());
+        movieCast.setActor(savedActor);
+        movieCast.setMovie(movie);
+
+        return movieCastRepository.save(movieCast);
+    }
+
+    public void deleteAllMovieCastsByMovie(Movie movie) {
         movieCastRepository.deleteAllByMovie(movie);
-
-        List<MovieCast> existingMovieCasts = new ArrayList<>();
-
-        for (MovieCast movieCast : movieCasts) {
-            Actor savedActor = actorService.getSavedActor(movieCast.getActor());
-            movieCast.setActor(savedActor);
-            movieCast.setMovie(movie);
-
-            MovieCast savedMovieCast = movieCastRepository.save(movieCast);
-            existingMovieCasts.add(savedMovieCast);
-        }
-
-        return existingMovieCasts;
     }
 
 }

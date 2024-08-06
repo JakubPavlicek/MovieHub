@@ -9,6 +9,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
+    show-sql: true
+    open-in-view: false
+    properties:
+      hibernate:
+        generate_statistics: true
 springdoc:
   api-docs:
     version: openapi_3_1

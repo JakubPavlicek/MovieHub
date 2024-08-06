@@ -11,6 +11,7 @@ import com.movie_manager.mapper.dto.MovieMapper;
 import com.movie_manager.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,7 +29,7 @@ public class MovieController implements MoviesApi {
         movie = movieService.addMovie(movie);
         MovieResponse movieResponse = MovieMapper.mapToMovieResponse(movie);
 
-        return ResponseEntity.ok(movieResponse);
+        return ResponseEntity.status(HttpStatus.CREATED).body(movieResponse);
     }
 
     @Override

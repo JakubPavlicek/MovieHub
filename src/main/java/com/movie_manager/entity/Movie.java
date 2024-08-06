@@ -23,7 +23,7 @@ import lombok.Setter;
 import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @AllArgsConstructor
@@ -83,7 +83,9 @@ public class Movie {
     )
     private String trailerUrl;
 
-    @ManyToOne
+    @ManyToOne(
+        fetch = FetchType.LAZY
+    )
     @JoinColumn(
         name = "director_id",
         referencedColumnName = "directorId",
@@ -93,12 +95,13 @@ public class Movie {
 
     @OneToMany(
         mappedBy = "movie",
+        fetch = FetchType.LAZY,
         cascade = CascadeType.REMOVE
     )
-    private List<MovieCast> cast;
+    private Set<MovieCast> cast;
 
     @ManyToMany(
-        fetch = FetchType.EAGER
+        fetch = FetchType.LAZY
     )
     @JoinTable(
         name = "movie_production",
@@ -113,10 +116,10 @@ public class Movie {
             foreignKey = @ForeignKey(name = "fk_company")
         )
     )
-    private List<ProductionCompany> production;
+    private Set<ProductionCompany> production;
 
     @ManyToMany(
-        fetch = FetchType.EAGER
+        fetch = FetchType.LAZY
     )
     @JoinTable(
         name = "movie_genre",
@@ -131,10 +134,10 @@ public class Movie {
             foreignKey = @ForeignKey(name = "fk_genre")
         )
     )
-    private List<Genre> genres;
+    private Set<Genre> genres;
 
     @ManyToMany(
-        fetch = FetchType.EAGER
+        fetch = FetchType.LAZY
     )
     @JoinTable(
         name = "movie_country",
@@ -149,6 +152,6 @@ public class Movie {
             foreignKey = @ForeignKey(name = "fk_country")
         )
     )
-    private List<Country> countries;
+    private Set<Country> countries;
 
 }

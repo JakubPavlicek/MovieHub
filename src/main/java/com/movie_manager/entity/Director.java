@@ -39,7 +39,7 @@ public class Director {
     private String bio;
 
     @ManyToOne(
-        fetch = FetchType.EAGER
+        fetch = FetchType.LAZY
     )
     @JoinColumn(
         name = "gender_id",
