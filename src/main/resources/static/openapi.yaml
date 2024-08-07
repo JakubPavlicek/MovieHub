@@ -298,6 +298,15 @@ components:
       description: The country ID.
       example: d9ac0050-db90-44c1-a218-f93b0428a073
 
+    companyId:
+      name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The production company ID.
+      example: 8e9334d2-e021-4ec3-b34b-8dc57032e362
+
   responses:
 
     404MovieNotFound:
@@ -316,6 +325,13 @@ components:
 
     404CountryNotFound:
       description: Country not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+
+    404ProductionNotFound:
+      description: Production company not found.
       content:
         application/json:
           schema:
@@ -769,6 +785,21 @@ components:
             - countryId: 21c9c051-0bf4-4e2b-8c96-7c19895ce72f
               name: France
 
+    ProductionCompanyResponse:
+      type: object
+      description: Object containing list of movie production companies.
+      properties:
+        companies:
+          description: List of all possible production companies for movies.
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductionCompanyDTO'
+          example:
+            - companyId: c27fbc2f-4758-4510-b995-c0d580c3661a
+              name: A24
+            - companyId: 89eb6c96-4090-4a4e-be51-9114b25c785f
+              name: Shudder
+
     ProblemDetail:
       type: object
       title: Problem Detail
@@ -1078,3 +1109,86 @@ paths:
                 $ref: '#/components/schemas/MoviePage'
         '404':
           $ref: '#/components/responses/404CountryNotFound'
+
+  /production-companies:
+    post:
+      description: Add production company to the databse.
+      summary: Add production company
+      operationId: addProductionCompany
+      tags:
+        - production-companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  $ref: '#/components/schemas/ProductionCompanyName'
+      responses:
+        '201':
+          description: Successfully added a production company to the database.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCompanyDTO'
+        '409':
+          description: Production company already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+    get:
+      description: List all possible production companies for movies.
+      summary: List production companies
+      operationId: getProductionCompanies
+      tags:
+        - production-companies
+      responses:
+        '200':
+          description: Successfully retrieved a list of all possible production companies for movies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCompanyResponse'
+
+  /production-companies/{companyId}:
+    get:
+      description: Retrieve production company details by ID.
+      summary: Retrieve production company details
+      operationId: getProductionCompanyById
+      tags:
+        - production-companies
+      parameters:
+        - $ref: '#/components/parameters/companyId'
+      responses:
+        '200':
+          description: Successfully retrieved the production company details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCompanyDTO'
+        '404':
+          $ref: '#/components/responses/404ProductionNotFound'
+
+  /production-companies/{companyId}/movies:
+    get:
+      description: List all movies with the given production company.
+      summary: List movies with production company
+      operationId: getMoviesWithProductionCompany
+      tags:
+        - production-companies
+      parameters:
+        - $ref: '#/components/parameters/companyId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/sort'
+      responses:
+        '200':
+          description: Successfully retrieved a list of movies with the given production company.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoviePage'
+        '404':
+          $ref: '#/components/responses/404ProductionNotFound'

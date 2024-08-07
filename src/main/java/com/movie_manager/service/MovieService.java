@@ -157,4 +157,12 @@ public class MovieService {
         return movieRepository.findAllByCountriesContaining(country, pageable);
     }
 
+    public Page<Movie> getMoviesWithProductionCompany(String companyId, Integer page, Integer limit, String sort) {
+        ProductionCompany productionCompany = productionService.getProductionCompany(companyId);
+
+        Pageable pageable = PageRequest.of(page, limit, parseService.parseSort(sort));
+
+        return movieRepository.findAllByProductionContaining(productionCompany, pageable);
+    }
+
 }

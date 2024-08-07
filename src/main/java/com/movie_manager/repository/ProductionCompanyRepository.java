@@ -11,4 +11,6 @@ public interface ProductionCompanyRepository extends JpaRepository<ProductionCom
 
     Optional<ProductionCompany> findByName(String name);
 
+    boolean existsByName(String name);
+
 }

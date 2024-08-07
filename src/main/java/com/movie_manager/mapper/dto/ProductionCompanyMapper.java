@@ -1,6 +1,7 @@
 package com.movie_manager.mapper.dto;
 
 import com.movie_manager.dto.ProductionCompanyDTO;
+import com.movie_manager.dto.ProductionCompanyResponse;
 import com.movie_manager.entity.ProductionCompany;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class ProductionCompanyMapper {
                                   .toList();
     }
 
-    private static ProductionCompanyDTO mapToProductionCompanyDTO(ProductionCompany company) {
+    public static ProductionCompanyDTO mapToProductionCompanyDTO(ProductionCompany company) {
         return ProductionCompanyDTO.builder()
                                    .companyId(company.getCompanyId())
                                    .name(company.getName())
@@ -35,6 +36,17 @@ public class ProductionCompanyMapper {
         return production.stream()
                          .map(ProductionCompany::getName)
                          .toList();
+    }
+
+    public static ProductionCompanyResponse mapToProductionCompanyResponse(List<ProductionCompany> companies) {
+        List<ProductionCompanyDTO> companyDTOS = companies.stream()
+                                                          .map(ProductionCompanyMapper::mapToProductionCompanyDTO)
+                                                          .toList();
+
+        ProductionCompanyResponse companyResponse = new ProductionCompanyResponse();
+        companyResponse.setCompanies(companyDTOS);
+
+        return companyResponse;
     }
 
 }
