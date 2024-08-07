@@ -280,6 +280,15 @@ components:
           example: "eq:South Korea"
           maxLength: 100
 
+    directorId:
+      name: directorId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The director ID.
+      example: f22608f8-43bb-4a69-b77a-cb2e3eaf0dfa
+
     genreId:
       name: genreId
       in: path
@@ -311,6 +320,13 @@ components:
 
     404MovieNotFound:
       description: Movie not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+
+    404DirectorNotFound:
+      description: Director not found.
       content:
         application/json:
           schema:
@@ -394,6 +410,16 @@ components:
       minLength: 1
       maxLength: 50
       nullable: false
+    PersonBio:
+      type: string
+      example: |
+        Patrick Joseph Wilson was born in Norfolk, Virginia and raised in St. Petersburg, Florida, the son of Mary Kathryn (Burton), a voice teacher and professional singer, and John Franklin Wilson, a news anchor.
+        Wilson has a B.F.A. in Drama from Carnegie-Mellon University.
+        His theater work has produced many nominations and awards.
+        He was nominated for Best Actor in a Musical for The Full Monty, a Drama League Award for 'Fascinating Rhythm', a Drama Drama League Award for 'Bright Lights, Big City', an Encores nomination for 'Tenderloin'.
+        He had national tours in 'Carousel' (Drama Logue Award winner and L.A. Ovation nomination) and 'Miss Saigon'.
+        Regionally, he has appeared in 'Sweet Bird of Youth' (La Jolla), 'Cider House Rules' (Mark Taper Forum), 'Romeo and Juliet: The Musical' (Ordway), 'Lucky in the Rain' (Goodspeed), 'Harmony' (La Jolla), and 'The Full Monty' (Globe).
+        Patrick Wilson is married to actress Dagmara Dominczyk; the couple has two children.
     ActorRole:
       type: string
       example: Detective
@@ -588,6 +614,30 @@ components:
       allOf:
         - $ref: '#/components/schemas/MovieRequest'
 
+    DirectorRequest:
+      type: object
+      description: Request body schema for a director.
+      properties:
+        name:
+          $ref: '#/components/schemas/PersonName'
+        bio:
+          $ref: '#/components/schemas/PersonBio'
+        gender:
+          $ref: '#/components/schemas/GenderName'
+
+    AddDirectorRequest:
+      description: Request body schema for adding a director.
+      allOf:
+        - $ref: '#/components/schemas/DirectorRequest'
+        - required:
+          - name
+          - gender
+
+    UpdateDirectorRequest:
+      description: Request body schema for updating a director.
+      allOf:
+        - $ref: '#/components/schemas/DirectorRequest'
+
     MovieCastRequest:
       type: object
       required:
@@ -754,6 +804,34 @@ components:
         name:
           type: string
           example: Male
+
+    DirectorResponse:
+      type: object
+      description: Object containing list of movie directors.
+      properties:
+        directors:
+          description: List of all movie directors.
+          type: array
+          items:
+            $ref: '#/components/schemas/DirectorDTO'
+          example:
+            - directorId: c4a9f55e-1ac0-4e90-808e-dc427c6f1e7e
+              name: Patrick Wilson
+            - genreId: 9d813a71-bc51-4168-95ab-792422d76669
+              name: Stiles White
+
+    DirectorDetailsResponse:
+      type: object
+      description: Directors details.
+      properties:
+        directorId:
+          $ref: '#/components/schemas/Uuid'
+        name:
+          $ref: '#/components/schemas/PersonName'
+        bio:
+          $ref: '#/components/schemas/PersonBio'
+        gender:
+          $ref: '#/components/schemas/GenderName'
 
     GenreResponse:
       type: object
@@ -944,6 +1022,193 @@ paths:
         '404':
           $ref: '#/components/responses/404MovieNotFound'
 
+  /directors:
+    post:
+      description: Add director to the databse.
+      summary: Add director
+      operationId: addDirector
+      tags:
+        - directors
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddDirectorRequest'
+      responses:
+        '201':
+          description: Successfully added a director to the database.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectorDTO'
+        '409':
+          description: Director already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+    get:
+      description: List all directors of movies.
+      summary: List directors
+      operationId: getDirectors
+      tags:
+        - directors
+      responses:
+        '200':
+          description: Successfully retrieved a list of all movie directors.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectorResponse'
+
+  /directors/{directorId}:
+    get:
+      description: Retrieve director details by ID.
+      summary: Get director details
+      operationId: getDirectorById
+      tags:
+        - directors
+      parameters:
+        - $ref: '#/components/parameters/directorId'
+      responses:
+        '200':
+          description: Successfully retrieved the director details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectorDetailsResponse'
+        '404':
+          $ref: '#/components/responses/404DirectorNotFound'
+    put:
+      description: |
+        Update the details of an existing director.
+        All director's details will be replaced with the new details provided.
+      summary: Update director details
+      operationId: updateDirector
+      tags:
+        - directors
+      parameters:
+        - $ref: '#/components/parameters/directorId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateDirectorRequest'
+      responses:
+        '200':
+          description: Successfully updated the director details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DirectorDetailsResponse'
+        '404':
+          $ref: '#/components/responses/404DirectorNotFound'
+
+  /directors/{directorId}/movies:
+    get:
+      description: List all movies with the given director.
+      summary: List movies with director
+      operationId: getMoviesWithDirector
+      tags:
+        - directors
+      parameters:
+        - $ref: '#/components/parameters/directorId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/sort'
+      responses:
+        '200':
+          description: Successfully retrieved a list of movies with the given director.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoviePage'
+        '404':
+          $ref: '#/components/responses/404DirectorNotFound'
+
+  /production-companies:
+    post:
+      description: Add production company to the databse.
+      summary: Add production company
+      operationId: addProductionCompany
+      tags:
+        - production-companies
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  $ref: '#/components/schemas/ProductionCompanyName'
+      responses:
+        '201':
+          description: Successfully added a production company to the database.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCompanyDTO'
+        '409':
+          description: Production company already exists.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+    get:
+      description: List all possible production companies for movies.
+      summary: List production companies
+      operationId: getProductionCompanies
+      tags:
+        - production-companies
+      responses:
+        '200':
+          description: Successfully retrieved a list of all possible production companies for movies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCompanyResponse'
+
+  /production-companies/{companyId}:
+    get:
+      description: Retrieve production company details by ID.
+      summary: Get production company details
+      operationId: getProductionCompanyById
+      tags:
+        - production-companies
+      parameters:
+        - $ref: '#/components/parameters/companyId'
+      responses:
+        '200':
+          description: Successfully retrieved the production company details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCompanyDTO'
+        '404':
+          $ref: '#/components/responses/404ProductionNotFound'
+
+  /production-companies/{companyId}/movies:
+    get:
+      description: List all movies with the given production company.
+      summary: List movies with production company
+      operationId: getMoviesWithProductionCompany
+      tags:
+        - production-companies
+      parameters:
+        - $ref: '#/components/parameters/companyId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/sort'
+      responses:
+        '200':
+          description: Successfully retrieved a list of movies with the given production company.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoviePage'
+        '404':
+          $ref: '#/components/responses/404ProductionNotFound'
+
   /genres:
     post:
       description: Add genre to the databse.
@@ -989,7 +1254,7 @@ paths:
   /genres/{genreId}:
     get:
       description: Retrieve genre details by ID.
-      summary: Retrieve genre details
+      summary: Get genre details
       operationId: getGenreById
       tags:
         - genres
@@ -1072,7 +1337,7 @@ paths:
   /countries/{countryId}:
     get:
       description: Retrieve country details by ID.
-      summary: Retrieve country details
+      summary: Get country details
       operationId: getCountryById
       tags:
         - countries
@@ -1109,86 +1374,3 @@ paths:
                 $ref: '#/components/schemas/MoviePage'
         '404':
           $ref: '#/components/responses/404CountryNotFound'
-
-  /production-companies:
-    post:
-      description: Add production company to the databse.
-      summary: Add production company
-      operationId: addProductionCompany
-      tags:
-        - production-companies
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  $ref: '#/components/schemas/ProductionCompanyName'
-      responses:
-        '201':
-          description: Successfully added a production company to the database.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductionCompanyDTO'
-        '409':
-          description: Production company already exists.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDetail'
-    get:
-      description: List all possible production companies for movies.
-      summary: List production companies
-      operationId: getProductionCompanies
-      tags:
-        - production-companies
-      responses:
-        '200':
-          description: Successfully retrieved a list of all possible production companies for movies.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductionCompanyResponse'
-
-  /production-companies/{companyId}:
-    get:
-      description: Retrieve production company details by ID.
-      summary: Retrieve production company details
-      operationId: getProductionCompanyById
-      tags:
-        - production-companies
-      parameters:
-        - $ref: '#/components/parameters/companyId'
-      responses:
-        '200':
-          description: Successfully retrieved the production company details.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProductionCompanyDTO'
-        '404':
-          $ref: '#/components/responses/404ProductionNotFound'
-
-  /production-companies/{companyId}/movies:
-    get:
-      description: List all movies with the given production company.
-      summary: List movies with production company
-      operationId: getMoviesWithProductionCompany
-      tags:
-        - production-companies
-      parameters:
-        - $ref: '#/components/parameters/companyId'
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/sort'
-      responses:
-        '200':
-          description: Successfully retrieved a list of movies with the given production company.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MoviePage'
-        '404':
-          $ref: '#/components/responses/404ProductionNotFound'

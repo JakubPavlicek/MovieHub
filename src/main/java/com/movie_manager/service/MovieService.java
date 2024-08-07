@@ -165,4 +165,12 @@ public class MovieService {
         return movieRepository.findAllByProductionContaining(productionCompany, pageable);
     }
 
+    public Page<Movie> getMoviesWithDirector(String directorId, Integer page, Integer limit, String sort) {
+        Director director = directorService.getDirector(directorId);
+
+        Pageable pageable = PageRequest.of(page, limit, parseService.parseSort(sort));
+
+        return movieRepository.findAllByDirector(director, pageable);
+    }
+
 }

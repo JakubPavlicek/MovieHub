@@ -1,6 +1,7 @@
 package com.movie_manager.repository;
 
 import com.movie_manager.entity.Country;
+import com.movie_manager.entity.Director;
 import com.movie_manager.entity.Genre;
 import com.movie_manager.entity.Movie;
 import com.movie_manager.entity.ProductionCompany;
@@ -13,10 +14,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, String>, JpaSpecificationExecutor<Movie> {
 
+    Page<Movie> findAllByDirector(Director director, Pageable pageable);
+
+    Page<Movie> findAllByProductionContaining(ProductionCompany company, Pageable pageable);
+
     Page<Movie> findAllByGenresContaining(Genre genre, Pageable pageable);
 
     Page<Movie> findAllByCountriesContaining(Country country, Pageable pageable);
-
-    Page<Movie> findAllByProductionContaining(ProductionCompany company, Pageable pageable);
 
 }

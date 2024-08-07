@@ -1,5 +1,6 @@
 package com.movie_manager.entity;
 
+import com.movie_manager.dto.GenderName;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,6 +31,6 @@ public class Gender {
         nullable = false
     )
     @Builder.Default
-    private String name = "Unspecified";
+    private String name = GenderName.UNSPECIFIED.getValue();
 
 }
