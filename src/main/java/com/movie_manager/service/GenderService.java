@@ -7,6 +7,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class GenderService {
@@ -20,6 +22,10 @@ public class GenderService {
 
         return genderRepository.findByName(genderName)
                                .orElseThrow(() -> new RuntimeException("Gender: " + genderName + " not found"));
+    }
+
+    public List<Gender> getGendres() {
+        return genderRepository.findAll();
     }
 
 }
