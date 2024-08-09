@@ -5,6 +5,7 @@ import com.movie_manager.entity.Director;
 import com.movie_manager.entity.Genre;
 import com.movie_manager.entity.Movie;
 import com.movie_manager.entity.MovieCast;
+import com.movie_manager.entity.Movie_;
 import com.movie_manager.entity.ProductionCompany;
 import com.movie_manager.exception.MovieNotFoundException;
 import com.movie_manager.repository.MovieRepository;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -27,11 +29,14 @@ public class MovieService {
 
     private final DirectorService directorService;
     private final MovieCastService movieCastService;
+    private final ActorService actorService;
     private final ProductionCompanyService productionService;
     private final CountryService countryService;
     private final GenreService genreService;
 
     private final ParseService parseService;
+
+    private static final Sort SORT_BY_UPDATED_AT_DESC = Sort.by(Sort.Direction.DESC, Movie_.UPDATED_AT);
 
     @Transactional
     public Movie addMovie(Movie movie) {
@@ -141,36 +146,38 @@ public class MovieService {
     }
 
     @Transactional
-    public Page<Movie> getMoviesByGenre(String genreId, Integer page, Integer limit, String sort) {
+    public Page<Movie> getMoviesByGenre(String genreId, Integer page, Integer limit) {
         Genre genre = genreService.getGenre(genreId);
-
-        Pageable pageable = PageRequest.of(page, limit, parseService.parseSort(sort));
+        Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
 
         return movieRepository.findAllByGenresContaining(genre, pageable);
     }
 
-    public Page<Movie> getMoviesByCountry(String countryId, Integer page, Integer limit, String sort) {
+    public Page<Movie> getMoviesByCountry(String countryId, Integer page, Integer limit) {
         Country country = countryService.getCountry(countryId);
-
-        Pageable pageable = PageRequest.of(page, limit, parseService.parseSort(sort));
+        Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
 
         return movieRepository.findAllByCountriesContaining(country, pageable);
     }
 
-    public Page<Movie> getMoviesWithProductionCompany(String companyId, Integer page, Integer limit, String sort) {
+    public Page<Movie> getMoviesWithProductionCompany(String companyId, Integer page, Integer limit) {
         ProductionCompany productionCompany = productionService.getProductionCompany(companyId);
-
-        Pageable pageable = PageRequest.of(page, limit, parseService.parseSort(sort));
+        Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
 
         return movieRepository.findAllByProductionContaining(productionCompany, pageable);
     }
 
-    public Page<Movie> getMoviesWithDirector(String directorId, Integer page, Integer limit, String sort) {
+    public Page<Movie> getMoviesWithDirector(String directorId, Integer page, Integer limit) {
         Director director = directorService.getDirector(directorId);
-
-        Pageable pageable = PageRequest.of(page, limit, parseService.parseSort(sort));
+        Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
 
         return movieRepository.findAllByDirector(director, pageable);
+    }
+
+    public Page<Movie> getMoviesWithActor(String actorId, Integer page, Integer limit) {
+        Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
+
+        return movieCastService.findMoviesByActor(actorId, pageable);
     }
 
 }

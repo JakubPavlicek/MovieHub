@@ -1,8 +1,9 @@
 package com.movie_manager.mapper.dto;
 
-import com.movie_manager.dto.CountryDTO;
-import com.movie_manager.dto.CountryResponse;
+import com.movie_manager.dto.CountryDetailsResponse;
+import com.movie_manager.dto.CountryPage;
 import com.movie_manager.entity.Country;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 import java.util.Set;
@@ -15,13 +16,15 @@ public class CountryMapper {
 
     public static Set<Country> mapToCountries(List<String> countries) {
         return countries.stream()
-                        .map(countryName -> Country.builder().name(countryName).build())
+                        .map(countryName -> Country.builder()
+                                                   .name(countryName)
+                                                   .build())
                         .collect(Collectors.toSet());
     }
 
-    public static List<CountryDTO> mapToCountryDTOS(Set<Country> countries) {
+    public static List<CountryDetailsResponse> mapToCountryDetailsResponseList(Set<Country> countries) {
         return countries.stream()
-                        .map(CountryMapper::mapToCountryDTO)
+                        .map(CountryMapper::mapToCountryDetailsResponse)
                         .toList();
     }
 
@@ -31,22 +34,33 @@ public class CountryMapper {
                         .toList();
     }
 
-    public static CountryDTO mapToCountryDTO(Country country) {
-        return CountryDTO.builder()
-                         .countryId(country.getCountryId())
-                         .name(country.getName())
-                         .build();
+    public static CountryDetailsResponse mapToCountryDetailsResponse(Country country) {
+        return CountryDetailsResponse.builder()
+                                     .countryId(country.getCountryId())
+                                     .name(country.getName())
+                                     .build();
     }
 
-    public static CountryResponse mapToCountryResponse(List<Country> countries) {
-        List<CountryDTO> countryDTOS = countries.stream()
-                                                .map(CountryMapper::mapToCountryDTO)
-                                                .toList();
+    public static CountryPage mapToCountryPage(Page<Country> countries) {
+        return CountryPage.builder()
+                          .content(mapToCountryDetailsResponseList(countries))
+                          .pageable(PageableMapper.mapToPageableDTO(countries.getPageable()))
+                          .last(countries.isLast())
+                          .totalElements(countries.getTotalElements())
+                          .totalPages(countries.getTotalPages())
+                          .first(countries.isFirst())
+                          .size(countries.getSize())
+                          .number(countries.getNumber())
+                          .sort(SortMapper.mapToSortDTO(countries.getSort()))
+                          .numberOfElements(countries.getNumberOfElements())
+                          .empty(countries.isEmpty())
+                          .build();
+    }
 
-        CountryResponse countryResponse = new CountryResponse();
-        countryResponse.setCountries(countryDTOS);
-
-        return countryResponse;
+    private static List<CountryDetailsResponse> mapToCountryDetailsResponseList(Page<Country> countries) {
+        return countries.stream()
+                        .map(CountryMapper::mapToCountryDetailsResponse)
+                        .toList();
     }
 
 }

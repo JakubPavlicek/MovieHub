@@ -3,8 +3,8 @@ package com.movie_manager.controller;
 import com.movie_manager.ProductionCompaniesApi;
 import com.movie_manager.dto.AddProductionCompanyRequest;
 import com.movie_manager.dto.MoviePage;
-import com.movie_manager.dto.ProductionCompanyDTO;
-import com.movie_manager.dto.ProductionCompanyResponse;
+import com.movie_manager.dto.ProductionCompanyDetailsResponse;
+import com.movie_manager.dto.ProductionCompanyPage;
 import com.movie_manager.entity.Movie;
 import com.movie_manager.entity.ProductionCompany;
 import com.movie_manager.mapper.dto.MovieMapper;
@@ -17,8 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 public class ProductionCompanyController implements ProductionCompaniesApi {
@@ -27,32 +25,32 @@ public class ProductionCompanyController implements ProductionCompaniesApi {
     private final MovieService movieService;
 
     @Override
-    public ResponseEntity<ProductionCompanyDTO> addProductionCompany(AddProductionCompanyRequest addProductionCompanyRequest) {
+    public ResponseEntity<ProductionCompanyDetailsResponse> addProductionCompany(AddProductionCompanyRequest addProductionCompanyRequest) {
         ProductionCompany company = companyService.addProductionCompany(addProductionCompanyRequest.getName());
-        ProductionCompanyDTO productionCompanyDTO = ProductionCompanyMapper.mapToProductionCompanyDTO(company);
+        ProductionCompanyDetailsResponse companyDetailsResponse = ProductionCompanyMapper.mapToProductionCompanyDetailsResponse(company);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(productionCompanyDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(companyDetailsResponse);
     }
 
     @Override
-    public ResponseEntity<ProductionCompanyResponse> getProductionCompanies() {
-        List<ProductionCompany> companies = companyService.getProductionCompanies();
-        ProductionCompanyResponse productionCompanyResponse = ProductionCompanyMapper.mapToProductionCompanyResponse(companies);
+    public ResponseEntity<ProductionCompanyPage> getProductionCompanies(Integer page, Integer limit) {
+        Page<ProductionCompany> companies = companyService.getProductionCompanies(page, limit);
+        ProductionCompanyPage companyPage = ProductionCompanyMapper.mapToProductionCompanyPage(companies);
 
-        return ResponseEntity.ok(productionCompanyResponse);
+        return ResponseEntity.ok(companyPage);
     }
 
     @Override
-    public ResponseEntity<ProductionCompanyDTO> getProductionCompanyById(String companyId) {
+    public ResponseEntity<ProductionCompanyDetailsResponse> getProductionCompanyById(String companyId) {
         ProductionCompany company = companyService.getProductionCompany(companyId);
-        ProductionCompanyDTO companyDTO = ProductionCompanyMapper.mapToProductionCompanyDTO(company);
+        ProductionCompanyDetailsResponse companyDetailsResponse = ProductionCompanyMapper.mapToProductionCompanyDetailsResponse(company);
 
-        return ResponseEntity.ok(companyDTO);
+        return ResponseEntity.ok(companyDetailsResponse);
     }
 
     @Override
-    public ResponseEntity<MoviePage> getMoviesWithProductionCompany(String companyId, Integer page, Integer limit, String sort) {
-        Page<Movie> movies = movieService.getMoviesWithProductionCompany(companyId, page, limit, sort);
+    public ResponseEntity<MoviePage> getMoviesWithProductionCompany(String companyId, Integer page, Integer limit) {
+        Page<Movie> movies = movieService.getMoviesWithProductionCompany(companyId, page, limit);
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
         return ResponseEntity.ok(moviePage);

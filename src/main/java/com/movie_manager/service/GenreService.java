@@ -1,16 +1,20 @@
 package com.movie_manager.service;
 
 import com.movie_manager.entity.Genre;
+import com.movie_manager.entity.Genre_;
 import com.movie_manager.exception.GenreAlreadyExistsException;
 import com.movie_manager.exception.GenreNotFoundException;
 import com.movie_manager.repository.GenreRepository;
 import com.movie_manager.repository.MovieRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -34,8 +38,11 @@ public class GenreService {
     }
 
     @Transactional
-    public List<Genre> getGenres() {
-        return genreRepository.findAll();
+    public Page<Genre> getGenres(Integer page, Integer limit) {
+        Sort sort = Sort.by(Sort.Direction.ASC, Genre_.NAME);
+        Pageable pageable = PageRequest.of(page, limit, sort);
+
+        return genreRepository.findAll(pageable);
     }
 
     @Transactional

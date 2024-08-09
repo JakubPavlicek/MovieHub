@@ -1,8 +1,9 @@
 package com.movie_manager.mapper.dto;
 
-import com.movie_manager.dto.GenreDTO;
-import com.movie_manager.dto.GenreResponse;
+import com.movie_manager.dto.GenreDetailsResponse;
+import com.movie_manager.dto.GenrePage;
 import com.movie_manager.entity.Genre;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,25 +18,38 @@ public class GenreMapper {
 
     public static Set<Genre> mapToGenres(List<String> genres) {
         return genres.stream()
-                     .map(genreName -> Genre.builder().name(genreName).build())
+                     .map(genreName -> Genre.builder()
+                                            .name(genreName)
+                                            .build())
                      .collect(Collectors.toSet());
     }
 
-    public static List<GenreDTO> mapToGenreDTOS(Set<Genre> genres) {
+    public static List<GenreDetailsResponse> mapToGenreDetailsResponseList(Set<Genre> genres) {
         return genres.stream()
-                     .map(GenreMapper::mapToGenreDTO)
+                     .map(GenreMapper::mapToGenreDetailsResponse)
                      .toList();
     }
 
-    public static GenreResponse mapToGenreResponse(List<Genre> genres) {
-        List<GenreDTO> genreDTOS = genres.stream()
-                                         .map(GenreMapper::mapToGenreDTO)
-                                         .toList();
+    public static GenrePage mapToGenrePage(Page<Genre> genres) {
+        return GenrePage.builder()
+                        .content(mapToGenreDetailsResponseList(genres))
+                        .pageable(PageableMapper.mapToPageableDTO(genres.getPageable()))
+                        .last(genres.isLast())
+                        .totalElements(genres.getTotalElements())
+                        .totalPages(genres.getTotalPages())
+                        .first(genres.isFirst())
+                        .size(genres.getSize())
+                        .number(genres.getNumber())
+                        .sort(SortMapper.mapToSortDTO(genres.getSort()))
+                        .numberOfElements(genres.getNumberOfElements())
+                        .empty(genres.isEmpty())
+                        .build();
+    }
 
-        GenreResponse genreResponse = new GenreResponse();
-        genreResponse.setGenres(genreDTOS);
-
-        return genreResponse;
+    private static List<GenreDetailsResponse> mapToGenreDetailsResponseList(Page<Genre> genres) {
+        return genres.stream()
+                     .map(GenreMapper::mapToGenreDetailsResponse)
+                     .toList();
     }
 
     public static List<String> mapToGenreNames(Set<Genre> genres) {
@@ -44,11 +58,11 @@ public class GenreMapper {
                      .toList();
     }
 
-    public static GenreDTO mapToGenreDTO(Genre genre) {
-        return GenreDTO.builder()
-                       .genreId(genre.getGenreId())
-                       .name(genre.getName())
-                       .build();
+    public static GenreDetailsResponse mapToGenreDetailsResponse(Genre genre) {
+        return GenreDetailsResponse.builder()
+                                   .genreId(genre.getGenreId())
+                                   .name(genre.getName())
+                                   .build();
     }
 
 }

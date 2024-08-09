@@ -1,8 +1,8 @@
 package com.movie_manager.mapper.dto;
 
-import com.movie_manager.dto.GenderDTO;
+import com.movie_manager.dto.GenderDetailsResponse;
+import com.movie_manager.dto.GenderListResponse;
 import com.movie_manager.dto.GenderName;
-import com.movie_manager.dto.GenderResponse;
 import com.movie_manager.entity.Gender;
 
 import java.util.List;
@@ -18,22 +18,22 @@ public class GenderMapper {
                      .build();
     }
 
-    public static GenderResponse mapToGenderResponse(List<Gender> genders) {
-        List<GenderDTO> genderDTOS = genders.stream()
-                                            .map(GenderMapper::mapToGenderDTO)
-                                            .toList();
+    public static GenderListResponse mapToGenderResponse(List<Gender> genders) {
+        List<GenderDetailsResponse> genderDetailsResponses = genders.stream()
+                                                                    .map(GenderMapper::mapToGenderDetailsResponse)
+                                                                    .toList();
 
-        GenderResponse genderResponse = new GenderResponse();
-        genderResponse.setGenders(genderDTOS);
+        GenderListResponse genderResponse = new GenderListResponse();
+        genderResponse.setGenders(genderDetailsResponses);
 
         return genderResponse;
     }
 
-    private static GenderDTO mapToGenderDTO(Gender gender) {
-        return GenderDTO.builder()
-                        .genderId(gender.getGenderId())
-                        .name(gender.getName())
-                        .build();
+    private static GenderDetailsResponse mapToGenderDetailsResponse(Gender gender) {
+        return GenderDetailsResponse.builder()
+                                    .genderId(gender.getGenderId())
+                                    .name(gender.getName())
+                                    .build();
     }
 
 }

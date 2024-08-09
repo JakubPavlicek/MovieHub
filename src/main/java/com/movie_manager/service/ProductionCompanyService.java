@@ -1,15 +1,19 @@
 package com.movie_manager.service;
 
 import com.movie_manager.entity.ProductionCompany;
+import com.movie_manager.entity.ProductionCompany_;
 import com.movie_manager.exception.ProductionCompanyAlreadyExistsException;
 import com.movie_manager.exception.ProductionCompanyNotFoundException;
 import com.movie_manager.repository.ProductionCompanyRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,8 +46,11 @@ public class ProductionCompanyService {
         return companyRepository.save(productionCompany);
     }
 
-    public List<ProductionCompany> getProductionCompanies() {
-        return companyRepository.findAll();
+    public Page<ProductionCompany> getProductionCompanies(Integer page, Integer limit) {
+        Sort sort = Sort.by(Sort.Direction.ASC, ProductionCompany_.NAME);
+        Pageable pageable = PageRequest.of(page, limit, sort);
+
+        return companyRepository.findAll(pageable);
     }
 
     public ProductionCompany getProductionCompany(String companyId) {

@@ -1,14 +1,17 @@
 package com.movie_manager.service;
 
 import com.movie_manager.entity.Director;
+import com.movie_manager.entity.Director_;
 import com.movie_manager.entity.Gender;
 import com.movie_manager.exception.DirectorNotFoundException;
 import com.movie_manager.repository.DirectorRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @AllArgsConstructor
@@ -44,8 +47,11 @@ public class DirectorService {
     }
 
     @Transactional
-    public List<Director> getDirectors() {
-        return directorRepository.findAll();
+    public Page<Director> getDirectors(Integer page, Integer limit) {
+        Sort sort = Sort.by(Sort.Direction.ASC, Director_.NAME);
+        Pageable pageable = PageRequest.of(page, limit, sort);
+
+        return directorRepository.findAll(pageable);
     }
 
     @Transactional

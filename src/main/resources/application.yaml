@@ -14,6 +14,7 @@ spring:
     properties:
       hibernate:
         generate_statistics: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 springdoc:
   api-docs:
     version: openapi_3_1

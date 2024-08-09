@@ -1,7 +1,7 @@
 package com.movie_manager.controller;
 
 import com.movie_manager.GendersApi;
-import com.movie_manager.dto.GenderResponse;
+import com.movie_manager.dto.GenderListResponse;
 import com.movie_manager.entity.Gender;
 import com.movie_manager.mapper.dto.GenderMapper;
 import com.movie_manager.service.GenderService;
@@ -18,11 +18,11 @@ public class GenderController implements GendersApi {
     private final GenderService genderService;
 
     @Override
-    public ResponseEntity<GenderResponse> getGendres() {
+    public ResponseEntity<GenderListResponse> getGendres() {
         List<Gender> genders = genderService.getGendres();
-        GenderResponse genderResponse = GenderMapper.mapToGenderResponse(genders);
+        GenderListResponse genderListResponse = GenderMapper.mapToGenderResponse(genders);
 
-        return ResponseEntity.ok(genderResponse);
+        return ResponseEntity.ok(genderListResponse);
     }
 
 }

@@ -14,10 +14,11 @@ components:
     movieId:
       name: movieId
       in: path
+      description: The movie ID.
       schema:
         type: string
       required: true
-      description: The movie ID.
+      example: 6c42ccf6-f635-48f8-9af5-4c80e6812dbf
     page:
       name: page
       in: query
@@ -25,8 +26,9 @@ components:
       schema:
         type: integer
         format: int32
-        default: 0
         minimum: 0
+        default: 0
+        example: 0
     limit:
       name: limit
       in: query
@@ -36,6 +38,7 @@ components:
         minimum: 1
         maximum: 50
         default: 10
+        example: 10
     sort:
       name: sort
       in: query
@@ -47,6 +50,7 @@ components:
       schema:
         type: string
         default: "name.asc"
+        example: "name.asc"
         maxLength: 200
     name:
       name: name
@@ -223,6 +227,7 @@ components:
       schema:
         type: array
         default: [ "eq:" ]
+        example: [ "eq:James Wan" ]
         items:
           type: string
           example: "eq:James Wan"
@@ -249,6 +254,7 @@ components:
       schema:
         type: array
         default: [ "eq:" ]
+        example: [ "eq:Horror" ]
         items:
           type: string
           example: "eq:Horror"
@@ -275,6 +281,7 @@ components:
       schema:
         type: array
         default: [ "eq:" ]
+        example: [ "eq:South Korea" ]
         items:
           type: string
           example: "eq:South Korea"
@@ -288,6 +295,15 @@ components:
         type: string
       description: The director ID.
       example: f22608f8-43bb-4a69-b77a-cb2e3eaf0dfa
+
+    actorId:
+      name: actorId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The actor ID.
+      example: c61a0a7c-c45e-41a0-9e6c-3f86beea1802
 
     genreId:
       name: genreId
@@ -332,6 +348,13 @@ components:
           schema:
             $ref: '#/components/schemas/ProblemDetail'
 
+    404ActorNotFound:
+      description: Actor not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+
     404GenreNotFound:
       description: Genre not found.
       content:
@@ -346,7 +369,7 @@ components:
           schema:
             $ref: '#/components/schemas/ProblemDetail'
 
-    404ProductionNotFound:
+    404ProductionCompanyNotFound:
       description: Production company not found.
       content:
         application/json:
@@ -357,11 +380,17 @@ components:
 
     Uuid:
       type: string
+      description: |
+        A universally unique identifier (UUID) used to uniquely identify entities.
+        It is a 36-character string consisting of hexadecimal digits and hyphens.
       example: 872e1723-09ac-461d-9f54-d4c221269bed
       maxLength: 255
       nullable: false
     MovieName:
       type: string
+      description: |
+        The title of a movie.
+        This field should contain the movie's name and is restricted to a maximum length of 100 characters.
       example: The Conjuring
       minLength: 1
       maxLength: 100
@@ -369,16 +398,25 @@ components:
     MovieReleaseDate:
       type: string
       format: date
+      description: |
+        The release date of the movie, formatted as `YYYY-MM-DD`.
+        This indicates when the movie was officially released.
       example: 2024-07-29
       nullable: false
     MovieDuration:
       type: integer
       format: int32
+      description: |
+        The duration of the movie in minutes.
+        This field must be a positive integer representing the total running time of the movie.
       example: 112
       minimum: 1
       nullable: false
     MovieDescription:
       type: string
+      description: |
+        A detailed summary of the movie's plot or theme.
+        This field can contain up to 1000 characters to provide a comprehensive overview.
       example: Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their farmhouse.
       minLength: 1
       maxLength: 1000
@@ -386,6 +424,9 @@ components:
     MovieRating:
       type: number
       format: double
+      description: |
+        The average rating of the movie on a scale from 0 to 10.
+        This value represents the general consensus of viewers.
       example: 7.5
       minimum: 0
       maximum: 10
@@ -393,25 +434,40 @@ components:
     MovieReviewCount:
       type: integer
       format: int32
+      description: |
+        The total number of reviews the movie has received.
+        This field is a non-negative integer representing the volume of feedback.
       example: 10
       minimum: 0
       nullable: false
     MoviePosterUrl:
       type: string
+      description: |
+        The URL to the movie's poster image.
+        This link points to the visual representation of the movie used for promotional purposes.
       example: 'https://image.tmdb.org/t/p/original/wVYREutTvI2tmxr6ujrHT704wGF.jpg'
       nullable: false
     MovieTrailerUrl:
       type: string
+      description: |
+        The URL to the movie's trailer video.
+        This link directs to the promotional trailer available online, typically hosted on platforms like YouTube.
       example: 'https://www.youtube.com/watch?v=k10ETZ41q5o'
       nullable: false
     PersonName:
       type: string
+      description: |
+        The full name of a person, such as an actor or director.
+        This field contains up to 50 characters and represents the individual's name.
       example: Patrick Wilson
       minLength: 1
       maxLength: 50
       nullable: false
     PersonBio:
       type: string
+      description: |
+        A biography or background information about a person, including their career and personal details.
+        This field provides a comprehensive overview of the individual's life and achievements.
       example: |
         Patrick Joseph Wilson was born in Norfolk, Virginia and raised in St. Petersburg, Florida, the son of Mary Kathryn (Burton), a voice teacher and professional singer, and John Franklin Wilson, a news anchor.
         Wilson has a B.F.A. in Drama from Carnegie-Mellon University.
@@ -422,11 +478,17 @@ components:
         Patrick Wilson is married to actress Dagmara Dominczyk; the couple has two children.
     ActorRole:
       type: string
+      description: |
+        The role or character that an actor plays in a movie.
+        This field identifies the actor's contribution to the film.
       example: Detective
       nullable: false
     ProductionCompanyName:
       type: string
       example: A24
+      description: |
+        The name of the company that produced the movie.
+        This field contains up to 100 characters and represents the organization responsible for the film's production.
       maxLength: 100
       nullable: false
     GenderName:
@@ -436,15 +498,24 @@ components:
         - Male
         - Female
         - Non-binary
+      description: |
+        The gender identity associated with a person.
+        This field includes predefined values such as Male, Female, Non-binary, or Unspecified.
       example: Male
       nullable: false
     GenreName:
       type: string
       example: Horror
+      description: |
+        The genre or category of the movie.
+        This field represents the type of movie, such as Horror or Comedy, and is limited to 15 characters.
       maxLength: 15
       nullable: false
     CountryName:
       type: string
+      description: |
+        The name of the country where the movie was produced or set.
+        This field identifies the geographical location associated with the movie and is limited to 15 characters.
       example: Italy
       maxLength: 15
       nullable: false
@@ -557,10 +628,276 @@ components:
             If `true`, the page has no items; otherwise, it has content.
           example: false
 
+    DirectorPage:
+      type: object
+      description: "Represents a page of directors, including pagination and sorting information."
+      properties:
+        content:
+          type: array
+          description: "List of directors."
+          items:
+            $ref: '#/components/schemas/DirectorDetailsResponse'
+        pageable:
+          $ref: '#/components/schemas/PageableDTO'
+        last:
+          type: boolean
+          description: |
+            A boolean value indicating whether this is the last page of data.
+            If `true`, it is the last page; otherwise, it's not the last page.
+          example: false
+        totalElements:
+          type: integer
+          format: int64
+          description: "The total number of items."
+          example: 4
+        totalPages:
+          type: integer
+          description: "The total number of pages needed to display all the data based on the page size."
+          example: 2
+        first:
+          type: boolean
+          description: |
+            A boolean value indicating whether this is the first page of data.
+            If `true`, it is the first page; otherwise, it's not the first page.
+          example: true
+        size:
+          type: integer
+          description: "The maximum number of items contained on each page."
+          example: 2
+        number:
+          type: integer
+          description: "The page number for the current page."
+          example: 0
+        sort:
+          $ref: '#/components/schemas/SortDTO'
+        numberOfElements:
+          type: integer
+          description: "The number of items on the current page."
+          example: 2
+        empty:
+          type: boolean
+          description: |
+            A boolean value indicating whether the current page is empty.
+            If `true`, the page has no items; otherwise, it has content.
+          example: false
+
+    ActorPage:
+      type: object
+      description: "Represents a page of actors, including pagination and sorting information."
+      properties:
+        content:
+          type: array
+          description: "List of actors."
+          items:
+            $ref: '#/components/schemas/ActorDetailsResponse'
+        pageable:
+          $ref: '#/components/schemas/PageableDTO'
+        last:
+          type: boolean
+          description: |
+            A boolean value indicating whether this is the last page of data.
+            If `true`, it is the last page; otherwise, it's not the last page.
+          example: false
+        totalElements:
+          type: integer
+          format: int64
+          description: "The total number of items."
+          example: 4
+        totalPages:
+          type: integer
+          description: "The total number of pages needed to display all the data based on the page size."
+          example: 2
+        first:
+          type: boolean
+          description: |
+            A boolean value indicating whether this is the first page of data.
+            If `true`, it is the first page; otherwise, it's not the first page.
+          example: true
+        size:
+          type: integer
+          description: "The maximum number of items contained on each page."
+          example: 2
+        number:
+          type: integer
+          description: "The page number for the current page."
+          example: 0
+        sort:
+          $ref: '#/components/schemas/SortDTO'
+        numberOfElements:
+          type: integer
+          description: "The number of items on the current page."
+          example: 2
+        empty:
+          type: boolean
+          description: |
+            A boolean value indicating whether the current page is empty.
+            If `true`, the page has no items; otherwise, it has content.
+          example: false
+
+    ProductionCompanyPage:
+      type: object
+      description: "Represents a page of production companies, including pagination and sorting information."
+      properties:
+        content:
+          type: array
+          description: "List of production companies."
+          items:
+            $ref: '#/components/schemas/ProductionCompanyDetailsResponse'
+        pageable:
+          $ref: '#/components/schemas/PageableDTO'
+        last:
+          type: boolean
+          description: |
+            A boolean value indicating whether this is the last page of data.
+            If `true`, it is the last page; otherwise, it's not the last page.
+          example: false
+        totalElements:
+          type: integer
+          format: int64
+          description: "The total number of items."
+          example: 4
+        totalPages:
+          type: integer
+          description: "The total number of pages needed to display all the data based on the page size."
+          example: 2
+        first:
+          type: boolean
+          description: |
+            A boolean value indicating whether this is the first page of data.
+            If `true`, it is the first page; otherwise, it's not the first page.
+          example: true
+        size:
+          type: integer
+          description: "The maximum number of items contained on each page."
+          example: 2
+        number:
+          type: integer
+          description: "The page number for the current page."
+          example: 0
+        sort:
+          $ref: '#/components/schemas/SortDTO'
+        numberOfElements:
+          type: integer
+          description: "The number of items on the current page."
+          example: 2
+        empty:
+          type: boolean
+          description: |
+            A boolean value indicating whether the current page is empty.
+            If `true`, the page has no items; otherwise, it has content.
+          example: false
+
+    GenrePage:
+      type: object
+      description: "Represents a page of genres, including pagination and sorting information."
+      properties:
+        content:
+          type: array
+          description: "List of genres."
+          items:
+            $ref: '#/components/schemas/GenreDetailsResponse'
+        pageable:
+          $ref: '#/components/schemas/PageableDTO'
+        last:
+          type: boolean
+          description: |
+            A boolean value indicating whether this is the last page of data.
+            If `true`, it is the last page; otherwise, it's not the last page.
+          example: false
+        totalElements:
+          type: integer
+          format: int64
+          description: "The total number of items."
+          example: 4
+        totalPages:
+          type: integer
+          description: "The total number of pages needed to display all the data based on the page size."
+          example: 2
+        first:
+          type: boolean
+          description: |
+            A boolean value indicating whether this is the first page of data.
+            If `true`, it is the first page; otherwise, it's not the first page.
+          example: true
+        size:
+          type: integer
+          description: "The maximum number of items contained on each page."
+          example: 2
+        number:
+          type: integer
+          description: "The page number for the current page."
+          example: 0
+        sort:
+          $ref: '#/components/schemas/SortDTO'
+        numberOfElements:
+          type: integer
+          description: "The number of items on the current page."
+          example: 2
+        empty:
+          type: boolean
+          description: |
+            A boolean value indicating whether the current page is empty.
+            If `true`, the page has no items; otherwise, it has content.
+          example: false
+
+    CountryPage:
+      type: object
+      description: "Represents a page of countries, including pagination and sorting information."
+      properties:
+        content:
+          type: array
+          description: "List of countries."
+          items:
+            $ref: '#/components/schemas/CountryDetailsResponse'
+        pageable:
+          $ref: '#/components/schemas/PageableDTO'
+        last:
+          type: boolean
+          description: |
+            A boolean value indicating whether this is the last page of data.
+            If `true`, it is the last page; otherwise, it's not the last page.
+          example: false
+        totalElements:
+          type: integer
+          format: int64
+          description: "The total number of items."
+          example: 4
+        totalPages:
+          type: integer
+          description: "The total number of pages needed to display all the data based on the page size."
+          example: 2
+        first:
+          type: boolean
+          description: |
+            A boolean value indicating whether this is the first page of data.
+            If `true`, it is the first page; otherwise, it's not the first page.
+          example: true
+        size:
+          type: integer
+          description: "The maximum number of items contained on each page."
+          example: 2
+        number:
+          type: integer
+          description: "The page number for the current page."
+          example: 0
+        sort:
+          $ref: '#/components/schemas/SortDTO'
+        numberOfElements:
+          type: integer
+          description: "The number of items on the current page."
+          example: 2
+        empty:
+          type: boolean
+          description: |
+            A boolean value indicating whether the current page is empty.
+            If `true`, the page has no items; otherwise, it has content.
+          example: false
+
     # TODO: requests
 
     MovieRequest:
       type: object
+      description: Schema for the request body when creating or updating a movie.
       properties:
         name:
           $ref: '#/components/schemas/MovieName'
@@ -594,7 +931,9 @@ components:
             $ref: '#/components/schemas/CountryName'
 
     AddMovieRequest:
-      description: Request body schema for adding a movie.
+      description: |
+        Schema for adding a new movie to the database.
+        It requires all movie details to be provided.
       allOf:
         - $ref: '#/components/schemas/MovieRequest'
         - required:
@@ -610,13 +949,15 @@ components:
             - countries
 
     UpdateMovieRequest:
-      description: Request body schema for updating a movie.
+      description: |
+        Schema for updating an existing movie's details.
+        It allows partial updates to movie information based on the existing schema.
       allOf:
         - $ref: '#/components/schemas/MovieRequest'
 
     DirectorRequest:
       type: object
-      description: Request body schema for a director.
+      description: Schema for the request body when creating or updating a director.
       properties:
         name:
           $ref: '#/components/schemas/PersonName'
@@ -626,7 +967,9 @@ components:
           $ref: '#/components/schemas/GenderName'
 
     AddDirectorRequest:
-      description: Request body schema for adding a director.
+      description: |
+        Schema for adding a new director to the database.
+        It requires the director's name and gender to be provided.
       allOf:
         - $ref: '#/components/schemas/DirectorRequest'
         - required:
@@ -634,12 +977,43 @@ components:
           - gender
 
     UpdateDirectorRequest:
-      description: Request body schema for updating a director.
+      description: |
+        Schema for updating an existing director's details.
+        It allows modifications to the director's information based on the existing schema.
       allOf:
         - $ref: '#/components/schemas/DirectorRequest'
 
+    ActorRequest:
+      type: object
+      description: Schema for the request body when creating or updating an actor.
+      properties:
+        name:
+          $ref: '#/components/schemas/PersonName'
+        bio:
+          $ref: '#/components/schemas/PersonBio'
+        gender:
+          $ref: '#/components/schemas/GenderName'
+
+    AddActorRequest:
+      description: |
+        Schema for adding a new actor to the database.
+        It requires the actor's name and gender to be provided.
+      allOf:
+        - $ref: '#/components/schemas/ActorRequest'
+        - required:
+            - name
+            - gender
+
+    UpdateActorRequest:
+      description: |
+        Schema for updating an existing actor's details.
+        It allows changes to the actor's information based on the existing schema.
+      allOf:
+        - $ref: '#/components/schemas/ActorRequest'
+
     MovieCastRequest:
       type: object
+      description: Schema for specifying the cast of a movie, including the name of the actor and their role in the film.
       required:
         - name
         - role
@@ -654,6 +1028,7 @@ components:
 
     MovieCastResponse:
       type: object
+      description: Represents the basic details of a cast member in a movie.
       properties:
         name:
           $ref: '#/components/schemas/PersonName'
@@ -662,6 +1037,7 @@ components:
 
     MovieCastDetailsResponse:
       type: object
+      description: Provides detailed information about a movie's cast member.
       properties:
         actorId:
           $ref: '#/components/schemas/Uuid'
@@ -672,6 +1048,7 @@ components:
 
     MovieResponse:
       type: object
+      description: Contains summary information about a movie.
       properties:
         movieId:
           $ref: '#/components/schemas/Uuid'
@@ -712,6 +1089,7 @@ components:
 
     MovieDetailsResponse:
       type: object
+      description: Offers comprehensive details about a movie.
       properties:
         movieId:
           $ref: '#/components/schemas/Uuid'
@@ -740,18 +1118,19 @@ components:
         productionCompanies:
           type: array
           items:
-            $ref: '#/components/schemas/ProductionCompanyDTO'
+            $ref: '#/components/schemas/ProductionCompanyDetailsResponse'
         genres:
           type: array
           items:
-            $ref: '#/components/schemas/GenreDTO'
+            $ref: '#/components/schemas/GenreDetailsResponse'
         countries:
           type: array
           items:
-            $ref: '#/components/schemas/CountryDTO'
+            $ref: '#/components/schemas/CountryDetailsResponse'
 
     DirectorDTO:
       type: object
+      description: Provides basic information about a director.
       properties:
         directorId:
           $ref: '#/components/schemas/Uuid'
@@ -759,18 +1138,9 @@ components:
           type: string
           example: James Wan
 
-    MovieCastDTO:
+    ProductionCompanyDetailsResponse:
       type: object
-      properties:
-        actorId:
-          $ref: '#/components/schemas/Uuid'
-        name:
-          $ref: '#/components/schemas/PersonName'
-        role:
-          $ref: '#/components/schemas/ActorRole'
-
-    ProductionCompanyDTO:
-      type: object
+      description: Provides details about a production company.
       properties:
         companyId:
           $ref: '#/components/schemas/Uuid'
@@ -778,8 +1148,9 @@ components:
           type: string
           example: A24
 
-    GenreDTO:
+    GenreDetailsResponse:
       type: object
+      description: Provides details about a genre.
       properties:
         genreId:
           $ref: '#/components/schemas/Uuid'
@@ -787,8 +1158,9 @@ components:
           type: string
           example: Horror
 
-    CountryDTO:
+    CountryDetailsResponse:
       type: object
+      description: Provides details about a country.
       properties:
         countryId:
           $ref: '#/components/schemas/Uuid'
@@ -796,8 +1168,9 @@ components:
           type: string
           example: Italy
 
-    GenderDTO:
+    GenderDetailsResponse:
       type: object
+      description: Provides details about a gender.
       properties:
         genderId:
           $ref: '#/components/schemas/Uuid'
@@ -805,24 +1178,9 @@ components:
           type: string
           example: Male
 
-    DirectorResponse:
-      type: object
-      description: Object containing list of movie directors.
-      properties:
-        directors:
-          description: List of all movie directors.
-          type: array
-          items:
-            $ref: '#/components/schemas/DirectorDTO'
-          example:
-            - directorId: c4a9f55e-1ac0-4e90-808e-dc427c6f1e7e
-              name: Patrick Wilson
-            - genreId: 9d813a71-bc51-4168-95ab-792422d76669
-              name: Stiles White
-
     DirectorDetailsResponse:
       type: object
-      description: Directors details.
+      description: Contains detailed information about a director.
       properties:
         directorId:
           $ref: '#/components/schemas/Uuid'
@@ -833,60 +1191,28 @@ components:
         gender:
           $ref: '#/components/schemas/GenderName'
 
-    GenreResponse:
+    ActorDetailsResponse:
       type: object
-      description: Object containing list of movie genres.
+      description: Contains detailed information about an actor.
       properties:
-        genres:
-          description: List of all possible genres for movies.
-          type: array
-          items:
-            $ref: '#/components/schemas/GenreDTO'
-          example:
-            - genreId: 525d0509-028c-45da-899f-db58ea520ca7
-              name: Action
-            - genreId: 1a96b16b-6a4c-4392-a892-fb5108d6245c
-              name: Horror
+        actorId:
+          $ref: '#/components/schemas/Uuid'
+        name:
+          $ref: '#/components/schemas/PersonName'
+        bio:
+          $ref: '#/components/schemas/PersonBio'
+        gender:
+          $ref: '#/components/schemas/GenderName'
 
-    CountryResponse:
+    GenderListResponse:
       type: object
-      description: Object containing list of movie countries.
-      properties:
-        countries:
-          description: List of all possible countries for movies.
-          type: array
-          items:
-            $ref: '#/components/schemas/CountryDTO'
-          example:
-            - countryId: 3d9e9db7-6544-4613-998e-88cdd6334ce1
-              name: Italy
-            - countryId: 21c9c051-0bf4-4e2b-8c96-7c19895ce72f
-              name: France
-
-    ProductionCompanyResponse:
-      type: object
-      description: Object containing list of movie production companies.
-      properties:
-        companies:
-          description: List of all possible production companies for movies.
-          type: array
-          items:
-            $ref: '#/components/schemas/ProductionCompanyDTO'
-          example:
-            - companyId: c27fbc2f-4758-4510-b995-c0d580c3661a
-              name: A24
-            - companyId: 89eb6c96-4090-4a4e-be51-9114b25c785f
-              name: Shudder
-
-    GenderResponse:
-      type: object
-      description: Object containing list of genders.
+      description: Provides a list of all possible genders available in the system.
       properties:
         genders:
-          description: List of all possible genders for people.
+          description: List of all possible genders available in the system.
           type: array
           items:
-            $ref: '#/components/schemas/GenderDTO'
+            $ref: '#/components/schemas/GenderDetailsResponse'
           example:
             - genderId: 21c9c051-0bf4-4e2b-8c96-7c19895ce72f
               name: Unspecified
@@ -938,7 +1264,7 @@ components:
 paths:
   /movies:
     post:
-      description: Add movie to the database.
+      description: Create a new movie record in the database with the specified details.
       summary: Add movie
       operationId: addMovie
       tags:
@@ -958,7 +1284,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/MovieResponse'
     get:
-      description: Retrieves a list of the movies.
+      description: |
+        Retrieve a list of movies in the system.
+        The results can be customized with various filters, sorting options, and pagination to refine the list based on user preferences.
       summary: List movies
       operationId: getMovies
       tags:
@@ -977,7 +1305,7 @@ paths:
         - $ref: '#/components/parameters/countries'
       responses:
         '200':
-          description: Successfully retrieved a list of movies.
+          description: Successfully retrieved a list of movies in the system.
           content:
             application/json:
               schema:
@@ -985,7 +1313,7 @@ paths:
 
   /movies/{movieId}:
     get:
-      description: Retrieve detailed information about a movie with a given ID.
+      description: Retrieve detailed information about a movie with the specified ID.
       summary: Get movie details
       operationId: getMovie
       tags:
@@ -994,7 +1322,7 @@ paths:
         - $ref: '#/components/parameters/movieId'
       responses:
         '200':
-          description: Successfully retrieved the movie details.
+          description: Successfully retrieved detailed information about the movie with the specified ID.
           content:
             application/json:
               schema:
@@ -1028,7 +1356,7 @@ paths:
         '404':
           $ref: '#/components/responses/404MovieNotFound'
     delete:
-      description: Delete a movie with a given ID.
+      description: Delete a movie with the specified ID from the database.
       summary: Delete movie
       operationId: deleteMovie
       tags:
@@ -1043,12 +1371,16 @@ paths:
 
   /directors:
     post:
-      description: Add director to the databse.
+      description: |
+        Create a new director record in the database with the specified details.
+        This operation adds a director to the system, enabling it to be used in association with movies.
       summary: Add director
       operationId: addDirector
       tags:
         - directors
       requestBody:
+        description: A director to be added to the database.
+        required: true
         content:
           application/json:
             schema:
@@ -1059,30 +1391,33 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DirectorDTO'
+                $ref: '#/components/schemas/DirectorDetailsResponse'
         '409':
-          description: Director already exists.
+          description: The director already exists in the database.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDetail'
     get:
-      description: List all directors of movies.
+      description: Retrieve a list of directors available in the system.
       summary: List directors
       operationId: getDirectors
       tags:
         - directors
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
       responses:
         '200':
-          description: Successfully retrieved a list of all movie directors.
+          description: Successfully retrieved the list of directors available in the system.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DirectorResponse'
+                $ref: '#/components/schemas/DirectorPage'
 
   /directors/{directorId}:
     get:
-      description: Retrieve director details by ID.
+      description: Retrieve detailed information about a specific director.
       summary: Get director details
       operationId: getDirectorById
       tags:
@@ -1091,7 +1426,7 @@ paths:
         - $ref: '#/components/parameters/directorId'
       responses:
         '200':
-          description: Successfully retrieved the director details.
+          description: Successfully retrieved the details of the specified director.
           content:
             application/json:
               schema:
@@ -1115,7 +1450,7 @@ paths:
               $ref: '#/components/schemas/UpdateDirectorRequest'
       responses:
         '200':
-          description: Successfully updated the director details.
+          description: Successfully updated the details of the specified director.
           content:
             application/json:
               schema:
@@ -1125,7 +1460,7 @@ paths:
 
   /directors/{directorId}/movies:
     get:
-      description: List all movies with the given director.
+      description: Retrieve a list of movies directed by the specified director.
       summary: List movies with director
       operationId: getMoviesWithDirector
       tags:
@@ -1134,10 +1469,9 @@ paths:
         - $ref: '#/components/parameters/directorId'
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/sort'
       responses:
         '200':
-          description: Successfully retrieved a list of movies with the given director.
+          description: Successfully retrieved a list of movies directed by the specified director.
           content:
             application/json:
               schema:
@@ -1145,9 +1479,121 @@ paths:
         '404':
           $ref: '#/components/responses/404DirectorNotFound'
 
+  /actors:
+    post:
+      description: |
+        Create a new actor record in the database with the specified details.
+        This operation adds an actor to the system, enabling it to be used in association with movies.
+      summary: Add actor
+      operationId: addActor
+      tags:
+        - actors
+      requestBody:
+        description: An actor to be added to the database.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddActorRequest'
+      responses:
+        '201':
+          description: Successfully added an actor to the database.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActorDetailsResponse'
+        '409':
+          description: The actor already exists in the database.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetail'
+    get:
+      description: Retrieve a list of actors available in the system.
+      summary: List actors
+      operationId: getActors
+      tags:
+        - actors
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: Successfully retrieved the list of actors available in the system.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActorPage'
+
+  /actors/{actorId}:
+    get:
+      description: Retrieve detailed information about a specific actor.
+      summary: Get actor details
+      operationId: getActorById
+      tags:
+        - actors
+      parameters:
+        - $ref: '#/components/parameters/actorId'
+      responses:
+        '200':
+          description: Successfully retrieved the details of the specified actor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActorDetailsResponse'
+        '404':
+          $ref: '#/components/responses/404ActorNotFound'
+    put:
+      description: |
+        Update the details of an existing actor.
+        All actor's details will be replaced with the new details provided.
+      summary: Update actor details
+      operationId: updateActor
+      tags:
+        - actors
+      parameters:
+        - $ref: '#/components/parameters/actorId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateActorRequest'
+      responses:
+        '200':
+          description: Successfully updated the details of the specified actor.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ActorDetailsResponse'
+        '404':
+          $ref: '#/components/responses/404ActorNotFound'
+
+  /actors/{actorId}/movies:
+    get:
+      description: Retrieve a list of movies in which the specified actor has appeared.
+      summary: List movies with actor
+      operationId: getMoviesWithActor
+      tags:
+        - actors
+      parameters:
+        - $ref: '#/components/parameters/actorId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          description: Successfully retrieved a list of movies in which the specified actor has appeared.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoviePage'
+        '404':
+          $ref: '#/components/responses/404ActorNotFound'
+
   /production-companies:
     post:
-      description: Add production company to the databse.
+      description: |
+        Create a new production company record in the database with the specified details.
+        This operation adds a production company to the system, enabling it to be used in association with movies.
       summary: Add production company
       operationId: addProductionCompany
       tags:
@@ -1162,34 +1608,37 @@ paths:
                   $ref: '#/components/schemas/ProductionCompanyName'
       responses:
         '201':
-          description: Successfully added a production company to the database.
+          description: Successfully created a new production company record in the database.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProductionCompanyDTO'
+                $ref: '#/components/schemas/ProductionCompanyDetailsResponse'
         '409':
-          description: Production company already exists.
+          description: The production company already exists in the database.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDetail'
     get:
-      description: List all possible production companies for movies.
+      description: Retrieve a list of production companies available in the system.
       summary: List production companies
       operationId: getProductionCompanies
       tags:
         - production-companies
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
       responses:
         '200':
-          description: Successfully retrieved a list of all possible production companies for movies.
+          description: Successfully retrieved the list of production companies available in the system.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProductionCompanyResponse'
+                $ref: '#/components/schemas/ProductionCompanyPage'
 
   /production-companies/{companyId}:
     get:
-      description: Retrieve production company details by ID.
+      description: Retrieve detailed information about a specific production company.
       summary: Get production company details
       operationId: getProductionCompanyById
       tags:
@@ -1198,18 +1647,18 @@ paths:
         - $ref: '#/components/parameters/companyId'
       responses:
         '200':
-          description: Successfully retrieved the production company details.
+          description: Successfully retrieved the details of the specified production company.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ProductionCompanyDTO'
+                $ref: '#/components/schemas/ProductionCompanyDetailsResponse'
         '404':
-          $ref: '#/components/responses/404ProductionNotFound'
+          $ref: '#/components/responses/404ProductionCompanyNotFound'
 
   /production-companies/{companyId}/movies:
     get:
-      description: List all movies with the given production company.
-      summary: List movies with production company
+      description: Retrieve a list of movies that were produced by the specified company.
+      summary: List movies produced by production company
       operationId: getMoviesWithProductionCompany
       tags:
         - production-companies
@@ -1217,20 +1666,21 @@ paths:
         - $ref: '#/components/parameters/companyId'
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/sort'
       responses:
         '200':
-          description: Successfully retrieved a list of movies with the given production company.
+          description: Successfully retrieved a list of movies that were produced by the specified company.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/MoviePage'
         '404':
-          $ref: '#/components/responses/404ProductionNotFound'
+          $ref: '#/components/responses/404ProductionCompanyNotFound'
 
   /genres:
     post:
-      description: Add genre to the databse.
+      description: |
+        Create a new genre record in the database with the specified details.
+        This operation adds a genre to the system, enabling it to be used in association with movies.
       summary: Add genre
       operationId: addGenre
       tags:
@@ -1245,34 +1695,37 @@ paths:
                   $ref: '#/components/schemas/GenreName'
       responses:
         '201':
-          description: Successfully added a genre to the database.
+          description: Successfully created a new genre record in the database.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenreDTO'
+                $ref: '#/components/schemas/GenreDetailsResponse'
         '409':
-          description: Genre already exists.
+          description: The genre already exists in the database.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDetail'
     get:
-      description: List all possible genres for movies.
+      description: Retrieve a list of genres available in the system.
       summary: List genres
       operationId: getGenres
       tags:
         - genres
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
       responses:
         '200':
-          description: Successfully retrieved a list of all possible genres for movies.
+          description: Successfully retrieved the list of genres available in the system.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenreResponse'
+                $ref: '#/components/schemas/GenrePage'
 
   /genres/{genreId}:
     get:
-      description: Retrieve genre details by ID.
+      description: Retrieve detailed information about a specific genre.
       summary: Get genre details
       operationId: getGenreById
       tags:
@@ -1281,17 +1734,17 @@ paths:
         - $ref: '#/components/parameters/genreId'
       responses:
         '200':
-          description: Successfully retrieved the genre details.
+          description: Successfully retrieved the details of the specified genre.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenreDTO'
+                $ref: '#/components/schemas/GenreDetailsResponse'
         '404':
           $ref: '#/components/responses/404GenreNotFound'
 
   /genres/{genreId}/movies:
     get:
-      description: List all movies with the given genre.
+      description: Retrieve a list of movies that are categorized under the specified genre.
       summary: List movies with genre
       operationId: getMoviesWithGenre
       tags:
@@ -1300,10 +1753,9 @@ paths:
         - $ref: '#/components/parameters/genreId'
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/sort'
       responses:
         '200':
-          description: Successfully retrieved a list of movies with the given genre.
+          description: Successfully retrieved a list of movies that are categorized under the specified genre.
           content:
             application/json:
               schema:
@@ -1313,7 +1765,9 @@ paths:
 
   /countries:
     post:
-      description: Add country to the databse.
+      description: |
+        Create a new country record in the database with the specified details.
+        This operation adds a country to the system, enabling it to be used in association with movies.
       summary: Add country
       operationId: addCountry
       tags:
@@ -1328,34 +1782,37 @@ paths:
                   $ref: '#/components/schemas/CountryName'
       responses:
         '201':
-          description: Successfully added a country to the database.
+          description: Successfully created a new country record in the database.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CountryDTO'
+                $ref: '#/components/schemas/CountryDetailsResponse'
         '409':
-          description: Country already exists.
+          description: The country already exists in the database.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDetail'
     get:
-      description: List all possible countries for movies.
+      description: Retrieve a list of countries available in the system.
       summary: List countries
       operationId: getCountries
       tags:
         - countries
+      parameters:
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/limit'
       responses:
         '200':
-          description: Successfully retrieved a list of all possible countries for movies.
+          description: Successfully retrieved the list of countries available in the system.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CountryResponse'
+                $ref: '#/components/schemas/CountryPage'
 
   /countries/{countryId}:
     get:
-      description: Retrieve country details by ID.
+      description: Retrieve detailed information about a specific country.
       summary: Get country details
       operationId: getCountryById
       tags:
@@ -1364,18 +1821,18 @@ paths:
         - $ref: '#/components/parameters/countryId'
       responses:
         '200':
-          description: Successfully retrieved the country details.
+          description: Successfully retrieved the details of the specified country.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CountryDTO'
+                $ref: '#/components/schemas/CountryDetailsResponse'
         '404':
           $ref: '#/components/responses/404CountryNotFound'
 
   /countries/{countryId}/movies:
     get:
-      description: List all movies with the given country.
-      summary: List movies with country
+      description: Retrieve a list of movies that were produced in the specified country.
+      summary: List movies produced in a country
       operationId: getMoviesWithCountry
       tags:
         - countries
@@ -1383,10 +1840,9 @@ paths:
         - $ref: '#/components/parameters/countryId'
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/limit'
-        - $ref: '#/components/parameters/sort'
       responses:
         '200':
-          description: Successfully retrieved a list of movies with the given country.
+          description: Successfully retrieved a list of movies that were produced in the specified country.
           content:
             application/json:
               schema:
@@ -1396,15 +1852,15 @@ paths:
 
   /genders:
     get:
-      description: List all possible gendres for people.
+      description: Retrieve a list of all possible genders available for individuals.
       summary: List genders
       operationId: getGendres
       tags:
         - genders
       responses:
         '200':
-          description: Successfully retrieved a list of all possible gendres for people.
+          description: Successfully retrieved a list of all possible gendres available for individuals.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenderResponse'
+                $ref: '#/components/schemas/GenderListResponse'

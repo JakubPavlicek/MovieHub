@@ -3,10 +3,11 @@ package com.movie_manager.mapper.dto;
 import com.movie_manager.dto.AddDirectorRequest;
 import com.movie_manager.dto.DirectorDTO;
 import com.movie_manager.dto.DirectorDetailsResponse;
-import com.movie_manager.dto.DirectorResponse;
+import com.movie_manager.dto.DirectorPage;
 import com.movie_manager.dto.GenderName;
 import com.movie_manager.dto.UpdateDirectorRequest;
 import com.movie_manager.entity.Director;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -53,15 +54,26 @@ public class DirectorMapper {
                                       .build();
     }
 
-    public static DirectorResponse mapToDirectorResponse(List<Director> directors) {
-        List<DirectorDTO> directorDTOS = directors.stream()
-                                                  .map(DirectorMapper::mapToDirectorDTO)
-                                                  .toList();
+    public static DirectorPage mapToDirectorPage(Page<Director> directors) {
+        return DirectorPage.builder()
+                          .content(mapToDirectorDetailsResponseList(directors))
+                          .pageable(PageableMapper.mapToPageableDTO(directors.getPageable()))
+                          .last(directors.isLast())
+                          .totalElements(directors.getTotalElements())
+                          .totalPages(directors.getTotalPages())
+                          .first(directors.isFirst())
+                          .size(directors.getSize())
+                          .number(directors.getNumber())
+                          .sort(SortMapper.mapToSortDTO(directors.getSort()))
+                          .numberOfElements(directors.getNumberOfElements())
+                          .empty(directors.isEmpty())
+                          .build();
+    }
 
-        DirectorResponse directorResponse = new DirectorResponse();
-        directorResponse.setDirectors(directorDTOS);
-
-        return directorResponse;
+    private static List<DirectorDetailsResponse> mapToDirectorDetailsResponseList(Page<Director> directors) {
+        return directors.stream()
+                        .map(DirectorMapper::mapToDirectorDetailsResponse)
+                        .toList();
     }
 
 }

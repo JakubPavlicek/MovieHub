@@ -1,15 +1,19 @@
 package com.movie_manager.service;
 
 import com.movie_manager.entity.Country;
+import com.movie_manager.entity.Country_;
 import com.movie_manager.exception.CountryAlreadyExistsException;
 import com.movie_manager.exception.CountryNotFoundException;
 import com.movie_manager.repository.CountryRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,8 +46,11 @@ public class CountryService {
         return countryRepository.save(country);
     }
 
-    public List<Country> getCountries() {
-        return countryRepository.findAll();
+    public Page<Country> getCountries(Integer page, Integer limit) {
+        Sort sort = Sort.by(Sort.Direction.ASC, Country_.NAME);
+        Pageable pageable = PageRequest.of(page, limit, sort);
+
+        return countryRepository.findAll(pageable);
     }
 
     public Country getCountry(String countryId) {

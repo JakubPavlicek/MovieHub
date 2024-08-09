@@ -81,15 +81,15 @@ public class MovieMapper {
                                    .trailerUrl(movie.getTrailerUrl())
                                    .director(DirectorMapper.mapToDirectorDTO(movie.getDirector()))
                                    .cast(MovieCastMapper.mapToMovieCastDetailsResponse(movie.getCast()))
-                                   .productionCompanies(ProductionCompanyMapper.mapToProductionCompanyDTOS(movie.getProduction()))
-                                   .genres(GenreMapper.mapToGenreDTOS(movie.getGenres()))
-                                   .countries(CountryMapper.mapToCountryDTOS(movie.getCountries()))
+                                   .productionCompanies(ProductionCompanyMapper.mapToProductionCompanyDetailsResponseList(movie.getProduction()))
+                                   .genres(GenreMapper.mapToGenreDetailsResponseList(movie.getGenres()))
+                                   .countries(CountryMapper.mapToCountryDetailsResponseList(movie.getCountries()))
                                    .build();
     }
 
     public static MoviePage mapToMoviePage(Page<Movie> movies) {
         return MoviePage.builder()
-                        .content(mapToMovieDetailsReponseList(movies))
+                        .content(mapToMovieDetailsResponseList(movies))
                         .pageable(PageableMapper.mapToPageableDTO(movies.getPageable()))
                         .last(movies.isLast())
                         .totalElements(movies.getTotalElements())
@@ -103,7 +103,7 @@ public class MovieMapper {
                         .build();
     }
 
-    private static List<MovieDetailsResponse> mapToMovieDetailsReponseList(Page<Movie> movies) {
+    private static List<MovieDetailsResponse> mapToMovieDetailsResponseList(Page<Movie> movies) {
         return movies.stream()
                      .map(MovieMapper::mapToMovieDetailsResponse)
                      .toList();

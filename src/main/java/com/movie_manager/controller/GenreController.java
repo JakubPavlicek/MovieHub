@@ -2,8 +2,8 @@ package com.movie_manager.controller;
 
 import com.movie_manager.GenresApi;
 import com.movie_manager.dto.AddGenreRequest;
-import com.movie_manager.dto.GenreDTO;
-import com.movie_manager.dto.GenreResponse;
+import com.movie_manager.dto.GenreDetailsResponse;
+import com.movie_manager.dto.GenrePage;
 import com.movie_manager.dto.MoviePage;
 import com.movie_manager.entity.Genre;
 import com.movie_manager.entity.Movie;
@@ -17,8 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 public class GenreController implements GenresApi {
@@ -27,32 +25,32 @@ public class GenreController implements GenresApi {
     private final MovieService movieService;
 
     @Override
-    public ResponseEntity<GenreDTO> addGenre(AddGenreRequest addGenreRequest) {
+    public ResponseEntity<GenreDetailsResponse> addGenre(AddGenreRequest addGenreRequest) {
         Genre genre = genreService.addGenre(addGenreRequest.getName());
-        GenreDTO genreDTO = GenreMapper.mapToGenreDTO(genre);
+        GenreDetailsResponse genreReponse = GenreMapper.mapToGenreDetailsResponse(genre);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(genreDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(genreReponse);
     }
 
     @Override
-    public ResponseEntity<GenreResponse> getGenres() {
-        List<Genre> genres = genreService.getGenres();
-        GenreResponse genreResponse = GenreMapper.mapToGenreResponse(genres);
+    public ResponseEntity<GenrePage> getGenres(Integer page, Integer limit) {
+        Page<Genre> genres = genreService.getGenres(page, limit);
+        GenrePage genrePage = GenreMapper.mapToGenrePage(genres);
 
-        return ResponseEntity.ok(genreResponse);
+        return ResponseEntity.ok(genrePage);
     }
 
     @Override
-    public ResponseEntity<GenreDTO> getGenreById(String genreId) {
+    public ResponseEntity<GenreDetailsResponse> getGenreById(String genreId) {
         Genre genre = genreService.getGenre(genreId);
-        GenreDTO genreDTO = GenreMapper.mapToGenreDTO(genre);
+        GenreDetailsResponse genreReponse = GenreMapper.mapToGenreDetailsResponse(genre);
 
-        return ResponseEntity.ok(genreDTO);
+        return ResponseEntity.ok(genreReponse);
     }
 
     @Override
-    public ResponseEntity<MoviePage> getMoviesWithGenre(String genreId, Integer page, Integer limit, String sort) {
-        Page<Movie> movies = movieService.getMoviesByGenre(genreId, page, limit, sort);
+    public ResponseEntity<MoviePage> getMoviesWithGenre(String genreId, Integer page, Integer limit) {
+        Page<Movie> movies = movieService.getMoviesByGenre(genreId, page, limit);
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
         return ResponseEntity.ok(moviePage);

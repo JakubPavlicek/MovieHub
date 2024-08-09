@@ -2,9 +2,8 @@ package com.movie_manager.controller;
 
 import com.movie_manager.DirectorsApi;
 import com.movie_manager.dto.AddDirectorRequest;
-import com.movie_manager.dto.DirectorDTO;
 import com.movie_manager.dto.DirectorDetailsResponse;
-import com.movie_manager.dto.DirectorResponse;
+import com.movie_manager.dto.DirectorPage;
 import com.movie_manager.dto.MoviePage;
 import com.movie_manager.dto.UpdateDirectorRequest;
 import com.movie_manager.entity.Director;
@@ -19,8 +18,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
 @RequiredArgsConstructor
 public class DirectorController implements DirectorsApi {
@@ -29,12 +26,12 @@ public class DirectorController implements DirectorsApi {
     private final MovieService movieService;
 
     @Override
-    public ResponseEntity<DirectorDTO> addDirector(AddDirectorRequest addDirectorRequest) {
+    public ResponseEntity<DirectorDetailsResponse> addDirector(AddDirectorRequest addDirectorRequest) {
         Director director = DirectorMapper.mapToDirector(addDirectorRequest);
         director = directorService.addDirector(director);
-        DirectorDTO directorDTO = DirectorMapper.mapToDirectorDTO(director);
+        DirectorDetailsResponse directorReponse = DirectorMapper.mapToDirectorDetailsResponse(director);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(directorDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(directorReponse);
     }
 
     @Override
@@ -46,16 +43,16 @@ public class DirectorController implements DirectorsApi {
     }
 
     @Override
-    public ResponseEntity<DirectorResponse> getDirectors() {
-        List<Director> directors = directorService.getDirectors();
-        DirectorResponse directorResponse = DirectorMapper.mapToDirectorResponse(directors);
+    public ResponseEntity<DirectorPage> getDirectors(Integer page, Integer limit) {
+        Page<Director> directors = directorService.getDirectors(page, limit);
+        DirectorPage directorPage = DirectorMapper.mapToDirectorPage(directors);
 
-        return ResponseEntity.ok(directorResponse);
+        return ResponseEntity.ok(directorPage);
     }
 
     @Override
-    public ResponseEntity<MoviePage> getMoviesWithDirector(String directorId, Integer page, Integer limit, String sort) {
-        Page<Movie> movies = movieService.getMoviesWithDirector(directorId, page, limit, sort);
+    public ResponseEntity<MoviePage> getMoviesWithDirector(String directorId, Integer page, Integer limit) {
+        Page<Movie> movies = movieService.getMoviesWithDirector(directorId, page, limit);
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
         return ResponseEntity.ok(moviePage);
