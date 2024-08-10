@@ -37,10 +37,12 @@ public class MovieCastService {
         return movieCastRepository.save(movieCast);
     }
 
+    @Transactional
     public void deleteAllMovieCastsByMovie(Movie movie) {
         movieCastRepository.deleteAllByMovie(movie);
     }
 
+    @Transactional
     public Page<Movie> findMoviesByActor(String actorId, Pageable pageable) {
         Actor actor = actorService.getActor(actorId);
 

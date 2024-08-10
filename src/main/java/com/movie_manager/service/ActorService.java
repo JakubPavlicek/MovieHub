@@ -35,11 +35,13 @@ public class ActorService {
         return actorRepository.save(actor);
     }
 
+    @Transactional
     public Actor getActor(String actorId) {
         return actorRepository.findById(actorId)
                               .orElseThrow(() -> new ActorNotFoundException("Actor with ID: " + actorId + " not found"));
     }
 
+    @Transactional
     public Actor updateActor(String actorId, Actor incomingActor) {
         Actor existingActor = getActor(actorId);
 
@@ -57,6 +59,7 @@ public class ActorService {
         return actorRepository.save(existingActor);
     }
 
+    @Transactional
     public Page<Actor> getActors(Integer page, Integer limit) {
         Sort sort = Sort.by(Sort.Direction.ASC, Actor_.NAME);
         Pageable pageable = PageRequest.of(page, limit, sort);

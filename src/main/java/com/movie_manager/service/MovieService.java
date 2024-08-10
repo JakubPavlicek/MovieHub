@@ -153,6 +153,7 @@ public class MovieService {
         return movieRepository.findAllByGenresContaining(genre, pageable);
     }
 
+    @Transactional
     public Page<Movie> getMoviesByCountry(String countryId, Integer page, Integer limit) {
         Country country = countryService.getCountry(countryId);
         Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
@@ -160,6 +161,7 @@ public class MovieService {
         return movieRepository.findAllByCountriesContaining(country, pageable);
     }
 
+    @Transactional
     public Page<Movie> getMoviesWithProductionCompany(String companyId, Integer page, Integer limit) {
         ProductionCompany productionCompany = productionService.getProductionCompany(companyId);
         Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
@@ -167,6 +169,7 @@ public class MovieService {
         return movieRepository.findAllByProductionContaining(productionCompany, pageable);
     }
 
+    @Transactional
     public Page<Movie> getMoviesWithDirector(String directorId, Integer page, Integer limit) {
         Director director = directorService.getDirector(directorId);
         Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
@@ -174,6 +177,7 @@ public class MovieService {
         return movieRepository.findAllByDirector(director, pageable);
     }
 
+    @Transactional
     public Page<Movie> getMoviesWithActor(String actorId, Integer page, Integer limit) {
         Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
 

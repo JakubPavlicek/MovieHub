@@ -35,6 +35,7 @@ public class CountryService {
                                 .orElseGet(() -> countryRepository.save(country));
     }
 
+    @Transactional
     public Country addCountry(String name) {
         if (countryRepository.existsByName(name)) {
             throw new CountryAlreadyExistsException("Country with name " + name + " already exists");
@@ -46,6 +47,7 @@ public class CountryService {
         return countryRepository.save(country);
     }
 
+    @Transactional
     public Page<Country> getCountries(Integer page, Integer limit) {
         Sort sort = Sort.by(Sort.Direction.ASC, Country_.NAME);
         Pageable pageable = PageRequest.of(page, limit, sort);
@@ -53,9 +55,18 @@ public class CountryService {
         return countryRepository.findAll(pageable);
     }
 
+    @Transactional
     public Country getCountry(String countryId) {
         return countryRepository.findById(countryId)
                                 .orElseThrow(() -> new CountryNotFoundException("Country with ID " + countryId + " not found"));
+    }
+
+    @Transactional
+    public Country updateCountry(String countryId, String name) {
+        Country country = getCountry(countryId);
+        country.setName(name);
+
+        return countryRepository.save(country);
     }
 
 }

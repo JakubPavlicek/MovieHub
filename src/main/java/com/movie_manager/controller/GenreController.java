@@ -56,4 +56,12 @@ public class GenreController implements GenresApi {
         return ResponseEntity.ok(moviePage);
     }
 
+    @Override
+    public ResponseEntity<GenreDetailsResponse> updateGenre(String genreId, AddGenreRequest addGenreRequest) {
+        Genre genre = genreService.updateGenre(genreId, addGenreRequest.getName());
+        GenreDetailsResponse genreDetailsResponse = GenreMapper.mapToGenreDetailsResponse(genre);
+
+        return ResponseEntity.ok(genreDetailsResponse);
+    }
+
 }

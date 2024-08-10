@@ -56,4 +56,12 @@ public class ProductionCompanyController implements ProductionCompaniesApi {
         return ResponseEntity.ok(moviePage);
     }
 
+    @Override
+    public ResponseEntity<ProductionCompanyDetailsResponse> updateProductionCompany(String companyId, AddProductionCompanyRequest addProductionCompanyRequest) {
+        ProductionCompany company = companyService.updateProductionCompany(companyId, addProductionCompanyRequest.getName());
+        ProductionCompanyDetailsResponse companyResponse = ProductionCompanyMapper.mapToProductionCompanyDetailsResponse(company);
+
+        return ResponseEntity.ok(companyResponse);
+    }
+
 }

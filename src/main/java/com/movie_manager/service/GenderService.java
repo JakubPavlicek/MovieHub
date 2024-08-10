@@ -24,6 +24,7 @@ public class GenderService {
                                .orElseThrow(() -> new RuntimeException("Gender: " + genderName + " not found"));
     }
 
+    @Transactional
     public List<Gender> getGendres() {
         return genderRepository.findAll();
     }

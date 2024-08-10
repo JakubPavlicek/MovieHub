@@ -56,4 +56,12 @@ public class CountryController implements CountriesApi {
         return ResponseEntity.ok(moviePage);
     }
 
+    @Override
+    public ResponseEntity<CountryDetailsResponse> updateCountry(String countryId, AddCountryRequest addCountryRequest) {
+        Country country = countryService.updateCountry(countryId, addCountryRequest.getName());
+        CountryDetailsResponse countryResponse = CountryMapper.mapToCountryDetailsResponse(country);
+
+        return ResponseEntity.ok(countryResponse);
+    }
+
 }

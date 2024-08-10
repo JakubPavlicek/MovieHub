@@ -63,4 +63,12 @@ public class GenreService {
         return genreRepository.save(genre);
     }
 
+    @Transactional
+    public Genre updateGenre(String genreId, String name) {
+        Genre genre = getGenre(genreId);
+        genre.setName(name);
+
+        return genreRepository.save(genre);
+    }
+
 }

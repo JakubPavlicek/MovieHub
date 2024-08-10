@@ -1654,6 +1654,34 @@ paths:
                 $ref: '#/components/schemas/ProductionCompanyDetailsResponse'
         '404':
           $ref: '#/components/responses/404ProductionCompanyNotFound'
+    put:
+      description: |
+        Update the details of an existing production company.
+        All production company's details will be replaced with the new details provided.
+      summary: Update production company details
+      operationId: updateProductionCompany
+      tags:
+        - production-companies
+      parameters:
+        - $ref: '#/components/parameters/companyId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  $ref: '#/components/schemas/ProductionCompanyName'
+      responses:
+        '200':
+          description: Successfully updated the details of the specified production company.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductionCompanyDetailsResponse'
+        '404':
+          $ref: '#/components/responses/404ProductionCompanyNotFound'
 
   /production-companies/{companyId}/movies:
     get:
@@ -1741,6 +1769,34 @@ paths:
                 $ref: '#/components/schemas/GenreDetailsResponse'
         '404':
           $ref: '#/components/responses/404GenreNotFound'
+    put:
+      description: |
+        Update the details of an existing genre.
+        All genre's details will be replaced with the new details provided.
+      summary: Update genre details
+      operationId: updateGenre
+      tags:
+        - genres
+      parameters:
+        - $ref: '#/components/parameters/genreId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  $ref: '#/components/schemas/GenreName'
+      responses:
+        '200':
+          description: Successfully updated the details of the specified genre.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GenreDetailsResponse'
+        '404':
+          $ref: '#/components/responses/404GenreNotFound'
 
   /genres/{genreId}/movies:
     get:
@@ -1773,6 +1829,7 @@ paths:
       tags:
         - countries
       requestBody:
+        required: true
         content:
           application/json:
             schema:
@@ -1822,6 +1879,34 @@ paths:
       responses:
         '200':
           description: Successfully retrieved the details of the specified country.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountryDetailsResponse'
+        '404':
+          $ref: '#/components/responses/404CountryNotFound'
+    put:
+      description: |
+        Update the details of an existing country.
+        All country's details will be replaced with the new details provided.
+      summary: Update country details
+      operationId: updateCountry
+      tags:
+        - countries
+      parameters:
+        - $ref: '#/components/parameters/countryId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  $ref: '#/components/schemas/CountryName'
+      responses:
+        '200':
+          description: Successfully updated the details of the specified country.
           content:
             application/json:
               schema:
