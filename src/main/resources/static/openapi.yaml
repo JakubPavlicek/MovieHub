@@ -94,7 +94,7 @@ components:
           - To find movies released on July 29, 2024, use `eq:2024-07-29`.
       schema:
         type: string
-        default: "eq:"
+        default: "gte:1890-01-01"
         example: "eq:2024-07-29"
         maxLength: 100
     duration:
@@ -204,7 +204,7 @@ components:
           - To find movies directed by "James Wan", use `eq:James Wan`.
       schema:
         type: string
-        default: "eq:"
+        default: "like:"
         example: "eq:James Wan"
         maxLength: 100
     actors:
@@ -226,7 +226,7 @@ components:
           - To filter movies featuring both "James Wan" and "Vera Farmiga", use `["eq:James Wan", "eq:Vera Farmiga"]`.
       schema:
         type: array
-        default: [ "eq:" ]
+        default: [ "like:" ]
         example: [ "eq:James Wan" ]
         items:
           type: string
@@ -244,16 +244,14 @@ components:
 
         - **Operators:**
           - `eq` - Exact match for the genre.
+          - `like` - Genre contains the specified substring.
         
-        - **Valid Values:**
-          - Refer to the `GenreDTO` for a list of valid genre strings.
-
         - **Example:**
           - To find movies classified as "Horror", use `eq:Horror`.
           - To filter movies by multiple genres, such as "Horror" and "Thriller", use `["eq:Horror", "eq:Thriller"]`.
       schema:
         type: array
-        default: [ "eq:" ]
+        default: [ "like:" ]
         example: [ "eq:Horror" ]
         items:
           type: string
@@ -271,16 +269,14 @@ components:
 
         - **Operators:**
           - `eq` - Exact match for the country.
-
-        - **Valid Values:**
-          - Refer to the `CountryDTO` for a list of valid genre strings.
+          - `like` - Country contains the specified substring.
 
         - **Example:**
           - To find movies from "South Korea", use `eq:South Korea`.
           - To filter movies from multiple countries, such as "South Korea" and "United States", use `["eq:South Korea", "eq:United States"]`.
       schema:
         type: array
-        default: [ "eq:" ]
+        default: [ "like:" ]
         example: [ "eq:South Korea" ]
         items:
           type: string

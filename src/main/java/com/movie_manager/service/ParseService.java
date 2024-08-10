@@ -126,13 +126,15 @@ public class ParseService {
 
     public Specification<Movie> parseGenres(List<String> genres) {
         return parseFilterList(genres, Map.of(
-            "eq", MovieSpecification::genreEqualTo
+            "eq", MovieSpecification::genreEqualTo,
+            "like", MovieSpecification::genreContains
         ));
     }
 
     public Specification<Movie> parseCountries(List<String> countries) {
         return parseFilterList(countries, Map.of(
-            "eq", MovieSpecification::countryEqualTo
+            "eq", MovieSpecification::countryEqualTo,
+            "like", MovieSpecification::countryContains
         ));
     }
 

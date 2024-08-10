@@ -100,8 +100,16 @@ public class MovieSpecification {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.GENRES).get(Genre_.NAME), genre);
     }
 
+    public static Specification<Movie> genreContains(String genre) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Movie_.GENRES).get(Genre_.NAME), "%" + genre + "%");
+    }
+
     public static Specification<Movie> countryEqualTo(String country) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.COUNTRIES).get(Country_.NAME), country);
+    }
+
+    public static Specification<Movie> countryContains(String country) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Movie_.COUNTRIES).get(Country_.NAME), "%" + country + "%");
     }
 
     public static Specification<Movie> conjunction() {
