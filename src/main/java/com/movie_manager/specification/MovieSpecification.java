@@ -7,6 +7,7 @@ import com.movie_manager.entity.Genre_;
 import com.movie_manager.entity.Movie;
 import com.movie_manager.entity.MovieCast_;
 import com.movie_manager.entity.Movie_;
+import com.movie_manager.entity.ProductionCompany_;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.time.LocalDate;
@@ -110,6 +111,19 @@ public class MovieSpecification {
 
     public static Specification<Movie> countryContains(String country) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Movie_.COUNTRIES).get(Country_.NAME), "%" + country + "%");
+    }
+
+    public static Specification<Movie> searchByKeyword(String keyword) {
+        return (root, query, criteriaBuilder) -> {
+            query.distinct(true);
+
+            return criteriaBuilder.or(
+                criteriaBuilder.like(root.get(Movie_.NAME), "%" + keyword + "%"),
+                criteriaBuilder.like(root.get(Movie_.DIRECTOR).get(Director_.NAME), "%" + keyword + "%"),
+                criteriaBuilder.like(root.get(Movie_.CAST).get(MovieCast_.ACTOR).get(Actor_.NAME), "%" + keyword + "%"),
+                criteriaBuilder.like(root.get(Movie_.PRODUCTION).get(ProductionCompany_.NAME), "%" + keyword + "%")
+            );
+        };
     }
 
     public static Specification<Movie> conjunction() {

@@ -9,6 +9,7 @@ import com.movie_manager.entity.Movie_;
 import com.movie_manager.entity.ProductionCompany;
 import com.movie_manager.exception.MovieNotFoundException;
 import com.movie_manager.repository.MovieRepository;
+import com.movie_manager.specification.MovieSpecification;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -130,7 +131,7 @@ public class MovieService {
     }
 
     @Transactional
-    public Page<Movie> getMovies(Integer page, Integer limit, String sort, String name, String releaseDate, String duration, String description, String director, List<String> actors, List<String> genres, List<String> countries) {
+    public Page<Movie> getMovies(Integer page, Integer limit, String sort, String name, String releaseDate, String duration, String description, String director, List<String> actors, List<String> genres, List<String> countries, String keyword) {
         Pageable pageable = PageRequest.of(page, limit, parseService.parseSort(sort));
 
         Specification<Movie> specification = Specification.where(parseService.parseName(name))
@@ -140,7 +141,8 @@ public class MovieService {
                                                           .and(parseService.parseDirector(director))
                                                           .and(parseService.parseActors(actors))
                                                           .and(parseService.parseGenres(genres))
-                                                          .and(parseService.parseCountries(countries));
+                                                          .and(parseService.parseCountries(countries))
+                                                          .and(MovieSpecification.searchByKeyword(keyword));
 
         return movieRepository.findAll(specification, pageable);
     }

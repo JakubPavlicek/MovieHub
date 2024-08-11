@@ -57,8 +57,8 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<MoviePage> getMovies(Integer page, Integer limit, String sort, String name, String releaseDate, String duration, String description, String director, List<String> actors, List<String> genres, List<String> countries) {
-        Page<Movie> movies = movieService.getMovies(page, limit, sort, name, releaseDate, duration, description, director, actors, genres, countries);
+    public ResponseEntity<MoviePage> getMovies(Integer page, Integer limit, String sort, String name, String releaseDate, String duration, String description, String director, List<String> actors, List<String> genres, List<String> countries, String keyword) {
+        Page<Movie> movies = movieService.getMovies(page, limit, sort, name, releaseDate, duration, description, director, actors, genres, countries, keyword);
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
         return ResponseEntity.ok(moviePage);

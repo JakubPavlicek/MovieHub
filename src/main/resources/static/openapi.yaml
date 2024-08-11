@@ -69,7 +69,7 @@ components:
           - To find movies exactly named "The Conjuring", use `eq:The Conjuring`.
       schema:
         type: string
-        default: "eq:"
+        default: "like:"
         example: "eq:The Conjuring"
         description: pes
         maxLength: 200
@@ -282,6 +282,16 @@ components:
           type: string
           example: "eq:South Korea"
           maxLength: 100
+    keyword:
+      name: keyword
+      in: query
+      description: |
+        A query parameter used to filter movies based on a specific keyword.
+        This parameter is useful for searching movies by name, director, cast, or production company.
+      schema:
+        type: string
+        default: ""
+        maxLength: 100
 
     directorId:
       name: directorId
@@ -1299,6 +1309,7 @@ paths:
         - $ref: '#/components/parameters/actors'
         - $ref: '#/components/parameters/genres'
         - $ref: '#/components/parameters/countries'
+        - $ref: '#/components/parameters/keyword'
       responses:
         '200':
           description: Successfully retrieved a list of movies in the system.
