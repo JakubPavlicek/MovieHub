@@ -45,7 +45,8 @@ public class MovieCast {
     private Actor actor;
 
     @Column(
-        nullable = false
+        nullable = false,
+        length = 100
     )
     private String role;
 

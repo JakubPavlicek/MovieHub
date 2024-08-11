@@ -34,7 +34,7 @@ public class GenreService {
 
     private Genre getSavedGenre(Genre genre) {
         return genreRepository.findByName(genre.getName())
-                              .orElseGet(() -> genreRepository.save(genre));
+                              .orElseThrow(() -> new GenreNotFoundException("Genre with name: " + genre.getName() + " not found"));
     }
 
     @Transactional

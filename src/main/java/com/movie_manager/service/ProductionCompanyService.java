@@ -38,7 +38,7 @@ public class ProductionCompanyService {
     @Transactional
     public ProductionCompany addProductionCompany(String name) {
         if (companyRepository.existsByName(name)) {
-            throw new ProductionCompanyAlreadyExistsException("Production company with name " + name + " already exists");
+            throw new ProductionCompanyAlreadyExistsException("Production company with name: " + name + " already exists");
         }
 
         ProductionCompany productionCompany = new ProductionCompany();

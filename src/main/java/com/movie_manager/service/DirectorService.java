@@ -3,6 +3,7 @@ package com.movie_manager.service;
 import com.movie_manager.entity.Director;
 import com.movie_manager.entity.Director_;
 import com.movie_manager.entity.Gender;
+import com.movie_manager.exception.DirectorAlreadyExistsException;
 import com.movie_manager.exception.DirectorNotFoundException;
 import com.movie_manager.repository.DirectorRepository;
 import jakarta.transaction.Transactional;
@@ -29,11 +30,23 @@ public class DirectorService {
         }
 
         return directorRepository.findByName(director.getName())
-                                 .orElseGet(() -> addDirector(director));
+                                 .orElseGet(() -> saveDirector(director));
     }
 
     @Transactional
     public Director addDirector(Director director) {
+        verifyDirectorUniqueness(director);
+
+        return saveDirector(director);
+    }
+
+    private void verifyDirectorUniqueness(Director director) {
+        if (directorRepository.existsByName(director.getName())) {
+            throw new DirectorAlreadyExistsException("Director with name: " + director.getName() + " already exists");
+        }
+    }
+
+    private Director saveDirector(Director director) {
         Gender savedGender = genderService.getSavedGender(director.getGender());
         director.setGender(savedGender);
 
@@ -59,6 +72,7 @@ public class DirectorService {
         Director existingDirector = getDirector(directorId);
 
         if (incomingDirector.getName() != null) {
+            verifyDirectorUniqueness(incomingDirector);
             existingDirector.setName(incomingDirector.getName());
         }
         if (incomingDirector.getBio() != null) {

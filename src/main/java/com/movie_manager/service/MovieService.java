@@ -1,5 +1,6 @@
 package com.movie_manager.service;
 
+import com.movie_manager.entity.Actor;
 import com.movie_manager.entity.Country;
 import com.movie_manager.entity.Director;
 import com.movie_manager.entity.Genre;
@@ -181,9 +182,10 @@ public class MovieService {
 
     @Transactional
     public Page<Movie> getMoviesWithActor(String actorId, Integer page, Integer limit) {
+        Actor actor = actorService.getActor(actorId);
         Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
 
-        return movieCastService.findMoviesByActor(actorId, pageable);
+        return movieRepository.findAllByActorsContaining(actor, pageable);
     }
 
 }

@@ -3,6 +3,7 @@ package com.movie_manager.service;
 import com.movie_manager.entity.Actor;
 import com.movie_manager.entity.Actor_;
 import com.movie_manager.entity.Gender;
+import com.movie_manager.exception.ActorAlreadyExistsException;
 import com.movie_manager.exception.ActorNotFoundException;
 import com.movie_manager.repository.ActorRepository;
 import jakarta.transaction.Transactional;
@@ -24,11 +25,23 @@ public class ActorService {
     @Transactional
     public Actor getSavedActor(Actor actor) {
         return actorRepository.findByName(actor.getName())
-                              .orElseGet(() -> addActor(actor));
+                              .orElseGet(() -> saveActor(actor));
     }
 
     @Transactional
     public Actor addActor(Actor actor) {
+        verifyActorUniqueness(actor);
+
+        return saveActor(actor);
+    }
+
+    private void verifyActorUniqueness(Actor actor) {
+        if (actorRepository.existsByName(actor.getName())) {
+            throw new ActorAlreadyExistsException("Actor with name: " + actor.getName() + " already exists");
+        }
+    }
+
+    private Actor saveActor(Actor actor) {
         Gender savedGender = genderService.getSavedGender(actor.getGender());
         actor.setGender(savedGender);
 
@@ -46,6 +59,7 @@ public class ActorService {
         Actor existingActor = getActor(actorId);
 
         if (incomingActor.getName() != null) {
+            verifyActorUniqueness(incomingActor);
             existingActor.setName(incomingActor.getName());
         }
         if (incomingActor.getBio() != null) {

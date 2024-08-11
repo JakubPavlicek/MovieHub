@@ -11,4 +11,6 @@ public interface DirectorRepository extends JpaRepository<Director, String> {
 
     Optional<Director> findByName(String name);
 
+    boolean existsByName(String name);
+
 }

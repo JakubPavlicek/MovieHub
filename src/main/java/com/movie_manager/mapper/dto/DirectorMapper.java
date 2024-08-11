@@ -17,6 +17,10 @@ public class DirectorMapper {
     }
 
     public static Director mapToDirector(String name) {
+        if (name == null) {
+            return null;
+        }
+
         return Director.builder()
                        .name(name)
                        .build();

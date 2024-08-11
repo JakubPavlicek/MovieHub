@@ -6,8 +6,6 @@ import com.movie_manager.entity.MovieCast;
 import com.movie_manager.repository.MovieCastRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -40,13 +38,6 @@ public class MovieCastService {
     @Transactional
     public void deleteAllMovieCastsByMovie(Movie movie) {
         movieCastRepository.deleteAllByMovie(movie);
-    }
-
-    @Transactional
-    public Page<Movie> findMoviesByActor(String actorId, Pageable pageable) {
-        Actor actor = actorService.getActor(actorId);
-
-        return movieCastRepository.findMoviesByActor(actor, pageable);
     }
 
 }

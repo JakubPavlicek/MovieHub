@@ -32,13 +32,13 @@ public class CountryService {
 
     private Country getSavedCountry(Country country) {
         return countryRepository.findByName(country.getName())
-                                .orElseGet(() -> countryRepository.save(country));
+                                .orElseThrow(() -> new CountryNotFoundException("Country with name: " + country.getName() + " not found"));
     }
 
     @Transactional
     public Country addCountry(String name) {
         if (countryRepository.existsByName(name)) {
-            throw new CountryAlreadyExistsException("Country with name " + name + " already exists");
+            throw new CountryAlreadyExistsException("Country with name: " + name + " already exists");
         }
 
         Country country = new Country();
@@ -58,7 +58,7 @@ public class CountryService {
     @Transactional
     public Country getCountry(String countryId) {
         return countryRepository.findById(countryId)
-                                .orElseThrow(() -> new CountryNotFoundException("Country with ID " + countryId + " not found"));
+                                .orElseThrow(() -> new CountryNotFoundException("Country with ID: " + countryId + " not found"));
     }
 
     @Transactional

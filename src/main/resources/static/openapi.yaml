@@ -452,6 +452,7 @@ components:
         The URL to the movie's poster image.
         This link points to the visual representation of the movie used for promotional purposes.
       example: 'https://image.tmdb.org/t/p/original/wVYREutTvI2tmxr6ujrHT704wGF.jpg'
+      minLength: 1
       nullable: false
     MovieTrailerUrl:
       type: string
@@ -459,6 +460,7 @@ components:
         The URL to the movie's trailer video.
         This link directs to the promotional trailer available online, typically hosted on platforms like YouTube.
       example: 'https://www.youtube.com/watch?v=k10ETZ41q5o'
+      minLength: 1
       nullable: false
     PersonName:
       type: string
@@ -474,6 +476,7 @@ components:
       description: |
         A biography or background information about a person, including their career and personal details.
         This field provides a comprehensive overview of the individual's life and achievements.
+      minLength: 1
       example: |
         Patrick Joseph Wilson was born in Norfolk, Virginia and raised in St. Petersburg, Florida, the son of Mary Kathryn (Burton), a voice teacher and professional singer, and John Franklin Wilson, a news anchor.
         Wilson has a B.F.A. in Drama from Carnegie-Mellon University.
@@ -487,6 +490,8 @@ components:
       description: |
         The role or character that an actor plays in a movie.
         This field identifies the actor's contribution to the film.
+      minLength: 1
+      maxLength: 100
       example: Detective
       nullable: false
     ProductionCompanyName:
@@ -495,6 +500,7 @@ components:
       description: |
         The name of the company that produced the movie.
         This field contains up to 100 characters and represents the organization responsible for the film's production.
+      minLength: 1
       maxLength: 100
       nullable: false
     GenderName:
@@ -515,6 +521,7 @@ components:
       description: |
         The genre or category of the movie.
         This field represents the type of movie, such as Horror or Comedy, and is limited to 15 characters.
+      minLength: 1
       maxLength: 15
       nullable: false
     CountryName:
@@ -523,6 +530,7 @@ components:
         The name of the country where the movie was produced or set.
         This field identifies the geographical location associated with the movie and is limited to 15 characters.
       example: Italy
+      minLength: 1
       maxLength: 15
       nullable: false
 
@@ -1258,12 +1266,14 @@ components:
           type: object
           description: "A free-form based object that contains additional context about the error."
           properties:
-            messages:
-              type: array
-              description: "More details on the error."
-              items:
-                type: string
-              example: [ "Something went wrong", "Something else went wrong" ]
+            genre:
+              type: string
+              description: "More details on the genre error."
+              example: "it must be between 1 and 15 characters long"
+            country:
+              type: string
+              description: "More details on the country error."
+              example: "it must be between 1 and 15 characters long"
 
     # TODO: endpoints
 
