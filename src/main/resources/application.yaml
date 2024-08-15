@@ -1,8 +1,11 @@
 spring:
+  profiles:
+    active: dev
+  docker:
+    compose:
+      profiles:
+        active: dev
   datasource:
-    url: jdbc:postgresql://localhost:5432/movie_manager
-    username: postgres
-    password: postgres
     driver-class-name: org.postgresql.Driver
   liquibase:
     change-log: classpath:db/changelog/changelog-root.yaml
@@ -13,10 +16,33 @@ spring:
     open-in-view: false
     properties:
       hibernate:
-        generate_statistics: true
+        #        generate_statistics: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
 springdoc:
   api-docs:
     version: openapi_3_1
   swagger-ui:
     url: openapi.yaml
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/movie_manager
+    username: postgres
+    password: postgres
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:postgresql://db:5432/${POSTGRES_DB}
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}

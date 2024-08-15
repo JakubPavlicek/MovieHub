@@ -1,0 +1,43 @@
+services:
+  db:
+    image: postgres:16.4
+    container_name: postgres
+    restart: always
+    env_file:
+      - .env
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - spring-net
+
+  moviemanager:
+    image: moviemanager
+    container_name: moviemanager
+    profiles:
+      - prod
+    build:
+      context: .
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    networks:
+      - spring-net
+    command:
+      - "--spring.profiles.active=prod"
+
+networks:
+  spring-net:
+
+volumes:
+  postgres_data:

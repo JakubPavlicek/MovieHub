@@ -10,7 +10,6 @@
 	</parent>
 	<groupId>com.kuba</groupId>
 	<artifactId>MovieManager</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>MovieManager</name>
 	<description>Manager for movies</description>
 	<url/>
@@ -41,6 +40,12 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-docker-compose</artifactId>
+			<scope>runtime</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.liquibase</groupId>
@@ -83,7 +88,9 @@
 		</dependency>
 	</dependencies>
 
+	<packaging>jar</packaging>
 	<build>
+		<finalName>MovieManager</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
