@@ -14,8 +14,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,10 +26,10 @@ public class GenreService {
     private final MovieRepository movieRepository;
 
     @Transactional
-    public Set<Genre> getSavedGenres(Set<Genre> genres) {
+    public List<Genre> getSavedGenres(List<Genre> genres) {
         return genres.stream()
                      .map(this::getSavedGenre)
-                     .collect(Collectors.toCollection(HashSet::new));
+                     .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private Genre getSavedGenre(Genre genre) {

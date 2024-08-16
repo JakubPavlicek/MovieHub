@@ -8,8 +8,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -21,10 +21,10 @@ public class MovieCastService {
     private final ActorService actorService;
 
     @Transactional
-    public Set<MovieCast> getSavedMovieCasts(Set<MovieCast> movieCasts, Movie movie) {
+    public List<MovieCast> getSavedMovieCasts(List<MovieCast> movieCasts, Movie movie) {
         return movieCasts.stream()
                          .map(movieCast -> getSavedMovieCast(movieCast, movie))
-                         .collect(Collectors.toCollection(HashSet::new));
+                         .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private MovieCast getSavedMovieCast(MovieCast movieCast, Movie movie) {

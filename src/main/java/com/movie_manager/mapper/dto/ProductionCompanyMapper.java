@@ -6,23 +6,21 @@ import com.movie_manager.entity.ProductionCompany;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class ProductionCompanyMapper {
 
     private ProductionCompanyMapper() {
     }
 
-    public static Set<ProductionCompany> mapToProductionCompanies(List<String> productionCompanies) {
+    public static List<ProductionCompany> mapToProductionCompanies(List<String> productionCompanies) {
         return productionCompanies.stream()
                                   .map(companyName -> ProductionCompany.builder()
                                                                        .name(companyName)
                                                                        .build())
-                                  .collect(Collectors.toSet());
+                                  .toList();
     }
 
-    public static List<ProductionCompanyDetailsResponse> mapToProductionCompanyDetailsResponseList(Set<ProductionCompany> productionCompanies) {
+    public static List<ProductionCompanyDetailsResponse> mapToProductionCompanyDetailsResponseList(List<ProductionCompany> productionCompanies) {
         return productionCompanies.stream()
                                   .map(ProductionCompanyMapper::mapToProductionCompanyDetailsResponse)
                                   .toList();
@@ -35,7 +33,7 @@ public class ProductionCompanyMapper {
                                                .build();
     }
 
-    public static List<String> mapToProductionCompanyNames(Set<ProductionCompany> production) {
+    public static List<String> mapToProductionCompanyNames(List<ProductionCompany> production) {
         return production.stream()
                          .map(ProductionCompany::getName)
                          .toList();

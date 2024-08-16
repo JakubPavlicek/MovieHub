@@ -25,7 +25,7 @@ import org.hibernate.annotations.UuidGenerator;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -98,7 +98,7 @@ public class Movie {
         fetch = FetchType.EAGER,
         cascade = CascadeType.REMOVE
     )
-    private Set<MovieCast> cast;
+    private List<MovieCast> cast;
 
     @ManyToMany(
         fetch = FetchType.EAGER
@@ -116,7 +116,7 @@ public class Movie {
             foreignKey = @ForeignKey(name = "fk_company")
         )
     )
-    private Set<ProductionCompany> production;
+    private List<ProductionCompany> production;
 
     @ManyToMany(
         fetch = FetchType.EAGER
@@ -134,7 +134,7 @@ public class Movie {
             foreignKey = @ForeignKey(name = "fk_genre")
         )
     )
-    private Set<Genre> genres;
+    private List<Genre> genres;
 
     @ManyToMany(
         fetch = FetchType.EAGER
@@ -152,7 +152,7 @@ public class Movie {
             foreignKey = @ForeignKey(name = "fk_country")
         )
     )
-    private Set<Country> countries;
+    private List<Country> countries;
 
     @UpdateTimestamp
     @Column(

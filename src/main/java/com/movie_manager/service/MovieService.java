@@ -21,7 +21,6 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -45,19 +44,19 @@ public class MovieService {
         Director savedDirector = directorService.getSavedDirector(movie.getDirector());
         movie.setDirector(savedDirector);
 
-        Set<Country> savedCountries = countryService.getSavedCountries(movie.getCountries());
+        List<Country> savedCountries = countryService.getSavedCountries(movie.getCountries());
         movie.setCountries(savedCountries);
 
-        Set<Genre> savedGenres = genreService.getSavedGenres(movie.getGenres());
+        List<Genre> savedGenres = genreService.getSavedGenres(movie.getGenres());
         movie.setGenres(savedGenres);
 
-        Set<ProductionCompany> savedProduction = productionService.getSavedProduction(movie.getProduction());
+        List<ProductionCompany> savedProduction = productionService.getSavedProduction(movie.getProduction());
         movie.setProduction(savedProduction);
 
         // Movie has to to exist in db so it can be used in MovieCast
         Movie savedMovie = movieRepository.save(movie);
 
-        Set<MovieCast> savedCast = movieCastService.getSavedMovieCasts(movie.getCast(), savedMovie);
+        List<MovieCast> savedCast = movieCastService.getSavedMovieCasts(movie.getCast(), savedMovie);
         savedMovie.setCast(savedCast);
 
         return savedMovie;
@@ -114,19 +113,19 @@ public class MovieService {
         if (incomingMovie.getCast() != null && !incomingMovie.getCast().isEmpty()) {
             movieCastService.deleteAllMovieCastsByMovie(existingMovie);
 
-            Set<MovieCast> savedMovieCasts = movieCastService.getSavedMovieCasts(incomingMovie.getCast(), existingMovie);
+            List<MovieCast> savedMovieCasts = movieCastService.getSavedMovieCasts(incomingMovie.getCast(), existingMovie);
             existingMovie.setCast(savedMovieCasts);
         }
         if (incomingMovie.getProduction() != null && !incomingMovie.getProduction().isEmpty()) {
-            Set<ProductionCompany> savedProduction = productionService.getSavedProduction(incomingMovie.getProduction());
+            List<ProductionCompany> savedProduction = productionService.getSavedProduction(incomingMovie.getProduction());
             existingMovie.setProduction(savedProduction);
         }
         if (incomingMovie.getCountries() != null && !incomingMovie.getCountries().isEmpty()) {
-            Set<Country> savedCountries = countryService.getSavedCountries(incomingMovie.getCountries());
+            List<Country> savedCountries = countryService.getSavedCountries(incomingMovie.getCountries());
             existingMovie.setCountries(savedCountries);
         }
         if (incomingMovie.getGenres() != null && !incomingMovie.getGenres().isEmpty()) {
-            Set<Genre> savedGenres = genreService.getSavedGenres(incomingMovie.getGenres());
+            List<Genre> savedGenres = genreService.getSavedGenres(incomingMovie.getGenres());
             existingMovie.setGenres(savedGenres);
         }
     }

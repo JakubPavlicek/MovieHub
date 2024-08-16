@@ -7,8 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Component
 public class GenreMapper {
@@ -16,15 +14,15 @@ public class GenreMapper {
     private GenreMapper() {
     }
 
-    public static Set<Genre> mapToGenres(List<String> genres) {
+    public static List<Genre> mapToGenres(List<String> genres) {
         return genres.stream()
                      .map(genreName -> Genre.builder()
                                             .name(genreName)
                                             .build())
-                     .collect(Collectors.toSet());
+                     .toList();
     }
 
-    public static List<GenreDetailsResponse> mapToGenreDetailsResponseList(Set<Genre> genres) {
+    public static List<GenreDetailsResponse> mapToGenreDetailsResponseList(List<Genre> genres) {
         return genres.stream()
                      .map(GenreMapper::mapToGenreDetailsResponse)
                      .toList();
@@ -52,7 +50,7 @@ public class GenreMapper {
                      .toList();
     }
 
-    public static List<String> mapToGenreNames(Set<Genre> genres) {
+    public static List<String> mapToGenreNames(List<Genre> genres) {
         return genres.stream()
                      .map(Genre::getName)
                      .toList();

@@ -13,8 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,10 +24,10 @@ public class ProductionCompanyService {
     private final ProductionCompanyRepository companyRepository;
 
     @Transactional
-    public Set<ProductionCompany> getSavedProduction(Set<ProductionCompany> companies) {
+    public List<ProductionCompany> getSavedProduction(List<ProductionCompany> companies) {
         return companies.stream()
                         .map(this::getSavedProductionCompany)
-                        .collect(Collectors.toCollection(HashSet::new));
+                        .collect(Collectors.toCollection(ArrayList::new));
     }
 
     private ProductionCompany getSavedProductionCompany(ProductionCompany company) {

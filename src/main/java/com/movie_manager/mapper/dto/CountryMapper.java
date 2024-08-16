@@ -6,29 +6,27 @@ import com.movie_manager.entity.Country;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class CountryMapper {
 
     private CountryMapper() {
     }
 
-    public static Set<Country> mapToCountries(List<String> countries) {
+    public static List<Country> mapToCountries(List<String> countries) {
         return countries.stream()
                         .map(countryName -> Country.builder()
                                                    .name(countryName)
                                                    .build())
-                        .collect(Collectors.toSet());
+                        .toList();
     }
 
-    public static List<CountryDetailsResponse> mapToCountryDetailsResponseList(Set<Country> countries) {
+    public static List<CountryDetailsResponse> mapToCountryDetailsResponseList(List<Country> countries) {
         return countries.stream()
                         .map(CountryMapper::mapToCountryDetailsResponse)
                         .toList();
     }
 
-    public static List<String> mapToCountryNames(Set<Country> countries) {
+    public static List<String> mapToCountryNames(List<Country> countries) {
         return countries.stream()
                         .map(Country::getName)
                         .toList();
