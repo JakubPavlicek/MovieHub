@@ -4,6 +4,9 @@ logging:
       springframework:
         security: TRACE
 spring:
+  docker:
+    compose:
+      file: api/docker-compose.yaml
   security:
     oauth2:
       resourceserver:
