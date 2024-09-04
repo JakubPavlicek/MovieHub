@@ -597,7 +597,7 @@ components:
           type: array
           description: "List of movies."
           items:
-            $ref: '#/components/schemas/MovieDetailsResponse'
+            $ref: '#/components/schemas/MoviePreviewResponse'
         pageable:
           $ref: '#/components/schemas/PageableDTO'
         last:
@@ -1100,6 +1100,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/CountryName'
+
+    MoviePreviewResponse:
+      type: object
+      description: Offers preview representation of the movie.
+      properties:
+        movieId:
+          $ref: '#/components/schemas/Uuid'
+        name:
+          $ref: '#/components/schemas/MovieName'
+        releaseDate:
+          $ref: '#/components/schemas/MovieReleaseDate'
+        duration:
+          $ref: '#/components/schemas/MovieDuration'
+        posterUrl:
+          $ref: '#/components/schemas/MoviePosterUrl'
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenreName'
 
     MovieDetailsResponse:
       type: object

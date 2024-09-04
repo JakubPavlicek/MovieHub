@@ -3,6 +3,7 @@ package com.moviehub.mapper.dto;
 import com.moviehub.dto.AddMovieRequest;
 import com.moviehub.dto.MovieDetailsResponse;
 import com.moviehub.dto.MoviePage;
+import com.moviehub.dto.MoviePreviewResponse;
 import com.moviehub.dto.MovieResponse;
 import com.moviehub.dto.UpdateMovieRequest;
 import com.moviehub.entity.Movie;
@@ -68,6 +69,17 @@ public class MovieMapper {
                             .build();
     }
 
+    public static MoviePreviewResponse mapToMoviePreviewResponse(Movie movie) {
+        return MoviePreviewResponse.builder()
+                            .movieId(movie.getMovieId())
+                            .name(movie.getName())
+                            .releaseDate(movie.getReleaseDate())
+                            .duration(movie.getDuration())
+                            .posterUrl(movie.getPosterUrl())
+                            .genres(GenreMapper.mapToGenreNames(movie.getGenres()))
+                            .build();
+    }
+
     public static MovieDetailsResponse mapToMovieDetailsResponse(Movie movie) {
         return MovieDetailsResponse.builder()
                                    .movieId(movie.getMovieId())
@@ -89,7 +101,7 @@ public class MovieMapper {
 
     public static MoviePage mapToMoviePage(Page<Movie> movies) {
         return MoviePage.builder()
-                        .content(mapToMovieDetailsResponseList(movies))
+                        .content(mapToMoviePreviewResponseList(movies))
                         .pageable(PageableMapper.mapToPageableDTO(movies.getPageable()))
                         .last(movies.isLast())
                         .totalElements(movies.getTotalElements())
@@ -103,9 +115,9 @@ public class MovieMapper {
                         .build();
     }
 
-    private static List<MovieDetailsResponse> mapToMovieDetailsResponseList(Page<Movie> movies) {
+    private static List<MoviePreviewResponse> mapToMoviePreviewResponseList(Page<Movie> movies) {
         return movies.stream()
-                     .map(MovieMapper::mapToMovieDetailsResponse)
+                     .map(MovieMapper::mapToMoviePreviewResponse)
                      .toList();
     }
 
