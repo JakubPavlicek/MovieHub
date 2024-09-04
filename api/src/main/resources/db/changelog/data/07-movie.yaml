@@ -1,0 +1,660 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: JakubPavlicek
+      changes:
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: '1cce6f34-13d2-4a3d-8c7e-8a7659db8a60'
+              - column:
+                  name: name
+                  value: 'The Conjuring'
+              - column:
+                  name: release_date
+                  value: '2013-07-25'
+              - column:
+                  name: duration
+                  value: '112'
+              - column:
+                  name: description
+                  value: "Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their farmhouse."
+              - column:
+                  name: director_id
+                  value: 'c56a4180-65aa-42ec-a945-5fd21dec0538' # James Wan
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/wVYREutTvI2tmxr6ujrHT704wGF.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=k10ETZ41q5o'
+              - column:
+                  name: updated_at
+                  value: '2024-08-10T14:22:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: 'a9c8e9a1-bb24-43b4-9e6b-b38ec61b241d'
+              - column:
+                  name: name
+                  value: 'The Conjuring 2'
+              - column:
+                  name: release_date
+                  value: '2016-06-10'
+              - column:
+                  name: duration
+                  value: '134'
+              - column:
+                  name: description
+                  value: 'Ed and Lorraine Warren travel to North London to help a single mother raising four children alone in a house plagued by a supernatural spirit.'
+              - column:
+                  name: director_id
+                  value: 'c56a4180-65aa-42ec-a945-5fd21dec0538' # James Wan
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/zEqyD0SBt6HL7W9JQoWwtd5Do1T.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=VFsmuRPClr4'
+              - column:
+                  name: updated_at
+                  value: '2024-08-10T14:23:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: 'acbef342-c46b-4f1b-8b1d-f4a7c82d6f8c'
+              - column:
+                  name: name
+                  value: 'The Watchers'
+              - column:
+                  name: release_date
+                  value: '2024-06-06'
+              - column:
+                  name: duration
+                  value: '102'
+              - column:
+                  name: description
+                  value: 'A young artist gets stranded in an extensive, immaculate forest in western Ireland, where, after finding shelter, she becomes trapped alongside three strangers, stalked by mysterious creatures each night.'
+              - column:
+                  name: director_id
+                  value: '7c8e3f8d-fb53-42ef-95b9-439b0917b30f' # Ishana Shyamalan
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/vZVEUPychdvZLrTNwWErr9xZFmu.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=dYo91Fq9tKY'
+              - column:
+                  name: updated_at
+                  value: '2024-08-10T14:24:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: 'f18d339f-fa0a-4e0d-8e5c-652e2b45b98c'
+              - column:
+                  name: name
+                  value: 'Tenet'
+              - column:
+                  name: release_date
+                  value: '2020-08-22'
+              - column:
+                  name: duration
+                  value: '150'
+              - column:
+                  name: description
+                  value: 'Armed with only the word Tenet, and fighting for the survival of the entire world, CIA operative, The Protagonist, journeys through a twilight world of international espionage on a global mission that unfolds beyond real time.'
+              - column:
+                  name: director_id
+                  value: 'f7c9a0d7-52fa-4f1e-8f73-28f7d8a6b2e1' # Christopher Nolan
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/aCIFMriQh8rvhxpN1IWGgvH0Tlg.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=L3pk_TBkihU&ab_channel=WarnerBros.Pictures'
+              - column:
+                  name: updated_at
+                  value: '2024-08-11T14:24:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: '8c328172-a60f-4ea6-93b1-ca2a5cca2bf0'
+              - column:
+                  name: name
+                  value: 'Interstellar'
+              - column:
+                  name: release_date
+                  value: '2014-10-26'
+              - column:
+                  name: duration
+                  value: '169'
+              - column:
+                  name: description
+                  value: 'When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.'
+              - column:
+                  name: director_id
+                  value: 'f7c9a0d7-52fa-4f1e-8f73-28f7d8a6b2e1' # Christopher Nolan
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=zSWdZVtXT7E&ab_channel=WarnerBros.UK%26Ireland'
+              - column:
+                  name: updated_at
+                  value: '2024-08-12T14:24:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: '62c92d5e-bd34-47e2-ba67-7443014af702'
+              - column:
+                  name: name
+                  value: 'Inception'
+              - column:
+                  name: release_date
+                  value: '2010-7-08'
+              - column:
+                  name: duration
+                  value: '148'
+              - column:
+                  name: description
+                  value: 'A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O., but his tragic past may doom the project and his team to disaster.'
+              - column:
+                  name: director_id
+                  value: 'f7c9a0d7-52fa-4f1e-8f73-28f7d8a6b2e1' # Christopher Nolan
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/ljsZTbVsrQSqZgWeep2B1QiDKuh.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=YoHD9XEInc0&ab_channel=RottenTomatoesClassicTrailers'
+              - column:
+                  name: updated_at
+                  value: '2024-08-13T14:24:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: '76a9e23a-c8e6-4d1f-9c2d-8b3f47a91a1d'
+              - column:
+                  name: name
+                  value: 'Gravity'
+              - column:
+                  name: release_date
+                  value: '2013-10-04'
+              - column:
+                  name: duration
+                  value: '91'
+              - column:
+                  name: description
+                  value: 'Two astronauts work together to survive after an accident leaves them stranded in space.'
+              - column:
+                  name: director_id
+                  value: 'f1a5b6c7-8d9e-4f10-9a11-b1c3d4e5f6a7' # Alfonso Cuarón
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/kZ2nZw8D681aphje8NJi8EfbL1U.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=OiTiKOy59o4'
+              - column:
+                  name: updated_at
+                  value: '2024-08-13T14:25:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: '1b8f6a44-ae99-4cfa-b15e-cde77b45b8de'
+              - column:
+                  name: name
+                  value: 'Roma'
+              - column:
+                  name: release_date
+                  value: '2018-11-21'
+              - column:
+                  name: duration
+                  value: '135'
+              - column:
+                  name: description
+                  value: |
+                    A year in the life of a middle-class family's maid in Mexico City in the early 1970s.
+              - column:
+                  name: director_id
+                  value: 'f1a5b6c7-8d9e-4f10-9a11-b1c3d4e5f6a7' # Alfonso Cuarón
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/dtIIyQyALk57ko5bjac7hi01YQ.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=6BS27ngZtxg'
+              - column:
+                  name: updated_at
+                  value: '2024-08-13T14:25:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: 'a1b2c3d4-e5f6-4g7h-8i9j-0k1l2m3n4o5p'
+              - column:
+                  name: name
+                  value: 'Wonder Woman'
+              - column:
+                  name: release_date
+                  value: '2017-06-02'
+              - column:
+                  name: duration
+                  value: '141'
+              - column:
+                  name: description
+                  value: 'Diana, princess of the Amazons, leaves her home to fight a war, discovering her full powers and true destiny.'
+              - column:
+                  name: director_id
+                  value: 'd7e9f8b4-5c2d-4e3f-9b5e-2a1f4b6c7d8e' # Patty Jenkins
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/imekS7f1OuHyUP2LAiTEM0zBzUz.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=1Q8fG0TtVAY'
+              - column:
+                  name: updated_at
+                  value: '2024-08-13T14:26:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: 'h9i8j7k6-l5m4-n3o2-p1q0-r8s7t6u5v4w3'
+              - column:
+                  name: name
+                  value: 'Selma'
+              - column:
+                  name: release_date
+                  value: '2014-12-25'
+              - column:
+                  name: duration
+                  value: '128'
+              - column:
+                  name: description
+                  value: |
+                    A chronicle of Dr. Martin Luther King, Jr.'s campaign to secure equal voting rights via an epic march from Selma to Montgomery, Alabama, in 1965.
+              - column:
+                  name: director_id
+                  value: 'g9h8i7j6-k5l4-3m2n-1o0p-9q8r7s6t5u4v' # Ava DuVernay
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/wq4lhMc4BuOyQqe1ZGzhxLyy3Uk.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=x6t7vVTxaic'
+              - column:
+                  name: updated_at
+                  value: '2024-08-13T14:27:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: 'v1w2x3y4-z5a6-b7c8-d9e0-f1g2h3i4j5k6'
+              - column:
+                  name: name
+                  value: 'The Shape of Water'
+              - column:
+                  name: release_date
+                  value: '2017-12-01'
+              - column:
+                  name: duration
+                  value: '123'
+              - column:
+                  name: description
+                  value: 'At a top secret research facility in the 1960s, a lonely janitor forms a unique relationship with an amphibious creature that is being held in captivity.'
+              - column:
+                  name: director_id
+                  value: 'w3x2y1z0-a9b8-c7d6-e5f4-g3h2i1j0k9l8' # Guillermo del Toro
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/9zfwPffUXpBrEP26yp0q1ckXDcj.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=XFYWazblaUA'
+              - column:
+                  name: updated_at
+                  value: '2024-08-13T14:28:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: 'u1v2w3x4-y5z6-a7b8-c9d0-e1f2g3h4i5j6'
+              - column:
+                  name: name
+                  value: 'Birdman or'
+              - column:
+                  name: release_date
+                  value: '2014-10-17'
+              - column:
+                  name: duration
+                  value: '119'
+              - column:
+                  name: description
+                  value: 'A washed-up superhero actor attempts to revive his fading career by writing, directing, and starring in a Broadway production.'
+              - column:
+                  name: director_id
+                  value: 'f1a5b6c7-8d9e-4f10-9a11-b1c3d4e5f6a7' # Alfonso Cuarón
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/rHUg2AuIuLSIYMYFgavVwqt1jtc.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=uJfLoE6hanc'
+              - column:
+                  name: updated_at
+                  value: '2024-08-14T14:25:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: 'o9p8q7r6-s5t4-u3v2-w1x0-y9z8a7b6c5d4'
+              - column:
+                  name: name
+                  value: 'Monster'
+              - column:
+                  name: release_date
+                  value: '2003-12-17'
+              - column:
+                  name: duration
+                  value: '109'
+              - column:
+                  name: description
+                  value: 'Based on the life of Aileen Wuornos, a Daytona Beach prostitute who became a serial killer.'
+              - column:
+                  name: director_id
+                  value: 'd7e9f8b4-5c2d-4e3f-9b5e-2a1f4b6c7d8e' # Patty Jenkins
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/aevmNtJCNG4ZlfEeEGZ79frMUes.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=QjnywVxM-9s'
+              - column:
+                  name: updated_at
+                  value: '2024-08-14T14:26:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: 'b1c2d3e4-f5g6-h7i8-j9k0-l1m2n3o4p5q6'
+              - column:
+                  name: name
+                  value: 'Nomadland'
+              - column:
+                  name: release_date
+                  value: '2020-09-11'
+              - column:
+                  name: duration
+                  value: '107'
+              - column:
+                  name: description
+                  value: 'A woman in her sixties who, after losing everything in the Great Recession, embarks on a journey through the American West, living as a van-dwelling modern-day nomad.'
+              - column:
+                  name: director_id
+                  value: 'b6c7d8e9-f0g1-h2i3-j4k5-l6m7n8o9p0q1' # Chloé Zhao
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/k5XzjWihzum1YgLMlqRDRZDmVMn.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=6sxCFZ8_d84'
+              - column:
+                  name: updated_at
+                  value: '2024-08-14T14:27:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: 'd1e2f3g4-h5i6-j7k8-l9m0-n1o2p3q4r5s6'
+              - column:
+                  name: name
+                  value: 'No Country for Old Men'
+              - column:
+                  name: release_date
+                  value: '2007-11-08'
+              - column:
+                  name: duration
+                  value: '122'
+              - column:
+                  name: description
+                  value: 'Violence and mayhem ensue after a hunter stumbles upon a drug deal gone wrong and more than two million dollars in cash near the Rio Grande.'
+              - column:
+                  name: director_id
+                  value: 'r9s8t7u6-v5w4-x3y2-z1a0-b9c8d7e6f5g4' # Coen brothers
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/bj1v6YKF8yHqA489VFfnQvOJpnc.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=38A__WT3-o0'
+              - column:
+                  name: updated_at
+                  value: '2024-08-14T14:28:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: 'x1y2z3w4-v5u6-t7s8-r9q0-p1o2n3m4l5k6'
+              - column:
+                  name: name
+                  value: 'The Grand Budapest Hotel'
+              - column:
+                  name: release_date
+                  value: '2014-03-28'
+              - column:
+                  name: duration
+                  value: '99'
+              - column:
+                  name: description
+                  value: |
+                    A writer encounters the owner of an aging high-class hotel, who tells him of his early years serving as a lobby boy in the hotel's glorious years under an exceptional concierge.
+              - column:
+                  name: director_id
+                  value: 't7u8v9w0-x1y2-z3a4-b5c6-d7e8f9g0h1i2' # Wes Anderson
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/eWdyYQreja6JGCzqHWXpWHDrrPo.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=1Fg5iWmQjwk'
+              - column:
+                  name: updated_at
+                  value: '2024-08-14T14:29:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: 'z3x4c5v6-b7n8-m9l0-k1j2-h3g4f5d6s7a8'
+              - column:
+                  name: name
+                  value: 'The Revenant'
+              - column:
+                  name: release_date
+                  value: '2015-12-25'
+              - column:
+                  name: duration
+                  value: '156'
+              - column:
+                  name: description
+                  value: 'A frontiersman on a fur trading expedition in the 1820s fights for survival after being mauled by a bear and left for dead by members of his own hunting team.'
+              - column:
+                  name: director_id
+                  value: 'f1a5b6c7-8d9e-4f10-9a11-b1c3d4e5f6a7' # Alfonso Cuarón
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/tSaBkriE7TpbjFoQUFXuikoz0dF.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=LoebZZ8K5N0'
+              - column:
+                  name: updated_at
+                  value: '2024-08-15T14:25:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: 'p9o8i7u6-y5t4-r3e2-w1q0-a9s8d7f6g5h4'
+              - column:
+                  name: name
+                  value: 'Eternals'
+              - column:
+                  name: release_date
+                  value: '2021-11-05'
+              - column:
+                  name: duration
+                  value: '156'
+              - column:
+                  name: description
+                  value: 'The saga of the Eternals, a race of immortal beings who lived on Earth and shaped its history and civilizations.'
+              - column:
+                  name: director_id
+                  value: 'b6c7d8e9-f0g1-h2i3-j4k5-l6m7n8o9p0q1' # Chloé Zhao
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/lFByFSLV5WDJEv3KabbdAF959F2.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=x_me3xsvDgk'
+              - column:
+                  name: updated_at
+                  value: '2024-08-15T14:26:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: 'j1k2l3m4-n5b6-v7c8-x9z0-q1w2e3r4t5y6'
+              - column:
+                  name: name
+                  value: 'The Big Lebowski'
+              - column:
+                  name: release_date
+                  value: '1998-03-06'
+              - column:
+                  name: duration
+                  value: '117'
+              - column:
+                  name: description
+                  value: 'Jeff "The Dude" Lebowski, mistaken for a millionaire of the same name, seeks restitution for his ruined rug and enlists his bowling buddies to help get it.'
+              - column:
+                  name: director_id
+                  value: 'r9s8t7u6-v5w4-x3y2-z1a0-b9c8d7e6f5g4' # Coen brothers
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/9mprbw31MGdd66LR0AQKoDMoFRv.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=cd-go0oBF4Y'
+              - column:
+                  name: updated_at
+                  value: '2024-08-15T14:27:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: 'l4k5j6h7-g8f9-d0s1-a2p3-o4i5u6y7t8r9'
+              - column:
+                  name: name
+                  value: 'Moonrise Kingdom'
+              - column:
+                  name: release_date
+                  value: '2012-05-16'
+              - column:
+                  name: duration
+                  value: '94'
+              - column:
+                  name: description
+                  value: 'A pair of young lovers flee their New England town, which causes a local search party to fan out and find them.'
+              - column:
+                  name: director_id
+                  value: 't7u8v9w0-x1y2-z3a4-b5c6-d7e8f9g0h1i2' # Wes Anderson
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/xrziXRHRQ7c7YLIehgSJY8GQBsx.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=7N8wkVA4_8s'
+              - column:
+                  name: updated_at
+                  value: '2024-08-15T14:28:45.123456'
+
+        - insert:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  value: 'a8b9c0d1-e2f3-g4h5-i6j7-k8l9m0n1o2p3'
+              - column:
+                  name: name
+                  value: 'Dune'
+              - column:
+                  name: release_date
+                  value: '2021-10-22'
+              - column:
+                  name: duration
+                  value: '155'
+              - column:
+                  name: description
+                  value: |
+                    Feature adaptation of Frank Herbert's science fiction novel about the son of a noble family entrusted with the protection of the most valuable asset and most vital element in the galaxy.
+              - column:
+                  name: director_id
+                  value: 'b1c2d3e4-f5g6-h7i8-j9k0-l1m2n3o4p5q6' # Denis Villeneuve
+              - column:
+                  name: poster_url
+                  value: 'https://image.tmdb.org/t/p/original/d5NXSklXo0qyIYkgV94XAgMIckC.jpg'
+              - column:
+                  name: trailer_url
+                  value: 'https://www.youtube.com/watch?v=8g18jFHCLXk'
+              - column:
+                  name: updated_at
+                  value: '2024-08-15T14:29:45.123456'

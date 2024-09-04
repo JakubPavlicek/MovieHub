@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: JakubPavlicek
+      changes:
+
+        - insert:
+            tableName: gender
+            columns:
+              - column:
+                  name: gender_id
+                  value: '54ebec15-3b78-4e27-a52c-fa80b222f86d'
+              - column:
+                  name: name
+                  value: 'Unspecified'
+
+        - insert:
+            tableName: gender
+            columns:
+              - column:
+                  name: gender_id
+                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999'
+              - column:
+                  name: name
+                  value: 'Male'
+
+        - insert:
+            tableName: gender
+            columns:
+              - column:
+                  name: gender_id
+                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728'
+              - column:
+                  name: name
+                  value: 'Female'
+
+        - insert:
+            tableName: gender
+            columns:
+              - column:
+                  name: gender_id
+                  value: '163ced04-ef03-4206-a8bf-ece306ea8d0b'
+              - column:
+                  name: name
+                  value: 'Non-binary'

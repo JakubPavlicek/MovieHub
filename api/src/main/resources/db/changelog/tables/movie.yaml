@@ -1,0 +1,69 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: JakubPavlicek
+      changes:
+        - createTable:
+            tableName: movie
+            columns:
+              - column:
+                  name: movie_id
+                  type: varchar(255)
+                  defaultValueComputed: uuid_generate_v4()
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: release_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: duration
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: clob
+                  constraints:
+                    nullable: false
+              - column:
+                  name: director_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_director
+              - column:
+                  name: rating
+                  type: double
+                  defaultValueNumeric: '0.0'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: review_count
+                  type: int
+                  defaultValueNumeric: '0'
+                  constraints:
+                    nullable: false
+              - column:
+                  name: poster_url
+                  type: clob
+                  constraints:
+                    nullable: false
+              - column:
+                  name: trailer_url
+                  type: clob
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  constraints:
+                    nullable: false

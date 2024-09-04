@@ -73,7 +73,7 @@ public class MovieMapper {
         return MoviePreviewResponse.builder()
                             .movieId(movie.getMovieId())
                             .name(movie.getName())
-                            .releaseDate(movie.getReleaseDate())
+                            .releaseYear(movie.getReleaseDate().getYear())
                             .duration(movie.getDuration())
                             .posterUrl(movie.getPosterUrl())
                             .genres(GenreMapper.mapToGenreNames(movie.getGenres()))

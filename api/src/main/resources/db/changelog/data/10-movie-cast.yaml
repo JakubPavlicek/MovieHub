@@ -1,0 +1,1013 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: JakubPavlicek
+      changes:
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: '3a5d8e91-d0f3-4b3e-a85d-4c29f1b8a3e9'
+              - column:
+                  name: movie_id
+                  value: '1cce6f34-13d2-4a3d-8c7e-8a7659db8a60' # The Conjuring
+              - column:
+                  name: actor_id
+                  value: 'cba1a8f9-ef1b-4e6c-9f92-cf4532b3a9a4' # Patrick Wilson
+              - column:
+                  name: role
+                  value: 'Ed Warren'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'c7cd38ad-58dd-4dc0-9637-fc10cdcdddd4'
+              - column:
+                  name: movie_id
+                  value: '1cce6f34-13d2-4a3d-8c7e-8a7659db8a60' # The Conjuring
+              - column:
+                  name: actor_id
+                  value: 'b7a5f35b-f3a4-44c8-913f-6b94a842ef02' # Vera Farmiga
+              - column:
+                  name: role
+                  value: 'Lorraine Warren'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'e0619c04-05bf-4df8-9ff6-2a68a8b6833a'
+              - column:
+                  name: movie_id
+                  value: '1cce6f34-13d2-4a3d-8c7e-8a7659db8a60' # The Conjuring
+              - column:
+                  name: actor_id
+                  value: '7a5f9c4e-2b8e-4d5b-91c2-d6d8a4e9f2c7' # Ron Livingston
+              - column:
+                  name: role
+                  value: 'Roger Perron'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'b7c7e5d6-1f87-4d7e-8a62-b7583be0e2b8'
+              - column:
+                  name: movie_id
+                  value: 'a9c8e9a1-bb24-43b4-9e6b-b38ec61b241d' # The Conjuring 2
+              - column:
+                  name: actor_id
+                  value: 'cba1a8f9-ef1b-4e6c-9f92-cf4532b3a9a4' # Patrick Wilson
+              - column:
+                  name: role
+                  value: 'Ed Warren'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'ac17a2e0-1e8e-4e2d-b39d-54dfe9068a62'
+              - column:
+                  name: movie_id
+                  value: 'a9c8e9a1-bb24-43b4-9e6b-b38ec61b241d' # The Conjuring 2
+              - column:
+                  name: actor_id
+                  value: 'b7a5f35b-f3a4-44c8-913f-6b94a842ef02' # Vera Farmiga
+              - column:
+                  name: role
+                  value: 'Lorraine Warren'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: '8d1e3f4b-3c8d-4a4d-b2e5-7d5f3c8a9e1b'
+              - column:
+                  name: movie_id
+                  value: 'a9c8e9a1-bb24-43b4-9e6b-b38ec61b241d' # The Conjuring 2
+              - column:
+                  name: actor_id
+                  value: '4e6d7f8a-1b5c-4e4d-b4c7-8b7f1c4a9a9d' # Madison Wolfe
+              - column:
+                  name: role
+                  value: 'Janet Hodgson'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'd5f737a4-24bc-47b1-8d47-afe8ac769ae0'
+              - column:
+                  name: movie_id
+                  value: 'acbef342-c46b-4f1b-8b1d-f4a7c82d6f8c' # The Watchers
+              - column:
+                  name: actor_id
+                  value: '4e9fddde-0657-4a2d-8e16-58b1a98e27c4' # Dakota Fanning
+              - column:
+                  name: role
+                  value: 'Lucy'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'f71d78eb-cd62-4784-a6c1-daaae5d45f87'
+              - column:
+                  name: movie_id
+                  value: 'acbef342-c46b-4f1b-8b1d-f4a7c82d6f8c' # The Watchers
+              - column:
+                  name: actor_id
+                  value: 'c258ba5b-5a3d-4f26-8c87-8e5c0b58b75a' # Georgina Campbell
+              - column:
+                  name: role
+                  value: 'Ciara'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'e5b16c1e-1d53-40d2-9c6d-2f577733c9d5'
+              - column:
+                  name: movie_id
+                  value: 'acbef342-c46b-4f1b-8b1d-f4a7c82d6f8c' # The Watchers
+              - column:
+                  name: actor_id
+                  value: '3e708ba5-e6c2-4d58-bd52-0975c2f08c81' # Olwen Fouéré
+              - column:
+                  name: role
+                  value: 'Madeline'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: '0ff12a46-fdd0-4888-9cfe-78e9b9f4b275'
+              - column:
+                  name: movie_id
+                  value: 'f18d339f-fa0a-4e0d-8e5c-652e2b45b98c' # Tenet
+              - column:
+                  name: actor_id
+                  value: 'd83751a9-7169-49b5-ad7e-2a226ddbe451' # John David Washington
+              - column:
+                  name: role
+                  value: 'Protagonist'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'dd00710b-66a6-4e9d-9489-f586318f6fd4'
+              - column:
+                  name: movie_id
+                  value: 'f18d339f-fa0a-4e0d-8e5c-652e2b45b98c' # Tenet
+              - column:
+                  name: actor_id
+                  value: '463f4f94-adf3-4cfe-9f2f-634e06b58c13' # Robert Pattinson
+              - column:
+                  name: role
+                  value: 'Neil'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'f30aa92a-df1e-419f-8610-ee0a9c02ea7a'
+              - column:
+                  name: movie_id
+                  value: 'f18d339f-fa0a-4e0d-8e5c-652e2b45b98c' # Tenet
+              - column:
+                  name: actor_id
+                  value: '8ff49121-cc35-414d-b57f-0f965766c375' # Elizabeth Debicki
+              - column:
+                  name: role
+                  value: 'Kat'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'dea46e22-7ebf-4123-8def-dd6fe5e9383c'
+              - column:
+                  name: movie_id
+                  value: '8c328172-a60f-4ea6-93b1-ca2a5cca2bf0' # Interstellar
+              - column:
+                  name: actor_id
+                  value: 'dcf93df0-707d-4ef3-a226-eeef6f185ebd' # Matthew McConaughey
+              - column:
+                  name: role
+                  value: 'Cooper'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: '59b92e4b-df27-4a14-ae05-16d12fcebf6a'
+              - column:
+                  name: movie_id
+                  value: '8c328172-a60f-4ea6-93b1-ca2a5cca2bf0' # Interstellar
+              - column:
+                  name: actor_id
+                  value: '0b356559-d9d4-42a4-ae44-ceae2632d8d2' # Anne Hathaway
+              - column:
+                  name: role
+                  value: 'Brand'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'c1b70952-5599-4500-bf88-76091672935f'
+              - column:
+                  name: movie_id
+                  value: '8c328172-a60f-4ea6-93b1-ca2a5cca2bf0' # Interstellar
+              - column:
+                  name: actor_id
+                  value: 'd9a675aa-d6c7-4066-9fe5-48bfcc9b348a' # Jessica Chastain
+              - column:
+                  name: role
+                  value: 'Murph'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: '4242915a-5439-4f5d-b7ef-cb7a6fc18237'
+              - column:
+                  name: movie_id
+                  value: '62c92d5e-bd34-47e2-ba67-7443014af702' # Inception
+              - column:
+                  name: actor_id
+                  value: 'd3310c75-6871-43e7-9e93-20e0dbfc2cdb' # Leonardo DiCaprio
+              - column:
+                  name: role
+                  value: 'Cobb'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: '77db3be1-2b6c-4771-9c6e-a0e7f668c63a'
+              - column:
+                  name: movie_id
+                  value: '62c92d5e-bd34-47e2-ba67-7443014af702' # Inception
+              - column:
+                  name: actor_id
+                  value: 'ceb3e7d4-bc0a-4e90-8e9d-b415be9e1265' # Joseph Gordon-Levitt
+              - column:
+                  name: role
+                  value: 'Arthur'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: '03b2dd95-fd04-46f3-81dc-5d7df4599c60'
+              - column:
+                  name: movie_id
+                  value: '62c92d5e-bd34-47e2-ba67-7443014af702' # Inception
+              - column:
+                  name: actor_id
+                  value: 'a7b94617-5576-4dca-b3d6-80e5444450d8' # Elliot Page
+              - column:
+                  name: role
+                  value: 'Ariadne'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'e5f9b77d-3fbb-44c4-8fd7-3f6847b7e45b'
+              - column:
+                  name: movie_id
+                  value: '76a9e23a-c8e6-4d1f-9c2d-8b3f47a91a1d' # Gravity
+              - column:
+                  name: actor_id
+                  value: 'd3e5f7g8-h9i0-j1k2-l3m4-n5o6p7q8r9t0' # Sandra Bullock
+              - column:
+                  name: role
+                  value: 'Dr. Ryan Stone'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'e9b2b7c8-1e0e-4a43-851f-5d8c6e226c1d'
+              - column:
+                  name: movie_id
+                  value: '76a9e23a-c8e6-4d1f-9c2d-8b3f47a91a1d' # Gravity
+              - column:
+                  name: actor_id
+                  value: 'a5b6c7d8-e9f0-g1h2-i3j4-k5l6m7n8o9p0' # George Clooney
+              - column:
+                  name: role
+                  value: 'Matt Kowalsky'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'a1b7c82f-3c9e-4d8e-9a2d-7e9a1a5b8f3d'
+              - column:
+                  name: movie_id
+                  value: '1b8f6a44-ae99-4cfa-b15e-cde77b45b8de' # Roma
+              - column:
+                  name: actor_id
+                  value: 'd6c4e52a-d456-4f84-8a4b-d3a34a9a6b9e' # Yalitza Aparicio
+              - column:
+                  name: role
+                  value: 'Cleo'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'b2d5c3e8-0c5d-4b63-b8f6-1d7a1c0e6d2e'
+              - column:
+                  name: movie_id
+                  value: '1b8f6a44-ae99-4cfa-b15e-cde77b45b8de' # Roma
+              - column:
+                  name: actor_id
+                  value: 'a9c6e37b-4a8e-4db4-b7f4-0b3b7a6d1b8a' # Marina de Tavira
+              - column:
+                  name: role
+                  value: 'Sofía'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'b1c2d3e4-f5g6-7h8i-9j0k-l1m2n3o4p5q6'
+              - column:
+                  name: movie_id
+                  value: 'a1b2c3d4-e5f6-4g7h-8i9j-0k1l2m3n4o5p' # Wonder Woman
+              - column:
+                  name: actor_id
+                  value: 'd8e7f6g5-h4i3-j2k1-l0m9-n8o7p6q5r4s3' # Gal Gadot
+              - column:
+                  name: role
+                  value: 'Diana Prince / Wonder Woman'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'c2d3e4f5-g6h7-8i9j-0k1l-2m3n4o5p6q7r'
+              - column:
+                  name: movie_id
+                  value: 'a1b2c3d4-e5f6-4g7h-8i9j-0k1l2m3n4o5p' # Wonder Woman
+              - column:
+                  name: actor_id
+                  value: 'c7d8e9f0-g1h2-i3j4-k5l6-m7n8o9p0q1r2' # Chris Pine
+              - column:
+                  name: role
+                  value: 'Steve Trevor'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'd3e4f5g6-h7i8-9j0k-1l2m-3n4o5p6q7r8'
+              - column:
+                  name: movie_id
+                  value: 'a1b2c3d4-e5f6-4g7h-8i9j-0k1l2m3n4o5p' # Wonder Woman
+              - column:
+                  name: actor_id
+                  value: 'b1c2d3e4-5f6g-7h8i-9j0k-l1m2n3o4p5q6' # Robin Wright
+              - column:
+                  name: role
+                  value: 'General Antiope'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'e1f2g3h4-i5j6-k7l8-m9n0-o1p2q3r4s5t6'
+              - column:
+                  name: movie_id
+                  value: 'h9i8j7k6-l5m4-n3o2-p1q0-r8s7t6u5v4w3' # Selma
+              - column:
+                  name: actor_id
+                  value: 'a1b2c3d4-5e6f-7g8h-9i0j-k1l2m3n4o5p6' # David Oyelowo
+              - column:
+                  name: role
+                  value: 'Dr. Martin Luther King, Jr.'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'f2g3h4i5-j6k7-l8m9-n0o1-p2q3r4s5t6u7'
+              - column:
+                  name: movie_id
+                  value: 'h9i8j7k6-l5m4-n3o2-p1q0-r8s7t6u5v4w3' # Selma
+              - column:
+                  name: actor_id
+                  value: 'c1d2e3f4-5g6h-7i8j-9k0l-m1n2o3p4q5r6' # Carmen Ejogo
+              - column:
+                  name: role
+                  value: 'Coretta Scott King'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'g3h4i5j6-k7l8-m9n0-o1p2-q3r4s5t6u7v8'
+              - column:
+                  name: movie_id
+                  value: 'h9i8j7k6-l5m4-n3o2-p1q0-r8s7t6u5v4w3' # Selma
+              - column:
+                  name: actor_id
+                  value: 'd1e2f3g4-5h6i-7j8k-9l0m-n1o2p3q4r5s' # Tom Wilkinson
+              - column:
+                  name: role
+                  value: 'President Lyndon B. Johnson'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'h7i8j9k0-l1m2-n3o4-p5q6-r7s8t9u0v1w2'
+              - column:
+                  name: movie_id
+                  value: 'v1w2x3y4-z5a6-b7c8-d9e0-f1g2h3i4j5k6' # The Shape of Water
+              - column:
+                  name: actor_id
+                  value: 'd92323d2-9c80-4f92-b7a1-16744a19cfd5' # Sally Hawkins
+              - column:
+                  name: role
+                  value: 'Elisa Esposito'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'i8j9k0l1-m2n3-o4p5-q6r7-s8t9u0v1w2x3'
+              - column:
+                  name: movie_id
+                  value: 'v1w2x3y4-z5a6-b7c8-d9e0-f1g2h3i4j5k6' # The Shape of Water
+              - column:
+                  name: actor_id
+                  value: 'c1d2e3f4-5g6h-7i8j-9k0l-m1n2o3p4q5r' # Michael Shannon
+              - column:
+                  name: role
+                  value: 'Richard Strickland'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'j9k0l1m2-n3o4-p5q6-r7s8-t9u0v1w2x3y4'
+              - column:
+                  name: movie_id
+                  value: 'v1w2x3y4-z5a6-b7c8-d9e0-f1g2h3i4j5k6' # The Shape of Water
+              - column:
+                  name: actor_id
+                  value: 'd2e3f4g5-6h7i-8j9k-0l1m-n2o3p4q5r6s' # Octavia Spencer
+              - column:
+                  name: role
+                  value: 'Zelda Fuller'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'k1l2m3n4-o5p6-q7r8-s9t0-u1v2w3x4y5z'
+              - column:
+                  name: movie_id
+                  value: 'u1v2w3x4-y5z6-a7b8-c9d0-e1f2g3h4i5j6' # Birdman
+              - column:
+                  name: actor_id
+                  value: '055f2de0-4154-47ba-a405-f1fa3740b47e' # Michael Keaton
+              - column:
+                  name: role
+                  value: 'Riggan Thomson'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'l2m3n4o5-p6q7-r8s9-t0u1-v2w3x4y5z6a'
+              - column:
+                  name: movie_id
+                  value: 'u1v2w3x4-y5z6-a7b8-c9d0-e1f2g3h4i5j6' # Birdman
+              - column:
+                  name: actor_id
+                  value: 'b2c3d4e5-f6g7-8h9i-0j1k-l2m3n4o5p6q7' # Emma Stone
+              - column:
+                  name: role
+                  value: 'Sam Thomson'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'm3n4o5p6-q7r8-s9t0-u1v2-w3x4y5z6a7b'
+              - column:
+                  name: movie_id
+                  value: 'u1v2w3x4-y5z6-a7b8-c9d0-e1f2g3h4i5j6' # Birdman
+              - column:
+                  name: actor_id
+                  value: 'c3d4e5f6-g7h8-9i0j-k1l2-m3n4o5p6q7r' # Edward Norton
+              - column:
+                  name: role
+                  value: 'Mike Shiner'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'f21a4949-4f01-4068-8bc5-4b1d968c9e17' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'o9p8q7r6-s5t4-u3v2-w1x0-y9z8a7b6c5d4' # Monster
+              - column:
+                  name: actor_id
+                  value: '010c846a-6ec8-4512-b071-6a9741ef3838' # Charlize Theron
+              - column:
+                  name: role
+                  value: 'Aileen Wuornos'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'b2c3d4e5-f6g7-8h9i-0j1k-l2m3n4o5p6q7' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'o9p8q7r6-s5t4-u3v2-w1x0-y9z8a7b6c5d4' # Monster
+              - column:
+                  name: actor_id
+                  value: 'd6295b47-b643-4074-b67d-947afd8a4268' # Christina Ricci
+              - column:
+                  name: role
+                  value: 'Selby Wall'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'c1d2e3f4-g5h6-i7j8-k9l0-m1n2o3p4q5r6' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'b1c2d3e4-f5g6-h7i8-j9k0-l1m2n3o4p5q6' # Nomadland
+              - column:
+                  name: actor_id
+                  value: '9afd6240-fd74-4aa9-8a62-c867c0ff527a' # Frances McDormand
+              - column:
+                  name: role
+                  value: 'Fern'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'd2e3f4g5-h6i7-j8k9-l0m1-n2o3p4q5r6s' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'b1c2d3e4-f5g6-h7i8-j9k0-l1m2n3o4p5q6' # Nomadland
+              - column:
+                  name: actor_id
+                  value: '1c3055d4-53f3-4f32-acfe-855707e716e9' # David Strathairn
+              - column:
+                  name: role
+                  value: 'David'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'e2f3g4h5-i6j7-k8l9-m0n1-o2p3q4r5s6t7' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'd1e2f3g4-h5i6-j7k8-l9m0-n1o2p3q4r5s6' # No Country for Old Men
+              - column:
+                  name: actor_id
+                  value: '04802317-6e53-483f-8c34-40bbd9d1b666' # Javier Bardem
+              - column:
+                  name: role
+                  value: 'Anton Chigurh'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'f3g4h5i6-j7k8-l9m0-n1o2-p3q4r5s6t7u' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'd1e2f3g4-h5i6-j7k8-l9m0-n1o2p3q4r5s6' # No Country for Old Men
+              - column:
+                  name: actor_id
+                  value: '848d0d10-0955-45f8-a874-1f26ab4c2a77' # Tommy Lee Jones
+              - column:
+                  name: role
+                  value: 'Sheriff Ed Tom Bell'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'g4h5i6j7-k8l9-m0n1-o2p3-q4r5s6t7u8v' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'd1e2f3g4-h5i6-j7k8-l9m0-n1o2p3q4r5s6' # No Country for Old Men
+              - column:
+                  name: actor_id
+                  value: '47ef5133-166a-40c5-b1a0-e7bc2b8480c1' # Josh Brolin
+              - column:
+                  name: role
+                  value: 'Llewelyn Moss'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'h1i2j3k4-l5m6-n7o8-p9q0-r1s2t3u4v5w6' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'x1y2z3w4-v5u6-t7s8-r9q0-p1o2n3m4l5k6' # The Grand Budapest Hotel
+              - column:
+                  name: actor_id
+                  value: 'a1b2c3d4-e5f6-7g8h-9i0j-k1l2m3n4o5p6' # Ralph Fiennes
+              - column:
+                  name: role
+                  value: 'Monsieur Gustave H.'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'i2j3k4l5-m6n7-o8p9-q0r1-s2t3u4v5w6x' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'x1y2z3w4-v5u6-t7s8-r9q0-p1o2n3m4l5k6' # The Grand Budapest Hotel
+              - column:
+                  name: actor_id
+                  value: '831e7d5e-9195-42ad-90bf-6f40a20d7e2e' # F. Murray Abraham
+              - column:
+                  name: role
+                  value: 'Mr. Moustafa'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'j3k4l5m6-n7o8-p9q0-r1s2-t3u4v5w6x7y' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'x1y2z3w4-v5u6-t7s8-r9q0-p1o2n3m4l5k6' # The Grand Budapest Hotel
+              - column:
+                  name: actor_id
+                  value: '5661f2f5-e001-4cab-b4d9-ff0021091df1' # Mathieu Amalric
+              - column:
+                  name: role
+                  value: 'Serge X.'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'i1j2k3l4-m5n6-o7p8-q9r0-s1t2u3v4w5x6' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'z3x4c5v6-b7n8-m9l0-k1j2-h3g4f5d6s7a8' # The Revenant
+              - column:
+                  name: actor_id
+                  value: 'd3310c75-6871-43e7-9e93-20e0dbfc2cdb' # Leonardo DiCaprio
+              - column:
+                  name: role
+                  value: 'Hugh Glass'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'j2k3l4m5-n6o7-p8q9-r0s1-t2u3v4w5x6y' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'z3x4c5v6-b7n8-m9l0-k1j2-h3g4f5d6s7a8' # The Revenant
+              - column:
+                  name: actor_id
+                  value: 'h1i2j3k4-l5m6-n7o8-p9q0-r1s2t3u4v5w6' # Tom Hardy
+              - column:
+                  name: role
+                  value: 'John Fitzgerald'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'k3l4m5n6-o7p8-q9r0-s1t2-u3v4w5x6y7z' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'z3x4c5v6-b7n8-m9l0-k1j2-h3g4f5d6s7a8' # The Revenant
+              - column:
+                  name: actor_id
+                  value: 'c1d2e3f4-g5h6-i7j8-k9l0-m1n2o3p4q5r6' # Domhnall Gleeson
+              - column:
+                  name: role
+                  value: 'Andrew Henry'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'ba1573e4-9ca6-4869-9886-72a13f6eba0a' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'p9o8i7u6-y5t4-r3e2-w1q0-a9s8d7f6g5h4' # Eternals
+              - column:
+                  name: actor_id
+                  value: 'd7e8f9g0-h1i2-j3k4-l5m6-n7o8p9q0r1s2' # Gemma Chan
+              - column:
+                  name: role
+                  value: 'Sersi'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'b2c3d4e5-f6g7-h8i9-j0k1-l2m3n4o5p6q7' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'p9o8i7u6-y5t4-r3e2-w1q0-a9s8d7f6g5h4' # Eternals
+              - column:
+                  name: actor_id
+                  value: 'e8f9g0h1-i2j3-k4l5-m6n7-o8p9q0r1s2t3' # Richard Madden
+              - column:
+                  name: role
+                  value: 'Ikaris'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'c3d4e5f6-g7h8-i9j0-k1l2-m3n4o5p6q7r8' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'p9o8i7u6-y5t4-r3e2-w1q0-a9s8d7f6g5h4' # Eternals
+              - column:
+                  name: actor_id
+                  value: 'f9g0h1i2-j3k4-l5m6-n7o8-p9q0r1s2t3u4' # Kumail Nanjiani
+              - column:
+                  name: role
+                  value: 'Kingo'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'd4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'p9o8i7u6-y5t4-r3e2-w1q0-a9s8d7f6g5h4' # Eternals
+              - column:
+                  name: actor_id
+                  value: 'g0h1i2j3-k4l5-m6n7-o8p9-q0r1s2t3u4v5' # Angelina Jolie
+              - column:
+                  name: role
+                  value: 'Thena'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'a2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'j1k2l3m4-n5b6-v7c8-x9z0-q1w2e3r4t5y6' # The Big Lebowski
+              - column:
+                  name: actor_id
+                  value: 'x8y7z6w5-v4u3-t2s1-r0q9-p8o7n6m5l4k3' # Jeff Bridges
+              - column:
+                  name: role
+                  value: 'Jeff Lebowski ("The Dude")'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'b3c4d5e6-f7g8-h9i0-j1k2-l3m4n5o6p7q8' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'j1k2l3m4-n5b6-v7c8-x9z0-q1w2e3r4t5y6' # The Big Lebowski
+              - column:
+                  name: actor_id
+                  value: 'e2f3g4h5-i6j7-k8l9-m0n1-o2p3q4r5s6t7' # John Goodman
+              - column:
+                  name: role
+                  value: 'Walter Sobchak'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'c4d5e6f7-g8h9-i0j1-k2l3-m4n5o6p7q8r9' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'j1k2l3m4-n5b6-v7c8-x9z0-q1w2e3r4t5y6' # The Big Lebowski
+              - column:
+                  name: actor_id
+                  value: 'f3g4h5i6-j7k8-l9m0-n1o2-p3q4r5s6t7u8' # Julianne Moore
+              - column:
+                  name: role
+                  value: 'Maude Lebowski'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'd5e6f7g8-h9i0-j1k2-l3m4-n5o6p7q8r9s0' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'j1k2l3m4-n5b6-v7c8-x9z0-q1w2e3r4t5y6' # The Big Lebowski
+              - column:
+                  name: actor_id
+                  value: 'g4h5i6j7-k8l9-m0n1-o2p3-q4r5s6t7u8v9' # Steve Buscemi
+              - column:
+                  name: role
+                  value: 'Donny'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'e5f6g7h8-i9j0-k1l2-m3n4-o5p6q7r8s9t0' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'l4k5j6h7-g8f9-d0s1-a2p3-o4i5u6y7t8r9' # Moonrise Kingdom
+              - column:
+                  name: actor_id
+                  value: '1eae7181-61cf-4050-85b1-67a4efd3df3a' # Jared Gilman
+              - column:
+                  name: role
+                  value: 'Sam Shakusky'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'f6g7h8i9-j0k1-l2m3-n4o5-p6q7r8s9t0u1' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'l4k5j6h7-g8f9-d0s1-a2p3-o4i5u6y7t8r9' # Moonrise Kingdom
+              - column:
+                  name: actor_id
+                  value: 'b8c9d0e1-f2g3-h4i5-j6k7-l8m9n0o1p2q3' # Kara Hayward
+              - column:
+                  name: role
+                  value: 'Suzy Bishop'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'g7h8i9j0-k1l2-m3n4-o5p6-q7r8s9t0u1v2' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'l4k5j6h7-g8f9-d0s1-a2p3-o4i5u6y7t8r9' # Moonrise Kingdom
+              - column:
+                  name: actor_id
+                  value: 'v3b2n1m4-k5j6-l7h8-g9f0-d1s2a3q4w5e6' # Bill Murray
+              - column:
+                  name: role
+                  value: 'Mr. Bishop'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'h8i9j0k1-l2m3-n4o5-p6q7-r8s9t0u1v2w3' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'l4k5j6h7-g8f9-d0s1-a2p3-o4i5u6y7t8r9' # Moonrise Kingdom
+              - column:
+                  name: actor_id
+                  value: '9afd6240-fd74-4aa9-8a62-c867c0ff527a' # Frances McDormand
+              - column:
+                  name: role
+                  value: 'Mrs. Bishop'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'd7e8f9g0-h1i2-j3k4-l5m6-n7o8p9q0r1s2' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'a8b9c0d1-e2f3-g4h5-i6j7-k8l9m0n1o2p3' # Dune
+              - column:
+                  name: actor_id
+                  value: 'w4x3y2z1-a9b8-c7d6-e5f4-g3h2i1j0k9l8' # Timothée Chalamet
+              - column:
+                  name: role
+                  value: 'Paul Atreides'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'e8f9g0h1-i2j3-k4l5-m6n7-o8p9q0r1s2t3' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'a8b9c0d1-e2f3-g4h5-i6j7-k8l9m0n1o2p3' # Dune
+              - column:
+                  name: actor_id
+                  value: 'd1e2f3g4-h5i6-j7k8-l9m0-n1o2p3q4r5s6' # Rebecca Ferguson
+              - column:
+                  name: role
+                  value: 'Lady Jessica'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'f9g0h1i2-j3k4-l5m6-n7o8-p9q0r1s2t3u4' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'a8b9c0d1-e2f3-g4h5-i6j7-k8l9m0n1o2p3' # Dune
+              - column:
+                  name: actor_id
+                  value: 'b1c2d3e4-f5g6-h7i8-j9k0-l1m2n3o4p5q6' # Oscar Isaac
+              - column:
+                  name: role
+                  value: 'Duke Leto Atreides'
+
+        - insert:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  value: 'g0h1i2j3-k4l5-m6n7-o8p9-q0r1s2t3u4v5' # Unique ID for cast entry
+              - column:
+                  name: movie_id
+                  value: 'a8b9c0d1-e2f3-g4h5-i6j7-k8l9m0n1o2p3' # Dune
+              - column:
+                  name: actor_id
+                  value: 'h3i4j5k6-l7m8-n9o0-p1q2-r3s4t5u6v7w' # Jason Momoa
+              - column:
+                  name: role
+                  value: 'Duncan Idaho'

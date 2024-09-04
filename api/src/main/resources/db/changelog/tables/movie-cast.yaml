@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: JakubPavlicek
+      changes:
+        - createTable:
+            tableName: movie_cast
+            columns:
+              - column:
+                  name: movie_cast_id
+                  type: varchar(255)
+                  defaultValueComputed: uuid_generate_v4()
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: movie_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_movie
+              - column:
+                  name: actor_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_actor
+              - column:
+                  name: role
+                  type: varchar(100)
+                  constraints:
+                    nullable: false

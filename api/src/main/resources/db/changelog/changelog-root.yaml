@@ -1,3 +1,9 @@
 databaseChangeLog:
-  - include:
-      file: /db/changelog/changelog-1.0.yaml
+  - includeAll:
+      path: db/changelog/extensions
+  - includeAll:
+      path: db/changelog/tables
+  - includeAll:
+      path: db/changelog/keys
+  - includeAll:
+      path: db/changelog/data

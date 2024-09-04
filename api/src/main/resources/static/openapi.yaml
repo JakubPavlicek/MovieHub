@@ -409,6 +409,14 @@ components:
         This indicates when the movie was officially released.
       example: 2024-07-29
       nullable: false
+    MovieReleaseYear:
+      type: integer
+      format: int32
+      description: |
+        The release year of the movie.
+        This indicates when the movie was officially released.
+      example: 2024
+      nullable: false
     MovieDuration:
       type: integer
       format: int32
@@ -1109,8 +1117,8 @@ components:
           $ref: '#/components/schemas/Uuid'
         name:
           $ref: '#/components/schemas/MovieName'
-        releaseDate:
-          $ref: '#/components/schemas/MovieReleaseDate'
+        releaseYear:
+          $ref: '#/components/schemas/MovieReleaseYear'
         duration:
           $ref: '#/components/schemas/MovieDuration'
         posterUrl:
