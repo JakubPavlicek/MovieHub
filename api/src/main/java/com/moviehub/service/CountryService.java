@@ -48,11 +48,10 @@ public class CountryService {
     }
 
     @Transactional
-    public Page<Country> getCountries(Integer page, Integer limit) {
+    public List<Country> getCountries() {
         Sort sort = Sort.by(Sort.Direction.ASC, Country_.NAME);
-        Pageable pageable = PageRequest.of(page, limit, sort);
 
-        return countryRepository.findAll(pageable);
+        return countryRepository.findAll(sort);
     }
 
     @Transactional

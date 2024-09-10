@@ -1,9 +1,8 @@
 package com.moviehub.mapper.dto;
 
 import com.moviehub.dto.CountryDetailsResponse;
-import com.moviehub.dto.CountryPage;
+import com.moviehub.dto.CountryListResponse;
 import com.moviehub.entity.Country;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -34,31 +33,15 @@ public class CountryMapper {
 
     public static CountryDetailsResponse mapToCountryDetailsResponse(Country country) {
         return CountryDetailsResponse.builder()
-                                     .countryId(country.getCountryId())
+                                     .id(country.getId())
                                      .name(country.getName())
                                      .build();
     }
 
-    public static CountryPage mapToCountryPage(Page<Country> countries) {
-        return CountryPage.builder()
-                          .content(mapToCountryDetailsResponseList(countries))
-                          .pageable(PageableMapper.mapToPageableDTO(countries.getPageable()))
-                          .last(countries.isLast())
-                          .totalElements(countries.getTotalElements())
-                          .totalPages(countries.getTotalPages())
-                          .first(countries.isFirst())
-                          .size(countries.getSize())
-                          .number(countries.getNumber())
-                          .sort(SortMapper.mapToSortDTO(countries.getSort()))
-                          .numberOfElements(countries.getNumberOfElements())
-                          .empty(countries.isEmpty())
-                          .build();
-    }
-
-    private static List<CountryDetailsResponse> mapToCountryDetailsResponseList(Page<Country> countries) {
-        return countries.stream()
-                        .map(CountryMapper::mapToCountryDetailsResponse)
-                        .toList();
+    public static CountryListResponse mapToCountryListResponse(List<Country> countries) {
+        return CountryListResponse.builder()
+                                  .countries(mapToCountryDetailsResponseList(countries))
+                                  .build();
     }
 
 }

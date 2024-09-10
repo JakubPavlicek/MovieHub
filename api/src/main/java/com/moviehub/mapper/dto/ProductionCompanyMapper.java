@@ -28,7 +28,7 @@ public class ProductionCompanyMapper {
 
     public static ProductionCompanyDetailsResponse mapToProductionCompanyDetailsResponse(ProductionCompany company) {
         return ProductionCompanyDetailsResponse.builder()
-                                               .companyId(company.getCompanyId())
+                                               .id(company.getId())
                                                .name(company.getName())
                                                .build();
     }

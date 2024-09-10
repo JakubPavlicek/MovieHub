@@ -33,7 +33,7 @@ public class ActorMapper {
 
     public static ActorDetailsResponse mapToActorDetailsResponse(Actor actor) {
         return ActorDetailsResponse.builder()
-                                   .actorId(actor.getActorId())
+                                   .id(actor.getId())
                                    .name(actor.getName())
                                    .bio(actor.getBio())
                                    .gender(GenderName.fromValue(actor.getGender().getName()))

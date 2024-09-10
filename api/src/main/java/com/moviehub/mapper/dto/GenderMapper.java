@@ -31,7 +31,7 @@ public class GenderMapper {
 
     private static GenderDetailsResponse mapToGenderDetailsResponse(Gender gender) {
         return GenderDetailsResponse.builder()
-                                    .genderId(gender.getGenderId())
+                                    .id(gender.getId())
                                     .name(gender.getName())
                                     .build();
     }

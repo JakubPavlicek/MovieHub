@@ -8,7 +8,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: '3a5d8e91-d0f3-4b3e-a85d-4c29f1b8a3e9'
               - column:
                   name: movie_id
@@ -24,7 +24,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'c7cd38ad-58dd-4dc0-9637-fc10cdcdddd4'
               - column:
                   name: movie_id
@@ -40,7 +40,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'e0619c04-05bf-4df8-9ff6-2a68a8b6833a'
               - column:
                   name: movie_id
@@ -56,7 +56,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'b7c7e5d6-1f87-4d7e-8a62-b7583be0e2b8'
               - column:
                   name: movie_id
@@ -72,7 +72,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'ac17a2e0-1e8e-4e2d-b39d-54dfe9068a62'
               - column:
                   name: movie_id
@@ -88,7 +88,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: '8d1e3f4b-3c8d-4a4d-b2e5-7d5f3c8a9e1b'
               - column:
                   name: movie_id
@@ -104,7 +104,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'd5f737a4-24bc-47b1-8d47-afe8ac769ae0'
               - column:
                   name: movie_id
@@ -120,7 +120,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'f71d78eb-cd62-4784-a6c1-daaae5d45f87'
               - column:
                   name: movie_id
@@ -136,7 +136,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'e5b16c1e-1d53-40d2-9c6d-2f577733c9d5'
               - column:
                   name: movie_id
@@ -152,7 +152,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: '0ff12a46-fdd0-4888-9cfe-78e9b9f4b275'
               - column:
                   name: movie_id
@@ -168,7 +168,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'dd00710b-66a6-4e9d-9489-f586318f6fd4'
               - column:
                   name: movie_id
@@ -184,7 +184,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'f30aa92a-df1e-419f-8610-ee0a9c02ea7a'
               - column:
                   name: movie_id
@@ -200,7 +200,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'dea46e22-7ebf-4123-8def-dd6fe5e9383c'
               - column:
                   name: movie_id
@@ -216,7 +216,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: '59b92e4b-df27-4a14-ae05-16d12fcebf6a'
               - column:
                   name: movie_id
@@ -232,7 +232,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'c1b70952-5599-4500-bf88-76091672935f'
               - column:
                   name: movie_id
@@ -248,7 +248,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: '4242915a-5439-4f5d-b7ef-cb7a6fc18237'
               - column:
                   name: movie_id
@@ -264,7 +264,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: '77db3be1-2b6c-4771-9c6e-a0e7f668c63a'
               - column:
                   name: movie_id
@@ -280,7 +280,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: '03b2dd95-fd04-46f3-81dc-5d7df4599c60'
               - column:
                   name: movie_id
@@ -296,7 +296,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'e5f9b77d-3fbb-44c4-8fd7-3f6847b7e45b'
               - column:
                   name: movie_id
@@ -312,7 +312,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'e9b2b7c8-1e0e-4a43-851f-5d8c6e226c1d'
               - column:
                   name: movie_id
@@ -328,7 +328,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'a1b7c82f-3c9e-4d8e-9a2d-7e9a1a5b8f3d'
               - column:
                   name: movie_id
@@ -344,7 +344,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'b2d5c3e8-0c5d-4b63-b8f6-1d7a1c0e6d2e'
               - column:
                   name: movie_id
@@ -360,7 +360,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'b1c2d3e4-f5g6-7h8i-9j0k-l1m2n3o4p5q6'
               - column:
                   name: movie_id
@@ -376,7 +376,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'c2d3e4f5-g6h7-8i9j-0k1l-2m3n4o5p6q7r'
               - column:
                   name: movie_id
@@ -392,7 +392,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'd3e4f5g6-h7i8-9j0k-1l2m-3n4o5p6q7r8'
               - column:
                   name: movie_id
@@ -408,7 +408,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'e1f2g3h4-i5j6-k7l8-m9n0-o1p2q3r4s5t6'
               - column:
                   name: movie_id
@@ -424,7 +424,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'f2g3h4i5-j6k7-l8m9-n0o1-p2q3r4s5t6u7'
               - column:
                   name: movie_id
@@ -440,7 +440,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'g3h4i5j6-k7l8-m9n0-o1p2-q3r4s5t6u7v8'
               - column:
                   name: movie_id
@@ -456,7 +456,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'h7i8j9k0-l1m2-n3o4-p5q6-r7s8t9u0v1w2'
               - column:
                   name: movie_id
@@ -472,7 +472,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'i8j9k0l1-m2n3-o4p5-q6r7-s8t9u0v1w2x3'
               - column:
                   name: movie_id
@@ -488,7 +488,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'j9k0l1m2-n3o4-p5q6-r7s8-t9u0v1w2x3y4'
               - column:
                   name: movie_id
@@ -504,7 +504,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'k1l2m3n4-o5p6-q7r8-s9t0-u1v2w3x4y5z'
               - column:
                   name: movie_id
@@ -520,7 +520,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'l2m3n4o5-p6q7-r8s9-t0u1-v2w3x4y5z6a'
               - column:
                   name: movie_id
@@ -536,7 +536,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'm3n4o5p6-q7r8-s9t0-u1v2-w3x4y5z6a7b'
               - column:
                   name: movie_id
@@ -552,7 +552,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'f21a4949-4f01-4068-8bc5-4b1d968c9e17' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -568,7 +568,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'b2c3d4e5-f6g7-8h9i-0j1k-l2m3n4o5p6q7' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -584,7 +584,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'c1d2e3f4-g5h6-i7j8-k9l0-m1n2o3p4q5r6' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -600,7 +600,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'd2e3f4g5-h6i7-j8k9-l0m1-n2o3p4q5r6s' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -616,7 +616,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'e2f3g4h5-i6j7-k8l9-m0n1-o2p3q4r5s6t7' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -632,7 +632,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'f3g4h5i6-j7k8-l9m0-n1o2-p3q4r5s6t7u' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -648,7 +648,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'g4h5i6j7-k8l9-m0n1-o2p3-q4r5s6t7u8v' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -664,7 +664,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'h1i2j3k4-l5m6-n7o8-p9q0-r1s2t3u4v5w6' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -680,7 +680,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'i2j3k4l5-m6n7-o8p9-q0r1-s2t3u4v5w6x' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -696,7 +696,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'j3k4l5m6-n7o8-p9q0-r1s2-t3u4v5w6x7y' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -712,7 +712,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'i1j2k3l4-m5n6-o7p8-q9r0-s1t2u3v4w5x6' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -728,7 +728,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'j2k3l4m5-n6o7-p8q9-r0s1-t2u3v4w5x6y' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -744,7 +744,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'k3l4m5n6-o7p8-q9r0-s1t2-u3v4w5x6y7z' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -760,7 +760,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'ba1573e4-9ca6-4869-9886-72a13f6eba0a' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -776,7 +776,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'b2c3d4e5-f6g7-h8i9-j0k1-l2m3n4o5p6q7' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -792,7 +792,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'c3d4e5f6-g7h8-i9j0-k1l2-m3n4o5p6q7r8' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -808,7 +808,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'd4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -824,7 +824,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'a2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -840,7 +840,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'b3c4d5e6-f7g8-h9i0-j1k2-l3m4n5o6p7q8' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -856,7 +856,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'c4d5e6f7-g8h9-i0j1-k2l3-m4n5o6p7q8r9' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -872,7 +872,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'd5e6f7g8-h9i0-j1k2-l3m4-n5o6p7q8r9s0' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -888,7 +888,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'e5f6g7h8-i9j0-k1l2-m3n4-o5p6q7r8s9t0' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -904,7 +904,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'f6g7h8i9-j0k1-l2m3-n4o5-p6q7r8s9t0u1' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -920,7 +920,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'g7h8i9j0-k1l2-m3n4-o5p6-q7r8s9t0u1v2' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -936,7 +936,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'h8i9j0k1-l2m3-n4o5-p6q7-r8s9t0u1v2w3' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -952,7 +952,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'd7e8f9g0-h1i2-j3k4-l5m6-n7o8p9q0r1s2' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -968,7 +968,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'e8f9g0h1-i2j3-k4l5-m6n7-o8p9q0r1s2t3' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -984,7 +984,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'f9g0h1i2-j3k4-l5m6-n7o8-p9q0r1s2t3u4' # Unique ID for cast entry
               - column:
                   name: movie_id
@@ -1000,7 +1000,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   value: 'g0h1i2j3-k4l5-m6n7-o8p9-q0r1s2t3u4v5' # Unique ID for cast entry
               - column:
                   name: movie_id

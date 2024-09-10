@@ -3,17 +3,14 @@ logging:
     org:
       springframework:
         security: TRACE
+okta:
+  oauth2:
+    audience: http://movie-hub-api
+    issuer: https://dev-bzrzau6cj3i0m33i.us.auth0.com/
 spring:
   docker:
     compose:
       file: api/docker-compose.yaml
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://keycloak:8080/realms/movie-manager
-#          issuer-uri: http://localhost:8090/realms/movie-manager
-          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
   datasource:
     driver-class-name: org.postgresql.Driver
   liquibase:

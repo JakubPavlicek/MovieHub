@@ -26,7 +26,7 @@ public class Director {
     @Id
     @UuidGenerator(style = UuidGenerator.Style.RANDOM)
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String directorId;
+    private String id;
 
     @Column(
         length = 50,
@@ -40,7 +40,7 @@ public class Director {
     @ManyToOne
     @JoinColumn(
         name = "gender_id",
-        referencedColumnName = "genderId",
+        referencedColumnName = "id",
         foreignKey = @ForeignKey(name = "fk_gender")
     )
     private Gender gender;

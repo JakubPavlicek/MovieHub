@@ -38,7 +38,7 @@ public class Movie {
     @Id
     @UuidGenerator(style = UuidGenerator.Style.RANDOM)
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String movieId;
+    private String id;
 
     @Column(
         length = 100,
@@ -88,7 +88,7 @@ public class Movie {
     @ManyToOne
     @JoinColumn(
         name = "director_id",
-        referencedColumnName = "directorId",
+        referencedColumnName = "id",
         foreignKey = @ForeignKey(name = "fk_director")
     )
     private Director director;
@@ -107,12 +107,12 @@ public class Movie {
         name = "movie_production",
         joinColumns = @JoinColumn(
             name = "movie_id",
-            referencedColumnName = "movieId",
+            referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "fk_movie")
         ),
         inverseJoinColumns = @JoinColumn(
             name = "company_id",
-            referencedColumnName = "companyId",
+            referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "fk_company")
         )
     )
@@ -125,12 +125,12 @@ public class Movie {
         name = "movie_genre",
         joinColumns = @JoinColumn(
             name = "movie_id",
-            referencedColumnName = "movieId",
+            referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "fk_movie")
         ),
         inverseJoinColumns = @JoinColumn(
             name = "genre_id",
-            referencedColumnName = "genreId",
+            referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "fk_genre")
         )
     )
@@ -143,12 +143,12 @@ public class Movie {
         name = "movie_country",
         joinColumns = @JoinColumn(
             name = "movie_id",
-            referencedColumnName = "movieId",
+            referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "fk_movie")
         ),
         inverseJoinColumns = @JoinColumn(
             name = "country_id",
-            referencedColumnName = "countryId",
+            referencedColumnName = "id",
             foreignKey = @ForeignKey(name = "fk_country")
         )
     )

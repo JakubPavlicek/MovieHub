@@ -28,7 +28,7 @@ public class DirectorMapper {
 
     public static DirectorDTO mapToDirectorDTO(Director director) {
         return DirectorDTO.builder()
-                          .directorId(director.getDirectorId())
+                          .id(director.getId())
                           .name(director.getName())
                           .build();
     }
@@ -51,7 +51,7 @@ public class DirectorMapper {
 
     public static DirectorDetailsResponse mapToDirectorDetailsResponse(Director director) {
         return DirectorDetailsResponse.builder()
-                                      .directorId(director.getDirectorId())
+                                      .id(director.getId())
                                       .name(director.getName())
                                       .bio(director.getBio())
                                       .gender(GenderName.fromValue(director.getGender().getName()))

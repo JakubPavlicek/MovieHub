@@ -23,7 +23,7 @@ public class Genre {
     @Id
     @UuidGenerator(style = UuidGenerator.Style.RANDOM)
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String genreId;
+    private String id;
 
     @Column(
         length = 15,

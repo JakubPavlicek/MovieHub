@@ -8,7 +8,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: '1f6e6d3b-3f88-4cbb-9baf-16b72c7d06c4'
               - column:
                   name: name
@@ -18,7 +18,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'f3e4f5a7-e6b4-4a3e-b5b9-c5ebf7f1d0f9'
               - column:
                   name: name
@@ -28,7 +28,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: '8f7b5a0b-7d5b-4f9e-9d8b-89d4a9f47322'
               - column:
                   name: name
@@ -38,7 +38,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'a2c75d8e-6d1a-4cfc-805d-d88d51aebf6f'
               - column:
                   name: name
@@ -48,7 +48,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'b8f5a4d7-e3c1-45f3-9b83-5f3672d27f68'
               - column:
                   name: name
@@ -58,7 +58,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'd3f30c47-04d3-4b8f-b9d8-2b88cb5e11d4'
               - column:
                   name: name
@@ -68,7 +68,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'e5a84c55-daa0-4a61-a8ff-7c4b6de8b8a0'
               - column:
                   name: name
@@ -78,7 +78,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'f9b22d0b-29cb-4d2a-8237-7d5d7a3ed8d3'
               - column:
                   name: name
@@ -88,7 +88,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'ab9f0d09-6b6f-40cf-8a78-74f53fc2f0d0'
               - column:
                   name: name
@@ -98,7 +98,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'bd8d64d7-6b16-4f5c-b4a8-5d885d3c56de'
               - column:
                   name: name
@@ -108,7 +108,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'b5fce2b2-8970-4c70-a3b7-60f68bb0523f'
               - column:
                   name: name
@@ -118,7 +118,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'cd7f1b35-50ec-4fc2-b1b7-5b4d9b344c9f'
               - column:
                   name: name
@@ -128,7 +128,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'd5f36c67-45b7-4c2b-bc63-df9de6b264ef'
               - column:
                   name: name
@@ -138,7 +138,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'e3d9a2a5-4b76-48c0-8c4c-f28f6c8a30e0'
               - column:
                   name: name
@@ -148,7 +148,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'f9d90c62-09f5-4d07-978a-7c8a5c3b8cb3'
               - column:
                   name: name
@@ -158,7 +158,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'c8b6e2d7-5b7d-46b0-9c27-36cf9b1a4a9e'
               - column:
                   name: name
@@ -168,7 +168,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'ab63ec39-3c69-4e0e-9d8b-7a09c13d4d1e'
               - column:
                   name: name
@@ -178,7 +178,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'd1b593d0-1c0b-4b84-b2c5-0626e5b57646'
               - column:
                   name: name
@@ -188,7 +188,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'b50d49f7-0f7e-4e3a-bd64-943f9b785d09'
               - column:
                   name: name
@@ -198,7 +198,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'a4c5d7d9-4e69-4a4e-9e09-8e2b50b07d56'
               - column:
                   name: name
@@ -208,7 +208,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'c1b98d5e-5f1a-4d58-bd5d-9b3d28712d44'
               - column:
                   name: name
@@ -218,7 +218,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'd6c5a9b1-3d0e-4d48-933b-84d1a54a5a8a'
               - column:
                   name: name
@@ -228,7 +228,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'a34e3d26-1ef6-4a52-8b91-0c7e6d9a673b'
               - column:
                   name: name
@@ -238,7 +238,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'b2f7e8d9-623c-4e83-8d9e-6f5c3e10f2d6'
               - column:
                   name: name
@@ -248,7 +248,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   value: 'd5f9d1e0-6b7e-41a4-9c3a-f8e6c5f8b6de'
               - column:
                   name: name

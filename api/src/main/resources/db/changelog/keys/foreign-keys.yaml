@@ -9,60 +9,60 @@ databaseChangeLog:
             baseColumnNames: director_id
             constraintName: fk_director
             referencedTableName: director
-            referencedColumnNames: director_id
+            referencedColumnNames: id
 
         - addForeignKeyConstraint:
             baseTableName: movie_country
             baseColumnNames: movie_id
             constraintName: fk_movie
             referencedTableName: movie
-            referencedColumnNames: movie_id
+            referencedColumnNames: id
 
         - addForeignKeyConstraint:
             baseTableName: movie_country
             baseColumnNames: country_id
             constraintName: fk_country
             referencedTableName: country
-            referencedColumnNames: country_id
+            referencedColumnNames: id
 
         - addForeignKeyConstraint:
             baseTableName: movie_genre
             baseColumnNames: movie_id
             constraintName: fk_movie
             referencedTableName: movie
-            referencedColumnNames: movie_id
+            referencedColumnNames: id
 
         - addForeignKeyConstraint:
             baseTableName: movie_genre
             baseColumnNames: genre_id
             constraintName: fk_genre
             referencedTableName: genre
-            referencedColumnNames: genre_id
+            referencedColumnNames: id
 
         - addForeignKeyConstraint:
             baseTableName: movie_production
             baseColumnNames: movie_id
             constraintName: fk_movie
             referencedTableName: movie
-            referencedColumnNames: movie_id
+            referencedColumnNames: id
 
         - addForeignKeyConstraint:
             baseTableName: movie_production
             baseColumnNames: company_id
             constraintName: fk_company
             referencedTableName: production_company
-            referencedColumnNames: company_id
+            referencedColumnNames: id
 
         - addForeignKeyConstraint:
             baseTableName: movie_cast
             baseColumnNames: movie_id
             constraintName: fk_movie
             referencedTableName: movie
-            referencedColumnNames: movie_id
+            referencedColumnNames: id
 
         - addForeignKeyConstraint:
             baseTableName: movie_cast
             baseColumnNames: actor_id
             constraintName: fk_actor
             referencedTableName: actor
-            referencedColumnNames: actor_id
+            referencedColumnNames: id

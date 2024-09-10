@@ -3,7 +3,7 @@ package com.moviehub.controller;
 import com.moviehub.GenresApi;
 import com.moviehub.dto.AddGenreRequest;
 import com.moviehub.dto.GenreDetailsResponse;
-import com.moviehub.dto.GenrePage;
+import com.moviehub.dto.GenreListResponse;
 import com.moviehub.dto.MoviePage;
 import com.moviehub.entity.Genre;
 import com.moviehub.entity.Movie;
@@ -16,6 +16,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,11 +35,11 @@ public class GenreController implements GenresApi {
     }
 
     @Override
-    public ResponseEntity<GenrePage> getGenres(Integer page, Integer limit) {
-        Page<Genre> genres = genreService.getGenres(page, limit);
-        GenrePage genrePage = GenreMapper.mapToGenrePage(genres);
+    public ResponseEntity<GenreListResponse> getGenres() {
+        List<Genre> genres = genreService.getGenres();
+        GenreListResponse genreListResponse = GenreMapper.mapToGenreListResponse(genres);
 
-        return ResponseEntity.ok(genrePage);
+        return ResponseEntity.ok(genreListResponse);
     }
 
     @Override

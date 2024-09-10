@@ -7,7 +7,7 @@ databaseChangeLog:
             tableName: movie_cast
             columns:
               - column:
-                  name: movie_cast_id
+                  name: id
                   type: varchar(255)
                   defaultValueComputed: uuid_generate_v4()
                   constraints:

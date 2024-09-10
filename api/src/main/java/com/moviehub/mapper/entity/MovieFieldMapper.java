@@ -29,7 +29,7 @@ public class MovieFieldMapper {
         Field movieField = Field.valueOf(field.replaceAll("([A-Z])", "_$1").toUpperCase());
 
         return switch (movieField) {
-            case MOVIE_ID -> Movie_.MOVIE_ID;
+            case MOVIE_ID -> Movie_.ID;
             case NAME -> Movie_.NAME;
             case RELEASE_DATE -> Movie_.RELEASE_DATE;
             case DURATION -> Movie_.DURATION;

@@ -8,7 +8,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: '1cce6f34-13d2-4a3d-8c7e-8a7659db8a60'
               - column:
                   name: name
@@ -39,7 +39,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: 'a9c8e9a1-bb24-43b4-9e6b-b38ec61b241d'
               - column:
                   name: name
@@ -70,7 +70,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: 'acbef342-c46b-4f1b-8b1d-f4a7c82d6f8c'
               - column:
                   name: name
@@ -101,7 +101,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: 'f18d339f-fa0a-4e0d-8e5c-652e2b45b98c'
               - column:
                   name: name
@@ -132,7 +132,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: '8c328172-a60f-4ea6-93b1-ca2a5cca2bf0'
               - column:
                   name: name
@@ -163,7 +163,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: '62c92d5e-bd34-47e2-ba67-7443014af702'
               - column:
                   name: name
@@ -194,7 +194,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: '76a9e23a-c8e6-4d1f-9c2d-8b3f47a91a1d'
               - column:
                   name: name
@@ -225,7 +225,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: '1b8f6a44-ae99-4cfa-b15e-cde77b45b8de'
               - column:
                   name: name
@@ -257,7 +257,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: 'a1b2c3d4-e5f6-4g7h-8i9j-0k1l2m3n4o5p'
               - column:
                   name: name
@@ -288,7 +288,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: 'h9i8j7k6-l5m4-n3o2-p1q0-r8s7t6u5v4w3'
               - column:
                   name: name
@@ -320,7 +320,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: 'v1w2x3y4-z5a6-b7c8-d9e0-f1g2h3i4j5k6'
               - column:
                   name: name
@@ -351,7 +351,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: 'u1v2w3x4-y5z6-a7b8-c9d0-e1f2g3h4i5j6'
               - column:
                   name: name
@@ -382,7 +382,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: 'o9p8q7r6-s5t4-u3v2-w1x0-y9z8a7b6c5d4'
               - column:
                   name: name
@@ -413,7 +413,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: 'b1c2d3e4-f5g6-h7i8-j9k0-l1m2n3o4p5q6'
               - column:
                   name: name
@@ -444,7 +444,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: 'd1e2f3g4-h5i6-j7k8-l9m0-n1o2p3q4r5s6'
               - column:
                   name: name
@@ -475,7 +475,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: 'x1y2z3w4-v5u6-t7s8-r9q0-p1o2n3m4l5k6'
               - column:
                   name: name
@@ -507,7 +507,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: 'z3x4c5v6-b7n8-m9l0-k1j2-h3g4f5d6s7a8'
               - column:
                   name: name
@@ -538,7 +538,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: 'p9o8i7u6-y5t4-r3e2-w1q0-a9s8d7f6g5h4'
               - column:
                   name: name
@@ -569,7 +569,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: 'j1k2l3m4-n5b6-v7c8-x9z0-q1w2e3r4t5y6'
               - column:
                   name: name
@@ -600,7 +600,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: 'l4k5j6h7-g8f9-d0s1-a2p3-o4i5u6y7t8r9'
               - column:
                   name: name
@@ -631,7 +631,7 @@ databaseChangeLog:
             tableName: movie
             columns:
               - column:
-                  name: movie_id
+                  name: id
                   value: 'a8b9c0d1-e2f3-g4h5-i6j7-k8l9m0n1o2p3'
               - column:
                   name: name

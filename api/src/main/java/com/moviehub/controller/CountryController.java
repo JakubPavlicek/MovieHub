@@ -3,7 +3,7 @@ package com.moviehub.controller;
 import com.moviehub.CountriesApi;
 import com.moviehub.dto.AddCountryRequest;
 import com.moviehub.dto.CountryDetailsResponse;
-import com.moviehub.dto.CountryPage;
+import com.moviehub.dto.CountryListResponse;
 import com.moviehub.dto.MoviePage;
 import com.moviehub.entity.Country;
 import com.moviehub.entity.Movie;
@@ -16,6 +16,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,11 +35,11 @@ public class CountryController implements CountriesApi {
     }
 
     @Override
-    public ResponseEntity<CountryPage> getCountries(Integer page, Integer limit) {
-        Page<Country> countries = countryService.getCountries(page, limit);
-        CountryPage countryPage = CountryMapper.mapToCountryPage(countries);
+    public ResponseEntity<CountryListResponse> getCountries() {
+        List<Country> countries = countryService.getCountries();
+        CountryListResponse countryListResponse = CountryMapper.mapToCountryListResponse(countries);
 
-        return ResponseEntity.ok(countryPage);
+        return ResponseEntity.ok(countryListResponse);
     }
 
     @Override

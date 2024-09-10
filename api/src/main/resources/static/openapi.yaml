@@ -809,112 +809,6 @@ components:
             If `true`, the page has no items; otherwise, it has content.
           example: false
 
-    GenrePage:
-      type: object
-      description: "Represents a page of genres, including pagination and sorting information."
-      properties:
-        content:
-          type: array
-          description: "List of genres."
-          items:
-            $ref: '#/components/schemas/GenreDetailsResponse'
-        pageable:
-          $ref: '#/components/schemas/PageableDTO'
-        last:
-          type: boolean
-          description: |
-            A boolean value indicating whether this is the last page of data.
-            If `true`, it is the last page; otherwise, it's not the last page.
-          example: false
-        totalElements:
-          type: integer
-          format: int64
-          description: "The total number of items."
-          example: 4
-        totalPages:
-          type: integer
-          description: "The total number of pages needed to display all the data based on the page size."
-          example: 2
-        first:
-          type: boolean
-          description: |
-            A boolean value indicating whether this is the first page of data.
-            If `true`, it is the first page; otherwise, it's not the first page.
-          example: true
-        size:
-          type: integer
-          description: "The maximum number of items contained on each page."
-          example: 2
-        number:
-          type: integer
-          description: "The page number for the current page."
-          example: 0
-        sort:
-          $ref: '#/components/schemas/SortDTO'
-        numberOfElements:
-          type: integer
-          description: "The number of items on the current page."
-          example: 2
-        empty:
-          type: boolean
-          description: |
-            A boolean value indicating whether the current page is empty.
-            If `true`, the page has no items; otherwise, it has content.
-          example: false
-
-    CountryPage:
-      type: object
-      description: "Represents a page of countries, including pagination and sorting information."
-      properties:
-        content:
-          type: array
-          description: "List of countries."
-          items:
-            $ref: '#/components/schemas/CountryDetailsResponse'
-        pageable:
-          $ref: '#/components/schemas/PageableDTO'
-        last:
-          type: boolean
-          description: |
-            A boolean value indicating whether this is the last page of data.
-            If `true`, it is the last page; otherwise, it's not the last page.
-          example: false
-        totalElements:
-          type: integer
-          format: int64
-          description: "The total number of items."
-          example: 4
-        totalPages:
-          type: integer
-          description: "The total number of pages needed to display all the data based on the page size."
-          example: 2
-        first:
-          type: boolean
-          description: |
-            A boolean value indicating whether this is the first page of data.
-            If `true`, it is the first page; otherwise, it's not the first page.
-          example: true
-        size:
-          type: integer
-          description: "The maximum number of items contained on each page."
-          example: 2
-        number:
-          type: integer
-          description: "The page number for the current page."
-          example: 0
-        sort:
-          $ref: '#/components/schemas/SortDTO'
-        numberOfElements:
-          type: integer
-          description: "The number of items on the current page."
-          example: 2
-        empty:
-          type: boolean
-          description: |
-            A boolean value indicating whether the current page is empty.
-            If `true`, the page has no items; otherwise, it has content.
-          example: false
-
     # TODO: requests
 
     MovieRequest:
@@ -1061,7 +955,7 @@ components:
       type: object
       description: Provides detailed information about a movie's cast member.
       properties:
-        actorId:
+        id:
           $ref: '#/components/schemas/Uuid'
         name:
           $ref: '#/components/schemas/PersonName'
@@ -1072,7 +966,7 @@ components:
       type: object
       description: Contains summary information about a movie.
       properties:
-        movieId:
+        id:
           $ref: '#/components/schemas/Uuid'
         name:
           $ref: '#/components/schemas/MovieName'
@@ -1113,7 +1007,7 @@ components:
       type: object
       description: Offers preview representation of the movie.
       properties:
-        movieId:
+        id:
           $ref: '#/components/schemas/Uuid'
         name:
           $ref: '#/components/schemas/MovieName'
@@ -1132,7 +1026,7 @@ components:
       type: object
       description: Offers comprehensive details about a movie.
       properties:
-        movieId:
+        id:
           $ref: '#/components/schemas/Uuid'
         name:
           $ref: '#/components/schemas/MovieName'
@@ -1173,7 +1067,7 @@ components:
       type: object
       description: Provides basic information about a director.
       properties:
-        directorId:
+        id:
           $ref: '#/components/schemas/Uuid'
         name:
           type: string
@@ -1183,7 +1077,7 @@ components:
       type: object
       description: Provides details about a production company.
       properties:
-        companyId:
+        id:
           $ref: '#/components/schemas/Uuid'
         name:
           type: string
@@ -1193,7 +1087,7 @@ components:
       type: object
       description: Provides details about a genre.
       properties:
-        genreId:
+        id:
           $ref: '#/components/schemas/Uuid'
         name:
           type: string
@@ -1203,7 +1097,7 @@ components:
       type: object
       description: Provides details about a country.
       properties:
-        countryId:
+        id:
           $ref: '#/components/schemas/Uuid'
         name:
           type: string
@@ -1213,7 +1107,7 @@ components:
       type: object
       description: Provides details about a gender.
       properties:
-        genderId:
+        id:
           $ref: '#/components/schemas/Uuid'
         name:
           type: string
@@ -1223,7 +1117,7 @@ components:
       type: object
       description: Contains detailed information about a director.
       properties:
-        directorId:
+        id:
           $ref: '#/components/schemas/Uuid'
         name:
           $ref: '#/components/schemas/PersonName'
@@ -1236,7 +1130,7 @@ components:
       type: object
       description: Contains detailed information about an actor.
       properties:
-        actorId:
+        id:
           $ref: '#/components/schemas/Uuid'
         name:
           $ref: '#/components/schemas/PersonName'
@@ -1244,6 +1138,34 @@ components:
           $ref: '#/components/schemas/PersonBio'
         gender:
           $ref: '#/components/schemas/GenderName'
+
+    GenreListResponse:
+      type: object
+      description: Provides a list of all genres available in the system.
+      properties:
+        genres:
+          type: array
+          items:
+            $ref: '#/components/schemas/GenreDetailsResponse'
+          example:
+            - id: 21c9c051-0bf4-4e2b-8c96-7c19895ce72f
+              name: Action
+            - id: 3d9e9db7-6544-4613-998e-88cdd6334ce1
+              name: Horror
+
+    CountryListResponse:
+      type: object
+      description: Provides a list of all countries available in the system.
+      properties:
+        countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/CountryDetailsResponse'
+          example:
+            - id: 21c9c051-0bf4-4e2b-8c96-7c19895ce72f
+              name: France
+            - id: 3d9e9db7-6544-4613-998e-88cdd6334ce1
+              name: Italy
 
     GenderListResponse:
       type: object
@@ -1255,13 +1177,13 @@ components:
           items:
             $ref: '#/components/schemas/GenderDetailsResponse'
           example:
-            - genderId: 21c9c051-0bf4-4e2b-8c96-7c19895ce72f
+            - id: 21c9c051-0bf4-4e2b-8c96-7c19895ce72f
               name: Unspecified
-            - genderId: 3d9e9db7-6544-4613-998e-88cdd6334ce1
+            - id: 3d9e9db7-6544-4613-998e-88cdd6334ce1
               name: Male
-            - genderId: 21c9c051-0bf4-4e2b-8c96-7c19895ce72f
+            - id: 21c9c051-0bf4-4e2b-8c96-7c19895ce72f
               name: Female
-            - genderId: 21c9c051-0bf4-4e2b-8c96-7c19895ce72f
+            - id: 21c9c051-0bf4-4e2b-8c96-7c19895ce72f
               name: Non-binary
 
     ProblemDetail:
@@ -1784,16 +1706,13 @@ paths:
       operationId: getGenres
       tags:
         - genres
-      parameters:
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/limit'
       responses:
         '200':
           description: Successfully retrieved the list of genres available in the system.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GenrePage'
+                $ref: '#/components/schemas/GenreListResponse'
 
   /genres/{genreId}:
     get:
@@ -1900,16 +1819,13 @@ paths:
       operationId: getCountries
       tags:
         - countries
-      parameters:
-        - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/limit'
       responses:
         '200':
           description: Successfully retrieved the list of countries available in the system.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CountryPage'
+                $ref: '#/components/schemas/CountryListResponse'
 
   /countries/{countryId}:
     get:

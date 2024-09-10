@@ -52,7 +52,7 @@ public class MovieMapper {
 
     public static MovieResponse mapToMovieResponse(Movie movie) {
         return MovieResponse.builder()
-                            .movieId(movie.getMovieId())
+                            .id(movie.getId())
                             .name(movie.getName())
                             .releaseDate(movie.getReleaseDate())
                             .duration(movie.getDuration())
@@ -71,7 +71,7 @@ public class MovieMapper {
 
     public static MoviePreviewResponse mapToMoviePreviewResponse(Movie movie) {
         return MoviePreviewResponse.builder()
-                            .movieId(movie.getMovieId())
+                            .id(movie.getId())
                             .name(movie.getName())
                             .releaseYear(movie.getReleaseDate().getYear())
                             .duration(movie.getDuration())
@@ -82,7 +82,7 @@ public class MovieMapper {
 
     public static MovieDetailsResponse mapToMovieDetailsResponse(Movie movie) {
         return MovieDetailsResponse.builder()
-                                   .movieId(movie.getMovieId())
+                                   .id(movie.getId())
                                    .name(movie.getName())
                                    .releaseDate(movie.getReleaseDate())
                                    .duration(movie.getDuration())

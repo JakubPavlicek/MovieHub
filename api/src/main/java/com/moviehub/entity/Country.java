@@ -23,7 +23,7 @@ public class Country {
     @Id
     @UuidGenerator(style = UuidGenerator.Style.RANDOM)
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String countryId;
+    private String id;
 
     @Column(
         length = 15,

@@ -7,7 +7,7 @@ databaseChangeLog:
             tableName: director
             columns:
               - column:
-                  name: director_id
+                  name: id
                   type: varchar(255)
                   defaultValueComputed: uuid_generate_v4()
                   constraints:

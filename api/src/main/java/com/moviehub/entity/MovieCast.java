@@ -26,12 +26,12 @@ public class MovieCast {
     @Id
     @UuidGenerator(style = UuidGenerator.Style.RANDOM)
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String movieCastId;
+    private String id;
 
     @ManyToOne
     @JoinColumn(
         name = "movie_id",
-        referencedColumnName = "movieId",
+        referencedColumnName = "id",
         foreignKey = @ForeignKey(name = "fk_movie")
     )
     private Movie movie;
@@ -39,7 +39,7 @@ public class MovieCast {
     @ManyToOne
     @JoinColumn(
         name = "actor_id",
-        referencedColumnName = "actorId",
+        referencedColumnName = "id",
         foreignKey = @ForeignKey(name = "fk_actor")
     )
     private Actor actor;

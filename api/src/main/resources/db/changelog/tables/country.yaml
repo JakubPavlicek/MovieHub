@@ -7,7 +7,7 @@ databaseChangeLog:
             tableName: country
             columns:
               - column:
-                  name: country_id
+                  name: id
                   type: varchar(255)
                   defaultValueComputed: uuid_generate_v4()
                   constraints:

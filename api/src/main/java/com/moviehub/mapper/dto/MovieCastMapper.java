@@ -25,7 +25,7 @@ public class MovieCastMapper {
     public static List<MovieCastDetailsResponse> mapToMovieCastDetailsResponse(List<MovieCast> movieCast) {
         return movieCast.stream()
                         .map(cast -> MovieCastDetailsResponse.builder()
-                                                             .actorId(cast.getActor().getActorId())
+                                                             .id(cast.getActor().getId())
                                                              .name(cast.getActor().getName())
                                                              .role(cast.getRole())
                                                              .build())

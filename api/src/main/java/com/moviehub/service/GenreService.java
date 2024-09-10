@@ -38,11 +38,10 @@ public class GenreService {
     }
 
     @Transactional
-    public Page<Genre> getGenres(Integer page, Integer limit) {
+    public List<Genre> getGenres() {
         Sort sort = Sort.by(Sort.Direction.ASC, Genre_.NAME);
-        Pageable pageable = PageRequest.of(page, limit, sort);
 
-        return genreRepository.findAll(pageable);
+        return genreRepository.findAll(sort);
     }
 
     @Transactional

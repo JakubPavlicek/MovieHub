@@ -24,7 +24,7 @@ public class Gender {
     @Id
     @UuidGenerator(style = UuidGenerator.Style.RANDOM)
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String genderId;
+    private String id;
 
     @Column(
         length = 15,
