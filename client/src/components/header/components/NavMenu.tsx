@@ -1,7 +1,7 @@
-import { NavLink } from "react-router-dom";
 import React from "react";
-import useGenres from "../../../hooks/useGenres.tsx";
+import { NavLink } from "react-router-dom";
 import DropdownMenu from "./DropdownMenu.tsx";
+import useGenres from "../../../hooks/useGenres.tsx";
 import useCountries from "../../../hooks/useCountries.tsx";
 
 const NavMenu: React.FC = () => {
@@ -9,7 +9,7 @@ const NavMenu: React.FC = () => {
   const { countries } = useCountries();
 
   return (
-    <nav className="hidden items-center justify-center gap-5 lg:flex">
+    <nav className="flex items-center justify-center gap-5">
       <NavLink to="/" className="p-3 hover:text-teal-300">
         Home
       </NavLink>

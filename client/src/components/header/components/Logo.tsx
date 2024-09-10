@@ -5,7 +5,7 @@ import React from "react";
 const Logo: React.FC = () => {
   return (
     <NavLink to="/">
-      <img src={logo} alt="logo" className="w-[180px]" />
+      <img src={logo} alt="logo" className="w-44" />
     </NavLink>
   );
 };

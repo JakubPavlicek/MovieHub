@@ -1,21 +1,19 @@
 import React from "react";
 import { Menu } from "lucide-react";
-import MobileMenu from "./MobileMenu.tsx";
-import useMobileMenu from "../../../hooks/useMobileMenu.tsx";
 
-const MobileMenuButton: React.FC = () => {
-  const { showMobileMenu, toggleMobileMenu } = useMobileMenu();
+interface MobileMenuButtonProps {
+  showMobileMenu: boolean;
+  toggleMobileMenu: () => void;
+}
 
+const MobileMenuButton: React.FC<MobileMenuButtonProps> = ({ showMobileMenu, toggleMobileMenu }) => {
   return (
-    <>
-      <button
-        className={`relative hover:text-teal-300 lg:hidden ${showMobileMenu ? "text-teal-300" : "text-white"}`}
-        onClick={toggleMobileMenu}
-      >
-        <Menu size={32} />
-      </button>
-      {showMobileMenu && <MobileMenu toggleMobileMenu={toggleMobileMenu} />}
-    </>
+    <button
+      className={`hover:text-teal-300 ${showMobileMenu ? "text-teal-300" : "text-white"}`}
+      onClick={toggleMobileMenu}
+    >
+      <Menu size={32} />
+    </button>
   );
 };
 
