@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 const useDropdownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  function toggleDropdown() {
+  const toggleDropdown = useCallback(() => {
     setIsOpen((prev) => !prev);
-  }
+  }, []);
 
   return { isOpen, toggleDropdown };
 };

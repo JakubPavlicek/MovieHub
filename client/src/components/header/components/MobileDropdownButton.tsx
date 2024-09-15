@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
 interface MobileDropdownButtonProps {
@@ -7,7 +7,7 @@ interface MobileDropdownButtonProps {
   toggleDropdown: () => void;
 }
 
-const MobileDropdownButton: React.FC<MobileDropdownButtonProps> = ({ title, isOpen, toggleDropdown }) => {
+const MobileDropdownButton: FC<MobileDropdownButtonProps> = ({ title, isOpen, toggleDropdown }) => {
   return (
     <button className="inline-flex w-full justify-between py-3 hover:text-teal-300" onClick={toggleDropdown}>
       {title}

@@ -4,7 +4,7 @@ const useMobileSearch = () => {
   const [showMobileSearch, setShowMobileSearch] = useState<boolean>(false);
 
   const toggleMobileSearch = useCallback(() => {
-    setShowMobileSearch((prevState) => !prevState);
+    setShowMobileSearch((prev) => !prev);
   }, []);
 
   return { showMobileSearch, toggleMobileSearch };

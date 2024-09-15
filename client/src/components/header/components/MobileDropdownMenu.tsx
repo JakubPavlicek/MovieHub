@@ -1,15 +1,15 @@
-import React from "react";
+import type { FC } from "react";
 import { DropdownItem } from "./DropdownMenu.tsx";
 import MobileDropdownButton from "./MobileDropdownButton.tsx";
 import MobileDropdownItems from "./MobileDropdownItems.tsx";
-import useDropdownMenu from "../../../hooks/useDropdownMenu.tsx";
+import useDropdownMenu from "../../../hooks/useDropdownMenu.ts";
 
 interface MobileMenuDropdownProps {
   title: string;
   items: DropdownItem[];
 }
 
-const MobileDropdownMenu: React.FC<MobileMenuDropdownProps> = ({ title, items }) => {
+const MobileDropdownMenu: FC<MobileMenuDropdownProps> = ({ title, items }) => {
   const { isOpen, toggleDropdown } = useDropdownMenu();
 
   return (

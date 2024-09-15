@@ -1,12 +1,12 @@
+import "./index.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Error from "./pages/Error.tsx";
-import "./index.css";
-import Root from "./components/Root.tsx";
-import Home from "./pages/Home.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Auth0Provider } from "@auth0/auth0-react";
+import Root from "./components/Root.tsx";
+import Error from "./pages/Error.tsx";
+import Home from "./pages/Home.tsx";
 
 // https://auth0.com/blog/complete-guide-to-react-user-authentication/
 

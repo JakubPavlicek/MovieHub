@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 const useMobileMenu = () => {
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
 
-  function toggleMobileMenu() {
+  const toggleMobileMenu = useCallback(() => {
     setShowMobileMenu((prev) => !prev);
-  }
+  }, []);
 
   return { showMobileMenu, toggleMobileMenu };
 };

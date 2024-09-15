@@ -1,15 +1,15 @@
-import React from "react";
+import type { FC } from "react";
 import { ChevronLeft } from "lucide-react";
 import { NavLink } from "react-router-dom";
-import useGenres from "../../../hooks/useGenres.tsx";
-import useCountries from "../../../hooks/useCountries.tsx";
+import useGenres from "../../../hooks/useGenres.ts";
+import useCountries from "../../../hooks/useCountries.ts";
 import MobileDropdownMenu from "./MobileDropdownMenu.tsx";
 
 interface MobileMenuProps {
   toggleMobileMenu: () => void;
 }
 
-const MobileMenu: React.FC<MobileMenuProps> = ({ toggleMobileMenu }) => {
+const MobileMenu: FC<MobileMenuProps> = ({ toggleMobileMenu }) => {
   const { genres } = useGenres();
   const { countries } = useCountries();
 

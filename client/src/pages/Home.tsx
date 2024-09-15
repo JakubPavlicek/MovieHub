@@ -1,8 +1,8 @@
-import React from "react";
+import type { FC } from "react";
 import MoviePreview from "../components/home/MoviePreview.tsx";
-import useMovies from "../hooks/useMovies.tsx";
+import useMovies from "../hooks/useMovies.ts";
 
-const Home: React.FC = () => {
+const Home: FC = () => {
   const { moviePage, isLoading, isError, error } = useMovies();
 
   if (isLoading) {
@@ -16,9 +16,9 @@ const Home: React.FC = () => {
   console.log(moviePage);
 
   return (
-    <main className="mx-5 mt-10 text-white lg:mx-10">
-      <div className="flex flex-col justify-between">
-        <div className="grid grid-cols-2 gap-x-3.5 gap-y-7 sm:grid-cols-[repeat(auto-fill,minmax(190px,1fr))]">
+    <main className="mx-auto 2xl:container">
+      <div className="mx-5 mt-10 flex flex-col justify-between text-white">
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-x-3.5 gap-y-10">
           {moviePage.content.map((movie) => (
             <MoviePreview key={movie.id} moviePreview={movie} />
           ))}

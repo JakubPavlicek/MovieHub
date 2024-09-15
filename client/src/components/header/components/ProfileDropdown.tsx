@@ -1,8 +1,8 @@
-import React from "react";
+import type { FC } from "react";
 import { ChevronDown } from "lucide-react";
 import { useAuth0 } from "@auth0/auth0-react";
 
-const ProfileDropdown: React.FC = () => {
+const ProfileDropdown: FC = () => {
   const { user } = useAuth0();
 
   return (

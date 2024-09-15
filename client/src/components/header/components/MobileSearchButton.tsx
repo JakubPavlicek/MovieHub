@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC } from "react";
 import { Search } from "lucide-react";
 
 interface MobileSearchButtonProps {
@@ -6,7 +6,7 @@ interface MobileSearchButtonProps {
   toggleMobileSearch: () => void;
 }
 
-const MobileSearchButton: React.FC<MobileSearchButtonProps> = ({ showMobileSearch, toggleMobileSearch }) => {
+const MobileSearchButton: FC<MobileSearchButtonProps> = ({ showMobileSearch, toggleMobileSearch }) => {
   return (
     <button
       className={`hover:text-teal-300 ${showMobileSearch ? "text-teal-300" : "text-white"}`}

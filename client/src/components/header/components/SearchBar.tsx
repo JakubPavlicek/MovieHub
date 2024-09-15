@@ -1,11 +1,11 @@
-import React from "react";
+import type { FC } from "react";
 import { Search } from "lucide-react";
 
 export interface SearchBarProps {
   autoFocus: boolean;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ autoFocus }) => {
+const SearchBar: FC<SearchBarProps> = ({ autoFocus }) => {
   return (
     <div className="relative text-white">
       <div className="absolute bottom-0 left-3 top-1/2 -translate-y-1/2">

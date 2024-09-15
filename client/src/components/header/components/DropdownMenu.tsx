@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC } from "react";
 
 interface DropdownProps {
   title: string;
@@ -10,7 +10,7 @@ export interface DropdownItem {
   name: string;
 }
 
-const DropdownMenu: React.FC<DropdownProps> = ({ title, items }) => {
+const DropdownMenu: FC<DropdownProps> = ({ title, items }) => {
   return (
     <div className="group relative">
       <button className="p-3 group-hover:text-teal-300">{title}</button>

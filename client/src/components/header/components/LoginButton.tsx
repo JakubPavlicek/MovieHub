@@ -1,8 +1,8 @@
-import React from "react";
+import type { FC } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { CircleUserRound } from "lucide-react";
 
-const LoginButton: React.FC = () => {
+const LoginButton: FC = () => {
   const { loginWithRedirect } = useAuth0();
 
   return (
