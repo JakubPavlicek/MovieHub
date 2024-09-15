@@ -9,13 +9,13 @@ const NavMenu: FC = () => {
   const { countries } = useCountries();
 
   return (
-    <nav className="flex items-center justify-center xl:gap-3">
+    <div className="flex items-center justify-center xl:gap-3">
       <NavLink to="/" className="p-3 hover:text-teal-300">
         Home
       </NavLink>
       <DropdownMenu title="Genre" items={genres} />
       <DropdownMenu title="Country" items={countries} />
-    </nav>
+    </div>
   );
 };
 
