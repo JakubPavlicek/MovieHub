@@ -1,11 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { DropdownItem } from "../components/header/components/DropdownMenu.tsx";
-
-type Genre = DropdownItem;
-
-interface GenreResponse {
-  genres: Genre[];
-}
+import { GenreResponse } from "@/types/genre.ts";
 
 async function fetchGenres() {
   const response = await fetch("http://localhost:8088/genres");

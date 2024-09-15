@@ -1,8 +1,8 @@
 import type { FC } from "react";
 import { NavLink } from "react-router-dom";
 import DropdownMenu from "./DropdownMenu.tsx";
-import useGenres from "../../../hooks/useGenres.ts";
-import useCountries from "../../../hooks/useCountries.ts";
+import useGenres from "@/hooks/useGenres.ts";
+import useCountries from "@/hooks/useCountries.ts";
 
 const NavMenu: FC = () => {
   const { genres } = useGenres();

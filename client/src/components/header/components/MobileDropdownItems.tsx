@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import { DropdownItem } from "./DropdownMenu.tsx";
+import { DropdownItem } from "@/types/navigation.ts";
 
 interface MobileDropdownItemsProps {
   isOpen: boolean;

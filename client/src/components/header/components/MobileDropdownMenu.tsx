@@ -1,8 +1,8 @@
 import type { FC } from "react";
-import { DropdownItem } from "./DropdownMenu.tsx";
+import { DropdownItem } from "@/types/navigation.ts";
 import MobileDropdownButton from "./MobileDropdownButton.tsx";
 import MobileDropdownItems from "./MobileDropdownItems.tsx";
-import useDropdownMenu from "../../../hooks/useDropdownMenu.ts";
+import useDropdownMenu from "@/hooks/useDropdownMenu.ts";
 
 interface MobileMenuDropdownProps {
   title: string;

@@ -1,11 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { DropdownItem } from "../components/header/components/DropdownMenu.tsx";
-
-type Country = DropdownItem;
-
-interface CountryReponse {
-  countries: Country[];
-}
+import { CountryReponse } from "@/types/country.ts";
 
 async function fetchCountries() {
   const response = await fetch("http://localhost:8088/countries");

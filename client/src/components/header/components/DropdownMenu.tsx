@@ -1,13 +1,9 @@
 import type { FC } from "react";
+import { DropdownItem } from "@/types/navigation.ts";
 
 interface DropdownProps {
   title: string;
   items: DropdownItem[];
-}
-
-export interface DropdownItem {
-  id: string;
-  name: string;
 }
 
 const DropdownMenu: FC<DropdownProps> = ({ title, items }) => {

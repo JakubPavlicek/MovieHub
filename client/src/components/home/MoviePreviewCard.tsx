@@ -1,14 +1,14 @@
 import type { FC } from "react";
-import { IMoviePreview } from "../../hooks/useMovies.ts";
+import { MoviePreview } from "@/types/movie.ts";
 
 interface MoviePreviewProps {
-  moviePreview: IMoviePreview;
+  moviePreview: MoviePreview;
 }
 
-const MoviePreview: FC<MoviePreviewProps> = ({ moviePreview }) => {
+const MoviePreviewCard: FC<MoviePreviewProps> = ({ moviePreview }) => {
   return (
     <div className="flex flex-col gap-2">
-      <img src={moviePreview.posterUrl} alt="item" className="rounded-md" />
+      <img src={moviePreview.posterUrl} alt={moviePreview.name} className="rounded-md" />
       <div className="flex flex-col gap-0.5 text-sm sm:text-base">
         <span className="mt-1 truncate font-medium">{moviePreview.name}</span>
         <div className="space-x-1.5 truncate opacity-50">
@@ -22,4 +22,4 @@ const MoviePreview: FC<MoviePreviewProps> = ({ moviePreview }) => {
   );
 };
 
-export default MoviePreview;
+export default MoviePreviewCard;

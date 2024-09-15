@@ -7,11 +7,12 @@ import MobileSearchButton from "./components/MobileSearchButton.tsx";
 import Logo from "./components/Logo.tsx";
 import NavMenu from "./components/NavMenu.tsx";
 import ProfileDropdown from "./components/ProfileDropdown.tsx";
-import useMobileSearch from "../../hooks/useMobileSearch.ts";
 import MobileMenu from "./components/MobileMenu.tsx";
-import useMobileMenu from "../../hooks/useMobileMenu.ts";
+import useMobileSearch from "@/hooks/useMobileSearch.ts";
+import useMobileMenu from "@/hooks/useMobileMenu.ts";
 
 // https://github.com/codyseibert/online-classroom/blob/cbcc7f6987e269be4ef125561aa0f532b8e055e2/src/components/common/Header/Header.tsx
+// NodeJS: https://github.com/nodejs/nodejs.org/tree/4139bbbd21d3a6bdbde5c89fb94ebf1c17d6ccc2/apps/site
 
 const Header: FC = () => {
   const { isAuthenticated } = useAuth0();
