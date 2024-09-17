@@ -18,11 +18,17 @@ public class MovieSpecification {
     }
 
     public static Specification<Movie> nameEqualTo(String name) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.NAME), name);
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(
+            criteriaBuilder.lower(root.get(Movie_.NAME)),
+            name.toLowerCase()
+        );
     }
 
     public static Specification<Movie> nameContains(String name) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Movie_.NAME), "%" + name + "%");
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(Movie_.NAME)),
+            "%" + name.toLowerCase() + "%"
+        );
     }
 
     public static Specification<Movie> releaseDateEqualTo(LocalDate releaseDate) {
@@ -74,43 +80,73 @@ public class MovieSpecification {
     }
 
     public static Specification<Movie> descriptionEqualTo(String description) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.DESCRIPTION), description);
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(
+            criteriaBuilder.lower(root.get(Movie_.DESCRIPTION)),
+            description.toLowerCase()
+        );
     }
 
     public static Specification<Movie> descriptionContains(String description) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Movie_.DESCRIPTION), "%" + description + "%");
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(Movie_.DESCRIPTION)),
+            "%" + description.toLowerCase() + "%"
+        );
     }
 
     public static Specification<Movie> directorEqualTo(String director) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.DIRECTOR).get(Director_.NAME), director);
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(
+            criteriaBuilder.lower(root.get(Movie_.DIRECTOR).get(Director_.NAME)),
+            director.toLowerCase()
+        );
     }
 
     public static Specification<Movie> directorContains(String director) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Movie_.DIRECTOR).get(Director_.NAME), "%" + director + "%");
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(Movie_.DIRECTOR).get(Director_.NAME)),
+            "%" + director.toLowerCase() + "%"
+        );
     }
 
     public static Specification<Movie> actorEqualTo(String actor) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.CAST).get(MovieCast_.ACTOR).get(Actor_.NAME), actor);
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(
+            criteriaBuilder.lower(root.get(Movie_.CAST).get(MovieCast_.ACTOR).get(Actor_.NAME)),
+            actor.toLowerCase()
+        );
     }
 
     public static Specification<Movie> actorContains(String actor) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Movie_.CAST).get(MovieCast_.ACTOR).get(Actor_.NAME), "%" + actor + "%");
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(Movie_.CAST).get(MovieCast_.ACTOR).get(Actor_.NAME)),
+            "%" + actor.toLowerCase() + "%"
+        );
     }
 
     public static Specification<Movie> genreEqualTo(String genre) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.GENRES).get(Genre_.NAME), genre);
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(
+            criteriaBuilder.lower(root.get(Movie_.GENRES).get(Genre_.NAME)),
+            genre.toLowerCase()
+        );
     }
 
     public static Specification<Movie> genreContains(String genre) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Movie_.GENRES).get(Genre_.NAME), "%" + genre + "%");
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(Movie_.GENRES).get(Genre_.NAME)),
+            "%" + genre.toLowerCase() + "%"
+        );
     }
 
     public static Specification<Movie> countryEqualTo(String country) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(root.get(Movie_.COUNTRIES).get(Country_.NAME), country);
+        return (root, query, criteriaBuilder) -> criteriaBuilder.equal(
+            criteriaBuilder.lower(root.get(Movie_.COUNTRIES).get(Country_.NAME)),
+            country.toLowerCase()
+        );
     }
 
     public static Specification<Movie> countryContains(String country) {
-        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Movie_.COUNTRIES).get(Country_.NAME), "%" + country + "%");
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(
+            criteriaBuilder.lower(root.get(Movie_.COUNTRIES).get(Country_.NAME)),
+            "%" + country.toLowerCase() + "%"
+        );
     }
 
     public static Specification<Movie> searchByKeyword(String keyword) {
@@ -118,10 +154,22 @@ public class MovieSpecification {
             query.distinct(true);
 
             return criteriaBuilder.or(
-                criteriaBuilder.like(root.get(Movie_.NAME), "%" + keyword + "%"),
-                criteriaBuilder.like(root.get(Movie_.DIRECTOR).get(Director_.NAME), "%" + keyword + "%"),
-                criteriaBuilder.like(root.get(Movie_.CAST).get(MovieCast_.ACTOR).get(Actor_.NAME), "%" + keyword + "%"),
-                criteriaBuilder.like(root.get(Movie_.PRODUCTION).get(ProductionCompany_.NAME), "%" + keyword + "%")
+                criteriaBuilder.like(
+                    criteriaBuilder.lower(root.get(Movie_.NAME)),
+                    "%" + keyword + "%"
+                ),
+                criteriaBuilder.like(
+                    criteriaBuilder.lower(root.get(Movie_.DIRECTOR).get(Director_.NAME)),
+                    "%" + keyword + "%"
+                ),
+                criteriaBuilder.like(
+                    criteriaBuilder.lower(root.get(Movie_.CAST).get(MovieCast_.ACTOR).get(Actor_.NAME)),
+                    "%" + keyword + "%"
+                ),
+                criteriaBuilder.like(
+                    criteriaBuilder.lower(root.get(Movie_.PRODUCTION).get(ProductionCompany_.NAME)),
+                    "%" + keyword + "%"
+                )
             );
         };
     }
