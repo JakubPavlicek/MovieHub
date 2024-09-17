@@ -1,19 +1,26 @@
 import type { FC } from "react";
-import { DropdownItem } from "@/types/navigation.ts";
+import { CategoryItem, CategoryItemType } from "@/types/category.ts";
+import { Link } from "react-router-dom";
+import { destination } from "@/utils/navigation.ts";
 
 interface MobileDropdownItemsProps {
   isOpen: boolean;
-  items: DropdownItem[];
+  type: CategoryItemType;
+  items: CategoryItem[];
 }
 
-const MobileDropdownItems: FC<MobileDropdownItemsProps> = ({ isOpen, items }) => {
+const MobileDropdownItems: FC<MobileDropdownItemsProps> = ({ isOpen, type, items }) => {
   return (
     <div className={`grid w-full transition-all duration-300 ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}>
       <div className="grid grid-cols-2 overflow-hidden">
         {items.map((item) => (
-          <button key={item.id} className="min-h-10 truncate py-2.5 text-left text-sm text-gray-400 hover:text-white">
+          <Link
+            to={destination(type, item)}
+            key={item.id}
+            className="min-h-10 truncate py-2.5 text-left text-sm text-gray-400 hover:text-white"
+          >
             {item.name}
-          </button>
+          </Link>
         ))}
       </div>
     </div>

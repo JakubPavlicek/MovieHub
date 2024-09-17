@@ -4,9 +4,12 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Auth0Provider } from "@auth0/auth0-react";
-import Root from "./components/Root.tsx";
-import Error from "./pages/Error.tsx";
-import Home from "./pages/Home.tsx";
+import Root from "@/components/Root.tsx";
+import Error from "@/pages/Error.tsx";
+import HomePage from "@/pages/HomePage.tsx";
+import GenrePage from "@/pages/GenrePage.tsx";
+import CountryPage from "@/pages/CountryPage.tsx";
+import SearchPage from "@/pages/SearchPage.tsx";
 
 // https://auth0.com/blog/complete-guide-to-react-user-authentication/
 
@@ -20,7 +23,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Home />,
+        element: <HomePage />,
+      },
+      {
+        path: "genre/:genreName",
+        element: <GenrePage />,
+      },
+      {
+        path: "country/:countryName",
+        element: <CountryPage />,
+      },
+      {
+        path: "search/:query",
+        element: <SearchPage />,
       },
     ],
   },

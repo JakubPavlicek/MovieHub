@@ -1,6 +1,6 @@
-import { DropdownItem } from "@/types/navigation.ts";
+import { CategoryItem } from "@/types/category.ts";
 
-type Country = DropdownItem;
+type Country = CategoryItem;
 
 export interface CountryReponse {
   countries: Country[];

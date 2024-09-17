@@ -19,7 +19,9 @@ const useGenres = () => {
 
   const genres = data?.genres ?? [];
 
-  return { genres, isLoadingGenres, isGenresError, errorGenres };
+  const genreMap = new Map<string, string>(genres.map((genre) => [genre.name.toLowerCase(), genre.id]));
+
+  return { genres, genreMap, isLoadingGenres, isGenresError, errorGenres };
 };
 
 export default useGenres;

@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import { ChevronLeft } from "lucide-react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useGenres from "@/hooks/useGenres.ts";
 import useCountries from "@/hooks/useCountries.ts";
 import MobileDropdownMenu from "./MobileDropdownMenu.tsx";
@@ -21,13 +21,13 @@ const MobileMenu: FC<MobileMenuProps> = ({ toggleMobileMenu }) => {
           Close menu
         </button>
       </div>
-      <NavLink to="/" className="w-full py-3 hover:text-teal-300">
+      <Link to="/" className="w-full py-3 hover:text-teal-300">
         Home
-      </NavLink>
+      </Link>
       <hr className="w-full border-neutral-700" />
-      <MobileDropdownMenu title="Genres" items={genres} />
+      <MobileDropdownMenu title="Genres" type="genre" items={genres} />
       <hr className="w-full border-neutral-700" />
-      <MobileDropdownMenu title="Country" items={countries} />
+      <MobileDropdownMenu title="Countries" type="country" items={countries} />
     </nav>
   );
 };

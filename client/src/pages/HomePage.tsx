@@ -2,7 +2,7 @@ import type { FC } from "react";
 import MoviePreviewCard from "../components/home/MoviePreviewCard.tsx";
 import useMovies from "../hooks/useMovies.ts";
 
-const Home: FC = () => {
+const HomePage: FC = () => {
   const { moviePage, isLoading, isError, error } = useMovies();
 
   if (isLoading) {
@@ -10,14 +10,15 @@ const Home: FC = () => {
   }
 
   if (isError || !moviePage) {
-    return <div>{JSON.stringify(error)}</div>;
+    return <div className="text-white">{JSON.stringify(error)}</div>;
   }
-
-  console.log(moviePage);
 
   return (
     <main className="mx-auto 2xl:container">
       <div className="mx-5 mt-10 flex flex-col justify-between text-white">
+        <div className="mb-6 text-3xl font-semibold">
+          <span className="border-b-2 border-cyan-400">Online movies</span>
+        </div>
         <div className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-x-3.5 gap-y-10">
           {moviePage.content.map((movie) => (
             <MoviePreviewCard key={movie.id} moviePreview={movie} />
@@ -28,4 +29,4 @@ const Home: FC = () => {
   );
 };
 
-export default Home;
+export default HomePage;
