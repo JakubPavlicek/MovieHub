@@ -6,10 +6,11 @@ async function getGenre(genreId: string) {
   return await response.json();
 }
 
-const useSearchGenreMovies = (genreId: string) => {
+const useGenreMovies = (genreId: string | undefined) => {
   const { data } = useQuery<MoviePage>({
     queryKey: ["genres", genreId, "movies"],
-    queryFn: () => getGenre(genreId),
+    queryFn: () => getGenre(genreId as string),
+    enabled: !!genreId,
   });
 
   const movies = data?.content ?? [];
@@ -17,4 +18,4 @@ const useSearchGenreMovies = (genreId: string) => {
   return { movies };
 };
 
-export default useSearchGenreMovies;
+export default useGenreMovies;

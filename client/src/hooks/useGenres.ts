@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { GenreResponse } from "@/types/genre.ts";
+import { useCallback, useMemo } from "react";
 
 async function fetchGenres() {
   const response = await fetch("http://localhost:8088/genres");
@@ -17,11 +18,18 @@ const useGenres = () => {
     queryFn: fetchGenres,
   });
 
-  const genres = data?.genres ?? [];
+  const { genres, genreMap } = useMemo(() => {
+    const genres = data?.genres ?? [];
+    const genreMap = new Map(genres.map(({ name, id }) => [name.toLowerCase(), id]));
+    return { genres, genreMap };
+  }, [data]);
 
-  const genreMap = new Map<string, string>(genres.map((genre) => [genre.name.toLowerCase(), genre.id]));
+  const getGenreId = useCallback(
+    (genreName?: string) => genreName && genreMap.get(genreName.toLowerCase()),
+    [genreMap],
+  );
 
-  return { genres, genreMap, isLoadingGenres, isGenresError, errorGenres };
+  return { genres, genreMap, getGenreId, isLoadingGenres, isGenresError, errorGenres };
 };
 
 export default useGenres;

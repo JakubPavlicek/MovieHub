@@ -1,7 +1,7 @@
 import type { FC } from "react";
-import { MoviePreview } from "@/types/movie.ts";
 import { Link } from "react-router-dom";
 import { Play } from "lucide-react";
+import { MoviePreview } from "@/types/movie";
 
 interface MoviePreviewProps {
   moviePreview: MoviePreview;

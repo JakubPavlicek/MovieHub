@@ -1,17 +1,9 @@
 import type { FC } from "react";
-import MoviePreviewCard from "../components/home/MoviePreviewCard.tsx";
-import useMovies from "../hooks/useMovies.ts";
+import useMovies from "@/hooks/useMovies";
+import MoviePreviewList from "@/components/common/MoviePreviewList";
 
 const HomePage: FC = () => {
-  const { moviePage, isLoading, isError, error } = useMovies();
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (isError || !moviePage) {
-    return <div className="text-white">{JSON.stringify(error)}</div>;
-  }
+  const { movies } = useMovies();
 
   return (
     <main className="mx-auto 2xl:container">
@@ -19,11 +11,7 @@ const HomePage: FC = () => {
         <div className="mb-6 text-3xl font-semibold">
           <span className="border-b-2 border-cyan-400">Online movies</span>
         </div>
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-x-3.5 gap-y-10">
-          {moviePage.content.map((movie) => (
-            <MoviePreviewCard key={movie.id} moviePreview={movie} />
-          ))}
-        </div>
+        <MoviePreviewList movies={movies} />
       </div>
     </main>
   );

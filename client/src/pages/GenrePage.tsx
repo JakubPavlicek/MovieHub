@@ -1,29 +1,30 @@
-import type { FC } from "react";
-import useSearchGenreMovies from "@/hooks/useSearchGenreMovies.ts";
-import { useParams } from "react-router-dom";
-import useGenres from "@/hooks/useGenres.ts";
-import MoviePreviewCard from "@/components/home/MoviePreviewCard.tsx";
+import { FC, useEffect, useMemo } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import useGenreMovies from "@/hooks/useGenreMovies";
+import useGenres from "@/hooks/useGenres";
+import MoviePreviewList from "@/components/common/MoviePreviewList";
 
 const GenrePage: FC = () => {
-  const { genreName } = useParams();
-  const { genreMap } = useGenres();
-  const genreId = genreMap.get(genreName!);
-  const { movies } = useSearchGenreMovies(genreId!);
+  const navigate = useNavigate();
+  const { genreName = "" } = useParams();
+  const { genreMap, getGenreId, isLoadingGenres } = useGenres();
+  const { movies } = useGenreMovies(getGenreId(genreName));
 
-  // TODO: make less api calls ? + use GET /genres/{genreId} to fetch the Details of the genre (usefull for capitalized genre name)
-  // TODO: create "Movie List" component
+  useEffect(() => {
+    if (!isLoadingGenres && !genreMap.has(genreName)) {
+      navigate("/", { replace: true });
+    }
+  }, [isLoadingGenres, genreMap, genreName, navigate]);
+
+  const pageTitle = useMemo(() => `${genreName.charAt(0).toUpperCase() + genreName.slice(1)} movies`, [genreName]);
 
   return (
     <main className="mx-auto 2xl:container">
       <div className="mx-5 mt-10 flex flex-col justify-between text-white">
         <div className="mb-6 text-3xl font-semibold">
-          <span className="border-b-2 border-cyan-400">{genreName![0].toUpperCase() + genreName!.slice(1)} movies</span>
+          <span className="border-b-2 border-cyan-400">{pageTitle}</span>
         </div>
-        <div className="grid grid-cols-[repeat(auto-fill,minmax(160px,1fr))] gap-x-3.5 gap-y-10">
-          {movies.map((movie) => (
-            <MoviePreviewCard key={movie.id} moviePreview={movie} />
-          ))}
-        </div>
+        <MoviePreviewList movies={movies} />
       </div>
     </main>
   );

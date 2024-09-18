@@ -7,17 +7,14 @@ async function fetchMovies() {
 }
 
 const useMovies = () => {
-  const {
-    data: moviePage,
-    isLoading,
-    isError,
-    error,
-  } = useQuery<MoviePage>({
+  const { data, isLoading, isError, error } = useQuery<MoviePage>({
     queryKey: ["movies"],
     queryFn: fetchMovies,
   });
 
-  return { moviePage, isLoading, isError, error };
+  const movies = data?.content ?? [];
+
+  return { movies, isLoading, isError, error };
 };
 
 export default useMovies;

@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { CategoryItem, CategoryItemType } from "@/types/category.ts";
 import { Link } from "react-router-dom";
-import { destination } from "@/utils/navigation.ts";
+import { resolveCategoryPath } from "@/utils/categoryPath.ts";
 
 interface MobileDropdownItemsProps {
   isOpen: boolean;
@@ -15,7 +15,7 @@ const MobileDropdownItems: FC<MobileDropdownItemsProps> = ({ isOpen, type, items
       <div className="grid grid-cols-2 overflow-hidden">
         {items.map((item) => (
           <Link
-            to={destination(type, item)}
+            to={resolveCategoryPath(type, item)}
             key={item.id}
             className="min-h-10 truncate py-2.5 text-left text-sm text-gray-400 hover:text-white"
           >

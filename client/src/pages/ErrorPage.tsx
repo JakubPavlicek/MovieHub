@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { isRouteErrorResponse, NavLink, useRouteError } from "react-router-dom";
 import { CircleChevronLeft } from "lucide-react";
 
-const Error: FC = () => {
+const ErrorPage: FC = () => {
   const error = useRouteError();
 
   if (isRouteErrorResponse(error)) {
@@ -20,11 +20,7 @@ const Error: FC = () => {
     );
   }
 
-  console.log(error);
-  // Check if the error is a response error from react-router
-
-  // Fallback UI for unexpected errors
   return <div>Something went wrong!</div>;
 };
 
-export default Error;
+export default ErrorPage;
