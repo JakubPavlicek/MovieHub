@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { CountryReponse } from "@/types/country.ts";
+import { useCallback, useMemo } from "react";
 
 async function fetchCountries() {
   const response = await fetch("http://localhost:8088/countries");
@@ -17,9 +18,18 @@ const useCountries = () => {
     queryFn: fetchCountries,
   });
 
-  const countries = data?.countries ?? [];
+  const { countries, countryMap } = useMemo(() => {
+    const countries = data?.countries ?? [];
+    const countryMap = new Map(countries.map(({ name, id }) => [name.toLowerCase(), id]));
+    return { countries, countryMap };
+  }, [data]);
 
-  return { countries, isLoadingCountries, isErrorCountries, errorCountries };
+  const getCountryId = useCallback(
+    (countryName?: string) => countryName && countryMap.get(countryName.toLowerCase()),
+    [countryMap],
+  );
+
+  return { countries, countryMap, getCountryId, isLoadingCountries, isErrorCountries, errorCountries };
 };
 
 export default useCountries;
