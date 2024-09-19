@@ -1,3 +1,18 @@
+export interface MovieSearchParams {
+  page?: number;
+  limit?: number;
+  sort?: string;
+  name?: string;
+  releaseDate?: string;
+  duration?: number;
+  description?: string;
+  director?: string;
+  actors?: string;
+  genres?: string;
+  countries?: string;
+  keyword?: string;
+}
+
 export interface MoviePreview {
   id: number;
   name: string;

@@ -156,19 +156,19 @@ public class MovieSpecification {
             return criteriaBuilder.or(
                 criteriaBuilder.like(
                     criteriaBuilder.lower(root.get(Movie_.NAME)),
-                    "%" + keyword + "%"
+                    "%" + keyword.toLowerCase() + "%"
                 ),
                 criteriaBuilder.like(
                     criteriaBuilder.lower(root.get(Movie_.DIRECTOR).get(Director_.NAME)),
-                    "%" + keyword + "%"
+                    "%" + keyword.toLowerCase() + "%"
                 ),
                 criteriaBuilder.like(
                     criteriaBuilder.lower(root.get(Movie_.CAST).get(MovieCast_.ACTOR).get(Actor_.NAME)),
-                    "%" + keyword + "%"
+                    "%" + keyword.toLowerCase() + "%"
                 ),
                 criteriaBuilder.like(
                     criteriaBuilder.lower(root.get(Movie_.PRODUCTION).get(ProductionCompany_.NAME)),
-                    "%" + keyword + "%"
+                    "%" + keyword.toLowerCase() + "%"
                 )
             );
         };
