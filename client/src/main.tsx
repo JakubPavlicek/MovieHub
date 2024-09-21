@@ -10,6 +10,7 @@ import GenrePage from "@/pages/GenrePage.tsx";
 import CountryPage from "@/pages/CountryPage.tsx";
 import SearchPage from "@/pages/SearchPage.tsx";
 import ErrorPage from "@/pages/ErrorPage.tsx";
+import MoviePage from "@/pages/MoviePage.tsx";
 
 // https://auth0.com/blog/complete-guide-to-react-user-authentication/
 
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "",
         element: <HomePage />,
+      },
+      {
+        path: "movie/:movieId",
+        element: <MoviePage />,
       },
       {
         path: "genre/:genreName",

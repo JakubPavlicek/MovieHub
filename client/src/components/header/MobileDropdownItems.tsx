@@ -1,12 +1,13 @@
 import type { FC } from "react";
-import { CategoryItem, CategoryItemType } from "@/types/category.ts";
 import { Link } from "react-router-dom";
 import { resolveCategoryPath } from "@/utils/categoryPath.ts";
+import { Genre } from "@/types/genre.ts";
+import { Country } from "@/types/country.ts";
 
 interface MobileDropdownItemsProps {
   isOpen: boolean;
-  type: CategoryItemType;
-  items: CategoryItem[];
+  type: "genre" | "country";
+  items: Genre[] | Country[];
 }
 
 const MobileDropdownItems: FC<MobileDropdownItemsProps> = ({ isOpen, type, items }) => {

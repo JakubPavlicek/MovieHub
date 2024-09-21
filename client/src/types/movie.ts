@@ -1,3 +1,26 @@
+import { Director } from "@/types/director.ts";
+import { Actor } from "@/types/actor.ts";
+import { ProductionCompany } from "@/types/productionCompany.ts";
+import { Genre } from "@/types/genre.ts";
+import { Country } from "@/types/country.ts";
+
+export interface MovieDetails {
+  id: string;
+  name: string;
+  releaseDate: string;
+  duration: number;
+  description: string;
+  rating: number;
+  reviewCount: number;
+  posterUrl: string;
+  trailerUrl: string;
+  director: Director;
+  cast: Actor[];
+  productionCompanies: ProductionCompany[];
+  genres: Genre[];
+  countries: Country[];
+}
+
 export interface MovieSearchParams {
   page?: number;
   limit?: number;

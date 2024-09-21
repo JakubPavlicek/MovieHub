@@ -1,12 +1,13 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
-import { CategoryItem, CategoryItemType } from "@/types/category.ts";
 import { resolveCategoryPath } from "@/utils/categoryPath.ts";
+import { Genre } from "@/types/genre.ts";
+import { Country } from "@/types/country.ts";
 
 interface DropdownProps {
   title: "Genre" | "Country";
-  type: CategoryItemType;
-  items: CategoryItem[];
+  type: "genre" | "country";
+  items: Genre[] | Country[];
 }
 
 const DropdownMenu: FC<DropdownProps> = ({ title, type, items }) => {

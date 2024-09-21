@@ -7,7 +7,7 @@ const ErrorPage: FC = () => {
 
   if (isRouteErrorResponse(error)) {
     return (
-      <div className="mx-4 flex h-screen flex-col items-center justify-center gap-4">
+      <main className="mx-4 flex h-screen flex-col items-center justify-center gap-4">
         <h1 className="text-7xl font-bold text-gray-400">{error.status}</h1>
         <p className="text-xl font-medium text-gray-500">This page could not be found.</p>
         <NavLink to="/" className="mt-2">
@@ -16,7 +16,7 @@ const ErrorPage: FC = () => {
             Back To Homepage
           </button>
         </NavLink>
-      </div>
+      </main>
     );
   }
 
