@@ -21,7 +21,7 @@ const Header: FC = () => {
 
   return (
     <header className="mx-auto mt-6 text-white 2xl:container">
-      <nav className="mx-5 flex min-h-12 flex-row flex-nowrap items-center gap-2.5">
+      <nav className="mx-5 flex min-h-12 flex-nowrap items-center gap-2.5">
         <div className="flex lg:hidden">
           <MobileMenuButton showMobileMenu={showMobileMenu} toggleMobileMenu={toggleMobileMenu} />
         </div>

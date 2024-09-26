@@ -1,6 +1,5 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
-import { resolveCategoryPath } from "@/utils/categoryPath.ts";
 import { Genre } from "@/types/genre.ts";
 import { Country } from "@/types/country.ts";
 
@@ -18,7 +17,7 @@ const DropdownMenu: FC<DropdownProps> = ({ title, type, items }) => {
         <div className="grid grid-cols-[repeat(3,minmax(130px,1fr))]">
           {items.map((item) => (
             <Link
-              to={resolveCategoryPath(type, item)}
+              to={`/${type}/${item.name.toLowerCase()}`}
               id={item.id}
               key={item.id}
               className="w-full truncate rounded-md px-3 py-1 text-left hover:bg-gray-950 hover:text-teal-300"

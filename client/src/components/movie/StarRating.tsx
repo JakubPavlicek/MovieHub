@@ -1,17 +1,21 @@
 import { FC, useState } from "react";
 import { Star } from "lucide-react";
 
-const StarRating: FC = () => {
+interface StarRatingProps {
+  movieId: string;
+}
+
+const StarRating: FC<StarRatingProps> = ({ movieId }) => {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
 
   const handleRating = (starIndex: number) => {
     setRating(starIndex);
-    // TODO: call api endpoint to rate the movie
+    // TODO: call api endpoint to rate the movie [API PUT /movies/{movieId}/rating/{rating} - useMutation()]
   };
 
   return (
-    <div className="flex flex-row text-white">
+    <div className="flex text-white">
       {Array.from({ length: 5 }, (_, starIndex) => {
         starIndex++;
 
