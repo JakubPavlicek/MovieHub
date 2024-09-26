@@ -20,6 +20,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: filename
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
                   name: release_date
                   type: date
                   constraints:

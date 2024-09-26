@@ -6,6 +6,7 @@ import com.moviehub.dto.AddActorRequest;
 import com.moviehub.dto.GenderName;
 import com.moviehub.dto.UpdateActorRequest;
 import com.moviehub.entity.Actor;
+import com.moviehub.entity.Gender;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class ActorMapper {
         return Actor.builder()
                     .name(addActorRequest.getName())
                     .bio(addActorRequest.getBio())
-                    .gender(GenderMapper.mapToGender(addActorRequest.getGender()))
+                    .gender(Gender.valueOf(addActorRequest.getGender().name()))
                     .build();
     }
 
@@ -27,7 +28,7 @@ public class ActorMapper {
         return Actor.builder()
                     .name(updateActorRequest.getName())
                     .bio(updateActorRequest.getBio())
-                    .gender(GenderMapper.mapToGender(updateActorRequest.getGender()))
+                    .gender(Gender.valueOf(updateActorRequest.getGender().name()))
                     .build();
     }
 
@@ -36,7 +37,7 @@ public class ActorMapper {
                                    .id(actor.getId())
                                    .name(actor.getName())
                                    .bio(actor.getBio())
-                                   .gender(GenderName.fromValue(actor.getGender().getName()))
+                                   .gender(GenderName.fromValue(actor.getGender().getValue()))
                                    .build();
     }
 

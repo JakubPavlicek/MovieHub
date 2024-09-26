@@ -49,6 +49,11 @@ public class Movie {
     @Column(
         nullable = false
     )
+    private String filename;
+
+    @Column(
+        nullable = false
+    )
     @Temporal(TemporalType.DATE)
     private LocalDate releaseDate;
 
@@ -92,6 +97,12 @@ public class Movie {
         foreignKey = @ForeignKey(name = "fk_director")
     )
     private Director director;
+
+    @OneToMany(
+        mappedBy = "movie",
+        fetch = FetchType.EAGER
+    )
+    private List<Comment> comments;
 
     @OneToMany(
         mappedBy = "movie",

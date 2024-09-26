@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: JakubPavlicek
+      changes:
+        - createTable:
+            tableName: comment
+            columns:
+              - column:
+                  name: id
+                  type: varchar(255)
+                  defaultValueComputed: uuid_generate_v4()
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    unique: true
+              - column:
+                  name: movie_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_movie
+              - column:
+                  name: user_id
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: createdAt
+                  type: datetime
+                  constraints:
+                    nullable: false
+              - column:
+                  name: text
+                  type: clob
+                  constraints:
+                    nullable: false

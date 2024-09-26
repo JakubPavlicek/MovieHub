@@ -2,12 +2,11 @@ package com.moviehub.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -37,12 +36,7 @@ public class Director {
 
     private String bio;
 
-    @ManyToOne
-    @JoinColumn(
-        name = "gender_id",
-        referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "fk_gender")
-    )
-    private Gender gender;
+    @Enumerated(EnumType.STRING)
+    private Gender gender = Gender.UNSPECIFIED;
 
 }

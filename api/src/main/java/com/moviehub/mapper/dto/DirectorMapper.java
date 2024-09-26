@@ -1,12 +1,13 @@
 package com.moviehub.mapper.dto;
 
 import com.moviehub.dto.AddDirectorRequest;
-import com.moviehub.dto.DirectorDTO;
 import com.moviehub.dto.DirectorDetailsResponse;
 import com.moviehub.dto.DirectorPage;
+import com.moviehub.dto.DirectorResponse;
 import com.moviehub.dto.GenderName;
 import com.moviehub.dto.UpdateDirectorRequest;
 import com.moviehub.entity.Director;
+import com.moviehub.entity.Gender;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -26,18 +27,18 @@ public class DirectorMapper {
                        .build();
     }
 
-    public static DirectorDTO mapToDirectorDTO(Director director) {
-        return DirectorDTO.builder()
-                          .id(director.getId())
-                          .name(director.getName())
-                          .build();
+    public static DirectorResponse mapToDirectorResponse(Director director) {
+        return DirectorResponse.builder()
+                               .id(director.getId())
+                               .name(director.getName())
+                               .build();
     }
 
     public static Director mapToDirector(AddDirectorRequest addDirectorRequest) {
         return Director.builder()
                        .name(addDirectorRequest.getName())
                        .bio(addDirectorRequest.getBio())
-                       .gender(GenderMapper.mapToGender(addDirectorRequest.getGender()))
+                       .gender(Gender.valueOf(addDirectorRequest.getGender().name()))
                        .build();
     }
 
@@ -45,7 +46,7 @@ public class DirectorMapper {
         return Director.builder()
                        .name(updateDirectorRequest.getName())
                        .bio(updateDirectorRequest.getBio())
-                       .gender(GenderMapper.mapToGender(updateDirectorRequest.getGender()))
+                       .gender(Gender.valueOf(updateDirectorRequest.getGender().name()))
                        .build();
     }
 
@@ -54,7 +55,7 @@ public class DirectorMapper {
                                       .id(director.getId())
                                       .name(director.getName())
                                       .bio(director.getBio())
-                                      .gender(GenderName.fromValue(director.getGender().getName()))
+                                      .gender(GenderName.fromValue(director.getGender().getValue()))
                                       .build();
     }
 

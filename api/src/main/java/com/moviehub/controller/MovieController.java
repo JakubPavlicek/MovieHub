@@ -4,7 +4,6 @@ import com.moviehub.MoviesApi;
 import com.moviehub.dto.AddMovieRequest;
 import com.moviehub.dto.MovieDetailsResponse;
 import com.moviehub.dto.MoviePage;
-import com.moviehub.dto.MovieResponse;
 import com.moviehub.dto.UpdateMovieRequest;
 import com.moviehub.entity.Movie;
 import com.moviehub.mapper.dto.MovieMapper;
@@ -24,10 +23,10 @@ public class MovieController implements MoviesApi {
     private final MovieService movieService;
 
     @Override
-    public ResponseEntity<MovieResponse> addMovie(AddMovieRequest addMovieRequest) {
+    public ResponseEntity<MovieDetailsResponse> addMovie(AddMovieRequest addMovieRequest) {
         Movie movie = MovieMapper.mapToMovie(addMovieRequest);
         movie = movieService.addMovie(movie);
-        MovieResponse movieResponse = MovieMapper.mapToMovieResponse(movie);
+        MovieDetailsResponse movieResponse = MovieMapper.mapToMovieDetailsResponse(movie);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(movieResponse);
     }
@@ -48,10 +47,10 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<MovieResponse> updateMovie(String movieId, UpdateMovieRequest updateMovieRequest) {
+    public ResponseEntity<MovieDetailsResponse> updateMovie(String movieId, UpdateMovieRequest updateMovieRequest) {
         Movie movie = MovieMapper.mapToMovie(updateMovieRequest);
         movie = movieService.updateMovie(movieId, movie);
-        MovieResponse movieResponse = MovieMapper.mapToMovieResponse(movie);
+        MovieDetailsResponse movieResponse = MovieMapper.mapToMovieDetailsResponse(movie);
 
         return ResponseEntity.ok(movieResponse);
     }
