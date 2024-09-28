@@ -14,6 +14,9 @@ databaseChangeLog:
                   name: name
                   value: 'The Conjuring'
               - column:
+                  name: filename
+                  value: 'placeholder.mp4'
+              - column:
                   name: release_date
                   value: '2013-07-25'
               - column:
@@ -44,6 +47,9 @@ databaseChangeLog:
               - column:
                   name: name
                   value: 'The Conjuring 2'
+              - column:
+                  name: filename
+                  value: 'placeholder.mp4'
               - column:
                   name: release_date
                   value: '2016-06-10'
@@ -76,6 +82,9 @@ databaseChangeLog:
                   name: name
                   value: 'The Watchers'
               - column:
+                  name: filename
+                  value: 'placeholder.mp4'
+              - column:
                   name: release_date
                   value: '2024-06-06'
               - column:
@@ -106,6 +115,9 @@ databaseChangeLog:
               - column:
                   name: name
                   value: 'Tenet'
+              - column:
+                  name: filename
+                  value: 'placeholder.mp4'
               - column:
                   name: release_date
                   value: '2020-08-22'
@@ -138,6 +150,9 @@ databaseChangeLog:
                   name: name
                   value: 'Interstellar'
               - column:
+                  name: filename
+                  value: 'placeholder.mp4'
+              - column:
                   name: release_date
                   value: '2014-10-26'
               - column:
@@ -168,6 +183,9 @@ databaseChangeLog:
               - column:
                   name: name
                   value: 'Inception'
+              - column:
+                  name: filename
+                  value: 'placeholder.mp4'
               - column:
                   name: release_date
                   value: '2010-7-08'
@@ -200,6 +218,9 @@ databaseChangeLog:
                   name: name
                   value: 'Gravity'
               - column:
+                  name: filename
+                  value: 'placeholder.mp4'
+              - column:
                   name: release_date
                   value: '2013-10-04'
               - column:
@@ -230,6 +251,9 @@ databaseChangeLog:
               - column:
                   name: name
                   value: 'Roma'
+              - column:
+                  name: filename
+                  value: 'placeholder.mp4'
               - column:
                   name: release_date
                   value: '2018-11-21'
@@ -263,6 +287,9 @@ databaseChangeLog:
                   name: name
                   value: 'Wonder Woman'
               - column:
+                  name: filename
+                  value: 'placeholder.mp4'
+              - column:
                   name: release_date
                   value: '2017-06-02'
               - column:
@@ -293,6 +320,9 @@ databaseChangeLog:
               - column:
                   name: name
                   value: 'Selma'
+              - column:
+                  name: filename
+                  value: 'placeholder.mp4'
               - column:
                   name: release_date
                   value: '2014-12-25'
@@ -326,6 +356,9 @@ databaseChangeLog:
                   name: name
                   value: 'The Shape of Water'
               - column:
+                  name: filename
+                  value: 'placeholder.mp4'
+              - column:
                   name: release_date
                   value: '2017-12-01'
               - column:
@@ -356,6 +389,9 @@ databaseChangeLog:
               - column:
                   name: name
                   value: 'Birdman or'
+              - column:
+                  name: filename
+                  value: 'placeholder.mp4'
               - column:
                   name: release_date
                   value: '2014-10-17'
@@ -388,6 +424,9 @@ databaseChangeLog:
                   name: name
                   value: 'Monster'
               - column:
+                  name: filename
+                  value: 'placeholder.mp4'
+              - column:
                   name: release_date
                   value: '2003-12-17'
               - column:
@@ -418,6 +457,9 @@ databaseChangeLog:
               - column:
                   name: name
                   value: 'Nomadland'
+              - column:
+                  name: filename
+                  value: 'placeholder.mp4'
               - column:
                   name: release_date
                   value: '2020-09-11'
@@ -450,6 +492,9 @@ databaseChangeLog:
                   name: name
                   value: 'No Country for Old Men'
               - column:
+                  name: filename
+                  value: 'placeholder.mp4'
+              - column:
                   name: release_date
                   value: '2007-11-08'
               - column:
@@ -480,6 +525,9 @@ databaseChangeLog:
               - column:
                   name: name
                   value: 'The Grand Budapest Hotel'
+              - column:
+                  name: filename
+                  value: 'placeholder.mp4'
               - column:
                   name: release_date
                   value: '2014-03-28'
@@ -513,6 +561,9 @@ databaseChangeLog:
                   name: name
                   value: 'The Revenant'
               - column:
+                  name: filename
+                  value: 'placeholder.mp4'
+              - column:
                   name: release_date
                   value: '2015-12-25'
               - column:
@@ -543,6 +594,9 @@ databaseChangeLog:
               - column:
                   name: name
                   value: 'Eternals'
+              - column:
+                  name: filename
+                  value: 'placeholder.mp4'
               - column:
                   name: release_date
                   value: '2021-11-05'
@@ -575,6 +629,9 @@ databaseChangeLog:
                   name: name
                   value: 'The Big Lebowski'
               - column:
+                  name: filename
+                  value: 'placeholder.mp4'
+              - column:
                   name: release_date
                   value: '1998-03-06'
               - column:
@@ -606,6 +663,9 @@ databaseChangeLog:
                   name: name
                   value: 'Moonrise Kingdom'
               - column:
+                  name: filename
+                  value: 'placeholder.mp4'
+              - column:
                   name: release_date
                   value: '2012-05-16'
               - column:
@@ -636,6 +696,9 @@ databaseChangeLog:
               - column:
                   name: name
                   value: 'Dune'
+              - column:
+                  name: filename
+                  value: 'placeholder.mp4'
               - column:
                   name: release_date
                   value: '2021-10-22'

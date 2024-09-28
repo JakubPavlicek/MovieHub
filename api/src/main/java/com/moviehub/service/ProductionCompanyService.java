@@ -18,13 +18,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class ProductionCompanyService {
 
     private final ProductionCompanyRepository companyRepository;
 
-    @Transactional
-    public List<ProductionCompany> getSavedProduction(List<ProductionCompany> companies) {
+    public List<ProductionCompany> getSavedProductions(List<ProductionCompany> companies) {
         return companies.stream()
                         .map(this::getSavedProductionCompany)
                         .collect(Collectors.toCollection(ArrayList::new));
@@ -35,7 +35,6 @@ public class ProductionCompanyService {
                                 .orElseGet(() -> companyRepository.save(company));
     }
 
-    @Transactional
     public ProductionCompany addProductionCompany(String name) {
         if (companyRepository.existsByName(name)) {
             throw new ProductionCompanyAlreadyExistsException("Production company with name: " + name + " already exists");
@@ -47,7 +46,6 @@ public class ProductionCompanyService {
         return companyRepository.save(productionCompany);
     }
 
-    @Transactional
     public Page<ProductionCompany> getProductionCompanies(Integer page, Integer limit) {
         Sort sort = Sort.by(Sort.Direction.ASC, ProductionCompany_.NAME);
         Pageable pageable = PageRequest.of(page, limit, sort);
@@ -55,13 +53,11 @@ public class ProductionCompanyService {
         return companyRepository.findAll(pageable);
     }
 
-    @Transactional
     public ProductionCompany getProductionCompany(String companyId) {
         return companyRepository.findById(companyId)
                                 .orElseThrow(() -> new ProductionCompanyNotFoundException("Production company with ID: " + companyId + " not found"));
     }
 
-    @Transactional
     public ProductionCompany updateProductionCompany(String companyId, String name) {
         ProductionCompany company = getProductionCompany(companyId);
         company.setName(name);

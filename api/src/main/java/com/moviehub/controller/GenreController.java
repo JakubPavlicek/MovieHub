@@ -52,7 +52,7 @@ public class GenreController implements GenresApi {
 
     @Override
     public ResponseEntity<MoviePage> getMoviesWithGenre(String genreId, Integer page, Integer limit) {
-        Page<Movie> movies = movieService.getMoviesByGenre(genreId, page, limit);
+        Page<Movie> movies = movieService.getMoviesWithGenre(genreId, page, limit);
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
         return ResponseEntity.ok(moviePage);

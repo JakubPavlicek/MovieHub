@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: JakubPavlicek
+      changes:
+
+        # ensure that a user can only react once to a given comment
+        - addUniqueConstraint:
+            tableName: comment_reaction
+            columnNames: comment_id, user_id
+            constraintName: uq_comment_user
+
+        # ensure that a user can only rate a given movie once
+        - addUniqueConstraint:
+            tableName: movie_rating
+            columnNames: movie_id, user_id
+            constraintName: uq_movie_user

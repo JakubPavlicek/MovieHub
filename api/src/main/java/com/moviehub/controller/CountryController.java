@@ -52,7 +52,7 @@ public class CountryController implements CountriesApi {
 
     @Override
     public ResponseEntity<MoviePage> getMoviesWithCountry(String countryId, Integer page, Integer limit) {
-        Page<Movie> movies = movieService.getMoviesByCountry(countryId, page, limit);
+        Page<Movie> movies = movieService.getMoviesWithCountry(countryId, page, limit);
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
         return ResponseEntity.ok(moviePage);

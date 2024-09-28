@@ -63,7 +63,6 @@ public class Movie {
     private Integer duration;
 
     @Column(
-        length = 1000,
         nullable = false
     )
     private String description;
@@ -100,7 +99,7 @@ public class Movie {
 
     @OneToMany(
         mappedBy = "movie",
-        fetch = FetchType.EAGER
+        fetch = FetchType.LAZY
     )
     private List<Comment> comments;
 
@@ -165,10 +164,24 @@ public class Movie {
     )
     private List<Country> countries;
 
+    @OneToMany(
+        mappedBy = "movie",
+        fetch = FetchType.LAZY
+    )
+    private List<MovieRating> ratings;
+
     @UpdateTimestamp
     @Column(
         nullable = false
     )
     private LocalDateTime updatedAt;
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+    }
+
+    public void addMovieRating(MovieRating rating) {
+        ratings.add(rating);
+    }
 
 }

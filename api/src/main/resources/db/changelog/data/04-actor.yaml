@@ -17,8 +17,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Patrick Joseph Wilson was born in Norfolk, Virginia and raised in St. Petersburg, Florida, the son of Mary Kathryn (Burton), a voice teacher and professional singer, and John Franklin Wilson, a news anchor.'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -33,8 +33,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Vera Farmiga is an American actress who has received an Academy Award nomination for her role in Up in the Air (2009) and Primetime Emmy Award nominations for her roles in Bates Motel (2013) and When They See Us (2019).'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -49,8 +49,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Ronald Joseph Livingston was born on June 5, 1967 in Cedar Rapids, Iowa, to Linda (Rinas), a Lutheran pastor, and Kurt Livingston, an aerospace engineer. He has three siblings, Nick, John Livingston, also an actor, and Jennifer Livingston, a TV news personality at CBS/WKBT in La Crosse, Wisconsin. He is of German, and smaller amounts of Welsh, Scottish, and English, ancestry.'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -66,8 +66,8 @@ databaseChangeLog:
                   value: |
                     Madison Wolfe was born in New Orleans, Louisiana. She began acting at the age of seven, and made her debut alongside Kristen Stewart and Amy Adams in "On The Road." In the years following, Wolfe landed many roles in various critically acclaimed films and television shows such as Jessica Brady in "The Campaign," starring Will Ferrell and Zach Galifianakis, Audrey Hart in "True Detective," opposite Woody Harrelson and Matthew Mcconaughey, and Young Poppy in "Mr. Church," starring Eddie Murphy. She can also be seen playing Bryan Cranston's daughter in "Trumbo," and acting alongside Robert DeNiro, Jennifer Lawrence, and Bradley Cooper in David O. Russell's "Joy."
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -82,8 +82,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Hannah Dakota Fanning was born on the 23rd of February 1994, in Conyers, Georgia, USA, to Heather Joy (Arrington) and Steven Fanning. Her mother played professional tennis, and her father, now an electronics salesman, played minor league baseball. She is of German, Irish, English, French, and Channel Islander descent. Before her debut into the cinematic world, Dakota did her own acting around her house. She was very active for her age, and often put a blanket under her shirt and pretended to be having a baby, using her younger sister, Elle Fanning, who is also an actress now, as the baby. Dakota went to a playhouse near her home, where the children that attended put on a play every week to show to their parents. But the people running the playhouse noticed that Dakota stood out, and advised her parents to take her to an agency. They believed that she was extremely talented.'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -98,8 +98,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Georgina Campbell was born in Maidstone, Kent, England. Georgina is an actor and producer, known for Barbarian (2022), Black Mirror (2011) and Bird Box: Barcelona (2023).'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -114,8 +114,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Olwen Fouéré was born on the west coast of Ireland of Breton parents on March 2nd,1954. Fluent in English and in French, her work as a creative artist, actor, writer and director includes film, the visual arts, music and over four decades of theatre. Notable film roles include "The Survivalist" by Stephen Fingleton, "Mandy" by Panos Cosmatos, "Beast" by Michael Pearce, "This Must be the Place" by Paolo Sorrentino. Recent titles include "The Texas Chainsaw Massacre" directed by David Blue Garcia, "The Northman" by Robert Eggers and "Violet Gibson, the woman who shot Mussolini" directed by Barrie Dowdall, In 2020, she was listed at number 22 on The Irish Times list of Irelands greatest film actors of all time.'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -131,8 +131,8 @@ databaseChangeLog:
                   value: |
                     John David Washington is an American actor, producer, and former professional football player. He played college football at Morehouse College and signed with the St. Louis Rams as an Undrafted free agent in 2006. Professionally, Washington spent four years as the running back for the United Football League's Sacramento Mountain Lions. Washington shifted to an acting career like his father, Denzel Washington, and mother, Pauletta. He was part of the main cast of the HBO comedy series Ballers (2015-2019). His breakthrough came playing Ron Stallworth in Spike Lee's 2018 crime film BlacKkKlansman, for which he received both Golden Globe and Screen Actors Guild Award nominations. In 2020, he starred in Christopher Nolan's science fiction action-thriller film Tenet, for which he won the Saturn Award for Best Actor.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -148,8 +148,8 @@ databaseChangeLog:
                   value: |
                     Robert Pattinson is an English actor who became a celebrity for his role as the dreamy vampire Edward Cullen in the Twilight Saga movie series (2008–12) before later establishing his bona fides as a serious actor in independent films, notably Cosmopolis (2012), Good Time (2017), and The Lighthouse (2019).
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -165,8 +165,8 @@ databaseChangeLog:
                   value: |
                     Debicki was born in Paris to a Polish father and an Australian mother of Irish descent who were both dancers. When she was five, the family moved to Melbourne, where she grew up with two younger siblings. She became interested in ballet at an early age and trained as a dancer until deciding to switch to theatre. A student at Huntingtower School in Melbourne's east, Debicki achieved two perfect study scores in drama and English and was the school's dux when she graduated in 2007. In 2010, she completed a degree in drama at the University of Melbourne's Victorian College of the Arts. In August 2009, she was the recipient of a Richard Pratt Bursary for outstanding acting students in their second year of training.
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -182,8 +182,8 @@ databaseChangeLog:
                   value: |
                     Matthew McConaughey was born Matthew David McConaughey in on Nov. 4, 1969. His mother, Mary Kathleen, is a substitute school teacher. His father, James Donald McConaughey, was a Mississippi-born gas station owner who ran an oil pipe supply business. After graduating high school, Matthew was not interested in working in the oil business, so he spent a year in Australia, washing dishes and shoveling chicken poop. After returning to the States, he attended the University of Texas in Austin, and discovered his love for acting. His breakout role was in the 1993 coming of age comedy, Dazed And Confused in which he played the hard partying and girl chasing Wooderson. His star continued to rise when he took the lead role in the adaption of the best-selling book, A Time To Kill, in 1996. After starring in a string of commercially successful but critically panned romantic comedies, McConaughey took on more dramatic roles and broke out again when he played the dark and disturbed homicide detective Rust Cohle in the HBO mini-series True Detective in 2014. Since then, he has starred in a number of smaller budgeted, dramatic movies including Mud, The Paperboy and Killer Joe.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -201,8 +201,8 @@ databaseChangeLog:
                     She also had a notable role in Nicholas Nickleby (2002) opposite Charlie Hunnam and Jamie Bell, and a starring role in Ella Enchanted (2004). A former top-ranking soprano in New York, Hathaway was reportedly a front-runner for the role of "Christine" in the 2004 The Phantom of the Opera (2004). However, due to scheduling conflicts with The Princess Diaries 2: Royal Engagement (2004), she couldn't take the role, which was later given to newcomer Emmy Rossum.
                     Hathaway soon started to move away from family-friendly films. Following The Princess Diaries 2: Royal Engagement (2004), she appeared topless in the films Havoc (2005) opposite Josh Peck and Brokeback Mountain (2005) opposite Heath Ledger and Jake Gyllenhaal. Her desire to break out of her "Princess Diaries" image parallels that of her one-time co-star, Julie Andrews, who went topless in the film S.O.B. (1981) in order to break away from the image she created from her 1960s musicals. In interviews, Hathaway said that doing family-friendly films didn't mean she was similar to their characters or mean she objected to appearing nude in other films.
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -221,8 +221,8 @@ databaseChangeLog:
                     In her last year at Juilliard, she was offered a holding deal with TV writer/producer John Wells and she eventually worked in three of his TV shows. Jessica continues to do theatre, having played in "The Cherry Orchard", "Rodney's Wife", "Salome" and "Othello". She spends her time between New York and Los Angeles, working in theater, film and TV.
                     In 2011, she had a prolific year in film. She was nominated for and won a number of awards, including a 2012 Oscar nomination for Best Performance by an Actress in a Supporting Role for The Help (2011).
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -238,8 +238,8 @@ databaseChangeLog:
                   value: |
                     Leonardo Wilhelm DiCaprio (born November 11, 1974) is an American actor and film producer. His first role was on the sitcom Growing Pains, but his breakthrough film performance came in This Boy's Life. This was quickly followed by What's Eating Gilbert Grape; his performance as the mentally handicapped brother of Gilbert (Johnny Depp) brought him nominations for the Golden Globe and Academy Award for Best Supporting Actor. He gained fame for his role as Jack Dawson in Titanic, and has starred in many other successful films including Romeo + Juliet, Catch Me If You Can, and Blood Diamond, for which he was nominated for the Academy Award for Best Actor. Another Academy Award nomination came for his role as Howard Hughes in The Aviator, directed by Martin Scorsese. He has also worked with Scorsese in Gangs of New York, The Departed and Shutter Island. This working partnership brought comparison to the earlier working relationship between Scorsese and actor Robert De Niro, who also benefited from roles in Scorsese films early in his career. DiCaprio has also been nominated for two BAFTAs, three SAGs, and seven Golden Globes. He is a Golden Globe and a Silver Bear winner.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -255,8 +255,8 @@ databaseChangeLog:
                   value: |
                     Joseph Leonard Gordon-Levitt was born February 17, 1981 in Los Angeles, California, to Jane Gordon and Dennis Levitt. Joseph was raised in a Jewish family with his late older brother, Dan Gordon-Levitt, who passed away in October 2010. His parents worked for the Pacifica Radio station KPFK-FM and his maternal grandfather, Michael Gordon, had been a well-known movie director. Joseph first became well known for his starring role on NBC's award-winning comedy series 3rd Rock from the Sun (1996). During his six seasons on the show, he won two YoungStar Awards and also shared in three Screen Actors Guild Award® nominations for Outstanding Performance by a Comedy Series Ensemble.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -272,8 +272,8 @@ databaseChangeLog:
                   value: |
                     Elliot Page was born in Halifax, Nova Scotia to Martha Philpotts, a teacher, and Dennis Page, a graphic designer. Page wanted to start acting at an early age and attended the Neptune Theater School. They began their career at the age of 10 on the award-winning television series Pit Pony (1999), for which they received a Gemini nomination and a Young Artist Awards nomination. Later, Page appeared in Marion Bridge (2002), which won the award for Best Canadian First Feature at the Toronto International Film Festival. They won a Gemini Award for their role of Lilith in the first season of ReGenesis (2004), a one-hour drama for TMN/Movie Central, and for the cable feature, Ghost Cat (2004), for Best Performance in a Children's or Youth Program or Series. In addition, Page appeared in the cult hit TV series Trailer Park Boys (2001).
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -288,8 +288,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Sandra Annette Bullock is an American actress and producer. She is best known for her roles in Speed (1994), Miss Congeniality (2000), and Gravity (2013). She has received various awards, including an Academy Award and a Golden Globe Award.'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -304,8 +304,8 @@ databaseChangeLog:
                   name: bio
                   value: 'George Timothy Clooney is an American actor, film director, producer, and screenwriter. He is the recipient of three Golden Globe Awards and two Academy Awards, one for acting in Syriana (2006) and the other for co-producing Argo (2012).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -323,8 +323,8 @@ databaseChangeLog:
                     Aparicio was born on December 11, 1993, in Tlaxiaco, Oaxaca, Mexico. She also has an baccalaureate in early childhood education.
                     Her parents are of indigenous origin.
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -340,8 +340,8 @@ databaseChangeLog:
                   value: |
                     Marina de Tavira is a Mexican theatre, film and television actress. Her career has mainly developed on the Mexican stage working with the most prestigious directors in the scene. She has played the lead parts in stagings of play writes like Bertold Brecht, Harold Pinter, David Mamet, and Ximena Escalante. In film she has worked with directors like Rodrigo Plá (in the film winner of the Lion of the Future Award in Venice 2007), Carlos Carrera, Issa López, Mariana Chenillo, Hari Sama and Alfonso Cuarón in his most recent film Roma. Her most recent TV work includes the series Ingobernable for Netflix, and Falco for Amazon directed by Ernesto Contreras. Her work has been nominated and awarded with various theatre critics and journalist associations in Mexico.
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -356,8 +356,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Charlize Theron is a South African and American actress and producer. She is known for her roles in Monster (2003), Mad Max: Fury Road (2015), and Atomic Blonde (2017).'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -373,8 +373,8 @@ databaseChangeLog:
                   value: |
                     Precocious, outspoken child-teen starlet of the 1990s, Christina Ricci was born on February 12, 1980 in Santa Monica, California, the youngest of four children of Sarah (Murdoch), a realtor, and Ralph Ricci, a lawyer and therapist. She is of Italian (from her paternal grandfather), Irish, and Scots-Irish descent. She made her screen debut at the age of 9 in Mermaids (1990), in which she worked with Winona Ryder and Cher. Her breakthrough adult role was in The Ice Storm (1997), in which she plays a nymphet who skillfully seduces two brothers. She worked with Johnny Depp and Casper Van Dien in the Tim Burton film Sleepy Hollow (1999).
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -389,8 +389,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Gal Gadot-Varsano is an Israeli actress and model. She was crowned Miss Israel 2004 and is known for her role as Wonder Woman in the DC Extended Universe.'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -405,8 +405,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Christopher Whitelaw Pine is an American actor known for his roles in Star Trek (2009), Wonder Woman (2017), and Hell or High Water (2016).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -422,8 +422,8 @@ databaseChangeLog:
                   value: |
                     Robin Gayle Wright was born in Dallas, Texas, to Gayle (Gaston), a national director at Mary Kay, and Freddie Wright, a pharmaceutical executive. She grew up in San Diego, California. She started her professional career as a model in 1980 at age 14, and worked both in Paris and Japan. After finishing high school she decided to become an actress. She got a role on the soap opera Santa Barbara (1984), for which she was nominated three times for a Daytime Emmy. During the first season of the show, she fell in love with fellow cast member Dane Witherspoon, whom she married in 1986. Meanwhile, she starred in The Princess Bride (1987), playing the title role. After leaving the cast of Santa Barbara, she got the starring role in Denial (1990) alongside Jason Patric. In 1990, she was in State of Grace (1990), where she met actor Sean Penn, by whom she had a daughter, Dylan Frances, and a son, Hopper Jack. After taking some time off, Robin was back to Hollywood with one the best roles of her career: She played Tara in The Playboys (1992). She was extremely stunning and brilliant. Then, she acted in Toys (1992) with Robin Williams, and she gave a funny performance. In 1994, Wright was in the blockbuster hit Forrest Gump (1994), with Tom Hanks. For her performance as Jenny, she got a nomination for a Golden Globe Award. She got a small role in The Crossing Guard (1995), which starred Jack Nicholson. After turning down 14 roles, she played the title role of MGM/UA's Moll Flanders (1996), directed by Pen Densham, and co-starring Morgan Freeman and Stockard Channing. She then starred in Erin Dignam's Loved (1997), with William Hurt.
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -439,8 +439,8 @@ databaseChangeLog:
                   value: |
                     David Oyelowo also known as 'David O', is a classically trained stage actor who has quickly become one of Hollywood's most sought-after talents. He graduated from the London Academy of Music and Dramatic Art (LAMDA), and received the "Scholarship for Excellence" from Nicholas Hytner in 1998.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -456,8 +456,8 @@ databaseChangeLog:
                   value: |
                     Carmen Elizabeth Ejogo was born in Kensington, London, England, to a Nigerian father and a Scottish mother. Her television career began in the United Kingdom in the early 1990s, where she presented the children's series Saturday Disney (1990). Subsequently, she has had an acting career in the United States. She has appeared in Metro (1997) with Eddie Murphy, What's the Worst That Could Happen? (2001) with Martin Lawrence, and Love's Labour's Lost (2000) with Kenneth Branagh, among other films, and also presented "The Carmen Ejogo Video Show" - her own video show on BSB's Power Station channel. She starred as Thomas Jefferson's slave concubine in the television drama Sally Hemings: An American Scandal (2000) as Sally Hemings and also as Sister Anderson in the remake version of the cult classic original film Sparkle (2012).
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -473,8 +473,8 @@ databaseChangeLog:
                   value: |
                     Popular British character actor Tom Wilkinson was born in Leeds, West Yorkshire, England, and came from a long line of urban farmers. He was the son of Marjorie (Percival) and Thomas Wilkinson. Economic hardships forced his family to move to Canada for a few years when Wilkinson was a child; then, after he had returned to England, he attended and graduated from the University of Kent at Canterbury with a degree in English and American Literature.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -490,8 +490,8 @@ databaseChangeLog:
                   value: |
                     Sally Cecilia Hawkins was born in 1976 in Lewisham hospital, London, England, to Jacqui and Colin Hawkins, authors and illustrators of children's books. She is of English and Irish descent. Hawkins was brought up in Greenwich, in southeast London. She attended James Allen's Girls' School in Dulwich. She graduated from the Royal Academy of Dramatic Art in 1998. Hawkins' theatre appearances include Much Ado About Nothing (2000), A Midsummer Night's Dream (2000), Misconceptions (2001), Country Music (2004), and David Hare's adaptation of Federico García Lorca's play The House of Bernarda Alba in 2005. Hawkins made her first notable screen performance as Samantha in the 2002 Mike Leigh film All or Nothing (2002). She also appeared as Slasher in the 2004 film Layer Cake (2004). She played the role of Zena Blake in the BBC adaptation of Sarah Waters' novel, Tipping the Velvet (2002) in 2002. Her first major television role came in 2005, when she played Susan Trinder in the BAFTA-nominated BBC drama Fingersmith (2005), an adaptation of Sarah Waters' novel of the same name, in which she co-starred with Imelda Staunton, as she had in Vera Drake (2004). Since then she has gone on to star in another BBC adaptation, Patrick Hamilton's Twenty Thousand Streets Under the Sky. Hawkins appeared in three episodes of the BBC comedy series Little Britain (2003), in addition to Ed Reardon's Week on BBC Radio 4. She has also contributed to the BBC Radio 4 series Concrete Cow. In 2006, Hawkins returned to the stage, appearing at the Royal Court Theatre in Jez Butterworth's The Winterling. In 2007, she played the lead in a new film of Jane Austen's Persuasion, and followed this with her critically acclaimed performance in Happy-Go-Lucky (2008). Questions and a minor controversy arose when Hawkins was not nominated for an Academy Award for her performance as Poppy. It was the first year since 2000-01 that the winner of the Golden Globe for Best Actress in a Motion Picture Musical or Comedy was not nominated for an Academy Award, and the first year since 1995-96 that no one from the category was nominated. During 2006 she also made uncredited appearances in Richard Ayoade's Man to Man with Dean Learner where she played various uncredited roles from Personal Assistant to Wife of Steve Pising in various deleted scenes included on the DVD. Hawkins' 2009-10 films included Desert Flower (2009), Never Let Me Go (2010), and Happy Ever Afters (2009). In November 2010, she appeared on Broadway as Vivie in Mrs. Warren's Profession. In 2011, Hawkins appeared in Submarine (2010) and had a supporting role in the film adaptation of Jane Eyre (2011).
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -510,8 +510,8 @@ databaseChangeLog:
                     While in Chicago, Shannon also kept busy in front of movie and television cameras, most notably in the big screen project Chicago Cab (1997), based on the long-running stage play "Hellcab". Kangaroo Jack (2003) marked the third Jerry Bruckheimer production in which Shannon has appeared. He also appeared in Bad Boys II (2003), directed by Michael Bay and starring Will Smith and Martin Lawrence, and in Grand Theft Parsons (2003), with Johnny Knoxville and Christina Applegate.
                     In addition, Shannon appeared in Pearl Harbor (2001), also directed by Bay. His other film credits also include Curtis Hanson's 8 Mile (2002); Cameron Crowe's Vanilla Sky (2001) with Tom Cruise; Carl Franklin's High Crimes (2002) with Morgan Freeman; John Waters' Cecil B. Demented (2000), and Joel Schumacher's war drama Tigerland (2000).
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -527,8 +527,8 @@ databaseChangeLog:
                   value: |
                     Spencer is a native of Montgomery, Alabama, which she claims is the proverbial buckle of the Bible belt. She's the sixth of seven siblings and holds a BS in Liberal Arts from Auburn University. A "closet" lover of acting, this practical Alabamian knew that she'd someday work in the film industry, but never dreamed it would be in front of the camera. In 1995, acclaimed director Joel Schumacher changed all that by giving her a small part opposite Sandra Bullock in the hit film A Time to Kill, and Spencer was on her way. In 1996, she teamed up with Bullock again in Bullock's directorial debut of Making Sandwiches, a short film that premiered at the 1997 Sundance Film Festival.
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -544,8 +544,8 @@ databaseChangeLog:
                   value: |
                     Quirky, inventive and handsome American actor Michael Keaton first achieved major fame with his door-busting performance as fast-talking ideas man Bill Blazejowski, alongside a nerdish morgue attendant (Henry Winkler), in Night Shift (1982). He played further comedic roles in Mr. Mom (1983), Johnny Dangerously (1984), and Beetlejuice (1988), earned further acclaim for his dramatic portrayal of Bruce Wayne / Batman in Tim Burton's Batman (1989) and Batman Returns (1992), and since then, has moved easily between film genres, ranging from drama and romantic comedy to thriller and action.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -560,8 +560,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Frances Louise McDormand is an American actress and producer. She is known for her roles in Fargo (1996), Almost Famous (2000), and Nomadland (2020).'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -577,8 +577,8 @@ databaseChangeLog:
                   value: |
                     David Russell Strathairn was born on January 26, 1949 in San Francisco, California. He is the son of Mary Frances (Frazier), a nurse, and Thomas Scott Strathairn, Jr., a physician. He has two siblings, Tom and Anne. His ancestry includes English, Scottish, Irish, Portuguese, Hawaiian, and one sixteenth Chinese (the latter three from his paternal grandmother).
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -593,8 +593,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Javier Ángel Encinas Bardem is a Spanish actor. He is best known for his roles in No Country for Old Men (2007), Skyfall (2012), and Vicky Cristina Barcelona (2008).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -610,8 +610,8 @@ databaseChangeLog:
                   value: |
                     Tommy Lee Jones was born in San Saba, Texas, the son of Lucille Marie (Scott), a police officer and beauty shop owner, and Clyde C. Jones, who worked on oil fields. Tommy himself worked in underwater construction and on an oil rig. He attended St. Mark's School of Texas, a prestigious prep school for boys in Dallas, on a scholarship, and went to Harvard on another scholarship. He roomed with future Vice President Al Gore and played offensive guard in the famous 29-29 Harvard-Yale football game of '68 known as "The Tie." He received a B.A. in English literature and graduated cum laude from Harvard in 1969.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -627,8 +627,8 @@ databaseChangeLog:
                   value: |
                     Brolin was born February 12, 1968 in Santa Monica, California, to Jane Cameron (Agee), a Texas-born wildlife activist, and James Brolin. Josh was not interested at first in the lifestyle of the entertainment business, in light of his parents' divorce, and both of them being actors. However, during junior year in high school, he took an acting class to see what it was like. He played Stanley in "A Streetcar Named Desire" and became hooked. His first major screen role was as the older brother in the film The Goonies (1985), based on a story by Steven Spielberg. He then immediately moved on to work on television, taking roles on such series as Pilot (1987) and The Young Riders (1989). "Private Eye" was a chance for Brolin to play a detective. "The Young Riders" was set just before the Civil War, and was co-directed by Brolin's father, James Brolin.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -644,8 +644,8 @@ databaseChangeLog:
                   value: |
                     Actor Ralph Nathaniel Twisleton-Wykeham-Fiennes was born on December 22, 1962 in Suffolk, England, to Jennifer Anne Mary Alleyne (Lash), a novelist, and Mark Fiennes, a photographer. He is the eldest of six children. Four of his siblings are also in the arts: Martha Fiennes, a director; Magnus Fiennes, a musician; Sophie Fiennes, a producer; and Joseph Fiennes, an actor. He is of English, Irish, and Scottish origin.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -660,8 +660,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Jeffrey Leon Bridges is an American actor, singer, and producer. He is known for his roles in The Big Lebowski (1998), Crazy Heart (2009), and True Grit (2010).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -677,8 +677,8 @@ databaseChangeLog:
                   value: |
                     John Stephen Goodman's an American film, TV & stage actor. He was born in Affton, Missouri to Virginia Roos (Loosmore), a waitress and saleswoman & Leslie Francis Goodman, a postal worker who died when he was a small child. He's of English, Welsh & German ancestry. He's best known for his role as Dan Conner on the TV show Roseanne (1988), which ran until 1997 & for which he earned him a Best Actor Golden Globe in 1993. He's also noted for appearances in films of the Coen brothers, w/ prominent roles in Raising Arizona (1987) as an escaped convict, in Barton Fink (1991) as a congenial murderer, in The Big Lebowski (1998) as a volatile bowler & in O Brother, Where Art Thou? (2000) as a cultured thief. Additionally, he has done voice work in numerous Disney & Pixar films, including the Sulley in Monsters, Inc. (2001). Having contributed to more than 50 films, he has also won 2 American Comedy Awards & hosted Saturday Night Live (1975) 14 times.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -694,8 +694,8 @@ databaseChangeLog:
                   value: |
                     Academy Award-winning actor F. Murray Abraham was born on October 24, 1939 in Pittsburgh, Pennsylvania and raised in El Paso, Texas. His father, Fred Abraham, was a Syrian (Antiochian Orthodox Christian) immigrant. His mother, Josephine (Stello) Abraham, was the daughter of Italian immigrants. Born with the first name "Murray", he added an "F." to distinguish his stage name.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -711,8 +711,8 @@ databaseChangeLog:
                   value: |
                     Mathieu Amalric was born on 25 October 1965 in Neuilly-sur-Seine, Hauts-de-Seine, France. He is an actor and director, known for The Diving Bell and the Butterfly (2007), The Grand Budapest Hotel (2014) and Munich (2005).
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -727,8 +727,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Edward Harrison Norton is an American actor and filmmaker. He is best known for his roles in Fight Club (1999), American History X (1998), and Birdman (2014).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -743,8 +743,8 @@ databaseChangeLog:
                   name: bio
                   value: 'William James Murray is an American actor, comedian, and writer. He is best known for his roles in Groundhog Day (1993), Lost in Translation (2003), and Moonrise Kingdom (2012).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -760,8 +760,8 @@ databaseChangeLog:
                   value: |
                     Julianne Moore was born Julie Anne Smith in Fort Bragg, North Carolina on December 3, 1960, the daughter of Anne (Love), a social worker, and Peter Moore Smith, a paratrooper, colonel, and later military judge. Her mother moved to the U.S. in 1951, from Greenock, Scotland. Her father, from Burlington, New Jersey, has German, Irish, Welsh, German-Jewish, and English ancestry.
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -777,8 +777,8 @@ databaseChangeLog:
                   value: |
                     Steve Buscemi was born in Brooklyn, New York, to Dorothy (Wilson), a restaurant hostess, and John Buscemi, a sanitation worker. He is of Italian (father) and English, Dutch, and Irish (mother) descent. He became interested in acting during his last year of high school. After graduating, he moved to Manhattan to study acting with John Strasberg. He began writing and performing original theatre pieces with fellow actor/writer Mark Boone Junior. This led to his being cast in his first lead role in Parting Glances (1986). Since then, he has worked with many of the top filmmakers in Hollywood, including Quentin Tarantino, Jerry Bruckheimer, and The Coen Brothers. He is a highly respected actor.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -794,8 +794,8 @@ databaseChangeLog:
                   value: |
                     A resident of South Orange, New Jersey, Gilman attended Newark Academy and attends NYU Tisch. When he was twelve years old, he was cast in the starring role of Sam Shakusky in Wes Anderson's 'Moonrise Kingdom', alongside an all-star cast of Bill Murray, Bruce Willis, Edward Norton, Harvey Keitel, Bob Balaban, Tilda Swinton, and Frances McDormand.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -811,8 +811,8 @@ databaseChangeLog:
                   value: |
                     Kara Hayward was born on November 17, 1998 in Massachusetts. She was discovered at an open call, landing her first movie role in Wes Anderson's Moonrise Kingdom (2012), and received critical acclaim and numerous award nominations for her performance as Suzy Bishop. At this point, she was 12 years old. As of 2021, she resides in California and continues to work as an actor.
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -828,8 +828,8 @@ databaseChangeLog:
                   value: |
                     Timothée Chalamet is an American actor known for his roles in Call Me by Your Name (2017), Lady Bird (2017), and Dune (2021). He has been nominated for several awards, including an Academy Award, a BAFTA Award, and a Golden Globe Award.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -845,8 +845,8 @@ databaseChangeLog:
                   value: |
                     Rebecca Ferguson was born Rebecca Louisa Ferguson Sundström in Stockholm, Sweden, and grew up in its Vasastaden district. Her father is Swedish. Her mother, Rosemary Ferguson, is British, of Scottish and Northern Irish descent, and moved to Sweden at the age of 25. Rebecca attended an English-speaking school in Sweden and was raised bilingual, speaking Swedish and English. As a student, she attended the Adolf Fredrik's Music School in Stockholm and graduated in 1999.
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -862,8 +862,8 @@ databaseChangeLog:
                   value: |
                     Zendaya Maree Stoermer Coleman is an American actress and singer. She has received various accolades, including a Primetime Emmy Award for her role in the HBO series Euphoria (2019–present). She is also known for her roles in Spider-Man: Homecoming (2017) and Dune (2021).
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -879,8 +879,8 @@ databaseChangeLog:
                   value: |
                     Óscar Isaac Hernández Estrada is a Guatemalan-American actor known for his roles in Inside Llewyn Davis (2013), Ex Machina (2014), and Dune (2021). He has received critical acclaim and has been nominated for several awards.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -896,8 +896,8 @@ databaseChangeLog:
                   value: |
                     Joseph Jason Namakaeha Momoa was born on August 1, 1979, in Honolulu, Hawaii. He is the son of Coni (Lemke), a photographer, and Joseph Momoa, a painter. His father is of Native Hawaiian and Samoan descent; and his mother, who is from Iowa, is of German, Irish, and Native American ancestry. Jason was raised in Norwalk, Iowa, by his mother. After high school, he moved to Hawaii, where he landed a lead role, beating out of thousands of hopefuls in the TV series Baywatch (1989) (known as "Baywatch Hawaii" in its 10th season). When the show ended, he spent the next couple of years traveling around the world. In 2001, he moved to Los Angeles, where he continued to pursue an acting career. In 2004, after the short-lived TV series North Shore (2004), he was cast as the popular character "Ronon Dex" in the TV series Stargate: Atlantis (2004), which achieved a cult-like following. In 2010, he appeared in the Emmy-nominated HBO series Game of Thrones (2011), playing the Dothraki king, Khal Drogo. To illustrate to the producers that he was Khal Drogo, he performed the Haka, a traditional war dance of the Maori of New Zealand. The audition was with the same casting director who was casting the titular role in the reboot of Conan the Barbarian (2011). Four weeks after being cast as the popular Robert E. Howard character, Momoa began shooting in Bulgaria. His approach, like that of the filmmakers, was to pull from the eight decades of comics and stories as well as the Frank Frazetta images rather than the hugely popular 1982 movie. Jason has a production company, Pride of Gypsies, in which he is expanding his career from actor to filmmaker. He has directed a couple of short films and is working on his feature film debut Road to Paloma (2014), which is pulled from a series of stories that he's been developing over the years, which he calls the Brown Bag Diaries: Ridin' the Blinds in B Minor (2010). Jason lives with his wife, actress Lisa Bonet, with whom he has two children, Lola and Nakoa-Wolf.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -913,8 +913,8 @@ databaseChangeLog:
                   value: |
                     Benicio Monserrate Rafael del Toro Sánchez is a Puerto Rican actor and producer. He is known for his roles in The Usual Suspects (1995), Traffic (2000), and Sicario (2015). He won an Academy Award for Best Supporting Actor for his role in Traffic.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -930,8 +930,8 @@ databaseChangeLog:
                   value: |
                     Tom Hardy is an English actor known for his roles in Inception (2010), Mad Max: Fury Road (2015), and Venom (2018). His performances have earned him acclaim and several awards.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -947,8 +947,8 @@ databaseChangeLog:
                   value: |
                     Domhnall Gleeson is an Irish actor and writer. He is best known for his portrayal of Bill Weasley in the Harry Potter film franchise (2010-2011), About Time (2013), Ex Machina (2015) and The Revenant (2015).
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -964,8 +964,8 @@ databaseChangeLog:
                   value: |
                     Gemma Chan (born 29 November 1982) is a British film, television, and theatre actress and former fashion model. She played Charlotte in season four of the Showtime and ITV2 series Secret Diary of a Call Girl (2007); Ruth in Channel 4's Fresh Meat (2011); Mia Bennett in The Waters of Mars (2009), and Soo Lin in The Blind Banker (2010). She also appeared in the feature films Exam (2009) and Paramount Pictures' action-thriller Jack Ryan: Shadow Recruit (2014). Chan made a film for Amnesty International to celebrate the 60th anniversary of the Universal Declaration of Human Rights.
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -982,8 +982,8 @@ databaseChangeLog:
                     Richard Madden, born 18 June 1986, is a Scottish stage, film, and television actor best known for portraying Robb Stark in the HBO series "Game of Thrones" and Prince Kit in Disney's "Cinderella." Starring as David Budd in the BBC miniseries "Bodyguard" has also brought him more international acclaim and attention including a Golden Globe and other nominations. Despite his seemingly overnight success, Madden has been acting since he was in his teens, with only a brief break where he focused on school.
                     Madden was born in Elderslie, Renfrewshire, Scotland, where he was brought up with two sisters. His mother, Pat, is a classroom assistant, and his father, Richard, is in the fire brigade.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -999,8 +999,8 @@ databaseChangeLog:
                   value: |
                     Kumail Nanjiani was born on 2 May 1978 in Karachi, Sindh, Pakistan. He is an actor and writer, known for The Big Sick (2017), Life as We Know It (2010) and Stuber (2019). He has been married to Emily V. Gordon since 14 July 2007.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -1016,8 +1016,8 @@ databaseChangeLog:
                   value: |
                     Angelina Jolie is an Academy Award-winning actress who rose to fame after her role in Girl, Interrupted (1999), playing the title role in the "Lara Croft" blockbuster movies, as well as Mr. & Mrs. Smith (2005), Wanted (2008), Salt (2010) and Maleficent (2014). Off-screen, Jolie has become prominently involved in international charity projects, especially those involving refugees. She often appears on many "most beautiful women" lists, and she has a personal life that is avidly covered by the tabloid press.
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -1033,8 +1033,8 @@ databaseChangeLog:
                   value: |
                     Rachel McAdams is a Canadian actress known for her roles in The Notebook (2004), Spotlight (2015), and Doctor Strange (2016). She has received critical acclaim for her diverse film roles.
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -1050,8 +1050,8 @@ databaseChangeLog:
                   value: |
                     Catherine Keener is an American actress known for her roles in Being John Malkovich (1999), Capote (2005), and Get Out (2017). She has been nominated for several awards throughout her career.
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -1067,8 +1067,8 @@ databaseChangeLog:
                   value: |
                     Jodie Comer is an English actress known for her role in the television series Killing Eve (2018–present), for which she won an Emmy Award. She has also appeared in films such as Free Guy (2021).
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -1084,8 +1084,8 @@ databaseChangeLog:
                   value: |
                     Idris Elba is an English actor, producer, and musician known for his roles in Luther (2010–2019), The Wire (2002–2008), and Mandela: Long Walk to Freedom (2013). He has received critical acclaim and several awards.
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: actor
@@ -1101,8 +1101,8 @@ databaseChangeLog:
                   value: |
                     Emma Stone is an American actress known for her roles in Easy A (2010), La La Land (2016), and The Favourite (2018). She has won an Academy Award, a Golden Globe Award, and a BAFTA Award.
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: actor
@@ -1118,5 +1118,5 @@ databaseChangeLog:
                   value: |
                     Brie Larson is an American actress and filmmaker known for her roles in Short Term 12 (2013), Room (2015), and Captain Marvel (2019). She won an Academy Award for Best Actress for her performance in Room.
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'

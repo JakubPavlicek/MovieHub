@@ -19,6 +19,20 @@ databaseChangeLog:
             referencedColumnNames: id
 
         - addForeignKeyConstraint:
+              baseTableName: comment_reaction
+              baseColumnNames: comment_id
+              constraintName: fk_comment
+              referencedTableName: comment
+              referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: movie_rating
+            baseColumnNames: movie_id
+            constraintName: fk_movie
+            referencedTableName: movie
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
             baseTableName: movie_country
             baseColumnNames: movie_id
             constraintName: fk_movie

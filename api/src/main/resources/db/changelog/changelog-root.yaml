@@ -4,6 +4,6 @@ databaseChangeLog:
   - includeAll:
       path: db/changelog/tables
   - includeAll:
-      path: db/changelog/keys
+      path: db/changelog/constraints
   - includeAll:
       path: db/changelog/data

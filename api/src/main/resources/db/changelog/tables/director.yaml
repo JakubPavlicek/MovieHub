@@ -26,8 +26,8 @@ databaseChangeLog:
                   constraints:
                     nullable: true
               - column:
-                  name: gender_id
-                  type: varchar(255)
+                  name: gender
+                  type: varchar(20)
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_gender
+                  defaultValue: 'UNSPECIFIED'

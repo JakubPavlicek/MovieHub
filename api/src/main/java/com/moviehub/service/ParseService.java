@@ -4,6 +4,7 @@ import com.moviehub.entity.Movie;
 import com.moviehub.exception.FilterException;
 import com.moviehub.exception.ParseException;
 import com.moviehub.exception.SortException;
+import com.moviehub.mapper.entity.CommentFieldMapper;
 import com.moviehub.mapper.entity.MovieFieldMapper;
 import com.moviehub.specification.MovieSpecification;
 import org.springframework.data.domain.Sort;
@@ -16,22 +17,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 @Service
 public class ParseService {
 
-    private static final String SORT_REGEX = "(name|releaseDate|duration|description|director).(asc|desc)(?:,|$)";
+    private static final String MOVIE_SORT_REGEX = "(name|releaseDate|duration|description|director).(asc|desc)(?:,|$)";
+    private static final Pattern MOVIE_SORT_PATTERN = Pattern.compile(MOVIE_SORT_REGEX);
 
-    public Sort parseSort(String sort) {
-        Pattern pattern = Pattern.compile(SORT_REGEX);
+    private static final String COMMENT_SORT_REGEX = "(createdAt).(asc|desc)";
+    private static final Pattern COMMENT_SORT_PATTERN = Pattern.compile(COMMENT_SORT_REGEX);
+
+    private Sort parseSort(String sort, Pattern pattern, UnaryOperator<String> fieldMapper) {
         Matcher matcher = pattern.matcher(sort);
-
         List<Sort.Order> orders = new ArrayList<>();
 
         while (matcher.find()) {
-            String field = MovieFieldMapper.mapToMovieField(matcher.group(1));
+            String field = fieldMapper.apply(matcher.group(1));
             Sort.Direction direction = Sort.Direction.fromString(matcher.group(2));
             orders.add(new Sort.Order(direction, field));
         }
@@ -41,6 +45,14 @@ public class ParseService {
         }
 
         return Sort.by(orders);
+    }
+
+    public Sort parseMovieSort(String sort) {
+        return parseSort(sort, MOVIE_SORT_PATTERN, MovieFieldMapper::mapToMovieField);
+    }
+
+    public Sort parseCommentSort(String sort) {
+        return parseSort(sort, COMMENT_SORT_PATTERN, CommentFieldMapper::mapToCommentField);
     }
 
     private Specification<Movie> parseFilter(String filter, Map<String, Function<String, Specification<Movie>>> criteriaHandlers) {

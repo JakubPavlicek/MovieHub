@@ -1,9 +1,9 @@
 package com.moviehub.entity;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Getter;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Getter
 public enum Gender {
     UNSPECIFIED("Unspecified"),
@@ -11,5 +11,5 @@ public enum Gender {
     FEMALE("Female"),
     NON_BINARY("Non-binary");
 
-    private String value;
+    private final String value;
 }

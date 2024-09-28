@@ -4,7 +4,6 @@ import com.moviehub.dto.AddMovieRequest;
 import com.moviehub.dto.MovieDetailsResponse;
 import com.moviehub.dto.MoviePage;
 import com.moviehub.dto.MoviePreviewResponse;
-import com.moviehub.dto.MovieResponse;
 import com.moviehub.dto.UpdateMovieRequest;
 import com.moviehub.entity.Movie;
 import org.springframework.data.domain.Page;
@@ -50,25 +49,6 @@ public class MovieMapper {
                     .build();
     }
 
-    public static MovieResponse mapToMovieResponse(Movie movie) {
-        return MovieResponse.builder()
-                            .id(movie.getId())
-                            .name(movie.getName())
-                            .releaseDate(movie.getReleaseDate())
-                            .duration(movie.getDuration())
-                            .description(movie.getDescription())
-                            .rating(movie.getRating())
-                            .reviewCount(movie.getReviewCount())
-                            .posterUrl(movie.getPosterUrl())
-                            .trailerUrl(movie.getTrailerUrl())
-                            .director(movie.getDirector().getName())
-                            .cast(MovieCastMapper.mapToMovieCastResponse(movie.getCast()))
-                            .productionCompanies(ProductionCompanyMapper.mapToProductionCompanyNames(movie.getProduction()))
-                            .genres(GenreMapper.mapToGenreNames(movie.getGenres()))
-                            .countries(CountryMapper.mapToCountryNames(movie.getCountries()))
-                            .build();
-    }
-
     public static MoviePreviewResponse mapToMoviePreviewResponse(Movie movie) {
         return MoviePreviewResponse.builder()
                             .id(movie.getId())
@@ -91,7 +71,7 @@ public class MovieMapper {
                                    .reviewCount(movie.getReviewCount())
                                    .posterUrl(movie.getPosterUrl())
                                    .trailerUrl(movie.getTrailerUrl())
-                                   .director(DirectorMapper.mapToDirectorDTO(movie.getDirector()))
+                                   .director(DirectorMapper.mapToDirectorResponse(movie.getDirector()))
                                    .cast(MovieCastMapper.mapToMovieCastDetailsResponse(movie.getCast()))
                                    .productionCompanies(ProductionCompanyMapper.mapToProductionCompanyDetailsResponseList(movie.getProduction()))
                                    .genres(GenreMapper.mapToGenreDetailsResponseList(movie.getGenres()))

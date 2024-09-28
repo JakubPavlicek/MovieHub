@@ -4,7 +4,7 @@ databaseChangeLog:
       author: JakubPavlicek
       changes:
         - createTable:
-            tableName: comment
+            tableName: comment_reaction
             columns:
               - column:
                   name: id
@@ -15,34 +15,18 @@ databaseChangeLog:
                     nullable: false
                     unique: true
               - column:
-                  name: movie_id
+                  name: comment_id
                   type: varchar(255)
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_movie
+                    foreignKeyName: fk_comment
               - column:
                   name: user_id
                   type: varchar(255)
                   constraints:
                     nullable: false
               - column:
-                  name: created_at
-                  type: datetime
+                  name: reaction_type
+                  type: varchar(7)
                   constraints:
                     nullable: false
-              - column:
-                  name: text
-                  type: clob
-                  constraints:
-                    nullable: false
-              - column:
-                  name: is_deleted
-                  type: boolean
-                  constraints:
-                    nullable: false
-                  defaultValueBoolean: false
-              - column:
-                  name: parent_comment_id
-                  type: varchar(255)
-                  constraints:
-                    nullable: true # null means it has no parents

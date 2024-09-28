@@ -1,11 +1,16 @@
 package com.moviehub.controller;
 
 import com.moviehub.MoviesApi;
+import com.moviehub.dto.AddCommentRequest;
 import com.moviehub.dto.AddMovieRequest;
+import com.moviehub.dto.CommentPage;
 import com.moviehub.dto.MovieDetailsResponse;
 import com.moviehub.dto.MoviePage;
 import com.moviehub.dto.UpdateMovieRequest;
+import com.moviehub.dto.UpdateRatingRequest;
+import com.moviehub.entity.Comment;
 import com.moviehub.entity.Movie;
+import com.moviehub.mapper.dto.CommentMapper;
 import com.moviehub.mapper.dto.MovieMapper;
 import com.moviehub.service.MovieService;
 import lombok.RequiredArgsConstructor;
@@ -61,6 +66,29 @@ public class MovieController implements MoviesApi {
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
         return ResponseEntity.ok(moviePage);
+    }
+
+    @Override
+    public ResponseEntity<Void> addComment(String movieId, AddCommentRequest addCommentRequest) {
+        Comment comment = CommentMapper.mapToComment(addCommentRequest);
+        movieService.addComment(movieId, comment);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<CommentPage> getComments(String movieId, Integer page, Integer limit, String sort) {
+        Page<Comment> comments = movieService.getComments(movieId, page, limit, sort);
+        CommentPage commentPage = CommentMapper.mapToCommentPage(comments);
+
+        return ResponseEntity.ok(commentPage);
+    }
+
+    @Override
+    public ResponseEntity<Void> updateRating(String movieId, UpdateRatingRequest updateRatingRequest) {
+        movieService.updateRating(movieId, updateRatingRequest.getRating());
+
+        return ResponseEntity.noContent().build();
     }
 
 }

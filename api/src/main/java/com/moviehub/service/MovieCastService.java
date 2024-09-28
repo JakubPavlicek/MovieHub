@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class MovieCastService {
 
@@ -20,7 +21,6 @@ public class MovieCastService {
 
     private final ActorService actorService;
 
-    @Transactional
     public List<MovieCast> getSavedMovieCasts(List<MovieCast> movieCasts, Movie movie) {
         return movieCasts.stream()
                          .map(movieCast -> getSavedMovieCast(movieCast, movie))
@@ -35,7 +35,6 @@ public class MovieCastService {
         return movieCastRepository.save(movieCast);
     }
 
-    @Transactional
     public void deleteAllMovieCastsByMovie(Movie movie) {
         movieCastRepository.deleteAllByMovie(movie);
     }

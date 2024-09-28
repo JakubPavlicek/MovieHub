@@ -17,8 +17,8 @@ databaseChangeLog:
                   name: bio
                   value: 'James Wan (born 26 February 1977) is an Australian film producer, screenwriter and film director of Malaysian Chinese descent. He is widely known for directing the horror film Saw (2004) and creating Billy the puppet. Wan has also directed Dead Silence (2007), Death Sentence (2007), Insidious (2010), The Conjuring (2013) and Fast & Furious 7 (2015).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -33,8 +33,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Ishana Shyamalan is known for Servant (2019), The Watched (2024) and Old (2021).'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: director
@@ -49,8 +49,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Christopher Nolan is a British-American filmmaker known for his cerebral, often nonlinear, storytelling. He is best known for directing The Dark Knight Trilogy, Inception (2010), and Interstellar (2014).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -66,8 +66,8 @@ databaseChangeLog:
                   value: |
                     Steven Spielberg is an American film director, producer, and screenwriter. He is considered one of the founding pioneers of the New Hollywood era and one of the most popular directors and producers in film history, known for movies like Jurassic Park (1993), Schindler\'s List (1993), and Saving Private Ryan (1998).
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -82,8 +82,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Kathryn Bigelow is an American filmmaker best known for her work in action and thriller genres. She is the first woman to win the Academy Award for Best Director for her film The Hurt Locker (2009).'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: director
@@ -98,8 +98,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Quentin Tarantino is an American filmmaker and actor. His films are characterized by nonlinear storylines, satirical subject matter, an aestheticization of violence, extended scenes of dialogue, ensemble casts, references to popular culture, and a wide variety of other films. Notable works include Pulp Fiction (1994), Kill Bill (2003), and Django Unchained (2012).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -114,8 +114,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Greta Gerwig is an American actress, screenwriter, and director. She has directed several films including Lady Bird (2017) and Little Women (2019), both of which received critical acclaim and numerous awards.'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: director
@@ -130,8 +130,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Alfonso Cuarón is a Mexican film director, screenwriter, producer, and editor. He is best known for his films Gravity (2013), Roma (2018), and Children of Men (2006), which have won numerous awards.'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -146,8 +146,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Patty Jenkins is an American film director and screenwriter. She is best known for directing the films Monster (2003) and Wonder Woman (2017).'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: director
@@ -162,8 +162,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Bong Joon-ho is a South Korean filmmaker known for his genre-bending films that often contain social commentary. His most famous works include Snowpiercer (2013), Okja (2017), and Parasite (2019), the latter of which won the Academy Award for Best Picture.'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -178,8 +178,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Ava DuVernay is an American filmmaker and film distributor. She is known for her works focusing on race and social justice, such as Selma (2014), 13th (2016), and When They See Us (2019).'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: director
@@ -195,8 +195,8 @@ databaseChangeLog:
                   value: |
                     Guillermo del Toro is a Mexican filmmaker, author, and actor. His work is characterized by a strong connection to fantasy and horror, notable films include Pan\'s Labyrinth (2006), The Shape of Water (2017), and Crimson Peak (2015).
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -211,8 +211,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Denis Villeneuve is a Canadian film director and screenwriter known for his visually striking and thought-provoking films such as Arrival (2016), Blade Runner 2049 (2017), and Dune (2021).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -227,8 +227,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Sofia Coppola is an American filmmaker, actress, and screenwriter. She is known for her distinctive style and films like Lost in Translation (2003), The Virgin Suicides (1999), and Marie Antoinette (2006).'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: director
@@ -243,8 +243,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Spike Lee is an American film director, producer, writer, and actor. His films are known for their biting social commentary and explorations of race relations. Notable works include Do the Right Thing (1989), Malcolm X (1992), and BlacKkKlansman (2018).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -259,8 +259,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Lynne Ramsay is a Scottish film director, writer, producer, and cinematographer. She is known for her atmospheric and often unsettling films, including We Need to Talk About Kevin (2011) and You Were Never Really Here (2017).'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: director
@@ -275,8 +275,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Jordan Peele is an American filmmaker, comedian, and actor. He is known for his work in the horror genre, with critically acclaimed films such as Get Out (2017), Us (2019), and Nope (2022).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -291,8 +291,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Pedro Almodóvar is a Spanish film director, screenwriter, and producer. He is known for his colorful and often provocative films that explore themes of sexuality, desire, and identity. Notable works include All About My Mother (1999), Talk to Her (2002), and Pain and Glory (2019).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -307,8 +307,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Chloé Zhao is a Chinese filmmaker known for her contemplative storytelling and naturalistic style. She gained international recognition for her films The Rider (2017) and Nomadland (2020), the latter winning the Academy Award for Best Director.'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: director
@@ -323,8 +323,8 @@ databaseChangeLog:
                   name: bio
                   value: 'David Fincher is an American director and producer known for his stylish and meticulous filmmaking, often involving psychological thrillers and complex narratives. His notable films include Se7en (1995), Fight Club (1999), The Social Network (2010), and Gone Girl (2014).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -339,8 +339,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Agnès Varda was a French film director, screenwriter, and photographer, often referred to as the "mother of the French New Wave." Her notable works include Cleo from 5 to 7 (1962), Vagabond (1985), and Faces Places (2017).'
               - column:
-                  name: gender_id
-                  value: '2f9b3c4d-4f12-4a5b-a4d8-c5b7a8d2e728' # Female
+                  name: gender
+                  value: 'FEMALE'
 
         - insert:
             tableName: director
@@ -355,8 +355,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Wes Anderson is an American filmmaker known for his distinct visual and narrative style, characterized by symmetrical compositions, vibrant color palettes, and quirky characters. His notable films include The Royal Tenenbaums (2001), The Grand Budapest Hotel (2014), and Isle of Dogs (2018).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -371,8 +371,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Martin Scorsese is an American filmmaker known for his work in the crime genre, as well as his collaborations with actors like Robert De Niro and Leonardo DiCaprio. His notable films include Taxi Driver (1976), Goodfellas (1990), and The Irishman (2019).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -387,8 +387,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Ridley Scott is a British film director and producer known for his work in the science fiction and historical epic genres. His most famous films include Alien (1979), Blade Runner (1982), Gladiator (2000), and The Martian (2015).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -403,8 +403,8 @@ databaseChangeLog:
                   name: bio
                   value: 'James Cameron is a Canadian filmmaker known for his big-budget and groundbreaking visual effects-driven films. He is the director behind some of the highest-grossing films of all time, such as Titanic (1997) and Avatar (2009).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -419,8 +419,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Francis Ford Coppola is an American film director, producer, and screenwriter. He is best known for The Godfather trilogy (1972, 1974, 1990) and Apocalypse Now (1979), which are considered some of the greatest films ever made.'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -435,8 +435,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Stanley Kubrick was an American film director, producer, and screenwriter known for his meticulously crafted and stylistically bold films across various genres. His most famous works include 2001: A Space Odyssey (1968), A Clockwork Orange (1971), and The Shining (1980).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -451,8 +451,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Tim Burton is an American filmmaker, artist, and writer known for his gothic and quirky visual style. His notable films include Edward Scissorhands (1990), The Nightmare Before Christmas (1993), and Alice in Wonderland (2010).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -467,8 +467,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Guy Ritchie is a British filmmaker known for his energetic and stylized action films with complex plots and witty dialogue. His notable works include Lock, Stock and Two Smoking Barrels (1998), Snatch (2000), and Sherlock Holmes (2009).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -483,8 +483,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Joel and Ethan Coen, collectively known as the Coen Brothers, are American filmmakers known for their dark humor and diverse range of genres. Notable films include Fargo (1996), No Country for Old Men (2007), and The Big Lebowski (1998).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -499,8 +499,8 @@ databaseChangeLog:
                   name: bio
                   value: 'Paul Thomas Anderson is an American filmmaker known for his deep character studies and innovative narrative style. His notable works include Boogie Nights (1997), There Will Be Blood (2007), and Phantom Thread (2017).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'
 
         - insert:
             tableName: director
@@ -515,5 +515,5 @@ databaseChangeLog:
                   name: bio
                   value: 'David Lynch is an American filmmaker, painter, and musician known for his surrealist approach to storytelling and distinctive visual style. Notable works include Eraserhead (1977), Blue Velvet (1986), and Mulholland Drive (2001).'
               - column:
-                  name: gender_id
-                  value: '1d9f5c1c-40ec-4c42-aabf-41e5f7f1d999' # Male
+                  name: gender
+                  value: 'MALE'

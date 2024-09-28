@@ -10,6 +10,7 @@ public class MovieFieldMapper {
     public enum Field {
         MOVIE_ID,
         NAME,
+        FILENAME,
         RELEASE_DATE,
         DURATION,
         DESCRIPTION,
@@ -18,10 +19,13 @@ public class MovieFieldMapper {
         POSTER_URL,
         TRAILER_URL,
         DIRECTOR,
+        COMMENTS,
         CAST,
         PRODUCTION,
         GENRES,
         COUNTRIES,
+        RATINGS,
+        UPDATED_AT
     }
 
     public static String mapToMovieField(String field) {
@@ -31,6 +35,7 @@ public class MovieFieldMapper {
         return switch (movieField) {
             case MOVIE_ID -> Movie_.ID;
             case NAME -> Movie_.NAME;
+            case FILENAME -> Movie_.FILENAME;
             case RELEASE_DATE -> Movie_.RELEASE_DATE;
             case DURATION -> Movie_.DURATION;
             case DESCRIPTION -> Movie_.DESCRIPTION;
@@ -39,10 +44,13 @@ public class MovieFieldMapper {
             case POSTER_URL -> Movie_.POSTER_URL;
             case TRAILER_URL -> Movie_.TRAILER_URL;
             case DIRECTOR -> Movie_.DIRECTOR;
+            case COMMENTS -> Movie_.COMMENTS;
             case CAST -> Movie_.CAST;
             case PRODUCTION -> Movie_.PRODUCTION;
             case GENRES -> Movie_.GENRES;
             case COUNTRIES -> Movie_.COUNTRIES;
+            case RATINGS -> Movie_.RATINGS;
+            case UPDATED_AT -> Movie_.UPDATED_AT;
         };
     }
 

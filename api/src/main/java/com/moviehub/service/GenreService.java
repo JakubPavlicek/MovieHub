@@ -6,11 +6,7 @@ import com.moviehub.exception.GenreAlreadyExistsException;
 import com.moviehub.exception.GenreNotFoundException;
 import com.moviehub.repository.GenreRepository;
 import com.moviehub.repository.MovieRepository;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +21,6 @@ public class GenreService {
     private final GenreRepository genreRepository;
     private final MovieRepository movieRepository;
 
-    @Transactional
     public List<Genre> getSavedGenres(List<Genre> genres) {
         return genres.stream()
                      .map(this::getSavedGenre)
@@ -37,20 +32,17 @@ public class GenreService {
                               .orElseThrow(() -> new GenreNotFoundException("Genre with name: " + genre.getName() + " not found"));
     }
 
-    @Transactional
     public List<Genre> getGenres() {
         Sort sort = Sort.by(Sort.Direction.ASC, Genre_.NAME);
 
         return genreRepository.findAll(sort);
     }
 
-    @Transactional
     public Genre getGenre(String genreId) {
         return genreRepository.findById(genreId)
                               .orElseThrow(() -> new GenreNotFoundException("Genre with ID: " + genreId + " not found"));
     }
 
-    @Transactional
     public Genre addGenre(String name) {
         if (genreRepository.existsByName(name)) {
             throw new GenreAlreadyExistsException("Genre with name: " + name + " already exists");
@@ -62,7 +54,6 @@ public class GenreService {
         return genreRepository.save(genre);
     }
 
-    @Transactional
     public Genre updateGenre(String genreId, String name) {
         Genre genre = getGenre(genreId);
         genre.setName(name);
