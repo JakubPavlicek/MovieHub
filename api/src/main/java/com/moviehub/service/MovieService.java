@@ -150,7 +150,8 @@ public class MovieService {
 
     public void addComment(String movieId, Comment comment) {
         Movie movie = getMovie(movieId);
-        Comment savedComment = interactionService.saveComment(movie, comment);
+
+        interactionService.saveComment(movie, comment);
     }
 
     public Page<Comment> getComments(String movieId, Integer page, Integer limit, String sort) {
