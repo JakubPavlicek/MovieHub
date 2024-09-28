@@ -1,6 +1,9 @@
 package com.moviehub.config;
 
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.lang.NonNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
@@ -9,29 +12,36 @@ import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
+@RequiredArgsConstructor
 public class JwtAuthConverter implements Converter<Jwt, JwtAuthenticationToken> {
 
-    private static final String CLIENT_ID = "api";
+    private final ClientUrlProperties clientUrlProperties;
+
+    private static final String AUTH0_SUB_PREFIX = "auth0";
 
     @Override
-    public JwtAuthenticationToken convert(Jwt jwt) {
+    public JwtAuthenticationToken convert(@NonNull Jwt jwt) {
         Collection<GrantedAuthority> authorities = extractAuthorities(jwt);
+        String name = createUserId(jwt);
 
-        return new JwtAuthenticationToken(jwt, authorities, jwt.getClaimAsString("preferred_username"));
+        return new JwtAuthenticationToken(jwt, authorities, name);
     }
 
     private Collection<GrantedAuthority> extractAuthorities(Jwt jwt) {
-        List<String> clientRoles = jwt.getClaimAsMap("resource_access").get(CLIENT_ID) != null
-            ? (List<String>) ((Map<String, Object>) jwt.getClaimAsMap("resource_access").get(CLIENT_ID)).get("roles")
-            : List.of();
+        List<String> userRoles = jwt.getClaimAsStringList(clientUrlProperties.getUrl() + "/roles");
 
-        return clientRoles.stream()
-                          .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-                          .collect(Collectors.toList());
+        return userRoles.stream()
+                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
+                        .collect(Collectors.toList());
+    }
+
+    private String createUserId(Jwt jwt) {
+        String sub = jwt.getClaimAsString("sub");
+        String username = jwt.getClaimAsString(clientUrlProperties.getUrl() + "/username");
+        return sub.replaceFirst(AUTH0_SUB_PREFIX, username);
     }
 
 }

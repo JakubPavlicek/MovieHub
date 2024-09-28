@@ -10,6 +10,7 @@ import com.moviehub.entity.MovieCast;
 import com.moviehub.entity.ProductionCompany;
 import com.moviehub.exception.MovieNotFoundException;
 import com.moviehub.repository.MovieRepository;
+import com.moviehub.security.AuthUser;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -30,6 +31,8 @@ public class MovieService {
     private final MovieInteractionService interactionService;
 
     public Movie addMovie(Movie movie) {
+        AuthUser.getUserId();
+
         Director savedDirector = crewService.getSavedDirector(movie.getDirector());
         movie.setDirector(savedDirector);
 

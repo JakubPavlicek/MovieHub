@@ -3,6 +3,9 @@ logging:
     org:
       springframework:
         security: TRACE
+# used for CORS and JWT claims retrieval
+client:
+  url: http://localhost:5173
 okta:
   oauth2:
     audience: http://movie-hub-api

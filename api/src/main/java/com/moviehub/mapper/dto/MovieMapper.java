@@ -20,6 +20,7 @@ public class MovieMapper {
     public static Movie mapToMovie(AddMovieRequest addMovieRequest) {
         return Movie.builder()
                     .name(addMovieRequest.getName())
+                    .filename(addMovieRequest.getFilename())
                     .releaseDate(addMovieRequest.getReleaseDate())
                     .duration(addMovieRequest.getDuration())
                     .description(addMovieRequest.getDescription())
@@ -36,6 +37,7 @@ public class MovieMapper {
     public static Movie mapToMovie(UpdateMovieRequest updateMovieRequest) {
         return Movie.builder()
                     .name(updateMovieRequest.getName())
+                    .filename(updateMovieRequest.getFilename())
                     .releaseDate(updateMovieRequest.getReleaseDate())
                     .duration(updateMovieRequest.getDuration())
                     .description(updateMovieRequest.getDescription())
@@ -51,13 +53,13 @@ public class MovieMapper {
 
     public static MoviePreviewResponse mapToMoviePreviewResponse(Movie movie) {
         return MoviePreviewResponse.builder()
-                            .id(movie.getId())
-                            .name(movie.getName())
-                            .releaseYear(movie.getReleaseDate().getYear())
-                            .duration(movie.getDuration())
-                            .posterUrl(movie.getPosterUrl())
-                            .genres(GenreMapper.mapToGenreNames(movie.getGenres()))
-                            .build();
+                                   .id(movie.getId())
+                                   .name(movie.getName())
+                                   .releaseYear(movie.getReleaseDate().getYear())
+                                   .duration(movie.getDuration())
+                                   .posterUrl(movie.getPosterUrl())
+                                   .genres(GenreMapper.mapToGenreNames(movie.getGenres()))
+                                   .build();
     }
 
     public static MovieDetailsResponse mapToMovieDetailsResponse(Movie movie) {

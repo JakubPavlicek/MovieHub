@@ -4,6 +4,7 @@ import com.moviehub.entity.Comment;
 import com.moviehub.entity.CommentReaction;
 import com.moviehub.entity.ReactionType;
 import com.moviehub.repository.CommentReactionRepository;
+import com.moviehub.security.AuthUser;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,11 @@ public class CommentReactionService {
     private final CommentReactionRepository reactionRepository;
 
     public void addCommentReaction(Comment comment, String reactionType) {
-        ensureUniqueReaction(comment, "7d63632f-792a-4691-b7d3-7d9096afba30");
+        ensureUniqueReaction(comment, AuthUser.getUserId());
 
         CommentReaction reaction = CommentReaction.builder()
                                                   .comment(comment)
-                                                  .userId("7d63632f-792a-4691-b7d3-7d9096afba30")
+                                                  .userId(AuthUser.getUserId())
                                                   .reactionType(ReactionType.valueOf(reactionType.toUpperCase()))
                                                   .build();
 

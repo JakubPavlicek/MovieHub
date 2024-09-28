@@ -3,6 +3,7 @@ package com.moviehub.service;
 import com.moviehub.entity.Movie;
 import com.moviehub.entity.MovieRating;
 import com.moviehub.repository.MovieRatingRepository;
+import com.moviehub.security.AuthUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,11 +14,11 @@ public class MovieRatingService {
     private final MovieRatingRepository ratingRepository;
 
     public MovieRating saveRating(Movie movie, Double rating) {
-        ensureUniqueRating(movie, "7d63632f-792a-4691-b7d3-7d9096afba30");
+        ensureUniqueRating(movie, AuthUser.getUserId());
 
         MovieRating movieRating = MovieRating.builder()
                                              .movie(movie)
-                                             .userId("7d63632f-792a-4691-b7d3-7d9096afba30")
+                                             .userId(AuthUser.getUserId())
                                              .rating(rating)
                                              .build();
 

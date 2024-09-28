@@ -27,7 +27,15 @@ public class CommentService {
     }
 
     public Comment saveComment(Comment comment) {
+        ensureValidParentCommentId(comment);
+
         return commentRepository.save(comment);
+    }
+
+    private void ensureValidParentCommentId(Comment comment) {
+        if (!commentRepository.existsById(comment.getParentCommentId())) {
+            throw new CommentNotFoundException("Parent comment with ID: " + comment.getParentCommentId() + " not found");
+        }
     }
 
     public Page<Comment> getComments(Movie movie, Pageable pageable) {
