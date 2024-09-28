@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.3.2</version>
+		<version>3.3.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -30,7 +30,7 @@
 	</scm>
 
 	<properties>
-		<java.version>22</java.version>
+		<java.version>23</java.version>
 	</properties>
 
 	<dependencies>
@@ -137,6 +137,7 @@
 								<modelPackage>com.moviehub.dto</modelPackage>
 								<interfaceOnly>true</interfaceOnly>
 								<generateBuilders>true</generateBuilders>
+								<openApiNullable>false</openApiNullable>
 							</configOptions>
 							<typeMappings>
 								<typeMapping>OffsetDateTime=java.time.LocalDateTime</typeMapping>
@@ -155,6 +156,11 @@
 							<groupId>org.hibernate</groupId>
 							<artifactId>hibernate-jpamodelgen</artifactId>
 							<version>${hibernate.version}</version>
+						</annotationProcessorPath>
+						<annotationProcessorPath>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${lombok.version}</version>
 						</annotationProcessorPath>
 					</annotationProcessorPaths>
 				</configuration>

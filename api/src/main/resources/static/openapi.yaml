@@ -606,6 +606,16 @@ components:
           example: Like
           nullable: false
 
+    ParentCommentUuid:
+      type: string
+      description: |
+        A universally unique identifier (UUID) used to uniquely identify entities.
+        It is a 36-character string consisting of hexadecimal digits and hyphens.
+        This field is optional and may be null if the comment does not have a parent.
+      example: 872e1723-09ac-461d-9f54-d4c221269bed
+      maxLength: 255
+      nullable: true
+
     SortDTO:
       type: object
       description: "Represents sorting information for ordering query results based on one or more criteria."
@@ -998,7 +1008,7 @@ components:
         text:
           $ref: '#/components/schemas/Text'
         parentCommentId:
-          $ref: '#/components/schemas/Uuid'
+          $ref: '#/components/schemas/ParentCommentUuid'
 
     DirectorRequest:
       type: object
