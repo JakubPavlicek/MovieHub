@@ -37,6 +37,7 @@ public class Director {
     private String bio;
 
     @Enumerated(EnumType.STRING)
+    @Builder.Default
     private Gender gender = Gender.UNSPECIFIED;
 
 }

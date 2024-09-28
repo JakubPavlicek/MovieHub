@@ -2,6 +2,8 @@ package com.moviehub.controller;
 
 import com.moviehub.CommentsApi;
 import com.moviehub.dto.ReactionTypeRequest;
+import com.moviehub.entity.ReactionType;
+import com.moviehub.mapper.dto.ReactionTypeMapper;
 import com.moviehub.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +24,8 @@ public class CommentController implements CommentsApi {
 
     @Override
     public ResponseEntity<Void> addCommentReaction(String commentId, ReactionTypeRequest reactionTypeRequest) {
-        commentService.addCommentReaction(commentId, reactionTypeRequest.getReactionType().getValue());
+        ReactionType reactionType = ReactionTypeMapper.mapToReactionType(reactionTypeRequest);
+        commentService.addCommentReaction(commentId, reactionType);
 
         return ResponseEntity.noContent().build();
     }

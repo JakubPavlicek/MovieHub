@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.0.1
 info:
   title: Movie Hub
   description: A Movie Hub API.
@@ -597,13 +597,13 @@ components:
         reactionType:
           type: string
           enum:
-            - Like
-            - Dislike
-            - None
+            - like
+            - dislike
+            - none
           description: |
             The reaction to the comment.
-            This field includes predefined values such as Like, Dislike or None.
-          example: Like
+            This field includes predefined values such as like, dislike or none.
+          example: like
           nullable: false
 
     ParentCommentUuid:
@@ -1422,9 +1422,9 @@ paths:
           $ref: '#/components/responses/404MovieNotFound'
 
   /movies/{movieId}/rating:
-    put:
-      description: Update the rating of the specified movie.
-      summary: Update rating
+    post:
+      description: Add a rating for the specified movie.
+      summary: Add movie rating
       operationId: updateRating
       tags:
         - movies
@@ -1443,7 +1443,7 @@ paths:
                   $ref: '#/components/schemas/MovieRating'
       responses:
         '200':
-          description: Successfully updated the movie rating.
+          description: Successfully added the movie rating.
         '404':
           $ref: '#/components/responses/404MovieNotFound'
 
@@ -1503,7 +1503,7 @@ paths:
 
   /comments/{commentId}/reaction:
     post:
-      description: Add a reaction (like or dislike) for a comment with the specified ID.
+      description: Add a reaction for a comment with the specified ID.
       summary: Add a reaction to a comment
       operationId: addCommentReaction
       tags:

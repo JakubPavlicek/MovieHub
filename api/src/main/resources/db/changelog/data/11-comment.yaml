@@ -15,7 +15,7 @@ databaseChangeLog:
                   value: "8c328172-a60f-4ea6-93b1-ca2a5cca2bf0"
               - column:
                   name: user_id
-                  value: "d7289d77-7e47-4747-9f9e-1a89c2e4ef5b"
+                  value: "user|66f8511afb3983f9045fc7c9"
               - column:
                   name: created_at
                   valueDate: "2024-09-27T12:00:00"
@@ -37,7 +37,7 @@ databaseChangeLog:
                   value: "8c328172-a60f-4ea6-93b1-ca2a5cca2bf0"
               - column:
                   name: user_id
-                  value: "fa2a986e-8ff1-44ae-9334-34c829f16b5c"
+                  value: "user|66f8511afb3983f9045fc7c9"
               - column:
                   name: created_at
                   valueDate: "2024-09-27T12:10:00"
@@ -59,7 +59,7 @@ databaseChangeLog:
                   value: "8c328172-a60f-4ea6-93b1-ca2a5cca2bf0"
               - column:
                   name: user_id
-                  value: "b4d7d9f5-82c4-4531-bd9f-62e09e13a9ff"
+                  value: "user|66f8511afb3983f9045fc7c9"
               - column:
                   name: created_at
                   valueDate: "2024-09-27T12:20:00"
@@ -84,7 +84,7 @@ databaseChangeLog:
                   value: "8c328172-a60f-4ea6-93b1-ca2a5cca2bf0"
               - column:
                   name: user_id
-                  value: "d75c3e82-2673-4294-bef4-6d70a49dfcb5"
+                  value: "user|66f8511afb3983f9045fc7c9"
               - column:
                   name: created_at
                   valueDate: "2024-09-27T12:30:00"
@@ -109,7 +109,7 @@ databaseChangeLog:
                   value: "8c328172-a60f-4ea6-93b1-ca2a5cca2bf0"
               - column:
                   name: user_id
-                  value: "8e9cd0ef-b71a-48d7-a5d2-82a15f760c35"
+                  value: "user|66f8511afb3983f9045fc7c9"
               - column:
                   name: created_at
                   valueDate: "2024-09-27T12:40:00"

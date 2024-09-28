@@ -2,8 +2,10 @@ package com.moviehub.service;
 
 import com.moviehub.entity.Comment;
 import com.moviehub.entity.Movie;
+import com.moviehub.entity.ReactionType;
 import com.moviehub.exception.CommentNotFoundException;
 import com.moviehub.repository.CommentRepository;
+import com.moviehub.security.AuthUser;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -26,13 +28,20 @@ public class CommentService {
                                 .orElseThrow(() -> new CommentNotFoundException("Comment with ID: " + commentId + " not found"));
     }
 
-    public Comment saveComment(Comment comment) {
+    public Comment saveComment(Movie movie, Comment comment) {
         ensureValidParentCommentId(comment);
+
+        comment.setMovie(movie);
+        comment.setUserId(AuthUser.getUserId());
 
         return commentRepository.save(comment);
     }
 
     private void ensureValidParentCommentId(Comment comment) {
+        if (comment.getParentCommentId() == null) {
+            return;
+        }
+
         if (!commentRepository.existsById(comment.getParentCommentId())) {
             throw new CommentNotFoundException("Parent comment with ID: " + comment.getParentCommentId() + " not found");
         }
@@ -51,7 +60,7 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
-    public void addCommentReaction(String commentId, String reactionType) {
+    public void addCommentReaction(String commentId, ReactionType reactionType) {
         Comment comment = getComment(commentId);
         reactionService.addCommentReaction(comment, reactionType);
     }

@@ -16,13 +16,19 @@ public class CommentReactionService {
 
     private final CommentReactionRepository reactionRepository;
 
-    public void addCommentReaction(Comment comment, String reactionType) {
+    public void addCommentReaction(Comment comment, ReactionType reactionType) {
+        // user wants to delete the reaction
+        if (reactionType.equals(ReactionType.NONE)) {
+            reactionRepository.removeByCommentAndUserId(comment, AuthUser.getUserId());
+            return;
+        }
+
         ensureUniqueReaction(comment, AuthUser.getUserId());
 
         CommentReaction reaction = CommentReaction.builder()
                                                   .comment(comment)
                                                   .userId(AuthUser.getUserId())
-                                                  .reactionType(ReactionType.valueOf(reactionType.toUpperCase()))
+                                                  .reactionType(reactionType)
                                                   .build();
 
         reactionRepository.save(reaction);
