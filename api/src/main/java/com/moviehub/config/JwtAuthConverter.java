@@ -24,9 +24,9 @@ public class JwtAuthConverter implements Converter<Jwt, JwtAuthenticationToken> 
     @Override
     public JwtAuthenticationToken convert(@NonNull Jwt jwt) {
         Collection<GrantedAuthority> authorities = extractAuthorities(jwt);
-        String name = createUserId(jwt);
+        String userId = createUserId(jwt);
 
-        return new JwtAuthenticationToken(jwt, authorities, name);
+        return new JwtAuthenticationToken(jwt, authorities, userId);
     }
 
     private Collection<GrantedAuthority> extractAuthorities(Jwt jwt) {

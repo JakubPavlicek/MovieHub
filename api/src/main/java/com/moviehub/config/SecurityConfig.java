@@ -27,6 +27,7 @@ public class SecurityConfig {
 
     private static final String ADMIN = "ADMIN";
     private static final String USER = "USER";
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -39,6 +40,7 @@ public class SecurityConfig {
                          .requestMatchers(PUT, "/movies/*/rating").hasAnyRole(USER, ADMIN)
                          .requestMatchers(DELETE, "/movies/*").hasRole(ADMIN)
                          .requestMatchers(DELETE, "/comments/*").hasAnyRole(USER, ADMIN)
+                         .requestMatchers("/ws/**").hasAnyRole(USER, ADMIN)
                          .anyRequest().hasRole(ADMIN)
             )
             .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter)))
