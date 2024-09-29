@@ -40,7 +40,7 @@ public class SecurityConfig {
                          .requestMatchers(PUT, "/movies/*/rating").hasAnyRole(USER, ADMIN)
                          .requestMatchers(DELETE, "/movies/*").hasRole(ADMIN)
                          .requestMatchers(DELETE, "/comments/*").hasAnyRole(USER, ADMIN)
-                         .requestMatchers("/ws/**").hasAnyRole(USER, ADMIN)
+                         .requestMatchers("/ws", "/ws/**").hasAnyRole(USER, ADMIN)
                          .anyRequest().hasRole(ADMIN)
             )
             .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter)))

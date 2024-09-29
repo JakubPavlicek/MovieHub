@@ -1,5 +1,6 @@
 package com.moviehub.config;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.handler.invocation.HandlerMethodArgumentResolver;
 import org.springframework.messaging.simp.annotation.support.PrincipalMethodArgumentResolver;
@@ -12,11 +13,19 @@ import java.util.List;
 
 @Configuration
 @EnableWebSocketMessageBroker
+@RequiredArgsConstructor
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
+
+    private final ClientUrlProperties clientUrlProperties;
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/ws").withSockJS();
+        registry.addEndpoint("/ws")
+                .setAllowedOrigins(clientUrlProperties.getUrl())
+                .withSockJS();
+
+        registry.addEndpoint("/ws")
+                .setAllowedOrigins(clientUrlProperties.getUrl());
     }
 
     @Override
