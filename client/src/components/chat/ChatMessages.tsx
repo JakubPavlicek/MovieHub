@@ -1,7 +1,4 @@
-import { type FC, useEffect, useState } from "react";
-import SockJS from "sockjs-client";
-import Stomp, { Client } from "stompjs";
-import { useAuth0 } from "@auth0/auth0-react";
+import { type FC } from "react";
 import { Message } from "@/components/chat/Chat.tsx";
 
 interface ChatMessageProps {
