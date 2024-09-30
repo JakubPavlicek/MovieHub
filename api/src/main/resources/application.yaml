@@ -3,6 +3,8 @@ logging:
     org:
       springframework:
         security: TRACE
+        messaging: TRACE
+        web: TRACE
 # used for CORS and JWT claims retrieval
 client:
   url: http://localhost:5173
@@ -21,7 +23,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
-    show-sql: true
+#    show-sql: true
     open-in-view: false
     properties:
       hibernate:

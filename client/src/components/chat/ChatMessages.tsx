@@ -31,8 +31,6 @@ const ChatMessages: FC = () => {
   const [client, setClient] = useState<Client | null>(null);
   const { getAccessTokenSilently } = useAuth0();
 
-  // TODO: fix WebSocket lost connection
-
   useEffect(() => {
     const connectWebSocket = async () => {
       const socket = new SockJS("http://localhost:8088/ws");
@@ -46,31 +44,29 @@ const ChatMessages: FC = () => {
       client.connect(authHeader, (frame) => {
         console.log("Connected: ", frame);
 
-        client.subscribe(
-          "/topic/chat",
-          (message) => {
-            const receivedMessage = JSON.parse(message.body);
-            setMessages((prevMessages) => [...prevMessages, receivedMessage]);
-          },
-          authHeader,
-        );
+        // client.subscribe(
+        //   "/topic/chat",
+        //   (message) => {
+        //     const receivedMessage = JSON.parse(message.body);
+        //     setMessages((prevMessages) => [...prevMessages, receivedMessage]);
+        //   },
+        //   authHeader,
+        // );
       });
 
       setClient(client);
-
-      console.log(token);
     };
 
     connectWebSocket();
 
-    return () => {
-      if (client?.connected) {
-        client.disconnect(() => {
-          console.log("disconnected");
-        });
-      }
-    };
-  }, [getAccessTokenSilently]);
+    // return () => {
+    //   if (client?.connected) {
+    //     client.disconnect(() => {
+    //       console.log("disconnected");
+    //     });
+    //   }
+    // };
+  }, []);
 
   return (
     <div className="m-2 mt-0 flex h-[21rem] flex-col gap-4 overflow-hidden overflow-y-scroll">
