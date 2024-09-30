@@ -2,9 +2,8 @@ logging:
   level:
     org:
       springframework:
-        security: TRACE
-        messaging: TRACE
-        web: TRACE
+        security: DEBUG
+        messaging: DEBUG
 # used for CORS and JWT claims retrieval
 client:
   url: http://localhost:5173

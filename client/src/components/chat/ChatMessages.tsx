@@ -2,6 +2,7 @@ import { type FC, useEffect, useState } from "react";
 import SockJS from "sockjs-client";
 import Stomp, { Client } from "stompjs";
 import { useAuth0 } from "@auth0/auth0-react";
+import { Message } from "@/components/chat/Chat.tsx";
 
 interface ChatMessageProps {
   name: string;
@@ -26,52 +27,18 @@ const ChatMessage: FC<ChatMessageProps> = ({ name, time, text, isCurrentUser }) 
   );
 };
 
-const ChatMessages: FC = () => {
-  const [messages, setMessages] = useState<string[]>([]);
-  const [client, setClient] = useState<Client | null>(null);
-  const { getAccessTokenSilently } = useAuth0();
+interface ChatMessagesProps {
+  messages: Message[];
+}
 
-  useEffect(() => {
-    const connectWebSocket = async () => {
-      const socket = new SockJS("http://localhost:8088/ws");
-      const client = Stomp.over(socket);
-
-      const token = await getAccessTokenSilently();
-      const authHeader = { Authorization: "Bearer " + token };
-
-      client.debug = (msg) => console.log(msg);
-
-      client.connect(authHeader, (frame) => {
-        console.log("Connected: ", frame);
-
-        // client.subscribe(
-        //   "/topic/chat",
-        //   (message) => {
-        //     const receivedMessage = JSON.parse(message.body);
-        //     setMessages((prevMessages) => [...prevMessages, receivedMessage]);
-        //   },
-        //   authHeader,
-        // );
-      });
-
-      setClient(client);
-    };
-
-    connectWebSocket();
-
-    // return () => {
-    //   if (client?.connected) {
-    //     client.disconnect(() => {
-    //       console.log("disconnected");
-    //     });
-    //   }
-    // };
-  }, []);
-
+const ChatMessages: FC<ChatMessagesProps> = ({ messages }) => {
   return (
     <div className="m-2 mt-0 flex h-[21rem] flex-col gap-4 overflow-hidden overflow-y-scroll">
       <ChatMessage name={"user"} time={"22:49"} text={"text"} isCurrentUser={false} />
       <ChatMessage name={"user"} time={"22:49"} text={"text"} isCurrentUser={true} />
+      {messages.map((message, i) => (
+        <ChatMessage key={i} name={"user"} time={message.time} text={message.message} isCurrentUser={true} />
+      ))}
     </div>
   );
 };
