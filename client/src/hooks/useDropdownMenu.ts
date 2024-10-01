@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-const useDropdownMenu = () => {
+export const useDropdownMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDropdown = useCallback(() => {
@@ -9,5 +9,3 @@ const useDropdownMenu = () => {
 
   return { isOpen, toggleDropdown };
 };
-
-export default useDropdownMenu;

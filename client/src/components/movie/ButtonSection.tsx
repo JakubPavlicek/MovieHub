@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { MessageSquare, Video } from "lucide-react";
 
-const ButtonSection: FC = () => {
+export const ButtonSection: FC = () => {
   return (
     <div className="flex items-center gap-3">
       <button className="group inline-flex gap-1 rounded-md border border-neutral-400 px-4 py-1.5 text-sm text-neutral-400 hover:border-neutral-300 hover:fill-neutral-300 hover:text-neutral-300">
@@ -19,5 +19,3 @@ const ButtonSection: FC = () => {
     </div>
   );
 };
-
-export default ButtonSection;

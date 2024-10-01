@@ -7,7 +7,7 @@ async function fetchMovies(params: MovieSearchParams): Promise<MoviePage> {
   return await response.json();
 }
 
-const useSearchMovies = (params: MovieSearchParams) => {
+export const useSearchMovies = (params: MovieSearchParams) => {
   const { data } = useQuery<MoviePage>({
     queryKey: ["movies", params],
     queryFn: () => fetchMovies(params),
@@ -17,5 +17,3 @@ const useSearchMovies = (params: MovieSearchParams) => {
 
   return { movies };
 };
-
-export default useSearchMovies;

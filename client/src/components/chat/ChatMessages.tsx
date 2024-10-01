@@ -1,6 +1,6 @@
 import { type FC, useEffect, useRef } from "react";
-import type { Message } from "@/types/message";
 import { useAuth0 } from "@auth0/auth0-react";
+import type { Message } from "@/types/message";
 
 interface ChatMessageProps {
   name: string;
@@ -43,11 +43,11 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ messages }) => {
     <div className="m-2 mt-0 flex h-[21rem] flex-col gap-4 overflow-hidden overflow-y-scroll">
       {messages.map((message, i) => (
         <ChatMessage
-          key={i}
+          key={`${i}-${message.username}-${message.time}`}
           name={message.username}
           time={message.time}
           text={message.message}
-          isCurrentUser={user?.nickname == message.username}
+          isCurrentUser={user?.nickname === message.username}
         />
       ))}
       <div ref={messagesEndRef} />

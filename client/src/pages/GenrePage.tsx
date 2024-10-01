@@ -1,10 +1,10 @@
 import { FC, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useGenreMovies from "@/hooks/useGenreMovies";
-import useGenres from "@/hooks/useGenres";
-import MoviePreviewList from "@/components/common/MoviePreviewList";
+import { useGenreMovies } from "@/hooks/useGenreMovies";
+import { useGenres } from "@/hooks/useGenres";
+import { MoviePreviewList } from "@/components/common/MoviePreviewList";
 
-const GenrePage: FC = () => {
+export const GenrePage: FC = () => {
   const navigate = useNavigate();
   const { genreName = "" } = useParams();
   const { genreMap, getGenreId, isLoadingGenres } = useGenres();
@@ -16,7 +16,10 @@ const GenrePage: FC = () => {
     }
   }, [isLoadingGenres, genreMap, genreName, navigate]);
 
-  const pageTitle = useMemo(() => `${genreName.charAt(0).toUpperCase() + genreName.slice(1)} movies`, [genreName]);
+  const pageTitle = useMemo(
+    () => `${genreName.charAt(0).toUpperCase() + genreName.slice(1)} movies`,
+    [genreName],
+  );
 
   return (
     <main className="mx-auto 2xl:container">
@@ -29,5 +32,3 @@ const GenrePage: FC = () => {
     </main>
   );
 };
-
-export default GenrePage;

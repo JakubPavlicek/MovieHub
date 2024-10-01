@@ -5,7 +5,7 @@ interface MovieDetailRowProps {
   value: string;
 }
 
-const MovieDetailRow: FC<MovieDetailRowProps> = ({ label, value }) => {
+export const MovieDetailRow: FC<MovieDetailRowProps> = ({ label, value }) => {
   return (
     <div className="grid grid-cols-[120px_1fr]">
       <span>{label}:</span>
@@ -13,5 +13,3 @@ const MovieDetailRow: FC<MovieDetailRowProps> = ({ label, value }) => {
     </div>
   );
 };
-
-export default MovieDetailRow;

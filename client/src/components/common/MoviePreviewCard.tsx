@@ -1,13 +1,13 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
 import { Play } from "lucide-react";
-import { MoviePreview } from "@/types/movie";
+import type { MoviePreview } from "@/types/movie";
 
 interface MoviePreviewProps {
   moviePreview: MoviePreview;
 }
 
-const MoviePreviewCard: FC<MoviePreviewProps> = ({ moviePreview }) => {
+export const MoviePreviewCard: FC<MoviePreviewProps> = ({ moviePreview }) => {
   const destination = `/movie/${moviePreview.id}`;
 
   return (
@@ -38,5 +38,3 @@ const MoviePreviewCard: FC<MoviePreviewProps> = ({ moviePreview }) => {
     </div>
   );
 };
-
-export default MoviePreviewCard;

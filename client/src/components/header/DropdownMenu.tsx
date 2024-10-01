@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
-import { Genre } from "@/types/genre.ts";
-import { Country } from "@/types/country.ts";
+import type { Genre } from "@/types/genre";
+import type { Country } from "@/types/country";
 
 interface DropdownProps {
   title: "Genre" | "Country";
@@ -9,7 +9,7 @@ interface DropdownProps {
   items: Genre[] | Country[];
 }
 
-const DropdownMenu: FC<DropdownProps> = ({ title, type, items }) => {
+export const DropdownMenu: FC<DropdownProps> = ({ title, type, items }) => {
   return (
     <div className="group relative">
       <button className="p-3 group-hover:text-cyan-300">{title}</button>
@@ -30,5 +30,3 @@ const DropdownMenu: FC<DropdownProps> = ({ title, type, items }) => {
     </div>
   );
 };
-
-export default DropdownMenu;

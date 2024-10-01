@@ -1,13 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
-import { GenreResponse } from "@/types/genre.ts";
 import { useCallback, useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
+import type { GenreResponse } from "@/types/genre";
 
 async function fetchGenres() {
   const response = await fetch("http://localhost:8088/genres");
   return await response.json();
 }
 
-const useGenres = () => {
+export const useGenres = () => {
   const {
     data,
     isLoading: isLoadingGenres,
@@ -31,5 +31,3 @@ const useGenres = () => {
 
   return { genres, genreMap, getGenreId, isLoadingGenres, isGenresError, errorGenres };
 };
-
-export default useGenres;

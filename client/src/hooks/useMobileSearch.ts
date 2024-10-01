@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-const useMobileSearch = () => {
+export const useMobileSearch = () => {
   const [showMobileSearch, setShowMobileSearch] = useState<boolean>(false);
 
   const toggleMobileSearch = useCallback(() => {
@@ -9,5 +9,3 @@ const useMobileSearch = () => {
 
   return { showMobileSearch, toggleMobileSearch };
 };
-
-export default useMobileSearch;

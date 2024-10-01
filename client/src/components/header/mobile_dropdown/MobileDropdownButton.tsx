@@ -7,7 +7,7 @@ interface MobileDropdownButtonProps {
   toggleDropdown: () => void;
 }
 
-const MobileDropdownButton: FC<MobileDropdownButtonProps> = ({ title, isOpen, toggleDropdown }) => {
+export const MobileDropdownButton: FC<MobileDropdownButtonProps> = ({ title, isOpen, toggleDropdown }) => {
   return (
     <button className="inline-flex w-full justify-between py-3 hover:text-cyan-300" onClick={toggleDropdown}>
       {title}
@@ -15,5 +15,3 @@ const MobileDropdownButton: FC<MobileDropdownButtonProps> = ({ title, isOpen, to
     </button>
   );
 };
-
-export default MobileDropdownButton;

@@ -19,9 +19,9 @@ const getMovieRating = async ({ movieId, token }: MovieRatingPayload) => {
 
 export const useGetMovieRating = ({ movieId, token }: MovieRatingPayload) => {
   const { data: movieRating } = useQuery<MovieRating>({
-    queryKey: ["movies", movieId, "rating"],
+    queryKey: ["movies", movieId, "ratings"],
     queryFn: () => getMovieRating({ movieId, token }),
-    enabled: !!movieId && !!token,
+    enabled: !!token,
   });
 
   return { movieRating };

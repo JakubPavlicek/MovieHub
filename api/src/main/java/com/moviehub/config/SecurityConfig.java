@@ -16,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.OPTIONS;
 import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.HttpMethod.PUT;
 
@@ -37,7 +38,8 @@ public class SecurityConfig {
         return http
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authorize ->
-                authorize.requestMatchers(GET).permitAll()
+                authorize.requestMatchers(OPTIONS).permitAll()
+                         .requestMatchers(GET).permitAll()
                          .requestMatchers(GET, "/movies/*/ratings").hasAnyRole(USER, ADMIN)
                          .requestMatchers(POST, "/movies", "/directors", "/actors", "/production-companies", "/genres", "/countries").hasRole(ADMIN)
                          .requestMatchers(POST, "/movies/*/comments", "/comments/*/reactions").hasAnyRole(USER, ADMIN)

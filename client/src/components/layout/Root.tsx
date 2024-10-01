@@ -1,9 +1,9 @@
 import type { FC } from "react";
 import { Outlet } from "react-router-dom";
-import Header from "./Header.tsx";
-import Footer from "./Footer.tsx";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
 
-const Root: FC = () => {
+export const Root: FC = () => {
   return (
     <>
       <Header />
@@ -12,5 +12,3 @@ const Root: FC = () => {
     </>
   );
 };
-
-export default Root;

@@ -1,14 +1,14 @@
 import type { FC } from "react";
-import MovieDetailRow from "@/components/movie/MovieDetailRow";
+import { MovieDetailRow } from "@/components/movie/MovieDetailRow";
 import { formatList } from "@/utils/movieDetails";
-import useMovieDetails from "@/hooks/useMovieDetails";
-import MovieHeader from "@/components/movie/MovieHeader";
+import { useMovieDetails } from "@/hooks/useMovieDetails";
+import { MovieHeader } from "@/components/movie/MovieHeader";
 
 interface MovieDetailsProps {
   movieId: string;
 }
 
-const MovieDetails: FC<MovieDetailsProps> = ({ movieId }) => {
+export const MovieDetails: FC<MovieDetailsProps> = ({ movieId }) => {
   const { movieDetails } = useMovieDetails(movieId);
 
   if (!movieDetails) {
@@ -50,5 +50,3 @@ const MovieDetails: FC<MovieDetailsProps> = ({ movieId }) => {
     </div>
   );
 };
-
-export default MovieDetails;

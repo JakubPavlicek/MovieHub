@@ -6,7 +6,7 @@ export interface SearchBarProps {
   autoFocus: boolean;
 }
 
-const SearchBar: FC<SearchBarProps> = ({ autoFocus }) => {
+export const SearchBar: FC<SearchBarProps> = ({ autoFocus }) => {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
@@ -48,5 +48,3 @@ const SearchBar: FC<SearchBarProps> = ({ autoFocus }) => {
     </div>
   );
 };
-
-export default SearchBar;

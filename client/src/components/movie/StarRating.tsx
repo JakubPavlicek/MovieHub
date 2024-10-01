@@ -1,65 +1,48 @@
-import { FC, useEffect, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 import { Star } from "lucide-react";
 import { useAddMovieRating } from "@/hooks/useAddMovieRating";
-import { useAuth0 } from "@auth0/auth0-react";
 import { useGetMovieRating } from "@/hooks/useGetMovieRating";
 
 interface StarRatingProps {
   movieId: string;
+  token: string | null;
 }
 
-const StarRating: FC<StarRatingProps> = ({ movieId }) => {
+export const StarRating: FC<StarRatingProps> = ({ movieId, token }) => {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
-  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
-  const [token, setToken] = useState<string | null>(null);
-
   const { movieRating } = useGetMovieRating({ movieId, token });
   const { rateMovie } = useAddMovieRating(movieId);
+  const multiplier = 2;
 
   useEffect(() => {
-    const fetchToken = async () => {
-      if (!isAuthenticated) return;
-
-      const fetchedToken = await getAccessTokenSilently();
-      setToken(fetchedToken);
-    };
-    fetchToken();
-  }, [isAuthenticated, getAccessTokenSilently]);
-
-  useEffect(() => {
-    if (movieRating) {
-      setRating(movieRating.rating / 2);
-    }
+    if (!movieRating) return;
+    setRating(movieRating.rating / multiplier);
   }, [movieRating]);
 
-  const handleRating = async (starIndex: number) => {
-    if (!isAuthenticated) return;
-
-    const token = await getAccessTokenSilently();
+  const submitRating = async (starIndex: number) => {
+    if (!token) return;
     setRating(starIndex);
-    const userRating = starIndex * 2;
+    const userRating = starIndex * multiplier;
     await rateMovie({ movieId, userRating, token });
   };
 
-  return (
-    <div className="flex text-white">
-      {Array.from({ length: 5 }, (_, starIndex) => {
-        starIndex++;
+  const renderStars = () =>
+    Array.from({ length: 5 }, (_, index) => {
+      const starIndex = index + 1;
+      const isFilled = starIndex <= (hoverRating || rating);
 
-        return (
-          <Star
-            key={starIndex}
-            className={`cursor-pointer ${starIndex <= (hoverRating || rating) ? "fill-amber-300" : "fill-neutral-500"}`}
-            strokeWidth={0}
-            onMouseEnter={() => setHoverRating(starIndex)}
-            onMouseLeave={() => setHoverRating(0)}
-            onClick={() => handleRating(starIndex)}
-          />
-        );
-      })}
-    </div>
-  );
+      return (
+        <Star
+          key={starIndex}
+          className={`cursor-pointer ${isFilled ? "fill-amber-300" : "fill-neutral-500"}`}
+          strokeWidth={0}
+          onMouseEnter={() => setHoverRating(starIndex)}
+          onMouseLeave={() => setHoverRating(0)}
+          onClick={() => submitRating(starIndex)}
+        />
+      );
+    });
+
+  return <div className="flex text-white">{renderStars()}</div>;
 };
-
-export default StarRating;

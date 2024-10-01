@@ -1,15 +1,15 @@
 import type { FC } from "react";
 import { ChevronLeft } from "lucide-react";
 import { Link } from "react-router-dom";
-import useGenres from "@/hooks/useGenres.ts";
-import useCountries from "@/hooks/useCountries.ts";
-import MobileDropdownMenu from "./mobile_dropdown/MobileDropdownMenu.tsx";
+import { useGenres } from "@/hooks/useGenres";
+import { useCountries } from "@/hooks/useCountries";
+import { MobileDropdownMenu } from "@/components/header/mobile_dropdown/MobileDropdownMenu";
 
 interface MobileMenuProps {
   toggleMobileMenu: () => void;
 }
 
-const MobileMenu: FC<MobileMenuProps> = ({ toggleMobileMenu }) => {
+export const MobileMenu: FC<MobileMenuProps> = ({ toggleMobileMenu }) => {
   const { genres } = useGenres();
   const { countries } = useCountries();
 
@@ -31,5 +31,3 @@ const MobileMenu: FC<MobileMenuProps> = ({ toggleMobileMenu }) => {
     </nav>
   );
 };
-
-export default MobileMenu;

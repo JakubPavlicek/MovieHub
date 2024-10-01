@@ -5,7 +5,7 @@ interface ChatInputProps {
   sendMessage: (message: string) => void;
 }
 
-const ChatInput: FC<ChatInputProps> = ({ sendMessage }) => {
+export const ChatInput: FC<ChatInputProps> = ({ sendMessage }) => {
   const [message, setMessage] = useState<string>("");
 
   const submitMessage = (text: string) => {
@@ -39,5 +39,3 @@ const ChatInput: FC<ChatInputProps> = ({ sendMessage }) => {
     </div>
   );
 };
-
-export default ChatInput;

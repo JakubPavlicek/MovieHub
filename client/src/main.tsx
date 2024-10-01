@@ -4,13 +4,13 @@ import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Auth0Provider } from "@auth0/auth0-react";
-import Root from "@/components/layout/Root.tsx";
-import HomePage from "@/pages/HomePage.tsx";
-import GenrePage from "@/pages/GenrePage.tsx";
-import CountryPage from "@/pages/CountryPage.tsx";
-import SearchPage from "@/pages/SearchPage.tsx";
-import ErrorPage from "@/pages/ErrorPage.tsx";
-import MoviePage from "@/pages/MoviePage.tsx";
+import { Root } from "@/components/layout/Root";
+import { HomePage } from "@/pages/HomePage";
+import { GenrePage } from "@/pages/GenrePage";
+import { CountryPage } from "@/pages/CountryPage";
+import { SearchPage } from "@/pages/SearchPage";
+import { ErrorPage } from "@/pages/ErrorPage";
+import { MoviePage } from "@/pages/MoviePage";
 
 // https://auth0.com/blog/complete-guide-to-react-user-authentication/
 

@@ -2,7 +2,7 @@ import type { FC } from "react";
 import { isRouteErrorResponse, NavLink, useRouteError } from "react-router-dom";
 import { CircleChevronLeft } from "lucide-react";
 
-const ErrorPage: FC = () => {
+export const ErrorPage: FC = () => {
   const error = useRouteError();
 
   if (isRouteErrorResponse(error)) {
@@ -22,5 +22,3 @@ const ErrorPage: FC = () => {
 
   return <div>Something went wrong!</div>;
 };
-
-export default ErrorPage;

@@ -6,7 +6,7 @@ interface ChatButtonProps {
   setIsChatOpened: (prev: boolean) => void;
 }
 
-const ChatButton: FC<ChatButtonProps> = ({ isChatOpened, setIsChatOpened }) => {
+export const ChatButton: FC<ChatButtonProps> = ({ isChatOpened, setIsChatOpened }) => {
   return (
     <div className="absolute bottom-8 right-6">
       <button
@@ -18,5 +18,3 @@ const ChatButton: FC<ChatButtonProps> = ({ isChatOpened, setIsChatOpened }) => {
     </div>
   );
 };
-
-export default ChatButton;

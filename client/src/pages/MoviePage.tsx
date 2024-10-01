@@ -1,12 +1,12 @@
 import type { FC } from "react";
 import { useParams } from "react-router-dom";
-import ButtonSection from "@/components/movie/ButtonSection";
+import { ButtonSection } from "@/components/movie/ButtonSection";
+import { MovieDetails } from "@/components/movie/MovieDetails";
 import placeholder from "@/assets/video/placeholder.mp4";
-import MovieDetails from "@/components/movie/MovieDetails";
 
 // https://flixwave.watch/home/
 
-const MoviePage: FC = () => {
+export const MoviePage: FC = () => {
   const { movieId = "" } = useParams();
 
   return (
@@ -25,5 +25,3 @@ const MoviePage: FC = () => {
     </main>
   );
 };
-
-export default MoviePage;

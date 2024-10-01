@@ -6,7 +6,7 @@ interface MobileSearchButtonProps {
   toggleMobileSearch: () => void;
 }
 
-const MobileSearchButton: FC<MobileSearchButtonProps> = ({ showMobileSearch, toggleMobileSearch }) => {
+export const MobileSearchButton: FC<MobileSearchButtonProps> = ({ showMobileSearch, toggleMobileSearch }) => {
   return (
     <button
       className={`hover:text-cyan-300 ${showMobileSearch ? "text-cyan-300" : "text-white"}`}
@@ -16,5 +16,3 @@ const MobileSearchButton: FC<MobileSearchButtonProps> = ({ showMobileSearch, tog
     </button>
   );
 };
-
-export default MobileSearchButton;

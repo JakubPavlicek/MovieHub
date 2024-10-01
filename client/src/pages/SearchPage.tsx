@@ -1,10 +1,10 @@
 import { type FC, useMemo } from "react";
 import type { MovieSearchParams } from "@/types/movie";
-import useSearchMovies from "@/hooks/useSearchMovies";
+import { useSearchMovies } from "@/hooks/useSearchMovies";
 import { useParams } from "react-router-dom";
-import MoviePreviewList from "@/components/common/MoviePreviewList";
+import { MoviePreviewList } from "@/components/common/MoviePreviewList";
 
-const SearchPage: FC = () => {
+export const SearchPage: FC = () => {
   const { query } = useParams();
   const movieSearchParams: MovieSearchParams = { keyword: query };
   const { movies } = useSearchMovies(movieSearchParams);
@@ -22,5 +22,3 @@ const SearchPage: FC = () => {
     </main>
   );
 };
-
-export default SearchPage;

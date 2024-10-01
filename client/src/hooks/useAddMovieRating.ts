@@ -21,7 +21,7 @@ export const useAddMovieRating = (movieId: string) => {
   const queryClient = useQueryClient();
 
   const { mutateAsync: rateMovie } = useMutation({
-    mutationKey: ["movies", movieId, "rating"],
+    mutationKey: ["movies", movieId, "ratings"],
     mutationFn: submitMovieRating,
     onSuccess: async () => await queryClient.invalidateQueries({ queryKey: ["movies", movieId] }),
   });

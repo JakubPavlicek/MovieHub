@@ -1,10 +1,10 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
-import DropdownMenu from "./DropdownMenu.tsx";
-import useGenres from "@/hooks/useGenres.ts";
-import useCountries from "@/hooks/useCountries.ts";
+import { useGenres } from "@/hooks/useGenres";
+import { useCountries } from "@/hooks/useCountries";
+import { DropdownMenu } from "@/components/header/DropdownMenu";
 
-const NavMenu: FC = () => {
+export const NavMenu: FC = () => {
   const { genres } = useGenres();
   const { countries } = useCountries();
 
@@ -18,5 +18,3 @@ const NavMenu: FC = () => {
     </div>
   );
 };
-
-export default NavMenu;

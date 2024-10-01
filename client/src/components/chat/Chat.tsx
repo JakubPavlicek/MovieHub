@@ -1,11 +1,11 @@
 import { type FC, useState } from "react";
 import { useChat } from "@/hooks/useChat";
 import { ChatMessages } from "@/components/chat/ChatMessages";
-import ChatButton from "@/components/chat/ChatButton";
-import ChatHeader from "@/components/chat/ChatHeader";
-import ChatInput from "@/components/chat/ChatInput";
+import { ChatButton } from "@/components/chat/ChatButton";
+import { ChatHeader } from "@/components/chat/ChatHeader";
+import { ChatInput } from "@/components/chat/ChatInput";
 
-const Chat: FC = () => {
+export const Chat: FC = () => {
   const [isChatOpened, setIsChatOpened] = useState<boolean>(false);
   const { messages, sendMessage } = useChat();
 
@@ -22,5 +22,3 @@ const Chat: FC = () => {
     </>
   );
 };
-
-export default Chat;

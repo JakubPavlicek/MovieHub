@@ -1,9 +1,9 @@
 import type { FC } from "react";
-import useMovies from "@/hooks/useMovies";
-import MoviePreviewList from "@/components/common/MoviePreviewList";
-import Chat from "@/components/chat/Chat";
+import { useMovies } from "@/hooks/useMovies";
+import { MoviePreviewList } from "@/components/common/MoviePreviewList";
+import { Chat } from "@/components/chat/Chat";
 
-const HomePage: FC = () => {
+export const HomePage: FC = () => {
   const { movies } = useMovies();
 
   return (
@@ -18,5 +18,3 @@ const HomePage: FC = () => {
     </main>
   );
 };
-
-export default HomePage;

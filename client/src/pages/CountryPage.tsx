@@ -1,10 +1,10 @@
 import { type FC, useEffect, useMemo } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useCountries from "@/hooks/useCountries";
-import useCountryMovies from "@/hooks/useCountryMovies";
-import MoviePreviewList from "@/components/common/MoviePreviewList";
+import { useCountries } from "@/hooks/useCountries";
+import { useCountryMovies } from "@/hooks/useCountryMovies";
+import { MoviePreviewList } from "@/components/common/MoviePreviewList";
 
-const CountryPage: FC = () => {
+export const CountryPage: FC = () => {
   const navigate = useNavigate();
   const { countryName = "" } = useParams();
   const { countryMap, getCountryId, isLoadingCountries } = useCountries();
@@ -32,5 +32,3 @@ const CountryPage: FC = () => {
     </main>
   );
 };
-
-export default CountryPage;

@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-const useMobileMenu = () => {
+export const useMobileMenu = () => {
   const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
 
   const toggleMobileMenu = useCallback(() => {
@@ -9,5 +9,3 @@ const useMobileMenu = () => {
 
   return { showMobileMenu, toggleMobileMenu };
 };
-
-export default useMobileMenu;

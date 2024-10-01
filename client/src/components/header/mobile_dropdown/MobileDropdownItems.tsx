@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
-import { Genre } from "@/types/genre.ts";
-import { Country } from "@/types/country.ts";
+import type { Genre } from "@/types/genre";
+import type { Country } from "@/types/country";
 
 interface MobileDropdownItemsProps {
   isOpen: boolean;
@@ -9,7 +9,7 @@ interface MobileDropdownItemsProps {
   items: Genre[] | Country[];
 }
 
-const MobileDropdownItems: FC<MobileDropdownItemsProps> = ({ isOpen, type, items }) => {
+export const MobileDropdownItems: FC<MobileDropdownItemsProps> = ({ isOpen, type, items }) => {
   return (
     <div
       className={`grid w-full transition-all duration-300 ${isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
@@ -28,5 +28,3 @@ const MobileDropdownItems: FC<MobileDropdownItemsProps> = ({ isOpen, type, items
     </div>
   );
 };
-
-export default MobileDropdownItems;

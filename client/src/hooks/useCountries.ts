@@ -1,13 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
-import { CountryReponse } from "@/types/country.ts";
 import { useCallback, useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
+import type { CountryReponse } from "@/types/country";
 
 async function fetchCountries() {
   const response = await fetch("http://localhost:8088/countries");
   return await response.json();
 }
 
-const useCountries = () => {
+export const useCountries = () => {
   const {
     data,
     isLoading: isLoadingCountries,
@@ -31,5 +31,3 @@ const useCountries = () => {
 
   return { countries, countryMap, getCountryId, isLoadingCountries, isErrorCountries, errorCountries };
 };
-
-export default useCountries;

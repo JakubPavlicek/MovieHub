@@ -1,8 +1,8 @@
-import { Director } from "@/types/director.ts";
-import { Actor } from "@/types/actor.ts";
-import { ProductionCompany } from "@/types/productionCompany.ts";
-import { Genre } from "@/types/genre.ts";
-import { Country } from "@/types/country.ts";
+import type { Director } from "@/types/director";
+import type { Actor } from "@/types/actor";
+import type { ProductionCompany } from "@/types/productionCompany";
+import type { Genre } from "@/types/genre";
+import type { Country } from "@/types/country";
 
 export interface MovieDetails {
   id: string;

@@ -6,7 +6,7 @@ interface MobileMenuButtonProps {
   toggleMobileMenu: () => void;
 }
 
-const MobileMenuButton: FC<MobileMenuButtonProps> = ({ showMobileMenu, toggleMobileMenu }) => {
+export const MobileMenuButton: FC<MobileMenuButtonProps> = ({ showMobileMenu, toggleMobileMenu }) => {
   return (
     <button
       className={`hover:text-cyan-300 ${showMobileMenu ? "text-cyan-300" : "text-white"}`}
@@ -16,5 +16,3 @@ const MobileMenuButton: FC<MobileMenuButtonProps> = ({ showMobileMenu, toggleMob
     </button>
   );
 };
-
-export default MobileMenuButton;
