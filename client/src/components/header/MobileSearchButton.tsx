@@ -9,7 +9,7 @@ interface MobileSearchButtonProps {
 const MobileSearchButton: FC<MobileSearchButtonProps> = ({ showMobileSearch, toggleMobileSearch }) => {
   return (
     <button
-      className={`hover:text-teal-300 ${showMobileSearch ? "text-teal-300" : "text-white"}`}
+      className={`hover:text-cyan-300 ${showMobileSearch ? "text-cyan-300" : "text-white"}`}
       onClick={toggleMobileSearch}
     >
       <Search size={32} />

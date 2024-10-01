@@ -28,7 +28,7 @@ const ChatInput: FC<ChatInputProps> = ({ client }) => {
       <input
         type="text"
         placeholder="Write a message"
-        className="w-full rounded-full border-transparent bg-gray-700 px-4 text-white placeholder:text-gray-400 focus:border-teal-300 focus:outline-none"
+        className="w-full rounded-full border-transparent bg-gray-700 px-4 text-white placeholder:text-gray-400 focus:border-cyan-300 focus:outline-none"
         value={text}
         onChange={(e) => setText(e.target.value)}
         onKeyDown={handleEnterKey}

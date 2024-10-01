@@ -6,7 +6,7 @@ import LoginButton from "@/components/header/LoginButton";
 import MobileSearchButton from "@/components/header/MobileSearchButton";
 import Logo from "@/components/header/Logo";
 import NavMenu from "@/components/header/NavMenu";
-import ProfileDropdown from "@/components/header/ProfileDropdown";
+import ProfileDropdown from "@/components/header/profile_dropdown/ProfileDropdown";
 import MobileMenu from "@/components/header/MobileMenu";
 import useMobileMenu from "@/hooks/useMobileMenu";
 import useMobileSearch from "@/hooks/useMobileSearch";

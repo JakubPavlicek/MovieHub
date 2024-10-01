@@ -9,7 +9,7 @@ interface MobileMenuButtonProps {
 const MobileMenuButton: FC<MobileMenuButtonProps> = ({ showMobileMenu, toggleMobileMenu }) => {
   return (
     <button
-      className={`hover:text-teal-300 ${showMobileMenu ? "text-teal-300" : "text-white"}`}
+      className={`hover:text-cyan-300 ${showMobileMenu ? "text-cyan-300" : "text-white"}`}
       onClick={toggleMobileMenu}
     >
       <Menu size={32} />

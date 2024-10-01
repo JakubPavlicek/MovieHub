@@ -10,7 +10,7 @@ const NavMenu: FC = () => {
 
   return (
     <div className="flex items-center justify-center xl:gap-3">
-      <Link to="/" className="p-3 hover:text-teal-300">
+      <Link to="/" className="p-3 hover:text-cyan-300">
         Home
       </Link>
       <DropdownMenu title="Genre" type="genre" items={genres} />

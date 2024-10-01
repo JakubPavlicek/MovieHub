@@ -3,7 +3,7 @@ import { ChevronLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import useGenres from "@/hooks/useGenres.ts";
 import useCountries from "@/hooks/useCountries.ts";
-import MobileDropdownMenu from "./MobileDropdownMenu.tsx";
+import MobileDropdownMenu from "./mobile_dropdown/MobileDropdownMenu.tsx";
 
 interface MobileMenuProps {
   toggleMobileMenu: () => void;
@@ -21,7 +21,7 @@ const MobileMenu: FC<MobileMenuProps> = ({ toggleMobileMenu }) => {
           Close menu
         </button>
       </div>
-      <Link to="/" className="w-full py-3 hover:text-teal-300">
+      <Link to="/" className="w-full py-3 hover:text-cyan-300">
         Home
       </Link>
       <hr className="w-full border-neutral-700" />

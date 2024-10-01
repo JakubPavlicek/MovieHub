@@ -7,10 +7,10 @@ const LogoutButton: FC = () => {
 
   return (
     <button
-      className="inline-flex items-center hover:text-cyan-300"
+      className="p inline-flex items-center gap-3 text-red-500 hover:text-red-300"
       onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
     >
-      <LogOut size={22} className="lg:mr-3" />
+      <LogOut size={22} />
       Logout
     </button>
   );
