@@ -18,6 +18,7 @@ components:
       schema:
         type: string
         format: uuid
+        maxLength: 255
       required: true
       example: 6c42ccf6-f635-48f8-9af5-4c80e6812dbf
     page:
@@ -229,6 +230,7 @@ components:
         type: array
         default: [ "like:" ]
         example: [ "eq:James Wan" ]
+        maxItems: 30
         items:
           type: string
           example: "eq:James Wan"
@@ -254,6 +256,7 @@ components:
         type: array
         default: [ "like:" ]
         example: [ "eq:Horror" ]
+        maxItems: 30
         items:
           type: string
           example: "eq:Horror"
@@ -279,6 +282,7 @@ components:
         type: array
         default: [ "like:" ]
         example: [ "eq:South Korea" ]
+        maxItems: 30
         items:
           type: string
           example: "eq:South Korea"
@@ -324,6 +328,7 @@ components:
       schema:
         type: string
         format: uuid
+        maxLength: 255
       description: The director ID.
       example: f22608f8-43bb-4a69-b77a-cb2e3eaf0dfa
 
@@ -334,6 +339,7 @@ components:
       schema:
         type: string
         format: uuid
+        maxLength: 255
       description: The actor ID.
       example: c61a0a7c-c45e-41a0-9e6c-3f86beea1802
 
@@ -364,6 +370,7 @@ components:
       schema:
         type: string
         format: uuid
+        maxLength: 255
       description: The production company ID.
       example: 8e9334d2-e021-4ec3-b34b-8dc57032e362
 
@@ -427,6 +434,7 @@ components:
         A universally unique identifier (UUID) used to uniquely identify entities.
         It is a 36-character string consisting of hexadecimal digits and hyphens.
       example: 872e1723-09ac-461d-9f54-d4c221269bed
+      pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
       maxLength: 255
       nullable: false
     MovieName:
@@ -435,12 +443,14 @@ components:
         The title of a movie.
         This field should contain the movie's name and is restricted to a maximum length of 100 characters.
       example: The Conjuring
+      pattern: "^[A-Za-z0-9.,'\"&()\\-: ]+$"
       minLength: 1
       maxLength: 100
       nullable: false
     MovieReleaseDate:
       type: string
       format: date
+      pattern: "^([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))$"
       description: |
         The release date of the movie, formatted as `YYYY-MM-DD`.
         This indicates when the movie was officially released.
@@ -462,6 +472,7 @@ components:
         This field must be a positive integer representing the total running time of the movie.
       example: 112
       minimum: 1
+      maximum: 1000
       nullable: false
     MovieDescription:
       type: string
@@ -470,6 +481,8 @@ components:
         This field can contain up to 1000 characters to provide a comprehensive overview.
       example: Paranormal investigators Ed and Lorraine Warren work to help a family terrorized by a dark presence in their farmhouse.
       minLength: 1
+      maxLength: 1000
+      pattern: "^[\x20-\x7E]+$"
       nullable: false
     MovieRating:
       type: number
@@ -483,6 +496,7 @@ components:
       nullable: false
     Rating:
       description: A float value representing the movie's rating.
+      additionalProperties: false
       type: object
       properties:
         rating:
@@ -502,6 +516,7 @@ components:
         The URL to the movie's poster image.
         This link points to the visual representation of the movie used for promotional purposes.
       example: 'https://image.tmdb.org/t/p/original/wVYREutTvI2tmxr6ujrHT704wGF.jpg'
+      format: "^(https?://)?(www\\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$"
       minLength: 1
       nullable: false
     MovieTrailerUrl:
@@ -510,6 +525,7 @@ components:
         The URL to the movie's trailer video.
         This link directs to the promotional trailer available online, typically hosted on platforms like YouTube.
       example: 'https://www.youtube.com/watch?v=k10ETZ41q5o'
+      format: "^(https?://)?(www\\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$"
       minLength: 1
       nullable: false
     MovieFilename:
@@ -517,6 +533,7 @@ components:
       description: |
         The filename of the movie, which serves as a reference to the corresponding video file in the storage.
       example: placeholder.mp4
+      format: "^[\\w,\\s-]+\\.[A-Za-z0-9]{3,4}$"
       minLength: 1
       maxLength: 255
       nullable: false
@@ -526,6 +543,7 @@ components:
         The full name of a person, such as an actor or director.
         This field contains up to 50 characters and represents the individual's name.
       example: Patrick Wilson
+      pattern: "^[A-Za-zÀ-ÿ.'-]{1,50}(?:\\s[A-Za-zÀ-ÿ.'-]{1,50}){0,4}$"
       minLength: 1
       maxLength: 50
       nullable: false
@@ -535,6 +553,8 @@ components:
         A biography or background information about a person, including their career and personal details.
         This field provides a comprehensive overview of the individual's life and achievements.
       minLength: 1
+      maxLength: 2000
+      pattern: "^[\x20-\x7E]+$"
       example: |
         Patrick Joseph Wilson was born in Norfolk, Virginia and raised in St. Petersburg, Florida, the son of Mary Kathryn (Burton), a voice teacher and professional singer, and John Franklin Wilson, a news anchor.
         Wilson has a B.F.A. in Drama from Carnegie-Mellon University.
@@ -551,6 +571,7 @@ components:
       minLength: 1
       maxLength: 100
       example: Detective
+      pattern: "^[\x20-\x7E]+$"
       nullable: false
     ProductionCompanyName:
       type: string
@@ -558,6 +579,7 @@ components:
       description: |
         The name of the company that produced the movie.
         This field contains up to 100 characters and represents the organization responsible for the film's production.
+      pattern: "^[\x20-\x7E]+$"
       minLength: 1
       maxLength: 100
       nullable: false
@@ -579,6 +601,7 @@ components:
       description: |
         The genre or category of the movie.
         This field represents the type of movie, such as Horror or Comedy, and is limited to 15 characters.
+      pattern: "^[A-Za-z\\- ]+$"
       minLength: 1
       maxLength: 15
       nullable: false
@@ -588,6 +611,7 @@ components:
         The name of the country where the movie was produced or set.
         This field identifies the geographical location associated with the movie and is limited to 15 characters.
       example: Italy
+      pattern: "^[A-Za-z\\- ]+$"
       minLength: 1
       maxLength: 15
       nullable: false
@@ -595,6 +619,7 @@ components:
     CreatedAt:
       type: string
       format: date-time
+      pattern: "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(Z|([+-]\\d{2}:\\d{2}))?$"
       description: |
         The creation date of a comment.
       example: "2017-07-21T17:32:28Z"
@@ -602,11 +627,15 @@ components:
     Text:
       type: string
       example: "Very interesting movie"
+      pattern: "^.+$"
+      format: "^[\\w\\s.,!?'-]+$"
       minLength: 1
+      maxLength: 500
       nullable: false
 
     ReactionTypeRequest:
       type: object
+      additionalProperties: false
       properties:
         reactionType:
           type: string
@@ -625,6 +654,7 @@ components:
       description: |
         A unique identifier used to uniquely identify users.
       example: user|12c5ja230ac8979cac9acv0v
+      format: "^[a-zA-Z0-9._-]{1,15}\\|[a-z0-9]+$"
       maxLength: 255
       nullable: false
 
@@ -642,6 +672,7 @@ components:
     SortDTO:
       type: object
       description: "Represents sorting information for ordering query results based on one or more criteria."
+      additionalProperties: false
       properties:
         empty:
           type: boolean
@@ -665,6 +696,7 @@ components:
     PageableDTO:
       type: object
       description: "Represents pagination and sorting information for querying a paginated dataset."
+      additionalProperties: false
       properties:
         pageNumber:
           type: integer
@@ -697,10 +729,12 @@ components:
     MoviePage:
       type: object
       description: "Represents a page of movies, including pagination and sorting information."
+      additionalProperties: false
       properties:
         content:
           type: array
           description: "List of movies."
+          maxItems: 50
           items:
             $ref: '#/components/schemas/MoviePreviewResponse'
         pageable:
@@ -750,10 +784,12 @@ components:
     DirectorPage:
       type: object
       description: "Represents a page of directors, including pagination and sorting information."
+      additionalProperties: false
       properties:
         content:
           type: array
           description: "List of directors."
+          maxItems: 50
           items:
             $ref: '#/components/schemas/DirectorDetailsResponse'
         pageable:
@@ -803,10 +839,12 @@ components:
     ActorPage:
       type: object
       description: "Represents a page of actors, including pagination and sorting information."
+      additionalProperties: false
       properties:
         content:
           type: array
           description: "List of actors."
+          maxItems: 50
           items:
             $ref: '#/components/schemas/ActorDetailsResponse'
         pageable:
@@ -856,10 +894,12 @@ components:
     ProductionCompanyPage:
       type: object
       description: "Represents a page of production companies, including pagination and sorting information."
+      additionalProperties: false
       properties:
         content:
           type: array
           description: "List of production companies."
+          maxItems: 50
           items:
             $ref: '#/components/schemas/ProductionCompanyDetailsResponse'
         pageable:
@@ -909,10 +949,12 @@ components:
     CommentPage:
       type: object
       description: "Represents a page of comments, including pagination and sorting information."
+      additionalProperties: false
       properties:
         content:
           type: array
           description: "List of comments."
+          maxItems: 50
           items:
             $ref: '#/components/schemas/CommentDetailsResponse'
         pageable:
@@ -981,18 +1023,22 @@ components:
           $ref: '#/components/schemas/PersonName'
         cast:
           type: array
+          maxItems: 50
           items:
             $ref: '#/components/schemas/MovieCastRequest'
         productionCompanies:
           type: array
+          maxItems: 50
           items:
             $ref: '#/components/schemas/ProductionCompanyName'
         genres:
           type: array
+          maxItems: 50
           items:
             $ref: '#/components/schemas/GenreName'
         countries:
           type: array
+          maxItems: 50
           items:
             $ref: '#/components/schemas/CountryName'
 
@@ -1025,6 +1071,7 @@ components:
     AddCommentRequest:
       type: object
       description: Schema for the requst body when creating a comment.
+      additionalProperties: false
       properties:
         text:
           $ref: '#/components/schemas/Text'
@@ -1100,18 +1147,10 @@ components:
         role:
           $ref: '#/components/schemas/ActorRole'
 
-    MovieCastResponse:
-      type: object
-      description: Represents the basic details of a cast member in a movie.
-      properties:
-        name:
-          $ref: '#/components/schemas/PersonName'
-        role:
-          $ref: '#/components/schemas/ActorRole'
-
     MovieCastDetailsResponse:
       type: object
       description: Provides detailed information about a movie's cast member.
+      additionalProperties: false
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1123,6 +1162,7 @@ components:
     MoviePreviewResponse:
       type: object
       description: Offers preview representation of the movie.
+      additionalProperties: false
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1136,12 +1176,14 @@ components:
           $ref: '#/components/schemas/MoviePosterUrl'
         genres:
           type: array
+          maxItems: 50
           items:
             $ref: '#/components/schemas/GenreName'
 
     MovieDetailsResponse:
       type: object
       description: Offers comprehensive details about a movie.
+      additionalProperties: false
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1167,40 +1209,48 @@ components:
           $ref: '#/components/schemas/DirectorResponse'
         cast:
           type: array
+          maxItems: 50
           items:
             $ref: '#/components/schemas/MovieCastDetailsResponse'
         productionCompanies:
           type: array
+          maxItems: 50
           items:
             $ref: '#/components/schemas/ProductionCompanyDetailsResponse'
         genres:
           type: array
+          maxItems: 50
           items:
             $ref: '#/components/schemas/GenreDetailsResponse'
         countries:
           type: array
+          maxItems: 50
           items:
             $ref: '#/components/schemas/CountryDetailsResponse'
 
     DirectorResponse:
       type: object
       description: Provides basic information about a director.
+      additionalProperties: false
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
         name:
           type: string
           example: James Wan
+          maxLength: 255
 
     ProductionCompanyDetailsResponse:
       type: object
       description: Provides details about a production company.
+      additionalProperties: false
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
         name:
           type: string
           example: A24
+          maxLength: 255
 
     GenreDetailsResponse:
       type: object
@@ -1211,20 +1261,24 @@ components:
         name:
           type: string
           example: Horror
+          maxLength: 255
 
     CountryDetailsResponse:
       type: object
       description: Provides details about a country.
+      additionalProperties: false
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
         name:
           type: string
           example: Italy
+          maxLength: 255
 
     DirectorDetailsResponse:
       type: object
       description: Contains detailed information about a director.
+      additionalProperties: false
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1238,6 +1292,7 @@ components:
     ActorDetailsResponse:
       type: object
       description: Contains detailed information about an actor.
+      additionalProperties: false
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1251,6 +1306,7 @@ components:
     CommentDetailsResponse:
       type: object
       description: Contains detailed information about a comment.
+      additionalProperties: false
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1266,9 +1322,11 @@ components:
     GenreListResponse:
       type: object
       description: Provides a list of all genres available in the system.
+      additionalProperties: false
       properties:
         genres:
           type: array
+          maxItems: 50
           items:
             $ref: '#/components/schemas/GenreDetailsResponse'
           example:
@@ -1280,9 +1338,11 @@ components:
     CountryListResponse:
       type: object
       description: Provides a list of all countries available in the system.
+      additionalProperties: false
       properties:
         countries:
           type: array
+          maxItems: 50
           items:
             $ref: '#/components/schemas/CountryDetailsResponse'
           example:
@@ -1295,15 +1355,18 @@ components:
       type: object
       title: Problem Detail
       description: "A generic error."
+      additionalProperties: false
       properties:
         type:
           type: string
           description: "A URI reference that identifies the problem type."
           example: "http://localhost:8080/movie-not-found"
+          maxLength: 1000
         title:
           type: string
           description: "A short, human-readable summary of the problem type."
           example: Document Not Found
+          maxLength: 255
         status:
           type: number
           description: "The HTTP status code."
@@ -1312,22 +1375,27 @@ components:
           type: string
           description: "A human-readable explanation specific to this occurrence of the problem."
           example: "Movie with ID: 11ae56ed-240e-4d4d-8d3c-f135d9394ab3 not found"
+          maxLength: 1000
         instance:
           type: string
           description: "A URI reference that identifies the specific occurrence of the problem."
           example: "/movies/11ae56ed-240e-4d4d-8d3c-f135d9394ab3"
+          maxLength: 1000
         contextInfo:
           type: object
           description: "A free-form based object that contains additional context about the error."
+          additionalProperties: false
           properties:
             genre:
               type: string
               description: "More details on the genre error."
               example: "it must be between 1 and 15 characters long"
+              maxLength: 1000
             country:
               type: string
               description: "More details on the country error."
               example: "it must be between 1 and 15 characters long"
+              maxLength: 1000
 
 paths:
   /movies:
@@ -1490,7 +1558,7 @@ paths:
             schema:
               $ref: '#/components/schemas/AddCommentRequest'
       responses:
-        '200':
+        '204':
           description: Sucessfully added a comment for the specified movie.
 
     get:
@@ -1784,6 +1852,7 @@ paths:
           application/json:
             schema:
               type: object
+              additionalProperties: false
               properties:
                 name:
                   $ref: '#/components/schemas/ProductionCompanyName'
@@ -1851,6 +1920,7 @@ paths:
           application/json:
             schema:
               type: object
+              additionalProperties: false
               properties:
                 name:
                   $ref: '#/components/schemas/ProductionCompanyName'
@@ -1899,6 +1969,7 @@ paths:
           application/json:
             schema:
               type: object
+              additionalProperties: false
               properties:
                 name:
                   $ref: '#/components/schemas/GenreName'
@@ -1963,6 +2034,7 @@ paths:
           application/json:
             schema:
               type: object
+              additionalProperties: false
               properties:
                 name:
                   $ref: '#/components/schemas/GenreName'
@@ -2012,6 +2084,7 @@ paths:
           application/json:
             schema:
               type: object
+              additionalProperties: false
               properties:
                 name:
                   $ref: '#/components/schemas/CountryName'
@@ -2076,6 +2149,7 @@ paths:
           application/json:
             schema:
               type: object
+              additionalProperties: false
               properties:
                 name:
                   $ref: '#/components/schemas/CountryName'

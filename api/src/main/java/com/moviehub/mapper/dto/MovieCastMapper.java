@@ -2,7 +2,6 @@ package com.moviehub.mapper.dto;
 
 import com.moviehub.dto.MovieCastDetailsResponse;
 import com.moviehub.dto.MovieCastRequest;
-import com.moviehub.dto.MovieCastResponse;
 import com.moviehub.entity.Actor;
 import com.moviehub.entity.MovieCast;
 
@@ -29,15 +28,6 @@ public class MovieCastMapper {
                                                              .name(cast.getActor().getName())
                                                              .role(cast.getRole())
                                                              .build())
-                        .toList();
-    }
-
-    public static List<MovieCastResponse> mapToMovieCastResponse(List<MovieCast> movieCast) {
-        return movieCast.stream()
-                        .map(cast -> MovieCastResponse.builder()
-                                                      .name(cast.getActor().getName())
-                                                      .role(cast.getRole())
-                                                      .build())
                         .toList();
     }
 
