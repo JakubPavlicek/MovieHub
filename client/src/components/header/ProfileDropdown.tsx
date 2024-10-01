@@ -1,5 +1,5 @@
 import { type FC, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, ChevronUp, CircleUserRound } from "lucide-react";
 import { useAuth0 } from "@auth0/auth0-react";
 import LogoutButton from "@/components/header/LogoutButton";
 
@@ -16,10 +16,14 @@ const ProfileDropdown: FC = () => {
         onClick={() => setShowDropdown(!showDropdown)}
       >
         <span className="hidden truncate lg:block lg:max-w-36">{user?.nickname}</span>
-        <ChevronDown size={20} />
+        {showDropdown ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
       </button>
       {showDropdown && (
-        <div className="absolute top-10">
+        <div className="absolute right-0 top-12 flex flex-col gap-2 bg-gray-500 p-2">
+          <button className="inline-flex items-center gap-3 hover:text-cyan-300">
+            <CircleUserRound size={22} />
+            Profile
+          </button>
           <LogoutButton />
         </div>
       )}
