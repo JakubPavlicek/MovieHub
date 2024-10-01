@@ -13,8 +13,10 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
-public interface MovieRepository extends JpaRepository<Movie, String>, JpaSpecificationExecutor<Movie> {
+public interface MovieRepository extends JpaRepository<Movie, UUID>, JpaSpecificationExecutor<Movie> {
 
     Page<Movie> findAllByDirector(Director director, Pageable pageable);
 

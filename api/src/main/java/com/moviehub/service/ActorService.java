@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @Transactional
 @AllArgsConstructor
@@ -41,12 +43,12 @@ public class ActorService {
         return actorRepository.save(actor);
     }
 
-    public Actor getActor(String actorId) {
+    public Actor getActor(UUID actorId) {
         return actorRepository.findById(actorId)
                               .orElseThrow(() -> new ActorNotFoundException("Actor with ID: " + actorId + " not found"));
     }
 
-    public Actor updateActor(String actorId, Actor incomingActor) {
+    public Actor updateActor(UUID actorId, Actor incomingActor) {
         Actor existingActor = getActor(actorId);
 
         if (incomingActor.getName() != null) {

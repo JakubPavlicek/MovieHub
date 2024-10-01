@@ -69,7 +69,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'e5a84c55-daa0-4a61-a8ff-7c4b6de8b8a0'
+                  value: e5a84c55-daa0-4a61-a8ff-7c4b6de8b8a0
               - column:
                   name: name
                   value: 'Italy'
@@ -79,7 +79,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'f9b22d0b-29cb-4d2a-8237-7d5d7a3ed8d3'
+                  value: f9b22d0b-29cb-4d2a-8237-7d5d7a3ed8d3
               - column:
                   name: name
                   value: 'Spain'
@@ -89,7 +89,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'ab9f0d09-6b6f-40cf-8a78-74f53fc2f0d0'
+                  value: ab9f0d09-6b6f-40cf-8a78-74f53fc2f0d0
               - column:
                   name: name
                   value: 'Japan'
@@ -99,7 +99,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'bd8d64d7-6b16-4f5c-b4a8-5d885d3c56de'
+                  value: bd8d64d7-6b16-4f5c-b4a8-5d885d3c56de
               - column:
                   name: name
                   value: 'China'
@@ -109,7 +109,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'b5fce2b2-8970-4c70-a3b7-60f68bb0523f'
+                  value: b5fce2b2-8970-4c70-a3b7-60f68bb0523f
               - column:
                   name: name
                   value: 'India'
@@ -119,7 +119,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'cd7f1b35-50ec-4fc2-b1b7-5b4d9b344c9f'
+                  value: cd7f1b35-50ec-4fc2-b1b7-5b4d9b344c9f
               - column:
                   name: name
                   value: 'Brazil'
@@ -129,7 +129,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'd5f36c67-45b7-4c2b-bc63-df9de6b264ef'
+                  value: d5f36c67-45b7-4c2b-bc63-df9de6b264ef
               - column:
                   name: name
                   value: 'Russia'
@@ -139,7 +139,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'e3d9a2a5-4b76-48c0-8c4c-f28f6c8a30e0'
+                  value: e3d9a2a5-4b76-48c0-8c4c-f28f6c8a30e0
               - column:
                   name: name
                   value: 'Mexico'
@@ -149,7 +149,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'f9d90c62-09f5-4d07-978a-7c8a5c3b8cb3'
+                  value: f9d90c62-09f5-4d07-978a-7c8a5c3b8cb3
               - column:
                   name: name
                   value: 'South Korea'
@@ -159,7 +159,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'c8b6e2d7-5b7d-46b0-9c27-36cf9b1a4a9e'
+                  value: c8b6e2d7-5b7d-46b0-9c27-36cf9b1a4a9e
               - column:
                   name: name
                   value: 'South Africa'
@@ -169,7 +169,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'ab63ec39-3c69-4e0e-9d8b-7a09c13d4d1e'
+                  value: ab63ec39-3c69-4e0e-9d8b-7a09c13d4d1e
               - column:
                   name: name
                   value: 'Netherlands'
@@ -179,7 +179,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'd1b593d0-1c0b-4b84-b2c5-0626e5b57646'
+                  value: d1b593d0-1c0b-4b84-b2c5-0626e5b57646
               - column:
                   name: name
                   value: 'Sweden'
@@ -189,7 +189,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'b50d49f7-0f7e-4e3a-bd64-943f9b785d09'
+                  value: b50d49f7-0f7e-4e3a-bd64-943f9b785d09
               - column:
                   name: name
                   value: 'Norway'
@@ -199,7 +199,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'a4c5d7d9-4e69-4a4e-9e09-8e2b50b07d56'
+                  value: a4c5d7d9-4e69-4a4e-9e09-8e2b50b07d56
               - column:
                   name: name
                   value: 'Denmark'
@@ -209,7 +209,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'c1b98d5e-5f1a-4d58-bd5d-9b3d28712d44'
+                  value: c1b98d5e-5f1a-4d58-bd5d-9b3d28712d44
               - column:
                   name: name
                   value: 'Finland'
@@ -219,7 +219,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'd6c5a9b1-3d0e-4d48-933b-84d1a54a5a8a'
+                  value: d6c5a9b1-3d0e-4d48-933b-84d1a54a5a8a
               - column:
                   name: name
                   value: 'New Zealand'
@@ -229,7 +229,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'a34e3d26-1ef6-4a52-8b91-0c7e6d9a673b'
+                  value: a34e3d26-1ef6-4a52-8b91-0c7e6d9a673b
               - column:
                   name: name
                   value: 'Argentina'
@@ -239,7 +239,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'b2f7e8d9-623c-4e83-8d9e-6f5c3e10f2d6'
+                  value: b2f7e8d9-623c-4e83-8d9e-6f5c3e10f2d6
               - column:
                   name: name
                   value: 'Belgium'
@@ -249,7 +249,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'd5f9d1e0-6b7e-41a4-9c3a-f8e6c5f8b6de'
+                  value: d5f9d1e0-6b7e-41a4-9c3a-f8e6c5f8b6de
               - column:
                   name: name
                   value: 'Switzerland'

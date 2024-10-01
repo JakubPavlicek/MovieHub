@@ -18,6 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 public class DirectorController implements DirectorsApi {
@@ -35,7 +37,7 @@ public class DirectorController implements DirectorsApi {
     }
 
     @Override
-    public ResponseEntity<DirectorDetailsResponse> getDirectorById(String directorId) {
+    public ResponseEntity<DirectorDetailsResponse> getDirectorById(UUID directorId) {
         Director director = directorService.getDirector(directorId);
         DirectorDetailsResponse directorDetailsResponse = DirectorMapper.mapToDirectorDetailsResponse(director);
 
@@ -51,7 +53,7 @@ public class DirectorController implements DirectorsApi {
     }
 
     @Override
-    public ResponseEntity<MoviePage> getMoviesWithDirector(String directorId, Integer page, Integer limit) {
+    public ResponseEntity<MoviePage> getMoviesWithDirector(UUID directorId, Integer page, Integer limit) {
         Page<Movie> movies = movieService.getMoviesWithDirector(directorId, page, limit);
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
@@ -59,7 +61,7 @@ public class DirectorController implements DirectorsApi {
     }
 
     @Override
-    public ResponseEntity<DirectorDetailsResponse> updateDirector(String directorId, UpdateDirectorRequest updateDirectorRequest) {
+    public ResponseEntity<DirectorDetailsResponse> updateDirector(UUID directorId, UpdateDirectorRequest updateDirectorRequest) {
         Director director = DirectorMapper.mapToDirector(updateDirectorRequest);
         director = directorService.updateDirector(directorId, director);
         DirectorDetailsResponse directorResponse = DirectorMapper.mapToDirectorDetailsResponse(director);

@@ -17,6 +17,7 @@ components:
       description: The movie ID.
       schema:
         type: string
+        format: uuid
       required: true
       example: 6c42ccf6-f635-48f8-9af5-4c80e6812dbf
     page:
@@ -312,6 +313,7 @@ components:
       required: true
       schema:
         type: string
+        format: uuid
       description: The comment ID.
       example: c9d6f870-9f9a-4dbf-9079-bb676bc5a1b5
 
@@ -321,6 +323,7 @@ components:
       required: true
       schema:
         type: string
+        format: uuid
       description: The director ID.
       example: f22608f8-43bb-4a69-b77a-cb2e3eaf0dfa
 
@@ -330,6 +333,7 @@ components:
       required: true
       schema:
         type: string
+        format: uuid
       description: The actor ID.
       example: c61a0a7c-c45e-41a0-9e6c-3f86beea1802
 
@@ -339,6 +343,7 @@ components:
       required: true
       schema:
         type: string
+        format: uuid
       description: The genre ID.
       example: 6b0de5bc-8e6c-4d4c-b13e-49450d7480a7
 
@@ -348,6 +353,7 @@ components:
       required: true
       schema:
         type: string
+        format: uuid
       description: The country ID.
       example: d9ac0050-db90-44c1-a218-f93b0428a073
 
@@ -357,6 +363,7 @@ components:
       required: true
       schema:
         type: string
+        format: uuid
       description: The production company ID.
       example: 8e9334d2-e021-4ec3-b34b-8dc57032e362
 
@@ -415,6 +422,7 @@ components:
 
     Uuid:
       type: string
+      format: uuid
       description: |
         A universally unique identifier (UUID) used to uniquely identify entities.
         It is a 36-character string consisting of hexadecimal digits and hyphens.
@@ -606,8 +614,17 @@ components:
           example: like
           nullable: false
 
+    UserUuid:
+      type: string
+      description: |
+        A unique identifier used to uniquely identify users.
+      example: user|12c5ja230ac8979cac9acv0v
+      maxLength: 255
+      nullable: false
+
     ParentCommentUuid:
       type: string
+      format: uuid
       description: |
         A universally unique identifier (UUID) used to uniquely identify entities.
         It is a 36-character string consisting of hexadecimal digits and hyphens.
@@ -1238,7 +1255,7 @@ components:
         movieId:
           $ref: '#/components/schemas/Uuid'
         userId:
-          $ref: '#/components/schemas/Uuid'
+          $ref: '#/components/schemas/UserUuid'
         createdAt:
           $ref: '#/components/schemas/CreatedAt'
         text:

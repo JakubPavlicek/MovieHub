@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -43,7 +44,7 @@ public class CountryController implements CountriesApi {
     }
 
     @Override
-    public ResponseEntity<CountryDetailsResponse> getCountryById(String countryId) {
+    public ResponseEntity<CountryDetailsResponse> getCountryById(UUID countryId) {
         Country country = countryService.getCountry(countryId);
         CountryDetailsResponse countryResponse = CountryMapper.mapToCountryDetailsResponse(country);
 
@@ -51,7 +52,7 @@ public class CountryController implements CountriesApi {
     }
 
     @Override
-    public ResponseEntity<MoviePage> getMoviesWithCountry(String countryId, Integer page, Integer limit) {
+    public ResponseEntity<MoviePage> getMoviesWithCountry(UUID countryId, Integer page, Integer limit) {
         Page<Movie> movies = movieService.getMoviesWithCountry(countryId, page, limit);
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
@@ -59,7 +60,7 @@ public class CountryController implements CountriesApi {
     }
 
     @Override
-    public ResponseEntity<CountryDetailsResponse> updateCountry(String countryId, AddCountryRequest addCountryRequest) {
+    public ResponseEntity<CountryDetailsResponse> updateCountry(UUID countryId, AddCountryRequest addCountryRequest) {
         Country country = countryService.updateCountry(countryId, addCountryRequest.getName());
         CountryDetailsResponse countryResponse = CountryMapper.mapToCountryDetailsResponse(country);
 

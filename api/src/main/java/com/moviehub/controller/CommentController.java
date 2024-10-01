@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 public class CommentController implements CommentsApi {
@@ -16,14 +18,14 @@ public class CommentController implements CommentsApi {
     private final CommentService commentService;
 
     @Override
-    public ResponseEntity<Void> deleteComment(String commentId) {
+    public ResponseEntity<Void> deleteComment(UUID commentId) {
         commentService.deleteComment(commentId);
 
         return ResponseEntity.noContent().build();
     }
 
     @Override
-    public ResponseEntity<Void> addCommentReaction(String commentId, ReactionTypeRequest reactionTypeRequest) {
+    public ResponseEntity<Void> addCommentReaction(UUID commentId, ReactionTypeRequest reactionTypeRequest) {
         ReactionType reactionType = ReactionTypeMapper.mapToReactionType(reactionTypeRequest);
         commentService.addCommentReaction(commentId, reactionType);
 

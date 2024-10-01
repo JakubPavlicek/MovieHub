@@ -9,7 +9,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'b4f52740-3e78-41a5-80d3-9351d7f2b691'
+                  value: b4f52740-3e78-41a5-80d3-9351d7f2b691
               - column:
                   name: name
                   value: 'The Safran Company'
@@ -19,7 +19,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: '9eaf9a8e-8b87-4e1c-a5d6-5c9b3d0b798b'
+                  value: 9eaf9a8e-8b87-4e1c-a5d6-5c9b3d0b798b
               - column:
                   name: name
                   value: 'Blinding Edge Pictures'
@@ -29,7 +29,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'c894946e-20b1-441d-b9c9-7bf5a0feadd8'
+                  value: c894946e-20b1-441d-b9c9-7bf5a0feadd8
               - column:
                   name: name
                   value: 'Warner Bros. Pictures'
@@ -39,7 +39,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: '4130511e-03b8-4d79-bbbb-adc31242578c'
+                  value: 4130511e-03b8-4d79-bbbb-adc31242578c
               - column:
                   name: name
                   value: 'Paramount Pictures'
@@ -49,7 +49,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'ec47044b-d20e-4353-a0d7-baa89fa4ae59'
+                  value: ec47044b-d20e-4353-a0d7-baa89fa4ae59
               - column:
                   name: name
                   value: 'Syncopy'
@@ -59,7 +59,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'f6a5e8a4-d81b-4f37-9732-68d67b9b587e'
+                  value: f6a5e8a4-d81b-4f37-9732-68d67b9b587e
               - column:
                   name: name
                   value: 'Lucasfilm'
@@ -69,7 +69,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'a1b2c3d4-e5f6-7890-abcd-ef1234567890'
+                  value: a1b2c3d4-e5f6-7890-abcd-ef1234567890
               - column:
                   name: name
                   value: 'Columbia Pictures'
@@ -79,7 +79,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: '12345678-9abc-def0-1234-56789abcdef0'
+                  value: 12345678-9abc-def0-1234-56789abcdef0
               - column:
                   name: name
                   value: 'DreamWorks Pictures'
@@ -89,7 +89,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'a5fdfb8b-5f62-4e94-82ee-f8cfdbfa7d3b'
+                  value: a5fdfb8b-5f62-4e94-82ee-f8cfdbfa7d3b
               - column:
                   name: name
                   value: '20th Century Studios'
@@ -99,7 +99,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: '1fbe81a5-5c1a-43c7-b7d2-4b9e6c2e89f3'
+                  value: 1fbe81a5-5c1a-43c7-b7d2-4b9e6c2e89f3
               - column:
                   name: name
                   value: 'MGM'
@@ -109,7 +109,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: '2c7b9d64-d84e-4c68-810d-b25b9646f49d'
+                  value: 2c7b9d64-d84e-4c68-810d-b25b9646f49d
               - column:
                   name: name
                   value: 'New Line Cinema'
@@ -119,7 +119,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'c4a36e8d-74d4-4e73-bf8e-2d6f8edcc2c7'
+                  value: c4a36e8d-74d4-4e73-bf8e-2d6f8edcc2c7
               - column:
                   name: name
                   value: 'Sony Pictures Entertainment'
@@ -129,7 +129,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'db1a7f0a-2c8e-42a2-8d5a-5f6fef3ab16b'
+                  value: db1a7f0a-2c8e-42a2-8d5a-5f6fef3ab16b
               - column:
                   name: name
                   value: 'Universal Pictures'
@@ -139,7 +139,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: '8d3a6f56-8e34-4d8a-ae5d-39f453c64f91'
+                  value: 8d3a6f56-8e34-4d8a-ae5d-39f453c64f91
               - column:
                   name: name
                   value: 'A24'
@@ -149,7 +149,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'e9d03d9c-c1e4-4b87-89de-7c9e6e9b6f13'
+                  value: e9d03d9c-c1e4-4b87-89de-7c9e6e9b6f13
               - column:
                   name: name
                   value: 'Focus Features'
@@ -159,7 +159,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: '19a7c5e4-d123-45f9-8f6d-0f6e1f0b4a1c'
+                  value: 19a7c5e4-d123-45f9-8f6d-0f6e1f0b4a1c
               - column:
                   name: name
                   value: 'Lionsgate'
@@ -169,7 +169,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'c81fbb6d-5eec-4e9a-8b9f-88a3e2d5d8c1'
+                  value: c81fbb6d-5eec-4e9a-8b9f-88a3e2d5d8c1
               - column:
                   name: name
                   value: 'Searchlight Pictures'
@@ -179,7 +179,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: '4b5d3f6b-b4c1-4e26-9b1b-7d0c3e8b5d54'
+                  value: 4b5d3f6b-b4c1-4e26-9b1b-7d0c3e8b5d54
               - column:
                   name: name
                   value: 'Illumination Entertainment'
@@ -189,7 +189,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: '5f8e6ed7-aadc-4e54-9e6b-002a00e6babd'
+                  value: 5f8e6ed7-aadc-4e54-9e6b-002a00e6babd
               - column:
                   name: name
                   value: 'Participant'
@@ -199,7 +199,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'b367c3d4-2a86-4e73-925c-a6b9570c3bb8'
+                  value: b367c3d4-2a86-4e73-925c-a6b9570c3bb8
               - column:
                   name: name
                   value: 'Fox Searchlight Pictures'
@@ -209,7 +209,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: '5faf7ec1-5dc1-4d48-96c8-252e6a1a1b46'
+                  value: 5faf7ec1-5dc1-4d48-96c8-252e6a1a1b46
               - column:
                   name: name
                   value: 'New Regency'
@@ -219,7 +219,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'a768273e-f4a4-448a-a5aa-23ac57774593'
+                  value: a768273e-f4a4-448a-a5aa-23ac57774593
               - column:
                   name: name
                   value: 'Media 8 Entertainment'
@@ -229,7 +229,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'b531d2b8-f7d9-4466-82ab-a4a8241b9998'
+                  value: b531d2b8-f7d9-4466-82ab-a4a8241b9998
               - column:
                   name: name
                   value: 'Miramax'
@@ -239,7 +239,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'd2e3f4g5-h6i7-j8k9-l0m1-n2o3p4q5r6s'
+                  value: d2e3f4g5-h6i7-j8k9-l0m1-n2o3p4q5r6s
               - column:
                   name: name
                   value: 'Regency Enterprises'
@@ -249,7 +249,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'a7b8c9d0-e1f2-g3h4-i5j6-k7l8m9n0o1p2'
+                  value: a7b8c9d0-e1f2-g3h4-i5j6-k7l8m9n0o1p2
               - column:
                   name: name
                   value: 'Marvel Studios'
@@ -259,7 +259,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'c3d4e5f6-7g8h-9i0j-k1l2-m3n4o5p6q7r8'
+                  value: c3d4e5f6-7g8h-9i0j-k1l2-m3n4o5p6q7r8
               - column:
                   name: name
                   value: 'Working Title Films'
@@ -269,7 +269,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'e4f5g6h7-i8j9-k0l1-m2n3-o4p5q6r7s8t9'
+                  value: e4f5g6h7-i8j9-k0l1-m2n3-o4p5q6r7s8t9
               - column:
                   name: name
                   value: 'American Empirical Pictures'
@@ -279,7 +279,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'd4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9'
+                  value: d4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9
               - column:
                   name: name
                   value: 'Legendary Entertainment'

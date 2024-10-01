@@ -7,6 +7,8 @@ import com.moviehub.security.AuthUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class MovieRatingService {
@@ -32,7 +34,7 @@ public class MovieRatingService {
         }
     }
 
-    public Double calculateRating(String movieId) {
+    public Double calculateRating(UUID movieId) {
         return ratingRepository.getAverageRatingByMovieId(movieId);
     }
 

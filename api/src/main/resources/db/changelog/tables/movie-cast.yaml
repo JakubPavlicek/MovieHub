@@ -8,7 +8,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: varchar(255)
+                  type: uuid
                   defaultValueComputed: uuid_generate_v4()
                   constraints:
                     primaryKey: true
@@ -16,13 +16,13 @@ databaseChangeLog:
                     unique: true
               - column:
                   name: movie_id
-                  type: varchar(255)
+                  type: uuid
                   constraints:
                     nullable: false
                     foreignKeyName: fk_movie
               - column:
                   name: actor_id
-                  type: varchar(255)
+                  type: uuid
                   constraints:
                     nullable: false
                     foreignKeyName: fk_actor

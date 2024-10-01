@@ -18,6 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 public class ActorController implements ActorsApi {
@@ -35,7 +37,7 @@ public class ActorController implements ActorsApi {
     }
 
     @Override
-    public ResponseEntity<ActorDetailsResponse> getActorById(String actorId) {
+    public ResponseEntity<ActorDetailsResponse> getActorById(UUID actorId) {
         Actor actor = actorService.getActor(actorId);
         ActorDetailsResponse actorDetailsResponse = ActorMapper.mapToActorDetailsResponse(actor);
 
@@ -51,7 +53,7 @@ public class ActorController implements ActorsApi {
     }
 
     @Override
-    public ResponseEntity<MoviePage> getMoviesWithActor(String actorId, Integer page, Integer limit) {
+    public ResponseEntity<MoviePage> getMoviesWithActor(UUID actorId, Integer page, Integer limit) {
         Page<Movie> movies = movieService.getMoviesWithActor(actorId, page, limit);
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
@@ -59,7 +61,7 @@ public class ActorController implements ActorsApi {
     }
 
     @Override
-    public ResponseEntity<ActorDetailsResponse> updateActor(String actorId, UpdateActorRequest updateActorRequest) {
+    public ResponseEntity<ActorDetailsResponse> updateActor(UUID actorId, UpdateActorRequest updateActorRequest) {
         Actor actor = ActorMapper.mapToActor(updateActorRequest);
         actor = actorService.updateActor(actorId, actor);
         ActorDetailsResponse actorDetailsResponse = ActorMapper.mapToActorDetailsResponse(actor);

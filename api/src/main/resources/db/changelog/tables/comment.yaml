@@ -8,7 +8,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: varchar(255)
+                  type: uuid
                   defaultValueComputed: uuid_generate_v4()
                   constraints:
                     primaryKey: true
@@ -16,7 +16,7 @@ databaseChangeLog:
                     unique: true
               - column:
                   name: movie_id
-                  type: varchar(255)
+                  type: uuid
                   constraints:
                     nullable: false
                     foreignKeyName: fk_movie
@@ -43,6 +43,6 @@ databaseChangeLog:
                   defaultValueBoolean: false
               - column:
                   name: parent_comment_id
-                  type: varchar(255)
+                  type: uuid
                   constraints:
                     nullable: true # null means it has no parents

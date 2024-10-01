@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -30,15 +31,15 @@ public class MovieMetadataService {
         return productionService.getSavedProductions(production);
     }
 
-    public Genre getGenre(String genreId) {
+    public Genre getGenre(UUID genreId) {
         return genreService.getGenre(genreId);
     }
 
-    public Country getCountry(String countryId) {
+    public Country getCountry(UUID countryId) {
         return countryService.getCountry(countryId);
     }
 
-    public ProductionCompany getProductionCompany(String companyId) {
+    public ProductionCompany getProductionCompany(UUID companyId) {
         return productionService.getProductionCompany(companyId);
     }
 

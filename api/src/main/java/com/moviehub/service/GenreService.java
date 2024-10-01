@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,7 +39,7 @@ public class GenreService {
         return genreRepository.findAll(sort);
     }
 
-    public Genre getGenre(String genreId) {
+    public Genre getGenre(UUID genreId) {
         return genreRepository.findById(genreId)
                               .orElseThrow(() -> new GenreNotFoundException("Genre with ID: " + genreId + " not found"));
     }
@@ -54,7 +55,7 @@ public class GenreService {
         return genreRepository.save(genre);
     }
 
-    public Genre updateGenre(String genreId, String name) {
+    public Genre updateGenre(UUID genreId, String name) {
         Genre genre = getGenre(genreId);
         genre.setName(name);
 

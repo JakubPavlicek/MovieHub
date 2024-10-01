@@ -12,6 +12,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -23,7 +25,7 @@ public class CommentService {
 
     private static final String DELETION_TEXT = "Comment deleted.";
 
-    public Comment getComment(String commentId) {
+    public Comment getComment(UUID commentId) {
         return commentRepository.findById(commentId)
                                 .orElseThrow(() -> new CommentNotFoundException("Comment with ID: " + commentId + " not found"));
     }
@@ -51,7 +53,7 @@ public class CommentService {
         return commentRepository.findAllByMovie(movie, pageable);
     }
 
-    public void deleteComment(String commentId) {
+    public void deleteComment(UUID commentId) {
         Comment comment = getComment(commentId);
 
         comment.setText(DELETION_TEXT);
@@ -60,7 +62,7 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
-    public void addCommentReaction(String commentId, ReactionType reactionType) {
+    public void addCommentReaction(UUID commentId, ReactionType reactionType) {
         Comment comment = getComment(commentId);
         reactionService.addCommentReaction(comment, reactionType);
     }

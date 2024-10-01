@@ -17,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -54,17 +55,17 @@ public class MovieService {
         return savedMovie;
     }
 
-    public Movie getMovie(String movieId) {
+    public Movie getMovie(UUID movieId) {
         return movieRepository.findById(movieId)
                               .orElseThrow(() -> new MovieNotFoundException("Movie with ID: " + movieId + " not found"));
     }
 
-    public void deleteMovie(String movieId) {
+    public void deleteMovie(UUID movieId) {
         Movie movie = getMovie(movieId);
         movieRepository.delete(movie);
     }
 
-    public Movie updateMovie(String movieId, Movie incomingMovie) {
+    public Movie updateMovie(UUID movieId, Movie incomingMovie) {
         Movie existingMovie = getMovie(movieId);
 
         updateMovieFields(existingMovie, incomingMovie);
@@ -123,43 +124,43 @@ public class MovieService {
         return searchService.getMovies(page, limit, sort, name, releaseDate, duration, description, director, actors, genres, countries, keyword);
     }
 
-    public Page<Movie> getMoviesWithGenre(String genreId, Integer page, Integer limit) {
+    public Page<Movie> getMoviesWithGenre(UUID genreId, Integer page, Integer limit) {
         Genre genre = metadataService.getGenre(genreId);
         return searchService.getMoviesWithGenre(genre, page, limit);
     }
 
-    public Page<Movie> getMoviesWithCountry(String countryId, Integer page, Integer limit) {
+    public Page<Movie> getMoviesWithCountry(UUID countryId, Integer page, Integer limit) {
         Country country = metadataService.getCountry(countryId);
         return searchService.getMoviesWithCountry(country, page, limit);
     }
 
-    public Page<Movie> getMoviesWithProductionCompany(String companyId, Integer page, Integer limit) {
+    public Page<Movie> getMoviesWithProductionCompany(UUID companyId, Integer page, Integer limit) {
         ProductionCompany productionCompany = metadataService.getProductionCompany(companyId);
         return searchService.getMoviesWithProductionCompany(productionCompany, page, limit);
     }
 
-    public Page<Movie> getMoviesWithDirector(String directorId, Integer page, Integer limit) {
+    public Page<Movie> getMoviesWithDirector(UUID directorId, Integer page, Integer limit) {
         Director director = crewService.getDirector(directorId);
         return searchService.getMoviesWithDirector(director, page, limit);
     }
 
-    public Page<Movie> getMoviesWithActor(String actorId, Integer page, Integer limit) {
+    public Page<Movie> getMoviesWithActor(UUID actorId, Integer page, Integer limit) {
         Actor actor = crewService.getActor(actorId);
         return searchService.getMoviesWithActor(actor, page, limit);
     }
 
-    public void addComment(String movieId, Comment comment) {
+    public void addComment(UUID movieId, Comment comment) {
         Movie movie = getMovie(movieId);
 
         interactionService.saveComment(movie, comment);
     }
 
-    public Page<Comment> getComments(String movieId, Integer page, Integer limit, String sort) {
+    public Page<Comment> getComments(UUID movieId, Integer page, Integer limit, String sort) {
         Movie movie = getMovie(movieId);
         return interactionService.getComments(movie, page, limit, sort);
     }
 
-    public void updateRating(String movieId, Double rating) {
+    public void updateRating(UUID movieId, Double rating) {
         Movie movie = getMovie(movieId);
 
         interactionService.saveRating(movie, rating);

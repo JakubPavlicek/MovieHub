@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @RequiredArgsConstructor
 public class ProductionCompanyController implements ProductionCompaniesApi {
@@ -41,7 +43,7 @@ public class ProductionCompanyController implements ProductionCompaniesApi {
     }
 
     @Override
-    public ResponseEntity<ProductionCompanyDetailsResponse> getProductionCompanyById(String companyId) {
+    public ResponseEntity<ProductionCompanyDetailsResponse> getProductionCompanyById(UUID companyId) {
         ProductionCompany company = companyService.getProductionCompany(companyId);
         ProductionCompanyDetailsResponse companyDetailsResponse = ProductionCompanyMapper.mapToProductionCompanyDetailsResponse(company);
 
@@ -49,7 +51,7 @@ public class ProductionCompanyController implements ProductionCompaniesApi {
     }
 
     @Override
-    public ResponseEntity<MoviePage> getMoviesWithProductionCompany(String companyId, Integer page, Integer limit) {
+    public ResponseEntity<MoviePage> getMoviesWithProductionCompany(UUID companyId, Integer page, Integer limit) {
         Page<Movie> movies = movieService.getMoviesWithProductionCompany(companyId, page, limit);
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
@@ -57,7 +59,7 @@ public class ProductionCompanyController implements ProductionCompaniesApi {
     }
 
     @Override
-    public ResponseEntity<ProductionCompanyDetailsResponse> updateProductionCompany(String companyId, AddProductionCompanyRequest addProductionCompanyRequest) {
+    public ResponseEntity<ProductionCompanyDetailsResponse> updateProductionCompany(UUID companyId, AddProductionCompanyRequest addProductionCompanyRequest) {
         ProductionCompany company = companyService.updateProductionCompany(companyId, addProductionCompanyRequest.getName());
         ProductionCompanyDetailsResponse companyResponse = ProductionCompanyMapper.mapToProductionCompanyDetailsResponse(company);
 

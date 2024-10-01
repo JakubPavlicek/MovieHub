@@ -8,7 +8,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: varchar(255)
+                  type: uuid
                   defaultValueComputed: uuid_generate_v4()
                   constraints:
                     primaryKey: true

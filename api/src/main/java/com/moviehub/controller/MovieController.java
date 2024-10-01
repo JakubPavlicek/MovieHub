@@ -20,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -37,14 +38,14 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteMovie(String movieId) {
+    public ResponseEntity<Void> deleteMovie(UUID movieId) {
         movieService.deleteMovie(movieId);
 
         return ResponseEntity.noContent().build();
     }
 
     @Override
-    public ResponseEntity<MovieDetailsResponse> getMovie(String movieId) {
+    public ResponseEntity<MovieDetailsResponse> getMovie(UUID movieId) {
         Movie movie = movieService.getMovie(movieId);
         MovieDetailsResponse movieDetailsResponse = MovieMapper.mapToMovieDetailsResponse(movie);
 
@@ -52,7 +53,7 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<MovieDetailsResponse> updateMovie(String movieId, UpdateMovieRequest updateMovieRequest) {
+    public ResponseEntity<MovieDetailsResponse> updateMovie(UUID movieId, UpdateMovieRequest updateMovieRequest) {
         Movie movie = MovieMapper.mapToMovie(updateMovieRequest);
         movie = movieService.updateMovie(movieId, movie);
         MovieDetailsResponse movieResponse = MovieMapper.mapToMovieDetailsResponse(movie);
@@ -69,7 +70,7 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<Void> addComment(String movieId, AddCommentRequest addCommentRequest) {
+    public ResponseEntity<Void> addComment(UUID movieId, AddCommentRequest addCommentRequest) {
         Comment comment = CommentMapper.mapToComment(addCommentRequest);
         movieService.addComment(movieId, comment);
 
@@ -77,7 +78,7 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<CommentPage> getComments(String movieId, Integer page, Integer limit, String sort) {
+    public ResponseEntity<CommentPage> getComments(UUID movieId, Integer page, Integer limit, String sort) {
         Page<Comment> comments = movieService.getComments(movieId, page, limit, sort);
         CommentPage commentPage = CommentMapper.mapToCommentPage(comments);
 
@@ -85,7 +86,7 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<Void> updateRating(String movieId, UpdateRatingRequest updateRatingRequest) {
+    public ResponseEntity<Void> updateRating(UUID movieId, UpdateRatingRequest updateRatingRequest) {
         movieService.updateRating(movieId, updateRatingRequest.getRating());
 
         return ResponseEntity.noContent().build();

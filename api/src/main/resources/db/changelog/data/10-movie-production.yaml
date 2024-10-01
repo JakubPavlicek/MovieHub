@@ -9,227 +9,227 @@ databaseChangeLog:
             columns:
               - column:
                   name: movie_id
-                  value: '1cce6f34-13d2-4a3d-8c7e-8a7659db8a60' # The Conjuring
+                  value: 1cce6f34-13d2-4a3d-8c7e-8a7659db8a60 # The Conjuring
               - column:
                   name: company_id
-                  value: 'b4f52740-3e78-41a5-80d3-9351d7f2b691' # The Safran Company
+                  value: b4f52740-3e78-41a5-80d3-9351d7f2b691 # The Safran Company
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: 'a9c8e9a1-bb24-43b4-9e6b-b38ec61b241d' # The Conjuring 2
+                  value: a9c8e9a1-bb24-43b4-9e6b-b38ec61b241d # The Conjuring 2
               - column:
                   name: company_id
-                  value: 'b4f52740-3e78-41a5-80d3-9351d7f2b691' # The Safran Company
+                  value: b4f52740-3e78-41a5-80d3-9351d7f2b691 # The Safran Company
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: 'acbef342-c46b-4f1b-8b1d-f4a7c82d6f8c' # The Watchers
+                  value: acbef342-c46b-4f1b-8b1d-f4a7c82d6f8c # The Watchers
               - column:
                   name: company_id
-                  value: '9eaf9a8e-8b87-4e1c-a5d6-5c9b3d0b798b' # Blinding Edge Pictures
+                  value: 9eaf9a8e-8b87-4e1c-a5d6-5c9b3d0b798b # Blinding Edge Pictures
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: 'f18d339f-fa0a-4e0d-8e5c-652e2b45b98c' # Tenet
+                  value: f18d339f-fa0a-4e0d-8e5c-652e2b45b98c # Tenet
               - column:
                   name: company_id
-                  value: 'c894946e-20b1-441d-b9c9-7bf5a0feadd8' # Warner Bros. Pictures
+                  value: c894946e-20b1-441d-b9c9-7bf5a0feadd8 # Warner Bros. Pictures
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: '8c328172-a60f-4ea6-93b1-ca2a5cca2bf0' # Interstellar
+                  value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: company_id
-                  value: 'c894946e-20b1-441d-b9c9-7bf5a0feadd8' # Warner Bros. Pictures
+                  value: c894946e-20b1-441d-b9c9-7bf5a0feadd8 # Warner Bros. Pictures
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: '8c328172-a60f-4ea6-93b1-ca2a5cca2bf0' # Interstellar
+                  value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: company_id
-                  value: '4130511e-03b8-4d79-bbbb-adc31242578c' # Paramount Pictures
+                  value: 4130511e-03b8-4d79-bbbb-adc31242578c # Paramount Pictures
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: '8c328172-a60f-4ea6-93b1-ca2a5cca2bf0' # Interstellar
+                  value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: company_id
-                  value: 'c894946e-20b1-441d-b9c9-7bf5a0feadd8' # Warner Bros. Pictures
+                  value: c894946e-20b1-441d-b9c9-7bf5a0feadd8 # Warner Bros. Pictures
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: '8c328172-a60f-4ea6-93b1-ca2a5cca2bf0' # Interstellar
+                  value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: company_id
-                  value: 'ec47044b-d20e-4353-a0d7-baa89fa4ae59' # Syncopy
+                  value: ec47044b-d20e-4353-a0d7-baa89fa4ae59 # Syncopy
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: '76a9e23a-c8e6-4d1f-9c2d-8b3f47a91a1d' # Gravity
+                  value: 76a9e23a-c8e6-4d1f-9c2d-8b3f47a91a1d # Gravity
               - column:
                   name: company_id
-                  value: 'c894946e-20b1-441d-b9c9-7bf5a0feadd8' # Warner Bros. Pictures
+                  value: c894946e-20b1-441d-b9c9-7bf5a0feadd8 # Warner Bros. Pictures
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: '1b8f6a44-ae99-4cfa-b15e-cde77b45b8de' # Roma
+                  value: 1b8f6a44-ae99-4cfa-b15e-cde77b45b8de # Roma
               - column:
                   name: company_id
-                  value: '5f8e6ed7-aadc-4e54-9e6b-002a00e6babd' # Participant
+                  value: 5f8e6ed7-aadc-4e54-9e6b-002a00e6babd # Participant
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: 'a1b2c3d4-e5f6-4g7h-8i9j-0k1l2m3n4o5p' # Wonder Woman
+                  value: a1b2c3d4-e5f6-4g7h-8i9j-0k1l2m3n4o5p # Wonder Woman
               - column:
                   name: company_id
-                  value: 'c894946e-20b1-441d-b9c9-7bf5a0feadd8' # Warner Bros. Pictures
+                  value: c894946e-20b1-441d-b9c9-7bf5a0feadd8 # Warner Bros. Pictures
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: 'h9i8j7k6-l5m4-n3o2-p1q0-r8s7t6u5v4w3' # Selma
+                  value: h9i8j7k6-l5m4-n3o2-p1q0-r8s7t6u5v4w3 # Selma
               - column:
                   name: company_id
-                  value: '4130511e-03b8-4d79-bbbb-adc31242578c' # Paramount Pictures
+                  value: 4130511e-03b8-4d79-bbbb-adc31242578c # Paramount Pictures
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: 'v1w2x3y4-z5a6-b7c8-d9e0-f1g2h3i4j5k6' # The Shape of Water
+                  value: v1w2x3y4-z5a6-b7c8-d9e0-f1g2h3i4j5k6 # The Shape of Water
               - column:
                   name: company_id
-                  value: 'b367c3d4-2a86-4e73-925c-a6b9570c3bb8' # Fox Searchlight Pictures
+                  value: b367c3d4-2a86-4e73-925c-a6b9570c3bb8 # Fox Searchlight Pictures
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: 'u1v2w3x4-y5z6-a7b8-c9d0-e1f2g3h4i5j6' # Birdman
+                  value: u1v2w3x4-y5z6-a7b8-c9d0-e1f2g3h4i5j6 # Birdman
               - column:
                   name: company_id
-                  value: '5faf7ec1-5dc1-4d48-96c8-252e6a1a1b46' # New Regency
+                  value: 5faf7ec1-5dc1-4d48-96c8-252e6a1a1b46 # New Regency
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: 'o9p8q7r6-s5t4-u3v2-w1x0-y9z8a7b6c5d4' # Monster
+                  value: o9p8q7r6-s5t4-u3v2-w1x0-y9z8a7b6c5d4 # Monster
               - column:
                   name: company_id
-                  value: 'a768273e-f4a4-448a-a5aa-23ac57774593' # Media 8 Entertainment
+                  value: a768273e-f4a4-448a-a5aa-23ac57774593 # Media 8 Entertainment
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: 'b1c2d3e4-f5g6-h7i8-j9k0-l1m2n3o4p5q6' # Nomadland
+                  value: b1c2d3e4-f5g6-h7i8-j9k0-l1m2n3o4p5q6 # Nomadland
               - column:
                   name: company_id
-                  value: 'b367c3d4-2a86-4e73-925c-a6b9570c3bb8' # Searchlight Pictures
+                  value: b367c3d4-2a86-4e73-925c-a6b9570c3bb8 # Searchlight Pictures
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: 'd1e2f3g4-h5i6-j7k8-l9m0-n1o2p3q4r5s6' # No Country for Old Men
+                  value: d1e2f3g4-h5i6-j7k8-l9m0-n1o2p3q4r5s6 # No Country for Old Men
               - column:
                   name: company_id
-                  value: 'b531d2b8-f7d9-4466-82ab-a4a8241b9998' # Miramax
+                  value: b531d2b8-f7d9-4466-82ab-a4a8241b9998 # Miramax
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: 'x1y2z3w4-v5u6-t7s8-r9q0-p1o2n3m4l5k6' # The Grand Budapest Hotel
+                  value: x1y2z3w4-v5u6-t7s8-r9q0-p1o2n3m4l5k6 # The Grand Budapest Hotel
               - column:
                   name: company_id
-                  value: 'b367c3d4-2a86-4e73-925c-a6b9570c3bb8' # Fox Searchlight Pictures
+                  value: b367c3d4-2a86-4e73-925c-a6b9570c3bb8 # Fox Searchlight Pictures
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: 'z3x4c5v6-b7n8-m9l0-k1j2-h3g4f5d6s7a8' # The Revenant
+                  value: z3x4c5v6-b7n8-m9l0-k1j2-h3g4f5d6s7a8 # The Revenant
               - column:
                   name: company_id
-                  value: 'd2e3f4g5-h6i7-j8k9-l0m1-n2o3p4q5r6s' # Regency Enterprises
+                  value: d2e3f4g5-h6i7-j8k9-l0m1-n2o3p4q5r6s # Regency Enterprises
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: 'p9o8i7u6-y5t4-r3e2-w1q0-a9s8d7f6g5h4' # Eternals
+                  value: p9o8i7u6-y5t4-r3e2-w1q0-a9s8d7f6g5h4 # Eternals
               - column:
                   name: company_id
-                  value: 'a7b8c9d0-e1f2-g3h4-i5j6-k7l8m9n0o1p2' # Marvel Studios
+                  value: a7b8c9d0-e1f2-g3h4-i5j6-k7l8m9n0o1p2 # Marvel Studios
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: 'j1k2l3m4-n5b6-v7c8-x9z0-q1w2e3r4t5y6' # The Big Lebowski
+                  value: j1k2l3m4-n5b6-v7c8-x9z0-q1w2e3r4t5y6 # The Big Lebowski
               - column:
                   name: company_id
-                  value: 'c3d4e5f6-7g8h-9i0j-k1l2-m3n4o5p6q7r8' # Working Title Films
+                  value: c3d4e5f6-7g8h-9i0j-k1l2-m3n4o5p6q7r8 # Working Title Films
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: 'l4k5j6h7-g8f9-d0s1-a2p3-o4i5u6y7t8r9' # Moonrise Kingdom
+                  value: l4k5j6h7-g8f9-d0s1-a2p3-o4i5u6y7t8r9 # Moonrise Kingdom
               - column:
                   name: company_id
-                  value: 'e4f5g6h7-i8j9-k0l1-m2n3-o4p5q6r7s8t9' # American Empirical Pictures
+                  value: e4f5g6h7-i8j9-k0l1-m2n3-o4p5q6r7s8t9 # American Empirical Pictures
 
         - insert:
             tableName: movie_production
             columns:
               - column:
                   name: movie_id
-                  value: 'a8b9c0d1-e2f3-g4h5-i6j7-k8l9m0n1o2p3' # Dune
+                  value: a8b9c0d1-e2f3-g4h5-i6j7-k8l9m0n1o2p3 # Dune
               - column:
                   name: company_id
-                  value: 'd4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9' # Legendary Entertainment
+                  value: d4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9 # Legendary Entertainment

@@ -5,8 +5,10 @@ import com.moviehub.entity.CommentReaction;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
-public interface CommentReactionRepository extends JpaRepository<CommentReaction, String> {
+public interface CommentReactionRepository extends JpaRepository<CommentReaction, UUID> {
 
     boolean existsByCommentAndUserId(Comment comment, String userId);
 

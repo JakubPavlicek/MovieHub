@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
@@ -43,7 +44,7 @@ public class GenreController implements GenresApi {
     }
 
     @Override
-    public ResponseEntity<GenreDetailsResponse> getGenreById(String genreId) {
+    public ResponseEntity<GenreDetailsResponse> getGenreById(UUID genreId) {
         Genre genre = genreService.getGenre(genreId);
         GenreDetailsResponse genreReponse = GenreMapper.mapToGenreDetailsResponse(genre);
 
@@ -51,7 +52,7 @@ public class GenreController implements GenresApi {
     }
 
     @Override
-    public ResponseEntity<MoviePage> getMoviesWithGenre(String genreId, Integer page, Integer limit) {
+    public ResponseEntity<MoviePage> getMoviesWithGenre(UUID genreId, Integer page, Integer limit) {
         Page<Movie> movies = movieService.getMoviesWithGenre(genreId, page, limit);
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
@@ -59,7 +60,7 @@ public class GenreController implements GenresApi {
     }
 
     @Override
-    public ResponseEntity<GenreDetailsResponse> updateGenre(String genreId, AddGenreRequest addGenreRequest) {
+    public ResponseEntity<GenreDetailsResponse> updateGenre(UUID genreId, AddGenreRequest addGenreRequest) {
         Genre genre = genreService.updateGenre(genreId, addGenreRequest.getName());
         GenreDetailsResponse genreDetailsResponse = GenreMapper.mapToGenreDetailsResponse(genre);
 

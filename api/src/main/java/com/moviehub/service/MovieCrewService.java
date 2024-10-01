@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -31,11 +32,11 @@ public class MovieCrewService {
         castService.deleteAllMovieCastsByMovie(existingMovie);
     }
 
-    public Director getDirector(String directorId) {
+    public Director getDirector(UUID directorId) {
         return directorService.getDirector(directorId);
     }
 
-    public Actor getActor(String actorId) {
+    public Actor getActor(UUID actorId) {
         return actorService.getActor(actorId);
     }
 

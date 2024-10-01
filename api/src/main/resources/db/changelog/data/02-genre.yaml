@@ -9,7 +9,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'a4dcbf78-2f6b-4e26-bf92-576d3b81f067'
+                  value: a4dcbf78-2f6b-4e26-bf92-576d3b81f067
               - column:
                   name: name
                   value: 'Action'
@@ -19,7 +19,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: '5e6f7d8a-4b9c-42d3-a8e4-cb6f7a9b0d2e'
+                  value: 5e6f7d8a-4b9c-42d3-a8e4-cb6f7a9b0d2e
               - column:
                   name: name
                   value: 'Adventure'
@@ -29,7 +29,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'c8ef8a14-99b4-4d7f-9a09-7a8b0f5a0e05'
+                  value: c8ef8a14-99b4-4d7f-9a09-7a8b0f5a0e05
               - column:
                   name: name
                   value: 'Animation'
@@ -39,7 +39,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'd5f9e2a6-2e6d-4a11-bb08-0e1a3d4e5c32'
+                  value: d5f9e2a6-2e6d-4a11-bb08-0e1a3d4e5c32
               - column:
                   name: name
                   value: 'Biography'
@@ -49,7 +49,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'e0b74d6b-82d2-4a4a-9bbf-2a7dbe2e5f7c'
+                  value: e0b74d6b-82d2-4a4a-9bbf-2a7dbe2e5f7c
               - column:
                   name: name
                   value: 'Comedy'
@@ -59,7 +59,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'f3e2c5a1-d3c4-4d5e-a9a4-89e4b7d5c9d0'
+                  value: f3e2c5a1-d3c4-4d5e-a9a4-89e4b7d5c9d0
               - column:
                   name: name
                   value: 'Crime'
@@ -69,7 +69,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'b2e8a4f9-8c7d-4c87-95c5-0a9b2c4a3e19'
+                  value: b2e8a4f9-8c7d-4c87-95c5-0a9b2c4a3e19
               - column:
                   name: name
                   value: 'Documentary'
@@ -79,7 +79,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'c9e0b6f3-a9b5-40e3-b1ef-1a7b2c8a7e44'
+                  value: c9e0b6f3-a9b5-40e3-b1ef-1a7b2c8a7e44
               - column:
                   name: name
                   value: 'Drama'
@@ -89,7 +89,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'd4f6a5e4-2b7d-48a7-896f-8c6b2f0e2e88'
+                  value: d4f6a5e4-2b7d-48a7-896f-8c6b2f0e2e88
               - column:
                   name: name
                   value: 'Family'
@@ -99,7 +99,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'e1a7c9d2-5e8d-4a9f-9b7c-3f6a7c8e9d9f'
+                  value: e1a7c9d2-5e8d-4a9f-9b7c-3f6a7c8e9d9f
               - column:
                   name: name
                   value: 'Fantasy'
@@ -109,7 +109,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'f4e0d6f8-7b9d-4c4f-8b6a-5c8e3f7d2e0c'
+                  value: f4e0d6f8-7b9d-4c4f-8b6a-5c8e3f7d2e0c
               - column:
                   name: name
                   value: 'Film-Noir'
@@ -119,7 +119,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'c9a1b3d4-8e5a-4c9e-a0f6-3b7c6e9d5f8b'
+                  value: c9a1b3d4-8e5a-4c9e-a0f6-3b7c6e9d5f8b
               - column:
                   name: name
                   value: 'History'
@@ -129,7 +129,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'd5e9a3c1-4f6e-4c4f-b8d8-8f5a7b9e1d22'
+                  value: d5e9a3c1-4f6e-4c4f-b8d8-8f5a7b9e1d22
               - column:
                   name: name
                   value: 'Horror'
@@ -139,7 +139,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'e4f8b5a6-3b9d-4a8b-a8b1-2c7e5d8f9e0a'
+                  value: e4f8b5a6-3b9d-4a8b-a8b1-2c7e5d8f9e0a
               - column:
                   name: name
                   value: 'Music'
@@ -149,7 +149,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'f6a9b0e5-2c7d-4a3d-bb5e-8e9d3f5c7e6f'
+                  value: f6a9b0e5-2c7d-4a3d-bb5e-8e9d3f5c7e6f
               - column:
                   name: name
                   value: 'Musical'
@@ -159,7 +159,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'c8d5a7f3-1b9e-4e6f-a5b7-8e2c9f7a1d6a'
+                  value: c8d5a7f3-1b9e-4e6f-a5b7-8e2c9f7a1d6a
               - column:
                   name: name
                   value: 'Mystery'
@@ -169,7 +169,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'd5c6b8f7-2d4a-4c1a-a1b8-3e9d6f0e7c8b'
+                  value: d5c6b8f7-2d4a-4c1a-a1b8-3e9d6f0e7c8b
               - column:
                   name: name
                   value: 'Romance'
@@ -179,7 +179,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'e4f8c1d7-6b5a-4d1e-8c9a-7d6e2b3f4a0b'
+                  value: e4f8c1d7-6b5a-4d1e-8c9a-7d6e2b3f4a0b
               - column:
                   name: name
                   value: 'Sci-Fi'
@@ -189,7 +189,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'f7a1d8b9-4e6a-4c3d-8b9e-2c5d7e8f9b0a'
+                  value: f7a1d8b9-4e6a-4c3d-8b9e-2c5d7e8f9b0a
               - column:
                   name: name
                   value: 'Sport'
@@ -199,7 +199,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'a3d8e6f7-1b9e-4d2a-8a6b-7c5e9d1f0c9d'
+                  value: a3d8e6f7-1b9e-4d2a-8a6b-7c5e9d1f0c9d
               - column:
                   name: name
                   value: 'Superhero'
@@ -209,7 +209,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'b2e9c5d7-4a6b-4c3f-9e8a-5f0c7d8e9b2a'
+                  value: b2e9c5d7-4a6b-4c3f-9e8a-5f0c7d8e9b2a
               - column:
                   name: name
                   value: 'Thriller'
@@ -219,7 +219,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'c4d8e2b9-7a6e-4d1f-9b3c-8f2a7d6e9c5b'
+                  value: c4d8e2b9-7a6e-4d1f-9b3c-8f2a7d6e9c5b
               - column:
                   name: name
                   value: 'War'
@@ -229,7 +229,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 'd8a9c3e2-4b6f-4c7a-8d1e-5f0b7c8e9d6a'
+                  value: d8a9c3e2-4b6f-4c7a-8d1e-5f0b7c8e9d6a
               - column:
                   name: name
                   value: 'Western'

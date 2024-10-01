@@ -8,13 +8,13 @@ databaseChangeLog:
             columns:
               - column:
                   name: movie_id
-                  type: varchar(255)
+                  type: uuid
                   constraints:
                     nullable: false
                     foreignKeyName: fk_movie
               - column:
                   name: company_id
-                  type: varchar(255)
+                  type: uuid
                   constraints:
                     nullable: false
                     foreignKeyName: fk_company

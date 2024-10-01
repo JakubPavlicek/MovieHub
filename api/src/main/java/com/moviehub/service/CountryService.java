@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -49,12 +50,12 @@ public class CountryService {
         return countryRepository.findAll(sort);
     }
 
-    public Country getCountry(String countryId) {
+    public Country getCountry(UUID countryId) {
         return countryRepository.findById(countryId)
                                 .orElseThrow(() -> new CountryNotFoundException("Country with ID: " + countryId + " not found"));
     }
 
-    public Country updateCountry(String countryId, String name) {
+    public Country updateCountry(UUID countryId, String name) {
         Country country = getCountry(countryId);
         country.setName(name);
 

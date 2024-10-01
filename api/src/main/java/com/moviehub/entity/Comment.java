@@ -19,6 +19,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @AllArgsConstructor
@@ -30,7 +31,7 @@ public class Comment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String id;
+    private UUID id;
 
     @ManyToOne
     @JoinColumn(
@@ -66,7 +67,7 @@ public class Comment {
     @Column(
         nullable = true
     )
-    private String parentCommentId;
+    private UUID parentCommentId;
 
     @OneToMany(
         mappedBy = "comment",

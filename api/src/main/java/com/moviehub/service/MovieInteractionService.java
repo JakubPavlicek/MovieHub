@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -32,7 +34,7 @@ public class MovieInteractionService {
         return ratingService.saveRating(movie, rating);
     }
 
-    public Double calculateRating(String movieId) {
+    public Double calculateRating(UUID movieId) {
         return ratingService.calculateRating(movieId);
     }
 

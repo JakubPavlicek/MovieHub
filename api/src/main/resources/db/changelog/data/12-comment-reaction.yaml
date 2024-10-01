@@ -9,10 +9,10 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: "d9f1c6d8-1f48-4f5d-9028-d4a5f1c4f573"
+                  value: d9f1c6d8-1f48-4f5d-9028-d4a5f1c4f573
               - column:
                   name: comment_id
-                  value: "c9d6f870-9f9a-4dbf-9079-bb676bc5a1b5"
+                  value: c9d6f870-9f9a-4dbf-9079-bb676bc5a1b5
               - column:
                   name: user_id
                   value: "user|66f8511afb3983f9045fc7c9"
@@ -25,10 +25,10 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: "e3a1b972-5e60-4e89-b9a4-6a10bde8e4b3"
+                  value: e3a1b972-5e60-4e89-b9a4-6a10bde8e4b3
               - column:
                   name: comment_id
-                  value: "35e4de5b-b805-45b6-b5b5-91b51b9fbb1f"
+                  value: 35e4de5b-b805-45b6-b5b5-91b51b9fbb1f
               - column:
                   name: user_id
                   value: "user|66f8511afb3983f9045fc7c9"
@@ -41,10 +41,10 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: "f2d2a5b8-2f4b-4716-bf35-88f8a0e7184d"
+                  value: f2d2a5b8-2f4b-4716-bf35-88f8a0e7184d
               - column:
                   name: comment_id
-                  value: "f97bfa82-4b64-48c1-b9b6-b52eec19104f"
+                  value: f97bfa82-4b64-48c1-b9b6-b52eec19104f
               - column:
                   name: user_id
                   value: "user|66f8511afb3983f9045fc7c9"

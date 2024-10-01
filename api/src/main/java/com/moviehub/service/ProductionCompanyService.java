@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -53,12 +54,12 @@ public class ProductionCompanyService {
         return companyRepository.findAll(pageable);
     }
 
-    public ProductionCompany getProductionCompany(String companyId) {
+    public ProductionCompany getProductionCompany(UUID companyId) {
         return companyRepository.findById(companyId)
                                 .orElseThrow(() -> new ProductionCompanyNotFoundException("Production company with ID: " + companyId + " not found"));
     }
 
-    public ProductionCompany updateProductionCompany(String companyId, String name) {
+    public ProductionCompany updateProductionCompany(UUID companyId, String name) {
         ProductionCompany company = getProductionCompany(companyId);
         company.setName(name);
 

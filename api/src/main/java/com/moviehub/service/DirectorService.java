@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 @Transactional
 @AllArgsConstructor
@@ -46,7 +48,7 @@ public class DirectorService {
         return directorRepository.save(director);
     }
 
-    public Director getDirector(String directorId) {
+    public Director getDirector(UUID directorId) {
         return directorRepository.findById(directorId)
                                  .orElseThrow(() -> new DirectorNotFoundException("Director with ID: " + directorId + " not found"));
     }
@@ -58,7 +60,7 @@ public class DirectorService {
         return directorRepository.findAll(pageable);
     }
 
-    public Director updateDirector(String directorId, Director incomingDirector) {
+    public Director updateDirector(UUID directorId, Director incomingDirector) {
         Director existingDirector = getDirector(directorId);
 
         if (incomingDirector.getName() != null) {
