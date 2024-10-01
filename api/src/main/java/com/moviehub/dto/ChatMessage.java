@@ -1,4 +1,4 @@
 package com.moviehub.dto;
 
-public record ChatMessage(String message, String time) {
+public record ChatMessage(String username, String message, String time) {
 }

@@ -17,8 +17,8 @@ public class ChatController {
 
     @MessageMapping("/chat")
     @SendTo("/topic/chat")
-    public ChatMessage sendMessage(String message, @AuthenticationPrincipal Principal principal) {
-        return new ChatMessage(message, LocalTime.now().format(TIME_FORMATTER));
+    public ChatMessage sendMessage(@AuthenticationPrincipal Principal principal, String message) {
+        return new ChatMessage(principal.getName().split("\\|")[0], message, LocalTime.now().format(TIME_FORMATTER));
     }
 
 }

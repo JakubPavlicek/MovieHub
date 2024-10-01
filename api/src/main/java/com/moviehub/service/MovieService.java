@@ -7,6 +7,7 @@ import com.moviehub.entity.Director;
 import com.moviehub.entity.Genre;
 import com.moviehub.entity.Movie;
 import com.moviehub.entity.MovieCast;
+import com.moviehub.entity.MovieRating;
 import com.moviehub.entity.ProductionCompany;
 import com.moviehub.exception.MovieNotFoundException;
 import com.moviehub.repository.MovieRepository;
@@ -160,17 +161,27 @@ public class MovieService {
         return interactionService.getComments(movie, page, limit, sort);
     }
 
-    public void updateRating(UUID movieId, Double rating) {
+    public void addRating(UUID movieId, Double rating) {
         Movie movie = getMovie(movieId);
 
-        interactionService.saveRating(movie, rating);
+        boolean wasRatingUpdated = interactionService.saveRating(movie, rating);
 
         Double newRating = interactionService.calculateRating(movieId);
 
         movie.setRating(newRating);
-        movie.setReviewCount(movie.getReviewCount() + 1);
+
+        // user rated the movie for the first time
+        if (!wasRatingUpdated) {
+            movie.setReviewCount(movie.getReviewCount() + 1);
+        }
 
         movieRepository.save(movie);
+    }
+
+    public MovieRating getRating(UUID movieId) {
+        Movie movie = getMovie(movieId);
+
+        return interactionService.getRating(movie);
     }
 
 }

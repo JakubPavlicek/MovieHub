@@ -9,6 +9,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -23,8 +25,23 @@ public class CommentReactionService {
             return;
         }
 
-        ensureUniqueReaction(comment, AuthUser.getUserId());
+        Optional<CommentReaction> existingReaction = reactionRepository.findByCommentAndUserId(comment, AuthUser.getUserId());
 
+        // user has already reacted to the comment -> update the reaction
+        if (existingReaction.isPresent()) {
+            updateExistingReaction(existingReaction.get(), reactionType);
+            return;
+        }
+
+        createNewReaction(comment, reactionType);
+    }
+
+    private void updateExistingReaction(CommentReaction commentReaction, ReactionType reactionType) {
+        commentReaction.setReactionType(reactionType);
+        reactionRepository.save(commentReaction);
+    }
+
+    private void createNewReaction(Comment comment, ReactionType reactionType) {
         CommentReaction reaction = CommentReaction.builder()
                                                   .comment(comment)
                                                   .userId(AuthUser.getUserId())
@@ -32,13 +49,6 @@ public class CommentReactionService {
                                                   .build();
 
         reactionRepository.save(reaction);
-    }
-
-    private void ensureUniqueReaction(Comment comment, String userId) {
-        // user has already reacted to the comment -> remove the reaction
-        if (reactionRepository.existsByCommentAndUserId(comment, userId)) {
-            reactionRepository.removeByCommentAndUserId(comment, userId);
-        }
     }
 
 }

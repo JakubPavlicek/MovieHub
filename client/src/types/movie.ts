@@ -45,6 +45,10 @@ export interface MoviePreview {
   genres: string[];
 }
 
+export interface MovieRating {
+  rating: number;
+}
+
 export interface MoviePage {
   content: MoviePreview[];
   pageable: Pageable;

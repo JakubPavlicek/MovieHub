@@ -481,6 +481,12 @@ components:
       minimum: 0
       maximum: 10
       nullable: false
+    Rating:
+      description: A float value representing the movie's rating.
+      type: object
+      properties:
+        rating:
+          $ref: '#/components/schemas/MovieRating'
     MovieReviewCount:
       type: integer
       format: int32
@@ -953,8 +959,6 @@ components:
             If `true`, the page has no items; otherwise, it has content.
           example: false
 
-    # TODO: requests
-
     MovieRequest:
       type: object
       description: Schema for the request body when creating or updating a movie.
@@ -1095,8 +1099,6 @@ components:
           $ref: '#/components/schemas/PersonName'
         role:
           $ref: '#/components/schemas/ActorRole'
-
-    # TODO: response
 
     MovieCastResponse:
       type: object
@@ -1327,8 +1329,6 @@ components:
               description: "More details on the country error."
               example: "it must be between 1 and 15 characters long"
 
-    # TODO: endpoints
-
 paths:
   /movies:
     post:
@@ -1438,11 +1438,11 @@ paths:
         '404':
           $ref: '#/components/responses/404MovieNotFound'
 
-  /movies/{movieId}/rating:
+  /movies/{movieId}/ratings:
     post:
       description: Add a rating for the specified movie.
       summary: Add movie rating
-      operationId: updateRating
+      operationId: addRating
       tags:
         - movies
       parameters:
@@ -1453,16 +1453,27 @@ paths:
         content:
           application/json:
             schema:
-              description: A float value representing the movie's rating.
-              type: object
-              properties:
-                rating:
-                  $ref: '#/components/schemas/MovieRating'
+              $ref: '#/components/schemas/Rating'
       responses:
-        '200':
+        '204':
           description: Successfully added the movie rating.
         '404':
           $ref: '#/components/responses/404MovieNotFound'
+    get:
+      description: Retrieve the rating given by the currently authenticated user for the specified movie.
+      summary: Get authenticated user's movie rating
+      operationId: getRating
+      tags:
+        - movies
+      parameters:
+        - $ref: '#/components/parameters/movieId'
+      responses:
+        '200':
+          description: Successfully retrieved the current user's rating for the specified movie.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rating'
 
   /movies/{movieId}/comments:
     post:
@@ -1518,7 +1529,7 @@ paths:
         '404':
           $ref: '#/components/responses/404CommentNotFound'
 
-  /comments/{commentId}/reaction:
+  /comments/{commentId}/reactions:
     post:
       description: Add a reaction for a comment with the specified ID.
       summary: Add a reaction to a comment

@@ -1,5 +1,8 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Star } from "lucide-react";
+import { useAddMovieRating } from "@/hooks/useAddMovieRating";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useGetMovieRating } from "@/hooks/useGetMovieRating";
 
 interface StarRatingProps {
   movieId: string;
@@ -8,10 +11,35 @@ interface StarRatingProps {
 const StarRating: FC<StarRatingProps> = ({ movieId }) => {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
+  const [token, setToken] = useState<string | null>(null);
 
-  const handleRating = (starIndex: number) => {
+  const { movieRating } = useGetMovieRating({ movieId, token });
+  const { rateMovie } = useAddMovieRating(movieId);
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      if (!isAuthenticated) return;
+
+      const fetchedToken = await getAccessTokenSilently();
+      setToken(fetchedToken);
+    };
+    fetchToken();
+  }, [isAuthenticated, getAccessTokenSilently]);
+
+  useEffect(() => {
+    if (movieRating) {
+      setRating(movieRating.rating / 2);
+    }
+  }, [movieRating]);
+
+  const handleRating = async (starIndex: number) => {
+    if (!isAuthenticated) return;
+
+    const token = await getAccessTokenSilently();
     setRating(starIndex);
-    // TODO: call api endpoint to rate the movie [API PUT /movies/{movieId}/rating/{rating} - useMutation()]
+    const userRating = starIndex * 2;
+    await rateMovie({ movieId, userRating, token });
   };
 
   return (

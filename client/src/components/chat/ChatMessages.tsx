@@ -1,5 +1,6 @@
-import { type FC } from "react";
-import { Message } from "@/components/chat/Chat.tsx";
+import { type FC, useEffect, useRef } from "react";
+import type { Message } from "@/types/message";
+import { useAuth0 } from "@auth0/auth0-react";
 
 interface ChatMessageProps {
   name: string;
@@ -28,16 +29,28 @@ interface ChatMessagesProps {
   messages: Message[];
 }
 
-const ChatMessages: FC<ChatMessagesProps> = ({ messages }) => {
+export const ChatMessages: FC<ChatMessagesProps> = ({ messages }) => {
+  const { user } = useAuth0();
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+
   return (
     <div className="m-2 mt-0 flex h-[21rem] flex-col gap-4 overflow-hidden overflow-y-scroll">
-      <ChatMessage name={"user"} time={"22:49"} text={"text"} isCurrentUser={false} />
-      <ChatMessage name={"user"} time={"22:49"} text={"text"} isCurrentUser={true} />
       {messages.map((message, i) => (
-        <ChatMessage key={i} name={"user"} time={message.time} text={message.message} isCurrentUser={true} />
+        <ChatMessage
+          key={i}
+          name={message.username}
+          time={message.time}
+          text={message.message}
+          isCurrentUser={user?.nickname == message.username}
+        />
       ))}
+      <div ref={messagesEndRef} />
     </div>
   );
 };
-
-export default ChatMessages;

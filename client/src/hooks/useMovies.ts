@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { MoviePage } from "@/types/movie.ts";
 
 async function fetchMovies() {
-  const data = await fetch("http://localhost:8088/movies");
+  const data = await fetch("http://localhost:8088/movies?limit=20");
   return (await data.json()) as MoviePage;
 }
 

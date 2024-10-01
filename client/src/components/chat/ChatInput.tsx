@@ -1,25 +1,22 @@
 import React, { type FC, useState } from "react";
 import { SendHorizontal } from "lucide-react";
-import { Client } from "stompjs";
 
 interface ChatInputProps {
-  client: Client | null;
+  sendMessage: (message: string) => void;
 }
 
-const ChatInput: FC<ChatInputProps> = ({ client }) => {
-  const [text, setText] = useState<string>("");
+const ChatInput: FC<ChatInputProps> = ({ sendMessage }) => {
+  const [message, setMessage] = useState<string>("");
 
-  const sendMessage = (text: string) => {
-    if (client) {
-      client.send("/app/chat", {}, text);
-      setText("");
-    }
+  const submitMessage = (text: string) => {
+    sendMessage(text);
+    setMessage("");
   };
 
   const handleEnterKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      sendMessage(text);
+      submitMessage(message);
     }
   };
 
@@ -29,13 +26,13 @@ const ChatInput: FC<ChatInputProps> = ({ client }) => {
         type="text"
         placeholder="Write a message"
         className="w-full rounded-full border-transparent bg-gray-700 px-4 text-white placeholder:text-gray-400 focus:border-cyan-300 focus:outline-none"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
         onKeyDown={handleEnterKey}
       />
       <button
         className="p-2 text-white hover:rounded-full hover:bg-gray-700"
-        onClick={() => sendMessage(text)}
+        onClick={() => submitMessage(message)}
       >
         <SendHorizontal strokeWidth={1} size={26} className="fill-cyan-600" />
       </button>

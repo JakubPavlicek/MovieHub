@@ -30,12 +30,16 @@ public class MovieInteractionService {
         return commentService.getComments(movie, pageable);
     }
 
-    public MovieRating saveRating(Movie movie, Double rating) {
+    public boolean saveRating(Movie movie, Double rating) {
         return ratingService.saveRating(movie, rating);
     }
 
     public Double calculateRating(UUID movieId) {
         return ratingService.calculateRating(movieId);
+    }
+
+    public MovieRating getRating(Movie movie) {
+        return ratingService.getRating(movie);
     }
 
 }
