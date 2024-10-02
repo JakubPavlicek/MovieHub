@@ -13,6 +13,7 @@ security:
 components:
 
   securitySchemes:
+
     bearerAuth:
       type: http
       scheme: bearer
@@ -27,6 +28,7 @@ components:
       schema:
         type: string
         format: uuid
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
         maxLength: 255
       required: true
       example: 6c42ccf6-f635-48f8-9af5-4c80e6812dbf
@@ -38,6 +40,7 @@ components:
         type: integer
         format: int32
         minimum: 0
+        maximum: 10000
         default: 0
         example: 0
     limit:
@@ -46,6 +49,7 @@ components:
       description: The maximum number of items to return per page.
       schema:
         type: integer
+        format: int32
         minimum: 1
         maximum: 50
         default: 10
@@ -60,6 +64,7 @@ components:
         Example usage: ?sort=name.desc,length.asc.
       schema:
         type: string
+        pattern: "(name|releaseDate|duration|description|director).(asc|desc)(?:,|$)"
         default: "name.asc"
         example: "name.asc"
         maxLength: 200
@@ -80,9 +85,9 @@ components:
           - To find movies exactly named "The Conjuring", use `eq:The Conjuring`.
       schema:
         type: string
+        pattern: "^(eq|like):[^:]*$"
         default: "like:"
         example: "eq:The Conjuring"
-        description: pes
         maxLength: 200
     releaseDate:
       name: releaseDate
@@ -105,6 +110,7 @@ components:
           - To find movies released on July 29, 2024, use `eq:2024-07-29`.
       schema:
         type: string
+        pattern: "^(eq|neq|lt|gt|lte|gte):\\d{4}-\\d{2}-\\d{2}$"
         default: "gte:1890-01-01"
         example: "eq:2024-07-29"
         maxLength: 100
@@ -129,6 +135,7 @@ components:
           - To find movies with a duration of at least 100 minutes, use `gte:100`.
       schema:
         type: string
+        pattern: "^(eq|neq|lt|gt|lte|gte):\\d+$"
         default: "gte:0"
         example: "gte:100"
         maxLength: 100
@@ -149,6 +156,7 @@ components:
           - To find movies with descriptions containing the word "scary", use `like:scary`.
       schema:
         type: string
+        pattern: "^(eq|like):[^:]+$"
         default: "like:"
         example: "like:scary"
         maxLength: 100
@@ -172,6 +180,7 @@ components:
           - To find movies with ratings greater than or equal to 5.0, use `gte:5.0`.
       schema:
         type: string
+        pattern: "^(eq|lt|gt|lte|gte):\\d+(\\.\\d+)?$"
         default: "gte:0"
         example: "gte:5.0"
         maxLength: 100
@@ -195,6 +204,7 @@ components:
           - To find movies with a review count greater than or equal to 10, use `gte:10`.
       schema:
         type: string
+        pattern: "^(eq|lt|gt|lte|gte):\\d+$"
         default: "gte:0"
         example: "gte:10"
         maxLength: 100
@@ -215,11 +225,12 @@ components:
           - To find movies directed by "James Wan", use `eq:James Wan`.
       schema:
         type: string
+        pattern: "^(eq|like):[^:]*$"
         default: "like:"
         example: "eq:James Wan"
         maxLength: 100
     actors:
-      name: actor
+      name: actors
       in: query
       description: |
         Query parameter for filtering movies based on the actors involved.
@@ -242,10 +253,11 @@ components:
         maxItems: 30
         items:
           type: string
+          pattern: "^(eq|like):[^:]*$"
           example: "eq:James Wan"
           maxLength: 100
     genres:
-      name: genre
+      name: genres
       in: query
       description: |
         Query parameter for filtering movies based on their genres.
@@ -268,10 +280,11 @@ components:
         maxItems: 30
         items:
           type: string
+          pattern: "^(eq|like):[^:]*$"
           example: "eq:Horror"
           maxLength: 100
     countries:
-      name: country
+      name: countries
       in: query
       description: |
         Query parameter for filtering movies based on the countries of origin.
@@ -294,6 +307,7 @@ components:
         maxItems: 30
         items:
           type: string
+          pattern: "^(eq|like):[^:]*$"
           example: "eq:South Korea"
           maxLength: 100
     keyword:
@@ -304,6 +318,7 @@ components:
         This parameter is useful for searching movies by name, director, cast, or production company.
       schema:
         type: string
+        pattern: "^[A-Za-z0-9.,'\"&()\\-: ]*$"
         default: ""
         maxLength: 100
 
@@ -316,6 +331,7 @@ components:
         Example usage: ?sort=createdAt.asc.
       schema:
         type: string
+        pattern: "^createdAt\\.(asc|desc)$"
         default: "createdAt.asc"
         example: "createdAt.asc"
         maxLength: 200
@@ -327,6 +343,8 @@ components:
       schema:
         type: string
         format: uuid
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
+        maxLength: 255
       description: The comment ID.
       example: c9d6f870-9f9a-4dbf-9079-bb676bc5a1b5
 
@@ -337,6 +355,7 @@ components:
       schema:
         type: string
         format: uuid
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
         maxLength: 255
       description: The director ID.
       example: f22608f8-43bb-4a69-b77a-cb2e3eaf0dfa
@@ -348,6 +367,7 @@ components:
       schema:
         type: string
         format: uuid
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
         maxLength: 255
       description: The actor ID.
       example: c61a0a7c-c45e-41a0-9e6c-3f86beea1802
@@ -359,6 +379,8 @@ components:
       schema:
         type: string
         format: uuid
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
+        maxLength: 255
       description: The genre ID.
       example: 6b0de5bc-8e6c-4d4c-b13e-49450d7480a7
 
@@ -369,6 +391,8 @@ components:
       schema:
         type: string
         format: uuid
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
+        maxLength: 255
       description: The country ID.
       example: d9ac0050-db90-44c1-a218-f93b0428a073
 
@@ -379,6 +403,7 @@ components:
       schema:
         type: string
         format: uuid
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
         maxLength: 255
       description: The production company ID.
       example: 8e9334d2-e021-4ec3-b34b-8dc57032e362
@@ -429,6 +454,27 @@ components:
 
     404ProductionCompanyNotFound:
       description: Production company not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+
+    401Unauthorized:
+      description: Either no access token was provided or the provided access token is invalid or expired.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+
+    403Forbidden:
+      description: The user does not have permission to access this resource.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemDetail'
+
+    Default:
+      description: Unexpected error.
       content:
         application/json:
           schema:
@@ -518,8 +564,9 @@ components:
         The URL to the movie's poster image.
         This link points to the visual representation of the movie used for promotional purposes.
       example: 'https://image.tmdb.org/t/p/original/wVYREutTvI2tmxr6ujrHT704wGF.jpg'
-      format: "^(https?://)?(www\\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$"
+      pattern: "^(https?://)?(www\\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$"
       minLength: 1
+      maxLength: 2000
       nullable: false
     MovieTrailerUrl:
       type: string
@@ -527,15 +574,16 @@ components:
         The URL to the movie's trailer video.
         This link directs to the promotional trailer available online, typically hosted on platforms like YouTube.
       example: 'https://www.youtube.com/watch?v=k10ETZ41q5o'
-      format: "^(https?://)?(www\\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$"
+      pattern: "^(https?://)?(www\\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$"
       minLength: 1
+      maxLength: 2000
       nullable: false
     MovieFilename:
       type: string
       description: |
         The filename of the movie, which serves as a reference to the corresponding video file in the storage.
       example: placeholder.mp4
-      format: "^[\\w,\\s-]+\\.[A-Za-z0-9]{3,4}$"
+      pattern: "^[\\w,\\s-]+\\.[A-Za-z0-9]{3,4}$"
       minLength: 1
       maxLength: 255
       nullable: false
@@ -559,12 +607,6 @@ components:
       pattern: "^[\x20-\x7E]+$"
       example: |
         Patrick Joseph Wilson was born in Norfolk, Virginia and raised in St. Petersburg, Florida, the son of Mary Kathryn (Burton), a voice teacher and professional singer, and John Franklin Wilson, a news anchor.
-        Wilson has a B.F.A. in Drama from Carnegie-Mellon University.
-        His theater work has produced many nominations and awards.
-        He was nominated for Best Actor in a Musical for The Full Monty, a Drama League Award for 'Fascinating Rhythm', a Drama Drama League Award for 'Bright Lights, Big City', an Encores nomination for 'Tenderloin'.
-        He had national tours in 'Carousel' (Drama Logue Award winner and L.A. Ovation nomination) and 'Miss Saigon'.
-        Regionally, he has appeared in 'Sweet Bird of Youth' (La Jolla), 'Cider House Rules' (Mark Taper Forum), 'Romeo and Juliet: The Musical' (Ordway), 'Lucky in the Rain' (Goodspeed), 'Harmony' (La Jolla), and 'The Full Monty' (Globe).
-        Patrick Wilson is married to actress Dagmara Dominczyk; the couple has two children.
     ActorRole:
       type: string
       description: |
@@ -618,8 +660,6 @@ components:
       maxLength: 15
       nullable: false
 
-    # TODO: ADD SECURITY TOKEN
-
     MovieUserRating:
       description: A float value representing the movie's rating.
       additionalProperties: false
@@ -639,8 +679,7 @@ components:
     Text:
       type: string
       example: "Very interesting movie"
-      pattern: "^.+$"
-      format: "^[\\w\\s.,!?'-]+$"
+      pattern: "^[\\w\\s.,!?'-]+$"
       minLength: 1
       maxLength: 500
       nullable: false
@@ -666,7 +705,7 @@ components:
       description: |
         A unique identifier used to uniquely identify users.
       example: user|12c5ja230ac8979cac9acv0v
-      format: "^[a-zA-Z0-9._-]{1,15}\\|[a-z0-9]+$"
+      pattern: "^[a-zA-Z0-9._-]{1,15}\\|[a-z0-9]+$"
       maxLength: 255
       nullable: false
 
@@ -678,6 +717,7 @@ components:
         It is a 36-character string consisting of hexadecimal digits and hyphens.
         This field is optional and may be null if the comment does not have a parent.
       example: 872e1723-09ac-461d-9f54-d4c221269bed
+      pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
       maxLength: 255
       nullable: true
 
@@ -1153,6 +1193,7 @@ components:
         - name
         - role
       nullable: false
+      additionalProperties: false
       properties:
         name:
           $ref: '#/components/schemas/PersonName'
@@ -1248,9 +1289,7 @@ components:
         id:
           $ref: '#/components/schemas/Uuid'
         name:
-          type: string
-          example: James Wan
-          maxLength: 255
+          $ref: '#/components/schemas/PersonName'
 
     ProductionCompanyDetailsResponse:
       type: object
@@ -1260,20 +1299,17 @@ components:
         id:
           $ref: '#/components/schemas/Uuid'
         name:
-          type: string
-          example: A24
-          maxLength: 255
+          $ref: '#/components/schemas/ProductionCompanyName'
 
     GenreDetailsResponse:
       type: object
       description: Provides details about a genre.
+      additionalProperties: false
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
         name:
-          type: string
-          example: Horror
-          maxLength: 255
+          $ref: '#/components/schemas/GenreName'
 
     CountryDetailsResponse:
       type: object
@@ -1283,9 +1319,7 @@ components:
         id:
           $ref: '#/components/schemas/Uuid'
         name:
-          type: string
-          example: Italy
-          maxLength: 255
+          $ref: '#/components/schemas/CountryName'
 
     DirectorDetailsResponse:
       type: object
@@ -1373,11 +1407,13 @@ components:
           type: string
           description: "A URI reference that identifies the problem type."
           example: "http://localhost:8080/movie-not-found"
+          pattern: "^((about:blank)|(https?://[^\\s]+$))"
           maxLength: 1000
         title:
           type: string
           description: "A short, human-readable summary of the problem type."
-          example: Document Not Found
+          example: "Document Not Found"
+          pattern: "^[A-Za-z0-9\\s\\-.,!?:;'\"]+$"
           maxLength: 255
         status:
           type: number
@@ -1387,27 +1423,17 @@ components:
           type: string
           description: "A human-readable explanation specific to this occurrence of the problem."
           example: "Movie with ID: 11ae56ed-240e-4d4d-8d3c-f135d9394ab3 not found"
+          pattern: "^[A-Za-z0-9\\s\\-.,!?:;'\"]+$"
           maxLength: 1000
         instance:
           type: string
           description: "A URI reference that identifies the specific occurrence of the problem."
           example: "/movies/11ae56ed-240e-4d4d-8d3c-f135d9394ab3"
+          pattern: "^(/[^\\s]*)+$"
           maxLength: 1000
         contextInfo:
           type: object
           description: "A free-form based object that contains additional context about the error."
-          additionalProperties: false
-          properties:
-            genre:
-              type: string
-              description: "More details on the genre error."
-              example: "it must be between 1 and 15 characters long"
-              maxLength: 1000
-            country:
-              type: string
-              description: "More details on the country error."
-              example: "it must be between 1 and 15 characters long"
-              maxLength: 1000
 
 paths:
   /movies:
@@ -1433,6 +1459,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MovieDetailsResponse'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        'default':
+          $ref: '#/components/responses/Default'
     get:
       description: |
         Retrieve a list of movies in the system.
@@ -1449,6 +1481,8 @@ paths:
         - $ref: '#/components/parameters/releaseDate'
         - $ref: '#/components/parameters/duration'
         - $ref: '#/components/parameters/description'
+        - $ref: '#/components/parameters/rating'
+        - $ref: '#/components/parameters/reviewCount'
         - $ref: '#/components/parameters/director'
         - $ref: '#/components/parameters/actors'
         - $ref: '#/components/parameters/genres'
@@ -1461,6 +1495,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MoviePage'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /movies/{movieId}:
     get:
@@ -1480,6 +1516,8 @@ paths:
                 $ref: '#/components/schemas/MovieDetailsResponse'
         '404':
           $ref: '#/components/responses/404MovieNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
     put:
       description: |
         Update the details of an existing movie.
@@ -1506,8 +1544,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MovieDetailsResponse'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
         '404':
           $ref: '#/components/responses/404MovieNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
     delete:
       description: Delete a movie with the specified ID from the database.
       summary: Delete movie
@@ -1521,8 +1565,14 @@ paths:
       responses:
         '204':
           description: Successfully deleted the movie from the database.
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
         '404':
           $ref: '#/components/responses/404MovieNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /movies/{movieId}/ratings:
     post:
@@ -1545,8 +1595,14 @@ paths:
       responses:
         '204':
           description: Successfully added the movie rating.
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
         '404':
           $ref: '#/components/responses/404MovieNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
     get:
       description: Retrieve the rating given by the currently authenticated user for the specified movie.
       summary: Get authenticated user's movie rating
@@ -1564,6 +1620,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MovieUserRating'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404MovieNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /movies/{movieId}/comments:
     post:
@@ -1584,6 +1648,14 @@ paths:
       responses:
         '204':
           description: Sucessfully added a comment for the specified movie.
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404MovieNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
 
     get:
       description: Retrieve a list of comments of the specified movie.
@@ -1605,6 +1677,8 @@ paths:
                 $ref: '#/components/schemas/CommentPage'
         '404':
           $ref: '#/components/responses/404MovieNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /comments/{commentId}:
     delete:
@@ -1620,8 +1694,14 @@ paths:
       responses:
         '204':
           description: Successfully deleted a comment with the given ID.
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
         '404':
           $ref: '#/components/responses/404CommentNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /comments/{commentId}/reactions:
     post:
@@ -1643,8 +1723,14 @@ paths:
       responses:
         '204':
           description: Successfully reacted to the specified comment.
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
         '404':
           $ref: '#/components/responses/404CommentNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /directors:
     post:
@@ -1671,12 +1757,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DirectorDetailsResponse'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
         '409':
           description: The director already exists in the database.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDetail'
+        'default':
+          $ref: '#/components/responses/Default'
     get:
       description: Retrieve a list of directors available in the system.
       summary: List directors
@@ -1693,6 +1785,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DirectorPage'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /directors/{directorId}:
     get:
@@ -1712,6 +1806,8 @@ paths:
                 $ref: '#/components/schemas/DirectorDetailsResponse'
         '404':
           $ref: '#/components/responses/404DirectorNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
     put:
       description: |
         Update the details of an existing director.
@@ -1736,8 +1832,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/DirectorDetailsResponse'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
         '404':
           $ref: '#/components/responses/404DirectorNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /directors/{directorId}/movies:
     get:
@@ -1759,6 +1861,8 @@ paths:
                 $ref: '#/components/schemas/MoviePage'
         '404':
           $ref: '#/components/responses/404DirectorNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /actors:
     post:
@@ -1785,12 +1889,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ActorDetailsResponse'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
         '409':
           description: The actor already exists in the database.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDetail'
+        'default':
+          $ref: '#/components/responses/Default'
     get:
       description: Retrieve a list of actors available in the system.
       summary: List actors
@@ -1807,6 +1917,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ActorPage'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /actors/{actorId}:
     get:
@@ -1826,6 +1938,8 @@ paths:
                 $ref: '#/components/schemas/ActorDetailsResponse'
         '404':
           $ref: '#/components/responses/404ActorNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
     put:
       description: |
         Update the details of an existing actor.
@@ -1850,8 +1964,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ActorDetailsResponse'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
         '404':
           $ref: '#/components/responses/404ActorNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /actors/{actorId}/movies:
     get:
@@ -1873,6 +1993,8 @@ paths:
                 $ref: '#/components/schemas/MoviePage'
         '404':
           $ref: '#/components/responses/404ActorNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /production-companies:
     post:
@@ -1901,12 +2023,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductionCompanyDetailsResponse'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
         '409':
           description: The production company already exists in the database.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDetail'
+        'default':
+          $ref: '#/components/responses/Default'
     get:
       description: Retrieve a list of production companies available in the system.
       summary: List production companies
@@ -1923,6 +2051,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductionCompanyPage'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /production-companies/{companyId}:
     get:
@@ -1942,6 +2072,8 @@ paths:
                 $ref: '#/components/schemas/ProductionCompanyDetailsResponse'
         '404':
           $ref: '#/components/responses/404ProductionCompanyNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
     put:
       description: |
         Update the details of an existing production company.
@@ -1971,8 +2103,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProductionCompanyDetailsResponse'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
         '404':
           $ref: '#/components/responses/404ProductionCompanyNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /production-companies/{companyId}/movies:
     get:
@@ -1994,6 +2132,8 @@ paths:
                 $ref: '#/components/schemas/MoviePage'
         '404':
           $ref: '#/components/responses/404ProductionCompanyNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /genres:
     post:
@@ -2022,12 +2162,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenreDetailsResponse'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
         '409':
           description: The genre already exists in the database.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDetail'
+        'default':
+          $ref: '#/components/responses/Default'
     get:
       description: Retrieve a list of genres available in the system.
       summary: List genres
@@ -2041,6 +2187,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenreListResponse'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /genres/{genreId}:
     get:
@@ -2060,6 +2208,8 @@ paths:
                 $ref: '#/components/schemas/GenreDetailsResponse'
         '404':
           $ref: '#/components/responses/404GenreNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
     put:
       description: |
         Update the details of an existing genre.
@@ -2089,8 +2239,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GenreDetailsResponse'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
         '404':
           $ref: '#/components/responses/404GenreNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /genres/{genreId}/movies:
     get:
@@ -2112,6 +2268,8 @@ paths:
                 $ref: '#/components/schemas/MoviePage'
         '404':
           $ref: '#/components/responses/404GenreNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /countries:
     post:
@@ -2141,12 +2299,18 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CountryDetailsResponse'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
         '409':
           description: The country already exists in the database.
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/ProblemDetail'
+        'default':
+          $ref: '#/components/responses/Default'
     get:
       description: Retrieve a list of countries available in the system.
       summary: List countries
@@ -2160,6 +2324,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CountryListResponse'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /countries/{countryId}:
     get:
@@ -2179,6 +2345,8 @@ paths:
                 $ref: '#/components/schemas/CountryDetailsResponse'
         '404':
           $ref: '#/components/responses/404CountryNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
     put:
       description: |
         Update the details of an existing country.
@@ -2208,8 +2376,14 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/CountryDetailsResponse'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
         '404':
           $ref: '#/components/responses/404CountryNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
 
   /countries/{countryId}/movies:
     get:
@@ -2231,3 +2405,5 @@ paths:
                 $ref: '#/components/schemas/MoviePage'
         '404':
           $ref: '#/components/responses/404CountryNotFound'
+        'default':
+          $ref: '#/components/responses/Default'

@@ -122,6 +122,26 @@ public class ParseService {
         ));
     }
 
+    public Specification<Movie> parseRating(String rating) {
+        return parseFilter(rating, Map.of(
+            "eq",  value -> MovieSpecification.ratingEqualTo(parseDouble(value)),
+            "lt",  value -> MovieSpecification.ratingLessThan(parseDouble(value)),
+            "gt",  value -> MovieSpecification.ratingGreaterThan(parseDouble(value)),
+            "lte", value -> MovieSpecification.ratingLessThanOrEqualTo(parseDouble(value)),
+            "gte", value -> MovieSpecification.ratingGreaterThanOrEqualTo(parseDouble(value))
+        ));
+    }
+
+    public Specification<Movie> parseReviewCount(String reviewCount) {
+        return parseFilter(reviewCount, Map.of(
+            "eq",  value -> MovieSpecification.reviewCountEqualTo(parseInteger(value)),
+            "lt",  value -> MovieSpecification.reviewCountLessThan(parseInteger(value)),
+            "gt",  value -> MovieSpecification.reviewCountGreaterThan(parseInteger(value)),
+            "lte", value -> MovieSpecification.reviewCountLessThanOrEqualTo(parseInteger(value)),
+            "gte", value -> MovieSpecification.reviewCountGreaterThanOrEqualTo(parseInteger(value))
+        ));
+    }
+
     public Specification<Movie> parseDirector(String director) {
         return parseFilter(director, Map.of(
             "eq",   MovieSpecification::directorEqualTo,
@@ -163,6 +183,14 @@ public class ParseService {
             return Integer.parseInt(integer);
         } catch (NumberFormatException exception) {
             throw new ParseException("Invalid integer format: " + integer);
+        }
+    }
+
+    private Double parseDouble(String number) {
+        try {
+            return Double.parseDouble(number);
+        } catch (NumberFormatException exception) {
+            throw new ParseException("Invalid double format: " + number);
         }
     }
 

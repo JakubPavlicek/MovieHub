@@ -15,6 +15,8 @@ import com.moviehub.mapper.dto.CommentMapper;
 import com.moviehub.mapper.dto.MovieMapper;
 import com.moviehub.mapper.dto.MovieRatingMapper;
 import com.moviehub.service.MovieService;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -64,8 +66,8 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<MoviePage> getMovies(Integer page, Integer limit, String sort, String name, String releaseDate, String duration, String description, String director, List<String> actors, List<String> genres, List<String> countries, String keyword) {
-        Page<Movie> movies = movieService.getMovies(page, limit, sort, name, releaseDate, duration, description, director, actors, genres, countries, keyword);
+    public ResponseEntity<MoviePage> getMovies(Integer page, Integer limit, String sort, String name, String releaseDate, String duration, String description, String rating, String reviewCount, String director, List<@Pattern(regexp = "^(eq|like):[^:]*$") @Size(max = 100) String> actors, List<@Pattern(regexp = "^(eq|like):[^:]*$") @Size(max = 100) String> genres, List<@Pattern(regexp = "^(eq|like):[^:]*$") @Size(max = 100) String> countries, String keyword) {
+        Page<Movie> movies = movieService.getMovies(page, limit, sort, name, releaseDate, duration, description, rating, reviewCount, director, actors, genres, countries, keyword);
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
         return ResponseEntity.ok(moviePage);
