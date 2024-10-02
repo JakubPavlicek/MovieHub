@@ -68,259 +68,6 @@ components:
         default: "name.asc"
         example: "name.asc"
         maxLength: 200
-    name:
-      name: name
-      in: query
-      description: |
-        Query parameter for filtering movies based on their name.
-        
-        - **Usage:**
-          - Prefix the movie name with a filter operator followed by a colon `:`.
-        
-        - **Operators:**
-          - `eq`- Equal to the specified name.
-          - `like`- Name contains the specified string.
-        
-        - **Example:**
-          - To find movies exactly named "The Conjuring", use `eq:The Conjuring`.
-      schema:
-        type: string
-        pattern: "^(eq|like):[^:]*$"
-        default: "like:"
-        example: "eq:The Conjuring"
-        maxLength: 200
-    releaseDate:
-      name: releaseDate
-      in: query
-      description: |
-        Query parameter for filtering movies based on their release date.
-
-        - **Usage:**
-          - Prefix the release date with a filter operator followed by a colon `:`.
-
-        - **Operators:**
-          - `eq` - Equal to the specified date.
-          - `neq` - Not equal to the specified date.
-          - `lt` - Less than the specified date.
-          - `gt` - Greater than the specified date.
-          - `lte` - Less than or equal to the specified date.
-          - `gte` - Greater than or equal to the specified date.
-
-        - **Example:**
-          - To find movies released on July 29, 2024, use `eq:2024-07-29`.
-      schema:
-        type: string
-        pattern: "^(eq|neq|lt|gt|lte|gte):\\d{4}-\\d{2}-\\d{2}$"
-        default: "gte:1890-01-01"
-        example: "eq:2024-07-29"
-        maxLength: 100
-    duration:
-      name: duration
-      in: query
-      description: |
-        Query parameter for filtering movies based on their duration (in minutes).
-
-        - **Usage:**
-          - Prefix the duration with a filter operator followed by a colon `:`.
-
-        - **Operators:**
-          - `eq` - Equal to the specified duration.
-          - `neq` - Not equal to the specified duration.
-          - `lt` - Less than the specified duration.
-          - `gt` - Greater than the specified duration.
-          - `lte` - Less than or equal to the specified duration.
-          - `gte` - Greater than or equal to the specified duration.
-
-        - **Example:**
-          - To find movies with a duration of at least 100 minutes, use `gte:100`.
-      schema:
-        type: string
-        pattern: "^(eq|neq|lt|gt|lte|gte):\\d+$"
-        default: "gte:0"
-        example: "gte:100"
-        maxLength: 100
-    description:
-      name: description
-      in: query
-      description: |
-        Query parameter for filtering movies based on their description.
-
-        - **Usage:**
-          - Prefix the description keyword with a filter operator followed by a colon `:`.
-
-        - **Operators:**
-          - `eq` - Exact match of the specified description.
-          - `like` - Description contains the specified substring.
-
-        - **Example:**
-          - To find movies with descriptions containing the word "scary", use `like:scary`.
-      schema:
-        type: string
-        pattern: "^(eq|like):[^:]+$"
-        default: "like:"
-        example: "like:scary"
-        maxLength: 100
-    rating:
-      name: rating
-      in: query
-      description: |
-        Query parameter for filtering movies based on their rating.
-
-        - **Usage:**
-          - Prefix the rating value with a filter operator followed by a colon `:`.
-
-        - **Operators:**
-          - `eq` - Exact match of the specified rating.
-          - `lt` - Rating is less than the specified value.
-          - `gt` - Rating is greater than the specified value.
-          - `lte` - Rating is less than or equal to the specified value.
-          - `gte` - Rating is greater than or equal to the specified value.
-
-        - **Example:**
-          - To find movies with ratings greater than or equal to 5.0, use `gte:5.0`.
-      schema:
-        type: string
-        pattern: "^(eq|lt|gt|lte|gte):\\d+(\\.\\d+)?$"
-        default: "gte:0"
-        example: "gte:5.0"
-        maxLength: 100
-    reviewCount:
-      name: reviewCount
-      in: query
-      description: |
-        Query parameter for filtering movies based on the number of reviews they have received.
-
-        - **Usage:**
-          - Prefix the review count value with a filter operator followed by a colon `:`.
-
-        - **Operators:**
-          - `eq` - Exact match of the specified review count.
-          - `lt` - Review count is less than the specified value.
-          - `gt` - Review count is greater than the specified value.
-          - `lte` - Review count is less than or equal to the specified value.
-          - `gte` - Review count is greater than or equal to the specified value.
-
-        - **Example:**
-          - To find movies with a review count greater than or equal to 10, use `gte:10`.
-      schema:
-        type: string
-        pattern: "^(eq|lt|gt|lte|gte):\\d+$"
-        default: "gte:0"
-        example: "gte:10"
-        maxLength: 100
-    director:
-      name: director
-      in: query
-      description: |
-        Query parameter for filtering movies based on the director's name.
-
-        - **Usage:**
-          - Prefix the director's name with a filter operator followed by a colon `:`.
-
-        - **Operators:**
-          - `eq` - Exact match of the director's name.
-          - `like` - Director's name contains the specified substring.
-
-        - **Example:**
-          - To find movies directed by "James Wan", use `eq:James Wan`.
-      schema:
-        type: string
-        pattern: "^(eq|like):[^:]*$"
-        default: "like:"
-        example: "eq:James Wan"
-        maxLength: 100
-    actors:
-      name: actors
-      in: query
-      description: |
-        Query parameter for filtering movies based on the actors involved.
-
-        - **Usage:**
-          - Prefix each actor's name with a filter operator followed by a colon `:`.
-          - Provide multiple values as an array if filtering by multiple actors.
-
-        - **Operators:**
-          - `eq` - Exact match for the actor's name.
-          - `like` - Actor's name contains the specified substring.
-
-        - **Example:**
-          - To find movies featuring "James Wan" as an actor, use `eq:James Wan`.
-          - To filter movies featuring both "James Wan" and "Vera Farmiga", use `["eq:James Wan", "eq:Vera Farmiga"]`.
-      schema:
-        type: array
-        default: [ "like:" ]
-        example: [ "eq:James Wan" ]
-        maxItems: 30
-        items:
-          type: string
-          pattern: "^(eq|like):[^:]*$"
-          example: "eq:James Wan"
-          maxLength: 100
-    genres:
-      name: genres
-      in: query
-      description: |
-        Query parameter for filtering movies based on their genres.
-
-        - **Usage:**
-          - Prefix each genre with a filter operator followed by a colon `:`.
-          - Provide multiple genres as an array if filtering by multiple genres.
-
-        - **Operators:**
-          - `eq` - Exact match for the genre.
-          - `like` - Genre contains the specified substring.
-        
-        - **Example:**
-          - To find movies classified as "Horror", use `eq:Horror`.
-          - To filter movies by multiple genres, such as "Horror" and "Thriller", use `["eq:Horror", "eq:Thriller"]`.
-      schema:
-        type: array
-        default: [ "like:" ]
-        example: [ "eq:Horror" ]
-        maxItems: 30
-        items:
-          type: string
-          pattern: "^(eq|like):[^:]*$"
-          example: "eq:Horror"
-          maxLength: 100
-    countries:
-      name: countries
-      in: query
-      description: |
-        Query parameter for filtering movies based on the countries of origin.
-
-        - **Usage:**
-          - Prefix each country with a filter operator followed by a colon `:`.
-          - Provide multiple countries as an array if filtering by more than one country.
-
-        - **Operators:**
-          - `eq` - Exact match for the country.
-          - `like` - Country contains the specified substring.
-
-        - **Example:**
-          - To find movies from "South Korea", use `eq:South Korea`.
-          - To filter movies from multiple countries, such as "South Korea" and "United States", use `["eq:South Korea", "eq:United States"]`.
-      schema:
-        type: array
-        default: [ "like:" ]
-        example: [ "eq:South Korea" ]
-        maxItems: 30
-        items:
-          type: string
-          pattern: "^(eq|like):[^:]*$"
-          example: "eq:South Korea"
-          maxLength: 100
-    keyword:
-      name: keyword
-      in: query
-      description: |
-        A query parameter used to filter movies based on a specific keyword.
-        This parameter is useful for searching movies by name, director, cast, or production company.
-      schema:
-        type: string
-        pattern: "^[A-Za-z0-9.,'\"&()\\-: ]*$"
-        default: ""
-        maxLength: 100
 
     commentSort:
       name: sort
@@ -659,6 +406,231 @@ components:
       minLength: 1
       maxLength: 15
       nullable: false
+
+    MovieFilter:
+      type: object
+      additionalProperties: false
+      properties:
+        name:
+          type: string
+          description: |
+            Query parameter for filtering movies based on their name.
+            
+            - **Usage:**
+              - Prefix the movie name with a filter operator followed by a colon `:`.
+            
+            - **Operators:**
+              - `eq`- Equal to the specified name.
+              - `like`- Name contains the specified string.
+            
+            - **Example:**
+              - To find movies exactly named "The Conjuring", use `eq:The Conjuring`.
+          pattern: "^(eq|like):[^:]*$"
+          default: "like:"
+          example: "eq:The Conjuring"
+          maxLength: 200
+        releaseDate:
+          type: string
+          description: |
+            Query parameter for filtering movies based on their release date.
+            
+            - **Usage:**
+              - Prefix the release date with a filter operator followed by a colon `:`.
+            
+            - **Operators:**
+              - `eq` - Equal to the specified date.
+              - `neq` - Not equal to the specified date.
+              - `lt` - Less than the specified date.
+              - `gt` - Greater than the specified date.
+              - `lte` - Less than or equal to the specified date.
+              - `gte` - Greater than or equal to the specified date.
+            
+            - **Example:**
+              - To find movies released on July 29, 2024, use `eq:2024-07-29`.
+          pattern: "^(eq|neq|lt|gt|lte|gte):\\d{4}-\\d{2}-\\d{2}$"
+          default: "gte:1890-01-01"
+          example: "eq:2024-07-29"
+          maxLength: 100
+        duration:
+          type: string
+          description: |
+            Query parameter for filtering movies based on their duration (in minutes).
+            
+            - **Usage:**
+              - Prefix the duration with a filter operator followed by a colon `:`.
+            
+            - **Operators:**
+              - `eq` - Equal to the specified duration.
+              - `neq` - Not equal to the specified duration.
+              - `lt` - Less than the specified duration.
+              - `gt` - Greater than the specified duration.
+              - `lte` - Less than or equal to the specified duration.
+              - `gte` - Greater than or equal to the specified duration.
+            
+            - **Example:**
+              - To find movies with a duration of at least 100 minutes, use `gte:100`.
+          pattern: "^(eq|neq|lt|gt|lte|gte):\\d+$"
+          default: "gte:0"
+          example: "gte:100"
+          maxLength: 100
+        description:
+          type: string
+          description: |
+            Query parameter for filtering movies based on their description.
+            
+            - **Usage:**
+              - Prefix the description keyword with a filter operator followed by a colon `:`.
+            
+            - **Operators:**
+              - `eq` - Exact match of the specified description.
+              - `like` - Description contains the specified substring.
+            
+            - **Example:**
+              - To find movies with descriptions containing the word "scary", use `like:scary`.
+          pattern: "^(eq|like):[^:]*$"
+          default: "like:"
+          example: "like:scary"
+          maxLength: 100
+        rating:
+          type: string
+          description: |
+            Query parameter for filtering movies based on their rating.
+            
+            - **Usage:**
+              - Prefix the rating value with a filter operator followed by a colon `:`.
+            
+            - **Operators:**
+              - `eq` - Exact match of the specified rating.
+              - `lt` - Rating is less than the specified value.
+              - `gt` - Rating is greater than the specified value.
+              - `lte` - Rating is less than or equal to the specified value.
+              - `gte` - Rating is greater than or equal to the specified value.
+            
+            - **Example:**
+              - To find movies with ratings greater than or equal to 5.0, use `gte:5.0`.
+          pattern: "^(eq|lt|gt|lte|gte):\\d+(\\.\\d+)?$"
+          default: "gte:0"
+          example: "gte:5.0"
+          maxLength: 100
+        reviewCount:
+          type: string
+          description: |
+            Query parameter for filtering movies based on the number of reviews they have received.
+
+            - **Usage:**
+              - Prefix the review count value with a filter operator followed by a colon `:`.
+
+            - **Operators:**
+              - `eq` - Exact match of the specified review count.
+              - `lt` - Review count is less than the specified value.
+              - `gt` - Review count is greater than the specified value.
+              - `lte` - Review count is less than or equal to the specified value.
+              - `gte` - Review count is greater than or equal to the specified value.
+
+            - **Example:**
+              - To find movies with a review count greater than or equal to 10, use `gte:10`.
+          pattern: "^(eq|lt|gt|lte|gte):\\d+$"
+          default: "gte:0"
+          example: "gte:10"
+          maxLength: 100
+        director:
+          type: string
+          description: |
+            Query parameter for filtering movies based on the director's name.
+            
+            - **Usage:**
+              - Prefix the director's name with a filter operator followed by a colon `:`.
+            
+            - **Operators:**
+              - `eq` - Exact match of the director's name.
+              - `like` - Director's name contains the specified substring.
+            
+            - **Example:**
+              - To find movies directed by "James Wan", use `eq:James Wan`.
+          pattern: "^(eq|like):[^:]*$"
+          default: "like:"
+          example: "eq:James Wan"
+          maxLength: 100
+        actors:
+          type: array
+          description: |
+            Query parameter for filtering movies based on the actors involved.
+
+            - **Usage:**
+              - Prefix each actor's name with a filter operator followed by a colon `:`.
+              - Provide multiple values as an array if filtering by multiple actors.
+
+            - **Operators:**
+              - `eq` - Exact match for the actor's name.
+              - `like` - Actor's name contains the specified substring.
+
+            - **Example:**
+              - To find movies featuring "James Wan" as an actor, use `eq:James Wan`.
+              - To filter movies featuring both "James Wan" and "Vera Farmiga", use `["eq:James Wan", "eq:Vera Farmiga"]`.
+          default: [ "like:" ]
+          example: [ "eq:James Wan" ]
+          maxItems: 30
+          items:
+            type: string
+            pattern: "^(eq|like):[^:]*$"
+            example: "eq:James Wan"
+            maxLength: 100
+        genres:
+          type: array
+          description: |
+            Query parameter for filtering movies based on their genres.
+
+            - **Usage:**
+              - Prefix each genre with a filter operator followed by a colon `:`.
+              - Provide multiple genres as an array if filtering by multiple genres.
+
+            - **Operators:**
+              - `eq` - Exact match for the genre.
+              - `like` - Genre contains the specified substring.
+
+            - **Example:**
+              - To find movies classified as "Horror", use `eq:Horror`.
+              - To filter movies by multiple genres, such as "Horror" and "Thriller", use `["eq:Horror", "eq:Thriller"]`.
+          default: [ "like:" ]
+          example: [ "eq:Horror" ]
+          maxItems: 30
+          items:
+            type: string
+            pattern: "^(eq|like):[^:]*$"
+            example: "eq:Horror"
+            maxLength: 100
+        countries:
+          type: array
+          description: |
+            Query parameter for filtering movies based on the countries of origin.
+
+            - **Usage:**
+              - Prefix each country with a filter operator followed by a colon `:`.
+              - Provide multiple countries as an array if filtering by more than one country.
+
+            - **Operators:**
+              - `eq` - Exact match for the country.
+              - `like` - Country contains the specified substring.
+
+            - **Example:**
+              - To find movies from "South Korea", use `eq:South Korea`.
+              - To filter movies from multiple countries, such as "South Korea" and "United States", use `["eq:South Korea", "eq:United States"]`.
+          default: [ "like:" ]
+          example: [ "eq:South Korea" ]
+          maxItems: 30
+          items:
+            type: string
+            pattern: "^(eq|like):[^:]*$"
+            example: "eq:South Korea"
+            maxLength: 100
+        keyword:
+          type: string
+          description: |
+            A query parameter used to filter movies based on a specific keyword.
+            This parameter is useful for searching movies by name, director, cast, or production company.
+          pattern: "^[A-Za-z0-9.,'\"&()\\-: ]*$"
+          default: ""
+          maxLength: 100
 
     MovieUserRating:
       description: A float value representing the movie's rating.
@@ -1477,17 +1449,10 @@ paths:
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/limit'
         - $ref: '#/components/parameters/sort'
-        - $ref: '#/components/parameters/name'
-        - $ref: '#/components/parameters/releaseDate'
-        - $ref: '#/components/parameters/duration'
-        - $ref: '#/components/parameters/description'
-        - $ref: '#/components/parameters/rating'
-        - $ref: '#/components/parameters/reviewCount'
-        - $ref: '#/components/parameters/director'
-        - $ref: '#/components/parameters/actors'
-        - $ref: '#/components/parameters/genres'
-        - $ref: '#/components/parameters/countries'
-        - $ref: '#/components/parameters/keyword'
+        - in: query
+          name: filter
+          schema:
+            $ref: '#/components/schemas/MovieFilter'
       responses:
         '200':
           description: Successfully retrieved a list of movies in the system.

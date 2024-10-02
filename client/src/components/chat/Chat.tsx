@@ -14,7 +14,7 @@ export const Chat: FC = () => {
       <ChatButton isChatOpened={isChatOpened} setIsChatOpened={setIsChatOpened} />
       {isChatOpened && (
         <div className="absolute bottom-24 right-6 h-[30rem] w-80 rounded-2xl bg-gray-800">
-          <ChatHeader />
+          <ChatHeader setIsChatOpened={setIsChatOpened} />
           <ChatMessages messages={messages} />
           <ChatInput sendMessage={sendMessage} />
         </div>

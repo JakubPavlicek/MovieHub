@@ -1,5 +1,6 @@
 package com.moviehub.service;
 
+import com.moviehub.dto.MovieFilter;
 import com.moviehub.entity.Actor;
 import com.moviehub.entity.Country;
 import com.moviehub.entity.Director;
@@ -18,8 +19,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -30,20 +29,20 @@ public class MovieSearchService {
 
     private static final Sort SORT_BY_UPDATED_AT_DESC = Sort.by(Sort.Direction.DESC, Movie_.UPDATED_AT);
 
-    public Page<Movie> getMovies(Integer page, Integer limit, String sort, String name, String releaseDate, String duration, String description, String rating, String reviewCount, String director, List<String> actors, List<String> genres, List<String> countries, String keyword) {
+    public Page<Movie> getMovies(Integer page, Integer limit, String sort, MovieFilter filter) {
         Pageable pageable = PageRequest.of(page, limit, parseService.parseMovieSort(sort));
 
-        Specification<Movie> specification = Specification.where(parseService.parseName(name))
-                                                          .and(parseService.parseReleaseDate(releaseDate))
-                                                          .and(parseService.parseDuration(duration))
-                                                          .and(parseService.parseDescription(description))
-                                                          .and(parseService.parseRating(rating))
-                                                          .and(parseService.parseReviewCount(reviewCount))
-                                                          .and(parseService.parseDirector(director))
-                                                          .and(parseService.parseActors(actors))
-                                                          .and(parseService.parseGenres(genres))
-                                                          .and(parseService.parseCountries(countries))
-                                                          .and(MovieSpecification.searchByKeyword(keyword));
+        Specification<Movie> specification = Specification.where(parseService.parseName(filter.getName()))
+                                                          .and(parseService.parseReleaseDate(filter.getReleaseDate()))
+                                                          .and(parseService.parseDuration(filter.getDuration()))
+                                                          .and(parseService.parseDescription(filter.getDescription()))
+                                                          .and(parseService.parseRating(filter.getRating()))
+                                                          .and(parseService.parseReviewCount(filter.getReviewCount()))
+                                                          .and(parseService.parseDirector(filter.getDirector()))
+                                                          .and(parseService.parseActors(filter.getActors()))
+                                                          .and(parseService.parseGenres(filter.getGenres()))
+                                                          .and(parseService.parseCountries(filter.getCountries()))
+                                                          .and(MovieSpecification.searchByKeyword(filter.getKeyword()));
 
         return movieRepository.findAll(specification, pageable);
     }

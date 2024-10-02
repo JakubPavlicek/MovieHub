@@ -1,5 +1,6 @@
 package com.moviehub.service;
 
+import com.moviehub.dto.MovieFilter;
 import com.moviehub.entity.Actor;
 import com.moviehub.entity.Comment;
 import com.moviehub.entity.Country;
@@ -121,8 +122,8 @@ public class MovieService {
         }
     }
 
-    public Page<Movie> getMovies(Integer page, Integer limit, String sort, String name, String releaseDate, String duration, String description, String rating, String reviewCount, String director, List<String> actors, List<String> genres, List<String> countries, String keyword) {
-        return searchService.getMovies(page, limit, sort, name, releaseDate, duration, description, rating, reviewCount, director, actors, genres, countries, keyword);
+    public Page<Movie> getMovies(Integer page, Integer limit, String sort, MovieFilter filter) {
+        return searchService.getMovies(page, limit, sort, filter);
     }
 
     public Page<Movie> getMoviesWithGenre(UUID genreId, Integer page, Integer limit) {

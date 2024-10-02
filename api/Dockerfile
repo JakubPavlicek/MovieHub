@@ -5,11 +5,11 @@ RUN mvn dependency:go-offline
 COPY src ./src
 RUN mvn clean package -DskipTests
 
-FROM eclipse-temurin:23_37-jre-alpine AS production
+FROM eclipse-temurin:23-jre AS production
 WORKDIR /app
 COPY --from=build /app/target/*.jar MovieManager.jar
 EXPOSE 8080
-RUN addgroup -S spring && \
-    adduser -S kuba -G spring
+RUN groupadd spring && \
+    useradd -g spring kuba
 USER kuba
 ENTRYPOINT ["java", "-jar", "MovieManager.jar"]

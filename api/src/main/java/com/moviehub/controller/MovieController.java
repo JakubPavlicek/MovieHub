@@ -5,6 +5,7 @@ import com.moviehub.dto.AddCommentRequest;
 import com.moviehub.dto.AddMovieRequest;
 import com.moviehub.dto.CommentPage;
 import com.moviehub.dto.MovieDetailsResponse;
+import com.moviehub.dto.MovieFilter;
 import com.moviehub.dto.MoviePage;
 import com.moviehub.dto.MovieUserRating;
 import com.moviehub.dto.UpdateMovieRequest;
@@ -15,15 +16,12 @@ import com.moviehub.mapper.dto.CommentMapper;
 import com.moviehub.mapper.dto.MovieMapper;
 import com.moviehub.mapper.dto.MovieRatingMapper;
 import com.moviehub.service.MovieService;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -66,8 +64,8 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<MoviePage> getMovies(Integer page, Integer limit, String sort, String name, String releaseDate, String duration, String description, String rating, String reviewCount, String director, List<@Pattern(regexp = "^(eq|like):[^:]*$") @Size(max = 100) String> actors, List<@Pattern(regexp = "^(eq|like):[^:]*$") @Size(max = 100) String> genres, List<@Pattern(regexp = "^(eq|like):[^:]*$") @Size(max = 100) String> countries, String keyword) {
-        Page<Movie> movies = movieService.getMovies(page, limit, sort, name, releaseDate, duration, description, rating, reviewCount, director, actors, genres, countries, keyword);
+    public ResponseEntity<MoviePage> getMovies(Integer page, Integer limit, String sort, MovieFilter filter) {
+        Page<Movie> movies = movieService.getMovies(page, limit, sort, filter);
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
         return ResponseEntity.ok(moviePage);
