@@ -1,6 +1,6 @@
 package com.moviehub.mapper.dto;
 
-import com.moviehub.dto.Rating;
+import com.moviehub.dto.MovieUserRating;
 import com.moviehub.entity.MovieRating;
 
 public class MovieRatingMapper {
@@ -8,10 +8,10 @@ public class MovieRatingMapper {
     private MovieRatingMapper() {
     }
 
-    public static Rating mapToRating(MovieRating movieRating) {
-        return Rating.builder()
-                     .rating(movieRating.getRating())
-                     .build();
+    public static MovieUserRating mapToRating(MovieRating movieRating) {
+        return MovieUserRating.builder()
+                              .rating(movieRating.getRating())
+                              .build();
     }
 
 }
