@@ -1,10 +1,10 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
 import { Play } from "lucide-react";
-import type { MoviePreview } from "@/types/movie";
+import { components } from "@/api/api";
 
 interface MoviePreviewProps {
-  moviePreview: MoviePreview;
+  moviePreview: components["schemas"]["MoviePreviewResponse"];
 }
 
 export const MoviePreviewCard: FC<MoviePreviewProps> = ({ moviePreview }) => {
@@ -33,7 +33,7 @@ export const MoviePreviewCard: FC<MoviePreviewProps> = ({ moviePreview }) => {
           <span>&#8226;</span>
           <span>{moviePreview.duration}m</span>
         </div>
-        <span className="truncate opacity-70">{moviePreview.genres.join(", ")}</span>
+        <span className="truncate opacity-70">{moviePreview.genres?.join(", ")}</span>
       </div>
     </div>
   );

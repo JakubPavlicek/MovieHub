@@ -1,10 +1,13 @@
 import type { FC } from "react";
-import { useMovies } from "@/hooks/useMovies";
 import { MoviePreviewList } from "@/components/common/MoviePreviewList";
 import { Chat } from "@/components/chat/Chat";
+import { api } from "@/main";
 
 export const HomePage: FC = () => {
-  const { movies } = useMovies();
+  // const { movies } = useMovies();
+  const { data: movies } = api.useQuery("get", "/movies", { params: { query: { limit: 20 } } });
+
+  if (!movies) return "Loading...";
 
   return (
     <main className="relative mx-auto 2xl:container">
@@ -12,7 +15,7 @@ export const HomePage: FC = () => {
         <div className="mb-6 text-3xl font-semibold">
           <span className="border-b-2 border-cyan-400">Online movies</span>
         </div>
-        <MoviePreviewList movies={movies} />
+        <MoviePreviewList movies={movies.content} />
         <Chat />
       </div>
     </main>

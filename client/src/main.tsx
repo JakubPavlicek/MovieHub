@@ -11,10 +11,19 @@ import { CountryPage } from "@/pages/CountryPage";
 import { SearchPage } from "@/pages/SearchPage";
 import { ErrorPage } from "@/pages/ErrorPage";
 import { MoviePage } from "@/pages/MoviePage";
+import type { paths } from "@/api/api";
+import createFetchClient from "openapi-fetch";
+import createClient from "openapi-react-query";
 
 // https://auth0.com/blog/complete-guide-to-react-user-authentication/
 
 const queryClient = new QueryClient();
+
+const fetchClient = createFetchClient<paths>({
+  baseUrl: "http://localhost:8088/",
+});
+
+export const api = createClient(fetchClient);
 
 const router = createBrowserRouter([
   {
