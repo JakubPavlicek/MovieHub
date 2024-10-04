@@ -1,22 +1,29 @@
 import { type FC, useEffect, useState } from "react";
 import { Star } from "lucide-react";
 import { useAddMovieRating } from "@/hooks/useAddMovieRating";
-import { useGetMovieRating } from "@/hooks/useGetMovieRating";
+import type { components } from "@/api/api";
+import { useApi } from "@/context/ApiProvider";
 
 interface StarRatingProps {
-  movieId: string;
+  movieId: components["schemas"]["MovieDetailsResponse"]["id"] | undefined;
   token: string | null;
 }
 
-export const StarRating: FC<StarRatingProps> = ({ movieId, token }) => {
+export const StarRating: FC<StarRatingProps> = ({ movieId = "", token }) => {
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
-  const { movieRating } = useGetMovieRating({ movieId, token });
+  const api = useApi();
+  const { data: movieRating } = api.useQuery("get", "/movies/{movieId}/ratings", {
+    params: {
+      path: { movieId: movieId },
+    },
+  });
   const { rateMovie } = useAddMovieRating(movieId);
   const multiplier = 2;
 
   useEffect(() => {
     if (!movieRating) return;
+    if (!movieRating.rating) return;
     setRating(movieRating.rating / multiplier);
   }, [movieRating]);
 

@@ -1,0 +1,69 @@
+import { type FC, useEffect, useRef } from "react";
+import { X } from "lucide-react";
+import { transformYouTubeUrl } from "@/utils/movieDetails";
+
+interface MovieTrailerProps {
+  showTrailer: boolean;
+  setShowTrailer: (prevState: boolean) => void;
+  trailerUrl: string | undefined;
+}
+
+export const MovieTrailer: FC<MovieTrailerProps> = ({ showTrailer, setShowTrailer, trailerUrl }) => {
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
+  const trailerSrc = transformYouTubeUrl(trailerUrl);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+
+    if (!dialog) return;
+
+    if (!showTrailer) {
+      dialog.close();
+      return;
+    }
+
+    dialog.showModal();
+    dialog.focus();
+  }, [trailerUrl, showTrailer]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (showTrailer && e.key === "Escape") {
+        setShowTrailer(false);
+      }
+    };
+
+    const handleClickOutside = (e: MouseEvent) => {
+      if (showTrailer && (e.target as HTMLElement).id !== "trailer-button") {
+        setShowTrailer(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("click", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, [showTrailer, setShowTrailer]);
+
+  return (
+    <dialog ref={dialogRef} className="relative backdrop:bg-gray-600 backdrop:opacity-70">
+      <iframe
+        title={trailerUrl}
+        width={800}
+        height={450}
+        src={showTrailer ? trailerSrc : ""}
+        allowFullScreen
+        className="bg-black"
+      />
+      <button
+        className="absolute right-2 top-2 z-10 rounded-full p-1 text-white hover:bg-gray-800"
+        onClick={() => setShowTrailer(false)}
+      >
+        <X />
+      </button>
+    </dialog>
+  );
+};

@@ -1,10 +1,11 @@
 import type { FC } from "react";
 import { MoviePreviewList } from "@/components/common/MoviePreviewList";
 import { Chat } from "@/components/chat/Chat";
-import { api } from "@/main";
+import { useApi } from "@/context/ApiProvider";
 
 export const HomePage: FC = () => {
   // const { movies } = useMovies();
+  const api = useApi();
   const { data: movies } = api.useQuery("get", "/movies", { params: { query: { limit: 20 } } });
 
   if (!movies) return "Loading...";

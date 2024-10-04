@@ -2,7 +2,7 @@ import type { FC } from "react";
 
 interface MovieDetailRowProps {
   label: string;
-  value: string;
+  value: string | undefined;
 }
 
 export const MovieDetailRow: FC<MovieDetailRowProps> = ({ label, value }) => {

@@ -1,21 +1,21 @@
 import { type FC, useEffect, useState } from "react";
-import type { MovieDetails } from "@/types/movie";
 import { useAuth0 } from "@auth0/auth0-react";
 import { StarRating } from "@/components/movie/StarRating";
 import { Star } from "lucide-react";
+import type { components } from "@/api/api";
 
 interface MovieStatsProps {
-  rating: number;
-  duration: number;
+  rating: components["schemas"]["MovieDetailsResponse"]["rating"];
+  duration: components["schemas"]["MovieDetailsResponse"]["duration"];
 }
 
 interface MovieRatingProps {
-  movieId: string;
-  reviewCount: number;
+  movieId: components["schemas"]["MovieDetailsResponse"]["id"];
+  reviewCount: components["schemas"]["MovieDetailsResponse"]["reviewCount"];
 }
 
 interface MovieHeaderProps {
-  movieDetails: MovieDetails;
+  movieDetails: components["schemas"]["MovieDetailsResponse"];
 }
 
 const MovieStats: FC<MovieStatsProps> = ({ rating, duration }) => {
@@ -50,6 +50,10 @@ const MovieRating: FC<MovieRatingProps> = ({ movieId, reviewCount }) => {
 };
 
 export const MovieHeader: FC<MovieHeaderProps> = ({ movieDetails }) => {
+  if (!movieDetails) {
+    return <div>Empty</div>;
+  }
+
   const { id, name, rating, duration, reviewCount } = movieDetails;
 
   return (

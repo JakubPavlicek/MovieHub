@@ -1,27 +1,25 @@
 import type { FC } from "react";
 import { MovieDetailRow } from "@/components/movie/MovieDetailRow";
 import { formatList } from "@/utils/movieDetails";
-import { useMovieDetails } from "@/hooks/useMovieDetails";
 import { MovieHeader } from "@/components/movie/MovieHeader";
+import type { components } from "@/api/api";
 
 interface MovieDetailsProps {
-  movieId: string;
+  movieDetails: components["schemas"]["MovieDetailsResponse"] | undefined;
 }
 
-export const MovieDetails: FC<MovieDetailsProps> = ({ movieId }) => {
-  const { movieDetails } = useMovieDetails(movieId);
-
+export const MovieDetails: FC<MovieDetailsProps> = ({ movieDetails }) => {
   if (!movieDetails) {
     return <div className="text-white">Empty</div>;
   }
 
   const {
-    posterUrl,
     name,
     description,
     countries,
     genres,
     releaseDate,
+    posterUrl,
     director,
     productionCompanies,
     cast,
