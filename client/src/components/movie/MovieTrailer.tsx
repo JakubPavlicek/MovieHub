@@ -19,11 +19,13 @@ export const MovieTrailer: FC<MovieTrailerProps> = ({ showTrailer, setShowTraile
 
     if (!showTrailer) {
       dialog.close();
+      document.body.style.overflow = "";
       return;
     }
 
     dialog.showModal();
     dialog.focus();
+    document.body.style.overflow = "hidden";
   }, [trailerUrl, showTrailer]);
 
   useEffect(() => {
@@ -49,14 +51,15 @@ export const MovieTrailer: FC<MovieTrailerProps> = ({ showTrailer, setShowTraile
   }, [showTrailer, setShowTrailer]);
 
   return (
-    <dialog ref={dialogRef} className="relative backdrop:bg-gray-600 backdrop:opacity-70">
+    <dialog
+      ref={dialogRef}
+      className="container relative aspect-video w-full max-w-[95%] backdrop:bg-gray-950 backdrop:opacity-80 lg:max-w-[1024px]"
+    >
       <iframe
         title={trailerUrl}
-        width={800}
-        height={450}
         src={showTrailer ? trailerSrc : ""}
         allowFullScreen
-        className="bg-black"
+        className="aspect-video h-auto w-full bg-black"
       />
       <button
         className="absolute right-2 top-2 z-10 rounded-full p-1 text-white hover:bg-gray-800"
