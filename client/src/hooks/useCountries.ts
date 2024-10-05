@@ -7,14 +7,11 @@ export const useCountries = () => {
 
   const { countries, countryMap } = useMemo(() => {
     const countries = data?.countries ?? [];
-    const countryMap = new Map(countries.map(({ name, id }) => [name?.toLowerCase(), id]));
+    const countryMap = new Map(countries.map(({ name, id }) => [name, id]));
     return { countries, countryMap };
   }, [data]);
 
-  const getCountryId = useCallback(
-    (countryName?: string) => countryName && countryMap.get(countryName.toLowerCase()),
-    [countryMap],
-  );
+  const getCountryId = useCallback((countryName?: string) => countryName && countryMap.get(countryName), [countryMap]);
 
   return { countries, countryMap, getCountryId };
 };

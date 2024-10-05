@@ -14,7 +14,7 @@ export const ApiProvider = ({ children }: { children: ReactNode }) => {
   const authMiddleware = useAuthMiddleware();
 
   const fetchClient = createFetchClient<paths>({
-    baseUrl: "http://localhost:8080/",
+    baseUrl: "http://localhost:8088/",
   });
 
   fetchClient.use(authMiddleware);

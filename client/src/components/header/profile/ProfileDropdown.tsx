@@ -1,7 +1,7 @@
 import { type FC, useState } from "react";
-import LogoutButton from "@/components/header/profile_dropdown/LogoutButton";
-import ProfileDropdownButton from "@/components/header/profile_dropdown/ProfileDropdownButton";
-import ProfileButton from "@/components/header/profile_dropdown/ProfileButton";
+import LogoutButton from "@/components/header/profile/LogoutButton";
+import ProfileDropdownButton from "@/components/header/profile/ProfileDropdownButton";
+import ProfileButton from "@/components/header/profile/ProfileButton";
 
 const ProfileDropdown: FC = () => {
   const [showDropdown, setShowDropdown] = useState(false);

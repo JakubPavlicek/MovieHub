@@ -4,6 +4,7 @@ import { useApi } from "@/context/ApiProvider";
 import { ButtonSection } from "@/components/movie/ButtonSection";
 import { MovieDetails } from "@/components/movie/MovieDetails";
 import { MovieTrailer } from "@/components/movie/MovieTrailer";
+import { MovieComments } from "@/components/movie/MovieComments";
 import placeholder from "@/assets/video/placeholder.mp4";
 
 export const MoviePage: FC = () => {
@@ -18,7 +19,7 @@ export const MoviePage: FC = () => {
   });
 
   if (!movieDetails) {
-    return <div>Empty</div>;
+    return <div className="text-white">Empty</div>;
   }
 
   return (
@@ -32,13 +33,9 @@ export const MoviePage: FC = () => {
 
         <MovieDetails movieDetails={movieDetails} />
 
-        <div className="mt-5">Comments</div>
+        <MovieComments movieId={movieId} />
       </div>
-      <MovieTrailer
-        showTrailer={showTrailer}
-        setShowTrailer={setShowTrailer}
-        trailerUrl={movieDetails.trailerUrl}
-      />
+      <MovieTrailer showTrailer={showTrailer} setShowTrailer={setShowTrailer} trailerUrl={movieDetails.trailerUrl} />
     </main>
   );
 };

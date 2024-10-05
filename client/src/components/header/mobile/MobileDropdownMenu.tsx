@@ -1,6 +1,6 @@
 import type { FC } from "react";
-import { MobileDropdownButton } from "@/components/header/mobile_dropdown/MobileDropdownButton";
-import { MobileDropdownItems } from "@/components/header/mobile_dropdown/MobileDropdownItems";
+import { MobileDropdownButton } from "@/components/header/mobile/MobileDropdownButton";
+import { MobileDropdownItems } from "@/components/header/mobile/MobileDropdownItems";
 import { useDropdownMenu } from "@/hooks/useDropdownMenu";
 import type { components } from "@/api/api";
 

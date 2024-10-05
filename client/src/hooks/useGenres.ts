@@ -7,14 +7,11 @@ export const useGenres = () => {
 
   const { genres, genreMap } = useMemo(() => {
     const genres = data?.genres ?? [];
-    const genreMap = new Map(genres.map(({ name, id }) => [name?.toLowerCase(), id]));
+    const genreMap = new Map(genres.map(({ name, id }) => [name, id]));
     return { genres, genreMap };
   }, [data]);
 
-  const getGenreId = useCallback(
-    (genreName?: string) => genreName && genreMap.get(genreName.toLowerCase()),
-    [genreMap],
-  );
+  const getGenreId = useCallback((genreName?: string) => genreName && genreMap.get(genreName), [genreMap]);
 
   return { genres, genreMap, getGenreId };
 };

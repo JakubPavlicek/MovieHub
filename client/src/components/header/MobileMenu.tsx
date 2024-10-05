@@ -3,7 +3,7 @@ import { ChevronLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useGenres } from "@/hooks/useGenres";
 import { useCountries } from "@/hooks/useCountries";
-import { MobileDropdownMenu } from "@/components/header/mobile_dropdown/MobileDropdownMenu";
+import { MobileDropdownMenu } from "@/components/header/mobile/MobileDropdownMenu";
 
 interface MobileMenuProps {
   toggleMobileMenu: () => void;

@@ -16,7 +16,7 @@ export const DropdownMenu: FC<DropdownProps> = ({ title, type, items }) => {
         <div className="grid grid-cols-[repeat(3,minmax(130px,1fr))]">
           {items.map((item) => (
             <Link
-              to={`/${type}/${item.name?.toLowerCase()}`}
+              to={`/${type}/${item.name}`}
               id={item.id}
               key={item.id}
               className="w-full truncate rounded-md px-3 py-1 text-left hover:bg-gray-950 hover:text-cyan-300"
