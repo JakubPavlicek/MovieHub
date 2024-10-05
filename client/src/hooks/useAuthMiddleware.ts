@@ -10,6 +10,7 @@ export const useAuthMiddleware = () => {
         const token = await getAccessTokenSilently();
         request.headers.set("Authorization", `Bearer ${token}`);
       }
+      console.log(request);
       return request;
     },
   };

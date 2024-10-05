@@ -8,7 +8,7 @@ interface ChatButtonProps {
 
 export const ChatButton: FC<ChatButtonProps> = ({ isChatOpened, setIsChatOpened }) => {
   return (
-    <div className="absolute bottom-8 right-6">
+    <div className="fixed bottom-8 right-8">
       <button
         className="rounded-xl bg-cyan-600 p-3 text-white hover:bg-cyan-500"
         onClick={() => setIsChatOpened(!isChatOpened)}

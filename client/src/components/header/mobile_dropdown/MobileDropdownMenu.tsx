@@ -2,13 +2,12 @@ import type { FC } from "react";
 import { MobileDropdownButton } from "@/components/header/mobile_dropdown/MobileDropdownButton";
 import { MobileDropdownItems } from "@/components/header/mobile_dropdown/MobileDropdownItems";
 import { useDropdownMenu } from "@/hooks/useDropdownMenu";
-import type { Genre } from "@/types/genre";
-import type { Country } from "@/types/country";
+import type { components } from "@/api/api";
 
 interface MobileMenuDropdownProps {
   title: "Genres" | "Countries";
   type: "genre" | "country";
-  items: Genre[] | Country[];
+  items: components["schemas"]["GenreDetailsResponse"][] | components["schemas"]["CountryDetailsResponse"][];
 }
 
 export const MobileDropdownMenu: FC<MobileMenuDropdownProps> = ({ title, type, items }) => {

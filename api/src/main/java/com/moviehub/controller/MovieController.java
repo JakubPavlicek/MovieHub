@@ -5,7 +5,6 @@ import com.moviehub.dto.AddCommentRequest;
 import com.moviehub.dto.AddMovieRequest;
 import com.moviehub.dto.CommentPage;
 import com.moviehub.dto.MovieDetailsResponse;
-import com.moviehub.dto.MovieFilter;
 import com.moviehub.dto.MoviePage;
 import com.moviehub.dto.MovieUserRating;
 import com.moviehub.dto.UpdateMovieRequest;
@@ -64,8 +63,24 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<MoviePage> getMovies(Integer page, Integer limit, String sort, MovieFilter filter) {
-        Page<Movie> movies = movieService.getMovies(page, limit, sort, filter);
+    public ResponseEntity<MoviePage> listMovies(Integer page, Integer limit, String sort) {
+        Page<Movie> movies = movieService.listMovies(page, limit, sort);
+        MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
+
+        return ResponseEntity.ok(moviePage);
+    }
+
+    @Override
+    public ResponseEntity<MoviePage> filterMovies(Integer page, Integer limit, String sort, String releaseYear, String genre, String country) {
+        Page<Movie> movies = movieService.filterMovies(page, limit, sort, releaseYear, genre, country);
+        MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
+
+        return ResponseEntity.ok(moviePage);
+    }
+
+    @Override
+    public ResponseEntity<MoviePage> searchMovies(Integer page, Integer limit, String sort, String keyword) {
+        Page<Movie> movies = movieService.searchMovies(page, limit, sort, keyword);
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
         return ResponseEntity.ok(moviePage);

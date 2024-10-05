@@ -1,25 +1,27 @@
 import { type FC, useEffect, useState } from "react";
 import { Star } from "lucide-react";
-import { useAddMovieRating } from "@/hooks/useAddMovieRating";
 import type { components } from "@/api/api";
 import { useApi } from "@/context/ApiProvider";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface StarRatingProps {
-  movieId: components["schemas"]["MovieDetailsResponse"]["id"] | undefined;
-  token: string | null;
+  movieId: components["schemas"]["MovieDetailsResponse"]["id"];
 }
 
-export const StarRating: FC<StarRatingProps> = ({ movieId = "", token }) => {
+export const StarRating: FC<StarRatingProps> = ({ movieId = "" }) => {
+  const multiplier = 2;
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
+  const queryClient = useQueryClient();
   const api = useApi();
   const { data: movieRating } = api.useQuery("get", "/movies/{movieId}/ratings", {
     params: {
       path: { movieId: movieId },
     },
   });
-  const { rateMovie } = useAddMovieRating(movieId);
-  const multiplier = 2;
+  const { mutate } = api.useMutation("post", "/movies/{movieId}/ratings", {
+    onSuccess: async () => queryClient.invalidateQueries({ queryKey: ["get", "/movies/{movieId}"] }),
+  });
 
   useEffect(() => {
     if (!movieRating) return;
@@ -28,10 +30,13 @@ export const StarRating: FC<StarRatingProps> = ({ movieId = "", token }) => {
   }, [movieRating]);
 
   const submitRating = async (starIndex: number) => {
-    if (!token) return;
     setRating(starIndex);
-    const userRating = starIndex * multiplier;
-    await rateMovie({ movieId, userRating, token });
+    mutate({
+      params: {
+        path: { movieId: movieId },
+      },
+      body: { rating: starIndex * multiplier },
+    });
   };
 
   const renderStars = () =>

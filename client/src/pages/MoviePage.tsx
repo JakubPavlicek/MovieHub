@@ -1,10 +1,10 @@
 import { type FC, useState } from "react";
 import { useParams } from "react-router-dom";
+import { useApi } from "@/context/ApiProvider";
 import { ButtonSection } from "@/components/movie/ButtonSection";
 import { MovieDetails } from "@/components/movie/MovieDetails";
-import placeholder from "@/assets/video/placeholder.mp4";
-import { useApi } from "@/context/ApiProvider";
 import { MovieTrailer } from "@/components/movie/MovieTrailer";
+import placeholder from "@/assets/video/placeholder.mp4";
 
 export const MoviePage: FC = () => {
   const { movieId = "" } = useParams();
@@ -16,6 +16,10 @@ export const MoviePage: FC = () => {
       path: { movieId: movieId },
     },
   });
+
+  if (!movieDetails) {
+    return <div>Empty</div>;
+  }
 
   return (
     <main className="mx-auto 2xl:container">
@@ -33,7 +37,7 @@ export const MoviePage: FC = () => {
       <MovieTrailer
         showTrailer={showTrailer}
         setShowTrailer={setShowTrailer}
-        trailerUrl={movieDetails?.trailerUrl}
+        trailerUrl={movieDetails.trailerUrl}
       />
     </main>
   );

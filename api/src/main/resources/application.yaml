@@ -4,6 +4,7 @@ logging:
       springframework:
         security: DEBUG
         messaging: DEBUG
+        web: TRACE
 # used for CORS and JWT claims retrieval
 client:
   url: http://localhost:5173

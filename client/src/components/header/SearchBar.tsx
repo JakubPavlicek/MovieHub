@@ -12,9 +12,8 @@ export const SearchBar: FC<SearchBarProps> = ({ autoFocus }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   function searchMovies() {
-    if (searchQuery === "") {
-      return;
-    }
+    if (searchQuery === "") return;
+
     navigate(`/search/${searchQuery}`);
     setSearchQuery("");
     inputRef.current?.blur();

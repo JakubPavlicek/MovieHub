@@ -6,14 +6,14 @@ import { ChatHeader } from "@/components/chat/ChatHeader";
 import { ChatInput } from "@/components/chat/ChatInput";
 
 export const Chat: FC = () => {
-  const [isChatOpened, setIsChatOpened] = useState<boolean>(false);
+  const [isChatOpened, setIsChatOpened] = useState(false);
   const { messages, sendMessage } = useChat();
 
   return (
     <>
       <ChatButton isChatOpened={isChatOpened} setIsChatOpened={setIsChatOpened} />
       {isChatOpened && (
-        <div className="absolute bottom-24 right-6 h-[30rem] w-80 rounded-2xl bg-gray-800">
+        <div className="fixed bottom-24 right-8 h-[30rem] w-80 rounded-2xl bg-gray-800 text-white">
           <ChatHeader setIsChatOpened={setIsChatOpened} />
           <ChatMessages messages={messages} />
           <ChatInput sendMessage={sendMessage} />

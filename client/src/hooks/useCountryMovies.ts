@@ -1,17 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
-import type { MoviePage } from "@/types/movie";
+import { useApi } from "@/context/ApiProvider";
 
-async function getCountry(countryId: string) {
-  const response = await fetch(`http://localhost:8088/countries/${countryId}/movies`);
-  return await response.json();
-}
-
-export const useCountryMovies = (countryId: string | undefined) => {
-  const { data } = useQuery<MoviePage>({
-    queryKey: ["countries", countryId, "movies"],
-    queryFn: () => getCountry(countryId as string),
-    enabled: !!countryId,
-  });
+export const useCountryMovies = (countryId: string) => {
+  const api = useApi();
+  const { data } = api.useQuery(
+    "get",
+    "/countries/{countryId}/movies",
+    {
+      params: {
+        path: { countryId: countryId },
+      },
+    },
+    {
+      enabled: !!countryId,
+    },
+  );
 
   const movies = data?.content ?? [];
 

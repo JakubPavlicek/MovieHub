@@ -1,12 +1,11 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
-import type { Genre } from "@/types/genre";
-import type { Country } from "@/types/country";
+import type { components } from "@/api/api";
 
 interface MobileDropdownItemsProps {
   isOpen: boolean;
   type: "genre" | "country";
-  items: Genre[] | Country[];
+  items: components["schemas"]["GenreDetailsResponse"][] | components["schemas"]["CountryDetailsResponse"][];
 }
 
 export const MobileDropdownItems: FC<MobileDropdownItemsProps> = ({ isOpen, type, items }) => {
@@ -17,7 +16,7 @@ export const MobileDropdownItems: FC<MobileDropdownItemsProps> = ({ isOpen, type
       <div className="grid grid-cols-2 overflow-hidden">
         {items.map((item) => (
           <Link
-            to={`/${type}/${item.name.toLowerCase()}`}
+            to={`/${type}/${item.name?.toLowerCase()}`}
             key={item.id}
             className="min-h-10 truncate py-2.5 text-left text-sm text-gray-400 hover:text-white"
           >

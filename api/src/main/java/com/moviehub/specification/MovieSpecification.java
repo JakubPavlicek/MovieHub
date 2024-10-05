@@ -189,6 +189,13 @@ public class MovieSpecification {
         );
     }
 
+    public static Specification<Movie> releaseYearEqualTo(String year) {
+        return (root, query, cb) -> cb.equal(
+            cb.function("YEAR", String.class, root.get(Movie_.RELEASE_DATE)),
+            year
+        );
+    }
+
     public static Specification<Movie> searchByKeyword(String keyword) {
         return (root, query, cb) -> {
             query.distinct(true);

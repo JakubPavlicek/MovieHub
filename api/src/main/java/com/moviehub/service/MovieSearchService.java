@@ -1,6 +1,5 @@
 package com.moviehub.service;
 
-import com.moviehub.dto.MovieFilter;
 import com.moviehub.entity.Actor;
 import com.moviehub.entity.Country;
 import com.moviehub.entity.Director;
@@ -28,24 +27,6 @@ public class MovieSearchService {
     private final ParseService parseService;
 
     private static final Sort SORT_BY_UPDATED_AT_DESC = Sort.by(Sort.Direction.DESC, Movie_.UPDATED_AT);
-
-    public Page<Movie> getMovies(Integer page, Integer limit, String sort, MovieFilter filter) {
-        Pageable pageable = PageRequest.of(page, limit, parseService.parseMovieSort(sort));
-
-        Specification<Movie> specification = Specification.where(parseService.parseName(filter.getName()))
-                                                          .and(parseService.parseReleaseDate(filter.getReleaseDate()))
-                                                          .and(parseService.parseDuration(filter.getDuration()))
-                                                          .and(parseService.parseDescription(filter.getDescription()))
-                                                          .and(parseService.parseRating(filter.getRating()))
-                                                          .and(parseService.parseReviewCount(filter.getReviewCount()))
-                                                          .and(parseService.parseDirector(filter.getDirector()))
-                                                          .and(parseService.parseActors(filter.getActors()))
-                                                          .and(parseService.parseGenres(filter.getGenres()))
-                                                          .and(parseService.parseCountries(filter.getCountries()))
-                                                          .and(MovieSpecification.searchByKeyword(filter.getKeyword()));
-
-        return movieRepository.findAll(specification, pageable);
-    }
 
     public Page<Movie> getMoviesWithGenre(Genre genre, Integer page, Integer limit) {
         Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
@@ -75,6 +56,29 @@ public class MovieSearchService {
         Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
 
         return movieRepository.findAllByActorsContaining(actor, pageable);
+    }
+
+    public Page<Movie> listMovies(Integer page, Integer limit, String sort) {
+        Pageable pageable = PageRequest.of(page, limit, parseService.parseMovieSort(sort));
+
+        return movieRepository.findAll(pageable);
+    }
+
+    public Page<Movie> filterMovies(Integer page, Integer limit, String sort, String releaseYear, String genre, String country) {
+        Pageable pageable = PageRequest.of(page, limit, parseService.parseMovieSort(sort));
+
+        Specification<Movie> specification = Specification.where(parseService.parseReleaseYear(releaseYear))
+                                                          .and(parseService.parseGenre(genre))
+                                                          .and(parseService.parseCountry(country));
+
+        return movieRepository.findAll(specification, pageable);
+    }
+
+    public Page<Movie> searchMovies(Integer page, Integer limit, String sort, String keyword) {
+        Pageable pageable = PageRequest.of(page, limit, parseService.parseMovieSort(sort));
+        Specification<Movie> specification = MovieSpecification.searchByKeyword(keyword);
+
+        return movieRepository.findAll(specification, pageable);
     }
 
 }

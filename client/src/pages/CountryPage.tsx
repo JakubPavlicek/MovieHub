@@ -1,33 +1,39 @@
-import { type FC, useEffect, useMemo } from "react";
+import { type FC, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useCountries } from "@/hooks/useCountries";
-import { useCountryMovies } from "@/hooks/useCountryMovies";
 import { MoviePreviewList } from "@/components/common/MoviePreviewList";
+import { useApi } from "@/context/ApiProvider";
 
 export const CountryPage: FC = () => {
   const navigate = useNavigate();
   const { countryName = "" } = useParams();
-  const { countryMap, getCountryId, isLoadingCountries } = useCountries();
-  const { movies } = useCountryMovies(getCountryId(countryName));
+  const { countryMap, getCountryId } = useCountries();
+  const countryId = getCountryId(countryName) ?? "";
+  const api = useApi();
+  const { data: movies } = api.useQuery("get", "/countries/{countryId}/movies", {
+    params: {
+      path: { countryId: countryId },
+    },
+  });
 
   useEffect(() => {
-    if (!isLoadingCountries && !countryMap.has(countryName)) {
+    if (!countryMap.has(countryName)) {
       navigate("/", { replace: true });
     }
-  }, [isLoadingCountries, countryMap, countryName, navigate]);
+  }, [countryMap, countryName, navigate]);
 
-  const pageTitle = useMemo(
-    () => `${countryName.charAt(0).toUpperCase() + countryName.slice(1)} movies`,
-    [countryName],
-  );
+  if (!movies?.content) {
+    return <div>Empty</div>;
+  }
 
   return (
     <main className="mx-auto 2xl:container">
       <div className="mx-5 mt-10 flex flex-col justify-between text-white">
-        <div className="mb-6 text-3xl font-semibold">
-          <span className="border-b-2 border-cyan-400">{pageTitle}</span>
+        <div className="mb-6 inline-flex max-w-fit gap-1.5 border-b-2 border-cyan-400 text-3xl font-semibold">
+          <span className="capitalize">{countryName}</span>
+          <span>movies</span>
         </div>
-        <MoviePreviewList movies={movies} />
+        <MoviePreviewList movies={movies.content} />
       </div>
     </main>
   );

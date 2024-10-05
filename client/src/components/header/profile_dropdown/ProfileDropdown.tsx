@@ -4,7 +4,7 @@ import ProfileDropdownButton from "@/components/header/profile_dropdown/ProfileD
 import ProfileButton from "@/components/header/profile_dropdown/ProfileButton";
 
 const ProfileDropdown: FC = () => {
-  const [showDropdown, setShowDropdown] = useState<boolean>(false);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   return (
     <div className="relative">

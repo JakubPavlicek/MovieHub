@@ -12,6 +12,7 @@ import { SearchPage } from "@/pages/SearchPage";
 import { ErrorPage } from "@/pages/ErrorPage";
 import { MoviePage } from "@/pages/MoviePage";
 import { ApiProvider } from "@/context/ApiProvider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 // https://auth0.com/blog/complete-guide-to-react-user-authentication/
 
@@ -40,7 +41,7 @@ const router = createBrowserRouter([
         element: <CountryPage />,
       },
       {
-        path: "search/:query",
+        path: "search/:keyword",
         element: <SearchPage />,
       },
     ],
@@ -60,6 +61,7 @@ createRoot(document.getElementById("root")!).render(
       <ApiProvider>
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
+          <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
       </ApiProvider>
     </Auth0Provider>

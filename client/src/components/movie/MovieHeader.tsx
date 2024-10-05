@@ -1,5 +1,4 @@
-import { type FC, useEffect, useState } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import { type FC } from "react";
 import { StarRating } from "@/components/movie/StarRating";
 import { Star } from "lucide-react";
 import type { components } from "@/api/api";
@@ -29,21 +28,9 @@ const MovieStats: FC<MovieStatsProps> = ({ rating, duration }) => {
 };
 
 const MovieRating: FC<MovieRatingProps> = ({ movieId, reviewCount }) => {
-  const [token, setToken] = useState<string | null>(null);
-  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
-
-  useEffect(() => {
-    const fetchToken = async () => {
-      if (!isAuthenticated) return;
-      const fetchedToken = await getAccessTokenSilently();
-      setToken(fetchedToken);
-    };
-    fetchToken();
-  }, [isAuthenticated, getAccessTokenSilently]);
-
   return (
     <div className="flex min-w-max gap-1">
-      <StarRating movieId={movieId} token={token} />
+      <StarRating movieId={movieId} />
       <span>({reviewCount} reviews)</span>
     </div>
   );

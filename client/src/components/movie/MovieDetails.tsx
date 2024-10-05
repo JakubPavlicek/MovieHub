@@ -5,14 +5,10 @@ import { MovieHeader } from "@/components/movie/MovieHeader";
 import type { components } from "@/api/api";
 
 interface MovieDetailsProps {
-  movieDetails: components["schemas"]["MovieDetailsResponse"] | undefined;
+  movieDetails: components["schemas"]["MovieDetailsResponse"];
 }
 
 export const MovieDetails: FC<MovieDetailsProps> = ({ movieDetails }) => {
-  if (!movieDetails) {
-    return <div className="text-white">Empty</div>;
-  }
-
   const {
     name,
     description,

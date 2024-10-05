@@ -1,23 +1,20 @@
 import { createContext, ReactNode, useContext, useMemo } from "react";
 import createFetchClient from "openapi-fetch";
 import createClient, { type OpenapiQueryClient } from "openapi-react-query";
-import type { paths } from "@/api/api";
 import { useAuthMiddleware } from "@/hooks/useAuthMiddleware";
+import type { paths } from "@/api/api";
 
-// Define the context type
 interface ApiContextProps {
   api: OpenapiQueryClient<paths, `${string}/${string}`>;
 }
 
-// Create the API context
 const ApiContext = createContext<ApiContextProps | undefined>(undefined);
 
-// Provider component for the API context
 export const ApiProvider = ({ children }: { children: ReactNode }) => {
   const authMiddleware = useAuthMiddleware();
 
   const fetchClient = createFetchClient<paths>({
-    baseUrl: "http://localhost:8088/",
+    baseUrl: "http://localhost:8080/",
   });
 
   fetchClient.use(authMiddleware);
