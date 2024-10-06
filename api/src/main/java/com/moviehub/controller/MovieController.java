@@ -89,7 +89,7 @@ public class MovieController implements MoviesApi {
     @Override
     public ResponseEntity<Void> addComment(UUID movieId, AddCommentRequest addCommentRequest) {
         Comment comment = CommentMapper.mapToComment(addCommentRequest);
-        movieService.addComment(movieId, comment);
+        movieService.addComment(movieId, comment, addCommentRequest.getParentCommentId());
 
         return ResponseEntity.noContent().build();
     }

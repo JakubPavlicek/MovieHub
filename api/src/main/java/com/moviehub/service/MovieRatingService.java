@@ -3,7 +3,6 @@ package com.moviehub.service;
 import com.moviehub.entity.Movie;
 import com.moviehub.entity.MovieRating;
 import com.moviehub.repository.MovieRatingRepository;
-import com.moviehub.security.AuthUser;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -20,10 +19,12 @@ public class MovieRatingService {
 
     private final MovieRatingRepository ratingRepository;
 
+    private final UserService userService;
+
     public boolean saveRating(Movie movie, Double rating) {
         log.info("Saving rating {} for movie {}", rating, movie.getId());
 
-        Optional<MovieRating> existingMovieRating = ratingRepository.findByMovieAndUserId(movie, AuthUser.getUserId());
+        Optional<MovieRating> existingMovieRating = ratingRepository.findByMovieAndUser(movie, userService.getUser());
 
         // user has already rated the movie -> update the rating
         if (existingMovieRating.isPresent()) {
@@ -44,7 +45,7 @@ public class MovieRatingService {
     private void createNewRating(Movie movie, Double rating) {
         MovieRating movieRating = MovieRating.builder()
                                              .movie(movie)
-                                             .userId(AuthUser.getUserId())
+                                             .user(userService.getUser())
                                              .rating(rating)
                                              .build();
 
@@ -56,7 +57,7 @@ public class MovieRatingService {
     }
 
     public MovieRating getRating(Movie movie) {
-        Optional<MovieRating> existingMovieRating = ratingRepository.findByMovieAndUserId(movie, AuthUser.getUserId());
+        Optional<MovieRating> existingMovieRating = ratingRepository.findByMovieAndUser(movie, userService.getUser());
 
         return existingMovieRating.orElseGet(() -> MovieRating.builder()
                                                               .rating(0d)

@@ -14,6 +14,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import static com.moviehub.entity.Role.ADMIN;
+import static com.moviehub.entity.Role.USER;
 import static org.springframework.http.HttpMethod.DELETE;
 import static org.springframework.http.HttpMethod.GET;
 import static org.springframework.http.HttpMethod.OPTIONS;
@@ -29,9 +31,7 @@ public class SecurityConfig {
     private final JwtAuthConverter jwtAuthConverter;
 
     private final ClientUrlProperties clientUrlProperties;
-
-    private static final String ADMIN = "ADMIN";
-    private static final String USER = "USER";
+    private final Auth0Properties auth0Properties;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -40,14 +40,14 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize ->
                 authorize.requestMatchers(OPTIONS).permitAll()
                          .requestMatchers(GET).permitAll()
-                         .requestMatchers(GET, "/movies/*/ratings").hasAnyRole(USER, ADMIN)
-                         .requestMatchers(POST, "/movies", "/directors", "/actors", "/production-companies", "/genres", "/countries").hasRole(ADMIN)
-                         .requestMatchers(POST, "/movies/*/comments", "/comments/*/reactions").hasAnyRole(USER, ADMIN)
-                         .requestMatchers(POST, "/movies/*/ratings").hasAnyRole(USER, ADMIN)
-                         .requestMatchers(PUT, "/movies/*", "/directors/*", "/actors/*", "/production-companies/*", "/genres/*", "/countries/*").hasRole(ADMIN)
-                         .requestMatchers(DELETE, "/movies/*").hasRole(ADMIN)
-                         .requestMatchers(DELETE, "/comments/*").hasAnyRole(USER, ADMIN)
-                         .anyRequest().hasRole(ADMIN)
+                         .requestMatchers(GET, "/movies/*/ratings").hasAnyRole(USER.name(), ADMIN.name())
+                         .requestMatchers(POST, "/movies", "/directors", "/actors", "/production-companies", "/genres", "/countries").hasRole(ADMIN.name())
+                         .requestMatchers(POST, "/movies/*/comments", "/comments/*/reactions").hasAnyRole(USER.name(), ADMIN.name())
+                         .requestMatchers(POST, "/movies/*/ratings").hasAnyRole(USER.name(), ADMIN.name())
+                         .requestMatchers(PUT, "/movies/*", "/directors/*", "/actors/*", "/production-companies/*", "/genres/*", "/countries/*").hasRole(ADMIN.name())
+                         .requestMatchers(DELETE, "/movies/*").hasRole(ADMIN.name())
+                         .requestMatchers(DELETE, "/comments/*").hasAnyRole(USER.name(), ADMIN.name())
+                         .anyRequest().hasRole(ADMIN.name())
             )
             .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter)))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -66,7 +66,7 @@ public class SecurityConfig {
 
     @Bean
     public JwtDecoder jwtDecoder() {
-        return JwtDecoders.fromIssuerLocation("https://dev-bzrzau6cj3i0m33i.us.auth0.com/");
+        return JwtDecoders.fromIssuerLocation(auth0Properties.getIssuer());
     }
 
 }

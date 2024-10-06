@@ -1,6 +1,5 @@
 package com.moviehub.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -38,10 +37,13 @@ public class CommentReaction {
     )
     private Comment comment;
 
-    @Column(
-        nullable = false
+    @ManyToOne
+    @JoinColumn(
+        name = "user_id",
+        referencedColumnName = "id",
+        foreignKey = @ForeignKey(name = "fk_user")
     )
-    private String userId;
+    private User user;
 
     @Enumerated(EnumType.STRING)
     private ReactionType reactionType;

@@ -15,7 +15,7 @@ databaseChangeLog:
                   value: 1cce6f34-13d2-4a3d-8c7e-8a7659db8a60
               - column:
                   name: user_id
-                  value: "user|66f8511afb3983f9045fc7c9"
+                  value: "66f8511afb3983f9045fc7c9"
               - column:
                   name: rating
                   value: "10"
@@ -31,7 +31,7 @@ databaseChangeLog:
                   value: a9c8e9a1-bb24-43b4-9e6b-b38ec61b241d
               - column:
                   name: user_id
-                  value: "user|66f8511afb3983f9045fc7c9"
+                  value: "66f8511afb3983f9045fc7c9"
               - column:
                   name: rating
                   value: "8"
@@ -47,7 +47,7 @@ databaseChangeLog:
                   value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0
               - column:
                   name: user_id
-                  value: "user|66f8511afb3983f9045fc7c9"
+                  value: "66f8511afb3983f9045fc7c9"
               - column:
                   name: rating
                   value: "8"

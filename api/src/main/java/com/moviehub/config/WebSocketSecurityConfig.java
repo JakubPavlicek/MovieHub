@@ -4,6 +4,9 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.messaging.MessageSecurityMetadataSourceRegistry;
 import org.springframework.security.config.annotation.web.socket.AbstractSecurityWebSocketMessageBrokerConfigurer;
 
+import static com.moviehub.entity.Role.ADMIN;
+import static com.moviehub.entity.Role.USER;
+
 /// Using a deprecated approach because the non-deprecated one requires a CSRF token to be sent with every WebSocket message.
 /// In the non-deprecated version, there is no easy way to disable CSRF.
 /// Authorization is handled in the `AuthorizationSocketInterceptor` using an Auth0 Access Token (JWT), so CSRF is not required.
@@ -14,14 +17,11 @@ import org.springframework.security.config.annotation.web.socket.AbstractSecurit
 @Configuration
 public class WebSocketSecurityConfig extends AbstractSecurityWebSocketMessageBrokerConfigurer {
 
-    private static final String ADMIN = "ADMIN";
-    private static final String USER = "USER";
-
     @Override
     protected void configureInbound(MessageSecurityMetadataSourceRegistry messages) {
         messages
-            .simpSubscribeDestMatchers("/topic/chat").hasAnyRole(USER, ADMIN)
-            .simpDestMatchers("/app/**").hasAnyRole(USER, ADMIN)
+            .simpSubscribeDestMatchers("/topic/chat").hasAnyRole(USER.name(), ADMIN.name())
+            .simpDestMatchers("/app/**").hasAnyRole(USER.name(), ADMIN.name())
             .anyMessage().authenticated();
     }
 

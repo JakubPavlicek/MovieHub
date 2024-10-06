@@ -123,6 +123,17 @@ components:
         default: ""
         maxLength: 100
 
+    commentLimit:
+      name: limit
+      in: query
+      description: The maximum number of items to return per page.
+      schema:
+        type: integer
+        format: int32
+        minimum: 1
+        maximum: 5
+        default: 5
+        example: 5
     commentSort:
       name: sort
       in: query
@@ -484,6 +495,23 @@ components:
       minLength: 1
       maxLength: 500
       nullable: false
+    IsDeleted:
+      type: boolean
+      description: "Indicates whether the comment has been deleted."
+      example: false
+      nullable: false
+    Likes:
+      type: integer
+      format: int64
+      description: "The total count of likes the comment has received."
+      minimum: 0
+      maximum: 10000000000
+    Dislikes:
+      type: integer
+      format: int64
+      description: "The total count of dislikes the comment has received."
+      minimum: 0
+      maximum: 10000000000
 
     ReactionTypeRequest:
       type: object
@@ -501,14 +529,28 @@ components:
           example: like
           nullable: false
 
-    UserUuid:
-      type: string
+    UserNameAndPictureUrl:
+      type: object
+      additionalProperties: false
       description: |
-        A unique identifier used to uniquely identify users.
-      example: user|12c5ja230ac8979cac9acv0v
-      pattern: "^[a-zA-Z0-9._-]{1,15}\\|[a-z0-9]+$"
-      maxLength: 255
-      nullable: false
+        An object representing a user's nickname and their associated profile picture URL.
+      properties:
+        name:
+          type: string
+          description: |
+            The nickname of the user.
+          pattern: "^[a-zA-Z0-9._-]{1,20}$"
+          minLength: 1
+          maxLength: 20
+          nullable: false
+        pictureUrl:
+          type: string
+          description: |
+            The URL of the user's profile picture.
+          pattern: "^(https?://)?(www\\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$"
+          minLength: 1
+          maxLength: 2000
+          nullable: false
 
     ParentCommentUuid:
       type: string
@@ -1159,12 +1201,27 @@ components:
           $ref: '#/components/schemas/Uuid'
         movieId:
           $ref: '#/components/schemas/Uuid'
-        userId:
-          $ref: '#/components/schemas/UserUuid'
+        user:
+          $ref: '#/components/schemas/UserNameAndPictureUrl'
         createdAt:
           $ref: '#/components/schemas/CreatedAt'
         text:
           $ref: '#/components/schemas/Text'
+        isDeleted:
+          $ref: '#/components/schemas/IsDeleted'
+        likes:
+          $ref: '#/components/schemas/Likes'
+        dislikes:
+          $ref: '#/components/schemas/Dislikes'
+        parentCommentId:
+          $ref: '#/components/schemas/ParentCommentUuid'
+        replies:
+          type: array
+          description: |
+            A list of replies to the comment.
+          maxItems: 20
+          items:
+            $ref: '#/components/schemas/CommentDetailsResponse'
 
     GenreListResponse:
       type: object
@@ -1504,7 +1561,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/movieId'
         - $ref: '#/components/parameters/page'
-        - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/commentLimit'
         - $ref: '#/components/parameters/commentSort'
       responses:
         '200':

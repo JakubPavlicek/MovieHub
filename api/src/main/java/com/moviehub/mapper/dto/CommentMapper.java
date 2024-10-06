@@ -16,18 +16,42 @@ public class CommentMapper {
     public static Comment mapToComment(AddCommentRequest addCommentRequest) {
         return Comment.builder()
                       .text(addCommentRequest.getText())
-                      .parentCommentId(addCommentRequest.getParentCommentId())
                       .build();
     }
+
+    // TODO: remove the recursion
 
     public static CommentDetailsResponse mapToCommentDetailsResponse(Comment comment) {
         return CommentDetailsResponse.builder()
                                      .id(comment.getId())
                                      .movieId(comment.getMovie().getId())
-                                     .userId(comment.getUserId())
+                                     .user(UserMapper.toUserNameAndPictureUrl(comment.getUser()))
                                      .createdAt(comment.getCreatedAt())
                                      .text(comment.getText())
+                                     .isDeleted(comment.getIsDeleted())
+                                     .likes(comment.getLikes())
+                                     .dislikes(comment.getDislikes())
+                                     .replies(mapRepliesToCommentDetailsResponse(comment.getReplies()))
                                      .build();
+    }
+
+    private static CommentDetailsResponse mapReplyToCommentDetailsResponse(Comment comment) {
+        return CommentDetailsResponse.builder()
+                                     .id(comment.getId())
+                                     .movieId(comment.getMovie().getId())
+                                     .user(UserMapper.toUserNameAndPictureUrl(comment.getUser()))
+                                     .createdAt(comment.getCreatedAt())
+                                     .text(comment.getText())
+                                     .isDeleted(comment.getIsDeleted())
+                                     .likes(comment.getLikes())
+                                     .dislikes(comment.getDislikes())
+                                     .build();
+    }
+
+    private static List<CommentDetailsResponse> mapRepliesToCommentDetailsResponse(List<Comment> replies) {
+        return replies.stream()
+                      .map(CommentMapper::mapReplyToCommentDetailsResponse)
+                      .toList();
     }
 
     public static CommentPage mapToCommentPage(Page<Comment> comments) {
@@ -44,6 +68,12 @@ public class CommentMapper {
                           .numberOfElements(comments.getNumberOfElements())
                           .empty(comments.isEmpty())
                           .build();
+    }
+
+    private static List<CommentDetailsResponse> mapToCommentDetailsResponse(List<Comment> comments) {
+        return comments.stream()
+                       .map(CommentMapper::mapToCommentDetailsResponse)
+                       .toList();
     }
 
     private static List<CommentDetailsResponse> mapToCommentDetailsResponse(Page<Comment> comments) {

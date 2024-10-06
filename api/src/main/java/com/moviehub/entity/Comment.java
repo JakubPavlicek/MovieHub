@@ -18,6 +18,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -41,10 +42,13 @@ public class Comment {
     )
     private Movie movie;
 
-    @Column(
-        nullable = false
+    @ManyToOne
+    @JoinColumn(
+        name = "user_id",
+        referencedColumnName = "id",
+        foreignKey = @ForeignKey(name = "fk_user")
     )
-    private String userId;
+    private User user;
 
     @CreationTimestamp
     @Column(
@@ -64,15 +68,39 @@ public class Comment {
     @Builder.Default
     private Boolean isDeleted = false;
 
-    @Column(
-        nullable = true
-    )
-    private UUID parentCommentId;
-
     @OneToMany(
         mappedBy = "comment",
         fetch = FetchType.LAZY
     )
     List<CommentReaction> reactions;
+
+    @Column(
+        nullable = false
+    )
+    @Builder.Default
+    Long likes = 0L;
+
+    @Column(
+        nullable = false
+    )
+    @Builder.Default
+    Long dislikes = 0L;
+
+    @ManyToOne
+    @JoinColumn(
+        name = "parent_comment_id",
+        referencedColumnName = "id",
+        foreignKey = @ForeignKey(name = "fk_parent_comment"),
+        insertable = false,
+        updatable = false
+    )
+    private Comment parentComment;
+
+    @OneToMany(
+        mappedBy = "parentComment",
+        fetch = FetchType.LAZY
+    )
+    @Builder.Default
+    private List<Comment> replies = new ArrayList<>();
 
 }

@@ -11,7 +11,6 @@ import com.moviehub.entity.MovieRating;
 import com.moviehub.entity.ProductionCompany;
 import com.moviehub.exception.MovieNotFoundException;
 import com.moviehub.repository.MovieRepository;
-import com.moviehub.security.AuthUser;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -33,8 +32,6 @@ public class MovieService {
     private final MovieInteractionService interactionService;
 
     public Movie addMovie(Movie movie) {
-        AuthUser.getUserId();
-
         Director savedDirector = crewService.getSavedDirector(movie.getDirector());
         movie.setDirector(savedDirector);
 
@@ -146,10 +143,10 @@ public class MovieService {
         return searchService.getMoviesWithActor(actor, page, limit);
     }
 
-    public void addComment(UUID movieId, Comment comment) {
+    public void addComment(UUID movieId, Comment comment, UUID parentCommentId) {
         Movie movie = getMovie(movieId);
 
-        interactionService.saveComment(movie, comment);
+        interactionService.saveComment(movie, comment, parentCommentId);
     }
 
     public Page<Comment> getComments(UUID movieId, Integer page, Integer limit, String sort) {

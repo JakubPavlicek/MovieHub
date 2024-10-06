@@ -1,14 +1,37 @@
 import type { FC } from "react";
 import type { components } from "@/api/api";
 import { useApi } from "@/context/ApiProvider";
-import { CircleUserRound, ThumbsDown, ThumbsUp } from "lucide-react";
+import { ThumbsDown, ThumbsUp } from "lucide-react";
+
+interface CommentReactionSection {
+  comment: components["schemas"]["CommentDetailsResponse"];
+}
+
+const CommentReactionSection: FC<CommentReactionSection> = ({ comment }) => {
+  return (
+    <div className="flex flex-row gap-4">
+      <div className="flex flex-row items-center gap-1 text-neutral-300">
+        <span>{comment.likes}</span>
+        <button className="p-1 hover:text-cyan-300">
+          <ThumbsUp size={20} strokeWidth={2} />
+        </button>
+      </div>
+      <div className="flex flex-row items-center gap-1 text-neutral-300">
+        <span>{comment.dislikes}</span>
+        <button className="p-1 hover:text-cyan-300">
+          <ThumbsDown size={20} strokeWidth={2} />
+        </button>
+      </div>
+    </div>
+  );
+};
 
 interface MovieCommentProps {
   comment: components["schemas"]["CommentDetailsResponse"];
 }
 
 const MovieComment: FC<MovieCommentProps> = ({ comment }) => {
-  const { userId, createdAt, text } = comment;
+  const { user, createdAt, text } = comment;
 
   const date = new Date(createdAt!);
 
@@ -24,30 +47,20 @@ const MovieComment: FC<MovieCommentProps> = ({ comment }) => {
     .replace(",", "");
 
   return (
-    <div className="mt-6 flex flex-row gap-4">
-      <CircleUserRound size={52} strokeWidth={1.3} className="text-cyan-300" />
-      <div className="flex w-full flex-col gap-1.5">
-        <div className="flex flex-row items-center gap-3">
-          <span className="font-semibold">{userId?.split("|")[0]}</span>
-          <span className="text-sm text-neutral-400">{formattedDate}</span>
-        </div>
-        <span className="text-neutral-200">{text}</span>
-        <div className="flex flex-row items-center justify-between">
-          <button className="max-w-fit text-neutral-400 hover:text-neutral-200">Reply</button>
-          <div className="flex flex-row gap-4">
-            <div className="flex flex-row items-center gap-1 text-neutral-300">
-              <span>0</span>
-              <button className="rounded-full p-1 hover:text-white">
-                <ThumbsUp size={20} strokeWidth={2} />
-              </button>
-            </div>
-            <div className="flex flex-row items-center gap-1 text-neutral-300">
-              <span>4</span>
-              <button className="p-1 hover:text-white">
-                <ThumbsDown size={20} strokeWidth={2} />
-              </button>
-            </div>
+    <div>
+      <div className="mt-6 flex flex-row gap-4">
+        <img src={user?.pictureUrl} alt={user?.name} className="mt-1 h-[52px] w-[52px] rounded-full" />
+        <div className="flex w-full flex-col gap-1.5">
+          <div className="flex flex-row items-center gap-3">
+            <span className="font-semibold">{user?.name}</span>
+            <span className="text-sm text-neutral-400">{formattedDate}</span>
           </div>
+          <span className="text-neutral-200">{text}</span>
+          <div className="flex flex-row items-center justify-between">
+            <button className="max-w-fit text-neutral-400 hover:text-cyan-300">Reply</button>
+            <CommentReactionSection comment={comment} />
+          </div>
+          {comment.replies?.map((reply) => <MovieComment comment={reply} key={reply.id} />)}
         </div>
       </div>
     </div>
@@ -63,12 +76,15 @@ export const MovieComments: FC<MovieCommentsProps> = ({ movieId }) => {
   const { data: comments } = api.useQuery("get", "/movies/{movieId}/comments", {
     params: {
       path: { movieId: movieId },
+      query: { limit: 5 },
     },
   });
 
   if (!comments?.content) {
     return <div className="text-white">Empty</div>;
   }
+
+  console.log(comments.content);
 
   // TODO: implement replies (parentCommentId) -> reply text: @user ... + margin left
 

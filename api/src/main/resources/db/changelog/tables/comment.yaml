@@ -42,6 +42,18 @@ databaseChangeLog:
                     nullable: false
                   defaultValueBoolean: false
               - column:
+                  name: likes
+                  type: bigint
+                  defaultValueNumeric: "0"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: dislikes
+                  type: bigint
+                  defaultValueNumeric: "0"
+                  constraints:
+                    nullable: false
+              - column:
                   name: parent_comment_id
                   type: uuid
                   constraints:

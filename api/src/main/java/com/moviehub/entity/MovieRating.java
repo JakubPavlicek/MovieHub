@@ -36,10 +36,13 @@ public class MovieRating {
     )
     private Movie movie;
 
-    @Column(
-        nullable = false
+    @ManyToOne
+    @JoinColumn(
+        name = "user_id",
+        referencedColumnName = "id",
+        foreignKey = @ForeignKey(name = "fk_user")
     )
-    private String userId;
+    private User user;
 
     @Column(
         nullable = false

@@ -19,7 +19,7 @@ public class JwtAuthConverter implements Converter<Jwt, JwtAuthenticationToken> 
 
     private final ClientUrlProperties clientUrlProperties;
 
-    private static final String AUTH0_SUB_PREFIX = "auth0";
+    private static final String AUTH0_SUB_PREFIX = "auth0|";
 
     @Override
     public JwtAuthenticationToken convert(@NonNull Jwt jwt) {
@@ -39,8 +39,7 @@ public class JwtAuthConverter implements Converter<Jwt, JwtAuthenticationToken> 
 
     private String createUserId(Jwt jwt) {
         String sub = jwt.getClaimAsString("sub");
-        String username = jwt.getClaimAsString(clientUrlProperties.getUrl() + "/username");
-        return sub.replaceFirst(AUTH0_SUB_PREFIX, username);
+        return sub.substring(AUTH0_SUB_PREFIX.length());
     }
 
 }

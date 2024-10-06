@@ -19,6 +19,20 @@ databaseChangeLog:
             referencedColumnNames: id
 
         - addForeignKeyConstraint:
+            baseTableName: comment
+            baseColumnNames: parent_comment_id
+            constraintName: fk_parent_comment
+            referencedTableName: comment
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: comment
+            baseColumnNames: user_id
+            constraintName: fk_user
+            referencedTableName: auth_user
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
               baseTableName: comment_reaction
               baseColumnNames: comment_id
               constraintName: fk_comment
@@ -26,10 +40,24 @@ databaseChangeLog:
               referencedColumnNames: id
 
         - addForeignKeyConstraint:
+            baseTableName: comment_reaction
+            baseColumnNames: user_id
+            constraintName: fk_user
+            referencedTableName: auth_user
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
             baseTableName: movie_rating
             baseColumnNames: movie_id
             constraintName: fk_movie
             referencedTableName: movie
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: movie_rating
+            baseColumnNames: user_id
+            constraintName: fk_user
+            referencedTableName: auth_user
             referencedColumnNames: id
 
         - addForeignKeyConstraint:

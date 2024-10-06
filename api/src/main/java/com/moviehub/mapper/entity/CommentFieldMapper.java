@@ -10,10 +10,10 @@ public class CommentFieldMapper {
     public enum Field {
         COMMENT_ID,
         MOVIE_ID,
-        USER_ID,
+        USER,
         CREATED_AT,
         TEXT,
-        PARENT_COMMENT_ID,
+        PARENT_COMMENT,
         REACTIONS
     }
 
@@ -24,10 +24,10 @@ public class CommentFieldMapper {
         return switch (commentField) {
             case COMMENT_ID -> Comment_.ID;
             case MOVIE_ID -> Comment_.MOVIE;
-            case USER_ID -> Comment_.USER_ID;
+            case USER -> Comment_.USER;
             case CREATED_AT -> Comment_.CREATED_AT;
             case TEXT -> Comment_.TEXT;
-            case PARENT_COMMENT_ID -> Comment_.PARENT_COMMENT_ID;
+            case PARENT_COMMENT -> Comment_.PARENT_COMMENT;
             case REACTIONS -> Comment_.REACTIONS;
         };
     }

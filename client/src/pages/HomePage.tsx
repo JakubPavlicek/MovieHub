@@ -3,11 +3,18 @@ import { MoviePreviewList } from "@/components/common/MoviePreviewList";
 import { useApi } from "@/context/ApiProvider";
 
 export const HomePage: FC = () => {
-  // const { movies } = useMovies();
   const api = useApi();
-  const { data: movies } = api.useQuery("get", "/movies", { params: { query: { limit: 20 } } });
+  const { data: movies } = api.useQuery("get", "/movies", {
+    params: {
+      query: {
+        limit: 20,
+      },
+    },
+  });
 
-  if (!movies) return "Loading...";
+  if (!movies?.content) {
+    return <div className="text-white">Empty</div>;
+  }
 
   return (
     <main className="mx-auto 2xl:container">

@@ -72,16 +72,6 @@ databaseChangeLog:
                   value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: company_id
-                  value: c894946e-20b1-441d-b9c9-7bf5a0feadd8 # Warner Bros. Pictures
-
-        - insert:
-            tableName: movie_production
-            columns:
-              - column:
-                  name: movie_id
-                  value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
-              - column:
-                  name: company_id
                   value: ec47044b-d20e-4353-a0d7-baa89fa4ae59 # Syncopy
 
         - insert:
