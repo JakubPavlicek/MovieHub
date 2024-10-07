@@ -90,9 +90,7 @@ public class Comment {
     @JoinColumn(
         name = "parent_comment_id",
         referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "fk_parent_comment"),
-        insertable = false,
-        updatable = false
+        foreignKey = @ForeignKey(name = "fk_parent_comment")
     )
     private Comment parentComment;
 

@@ -1,7 +1,7 @@
 export const formatList = (list: { id?: string; name?: string }[] | undefined) =>
   list?.map((item) => item.name).join(", ");
 
-export const transformYouTubeUrl = (url: string | undefined): string | undefined => {
+export const transformYouTubeUrl = (url: string): string | undefined => {
   if (!url) return;
 
   const urlPattern = /(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([a-zA-Z0-9_-]+)/;
@@ -13,6 +13,4 @@ export const transformYouTubeUrl = (url: string | undefined): string | undefined
     const videoId = match[1];
     return `https://www.youtube.com/embed/${videoId}`;
   }
-
-  return;
 };

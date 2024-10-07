@@ -1,5 +1,6 @@
 package com.moviehub.service;
 
+import com.moviehub.dto.UserCommentReaction;
 import com.moviehub.entity.Comment;
 import com.moviehub.entity.Movie;
 import com.moviehub.entity.ReactionType;
@@ -40,6 +41,7 @@ public class CommentService {
 
         comment.setMovie(movie);
         comment.setUser(userService.getUser());
+        comment.setParentComment(getComment(parentCommentId));
 
         return commentRepository.save(comment);
     }
@@ -64,7 +66,7 @@ public class CommentService {
                                                 .toList();
 
         // fetch replies in one query for all top-level comments
-        List<Comment> replies = commentRepository.findRepliesForComments(commentIds);
+        List<Comment> replies = commentRepository.findRepliesForComments(commentIds, pageable.getSort());
 
         // map the replies to their corresponding top-level comments
         Map<UUID, List<Comment>> repliesGroupedByCommentId = replies.stream()
@@ -91,6 +93,14 @@ public class CommentService {
     public void addCommentReaction(UUID commentId, ReactionType reactionType) {
         Comment comment = getComment(commentId);
         reactionService.addCommentReaction(comment, reactionType);
+    }
+
+    public List<UserCommentReaction> getUserReactions(List<UUID> commentIds) {
+        return reactionService.getUserReactions(commentIds);
+    }
+
+    public List<UUID> getUserComments(List<UUID> commentIds) {
+        return commentRepository.filterCommentsPostedByUser(commentIds, userService.getUser());
     }
 
 }

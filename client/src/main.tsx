@@ -1,4 +1,5 @@
 import "@/styles/index.css";
+import "react-toastify/dist/ReactToastify.min.css";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -12,6 +13,7 @@ import { SearchPage } from "@/pages/SearchPage";
 import { ErrorPage } from "@/pages/ErrorPage";
 import { MoviePage } from "@/pages/MoviePage";
 import { ApiProvider } from "@/context/ApiProvider";
+import { ToastContainer } from "react-toastify";
 
 // https://auth0.com/blog/complete-guide-to-react-user-authentication/
 
@@ -61,6 +63,7 @@ createRoot(document.getElementById("root")!).render(
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
           {/*<ReactQueryDevtools initialIsOpen={false} />*/}
+          <ToastContainer theme="colored" autoClose={2500} />
         </QueryClientProvider>
       </ApiProvider>
     </Auth0Provider>

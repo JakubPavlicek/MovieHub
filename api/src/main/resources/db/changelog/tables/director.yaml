@@ -28,6 +28,6 @@ databaseChangeLog:
               - column:
                   name: gender
                   type: varchar(20)
+                  defaultValue: 'UNSPECIFIED'
                   constraints:
                     nullable: false
-                  defaultValue: 'UNSPECIFIED'

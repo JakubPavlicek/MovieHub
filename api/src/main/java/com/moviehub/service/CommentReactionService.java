@@ -1,5 +1,6 @@
 package com.moviehub.service;
 
+import com.moviehub.dto.UserCommentReaction;
 import com.moviehub.entity.Comment;
 import com.moviehub.entity.CommentReaction;
 import com.moviehub.entity.ReactionType;
@@ -8,7 +9,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -28,7 +31,8 @@ public class CommentReactionService {
             return;
         }
 
-        createNewReaction(comment, reactionType);
+        CommentReaction newReaction = createNewReaction(comment, reactionType);
+        updateCommentReactions(comment, ReactionType.NONE, newReaction.getReactionType());
     }
 
     private void updateExistingReaction(CommentReaction reaction, Comment comment, ReactionType newReactionType) {
@@ -64,14 +68,18 @@ public class CommentReactionService {
         }
     }
 
-    private void createNewReaction(Comment comment, ReactionType reactionType) {
+    private CommentReaction createNewReaction(Comment comment, ReactionType reactionType) {
         CommentReaction reaction = CommentReaction.builder()
                                                   .comment(comment)
                                                   .user(userService.getUser())
                                                   .reactionType(reactionType)
                                                   .build();
 
-        reactionRepository.save(reaction);
+        return reactionRepository.save(reaction);
+    }
+
+    public List<UserCommentReaction> getUserReactions(List<UUID> commentIds) {
+        return reactionRepository.filterReactionsCreatedByUser(commentIds, userService.getUser());
     }
 
 }

@@ -3,6 +3,8 @@ import { Star } from "lucide-react";
 import type { components } from "@/api/api";
 import { useApi } from "@/context/ApiProvider";
 import { useQueryClient } from "@tanstack/react-query";
+import { useAuth0 } from "@auth0/auth0-react";
+import { toast } from "react-toastify";
 
 interface StarRatingProps {
   movieId: components["schemas"]["MovieDetailsResponse"]["id"];
@@ -12,9 +14,10 @@ export const StarRating: FC<StarRatingProps> = ({ movieId = "" }) => {
   const multiplier = 2;
   const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
+  const { isAuthenticated } = useAuth0();
   const queryClient = useQueryClient();
   const api = useApi();
-  const { data: movieRating } = api.useQuery("get", "/movies/{movieId}/ratings", {
+  const { data: movieRating } = api.useQuery("get", "/movies/{movieId}/user/rating", {
     params: {
       path: { movieId: movieId },
     },
@@ -24,12 +27,16 @@ export const StarRating: FC<StarRatingProps> = ({ movieId = "" }) => {
   });
 
   useEffect(() => {
-    if (!movieRating) return;
-    if (!movieRating.rating) return;
+    if (!movieRating?.rating) return;
     setRating(movieRating.rating / multiplier);
   }, [movieRating]);
 
   const submitRating = async (starIndex: number) => {
+    if (!isAuthenticated) {
+      toast.error(import.meta.env.VITE_NOT_AUTHENTICATED_MESSAGE);
+      return;
+    }
+
     setRating(starIndex);
     mutate({
       params: {

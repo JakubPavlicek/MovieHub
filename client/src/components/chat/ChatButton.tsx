@@ -1,5 +1,7 @@
-import type { FC } from "react";
+import { type FC, useEffect } from "react";
 import { MessageSquareText, X } from "lucide-react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { toast } from "react-toastify";
 
 interface ChatButtonProps {
   isChatOpened: boolean;
@@ -7,6 +9,14 @@ interface ChatButtonProps {
 }
 
 export const ChatButton: FC<ChatButtonProps> = ({ isChatOpened, setIsChatOpened }) => {
+  const { isAuthenticated } = useAuth0();
+
+  useEffect(() => {
+    if (!isAuthenticated && isChatOpened) {
+      toast.error(import.meta.env.VITE_NOT_AUTHENTICATED_MESSAGE);
+    }
+  }, [isAuthenticated, isChatOpened]);
+
   return (
     <div className="fixed bottom-8 right-8">
       <button

@@ -110,7 +110,7 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<MovieUserRating> getRating(UUID movieId) {
+    public ResponseEntity<MovieUserRating> getUserMovieRating(UUID movieId) {
         MovieRating movieRating = movieService.getRating(movieId);
         MovieUserRating rating = MovieRatingMapper.mapToRating(movieRating);
 

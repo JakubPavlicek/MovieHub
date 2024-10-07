@@ -2,11 +2,15 @@ package com.moviehub.mapper.dto;
 
 import com.moviehub.dto.AddCommentRequest;
 import com.moviehub.dto.CommentDetailsResponse;
+import com.moviehub.dto.CommentInteractions;
 import com.moviehub.dto.CommentPage;
+import com.moviehub.dto.CommentReaction;
+import com.moviehub.dto.UserCommentReaction;
 import com.moviehub.entity.Comment;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
+import java.util.UUID;
 
 public class CommentMapper {
 
@@ -18,8 +22,6 @@ public class CommentMapper {
                       .text(addCommentRequest.getText())
                       .build();
     }
-
-    // TODO: remove the recursion
 
     public static CommentDetailsResponse mapToCommentDetailsResponse(Comment comment) {
         return CommentDetailsResponse.builder()
@@ -70,16 +72,30 @@ public class CommentMapper {
                           .build();
     }
 
-    private static List<CommentDetailsResponse> mapToCommentDetailsResponse(List<Comment> comments) {
+    private static List<CommentDetailsResponse> mapToCommentDetailsResponse(Page<Comment> comments) {
         return comments.stream()
                        .map(CommentMapper::mapToCommentDetailsResponse)
                        .toList();
     }
 
-    private static List<CommentDetailsResponse> mapToCommentDetailsResponse(Page<Comment> comments) {
-        return comments.stream()
-                       .map(CommentMapper::mapToCommentDetailsResponse)
-                       .toList();
+    public static CommentInteractions mapToCommentInteractions(List<UserCommentReaction> reactions, List<UUID> comments) {
+        return CommentInteractions.builder()
+                                  .comments(comments)
+                                  .reactions(mapToCommentReactions(reactions))
+                                  .build();
+    }
+
+    private static List<CommentReaction> mapToCommentReactions(List<UserCommentReaction> reactions) {
+        return reactions.stream()
+                        .map(CommentMapper::mapToCommentReaction)
+                        .toList();
+    }
+
+    private static CommentReaction mapToCommentReaction(UserCommentReaction userCommentReaction) {
+        return CommentReaction.builder()
+                              .commentId(userCommentReaction.commentId())
+                              .reaction(ReactionTypeMapper.mapToReactionType(userCommentReaction.reactionType()))
+                              .build();
     }
 
 }

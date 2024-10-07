@@ -4,7 +4,7 @@ import { SendHorizontal } from "lucide-react";
 import { useApi } from "@/context/ApiProvider";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuth0 } from "@auth0/auth0-react";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 
 interface CommentInputProps {
   movieId?: components["schemas"]["Uuid"];
@@ -13,10 +13,7 @@ interface CommentInputProps {
   setShowInput: (prev: boolean) => void;
 }
 
-// TODO: parentCommentId has to be the ID of the top level comment
-// TODO: replierUserName has to be the user of the comment with "Reply" button
-
-export const CommentInput: FC<CommentInputProps> = ({
+export const CommentReplyInput: FC<CommentInputProps> = ({
   movieId = "",
   parentCommentId,
   replierUserName,
@@ -32,9 +29,7 @@ export const CommentInput: FC<CommentInputProps> = ({
 
   const submitComment = (text: string) => {
     if (!isAuthenticated) {
-      toast.error("Not authenticated", {
-        autoClose: 3000,
-      });
+      toast.error(import.meta.env.VITE_NOT_AUTHENTICATED_MESSAGE);
       return;
     }
 
@@ -67,6 +62,7 @@ export const CommentInput: FC<CommentInputProps> = ({
         value={text}
         onChange={(e) => setText(e.target.value)}
         onKeyDown={handleEnterKey}
+        autoFocus
       />
       <button className="p-2 text-white hover:rounded-full hover:bg-gray-700" onClick={() => submitComment(text)}>
         <SendHorizontal strokeWidth={1} size={26} className="fill-cyan-600" />

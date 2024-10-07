@@ -16,19 +16,19 @@ const InfoRow: FC<InfoRowProps> = ({ label, children }) => (
 );
 
 interface LinkListItem {
-  id?: components["schemas"]["Uuid"];
-  name?: string;
+  id: components["schemas"]["Uuid"];
+  name: string;
 }
 
 interface LinkListProps {
-  items?: LinkListItem[];
+  items: LinkListItem[];
   type: string;
 }
 
 const LinkList: FC<LinkListProps> = ({ items, type }) => {
   return (
     <div>
-      {items?.map((item, index) => (
+      {items.map((item, index) => (
         <Fragment key={item.id}>
           <Link to={`/${type}/${item.name}`} className="text-neutral-300 hover:text-cyan-300">
             {item.name}

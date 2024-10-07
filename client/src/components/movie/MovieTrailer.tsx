@@ -5,7 +5,7 @@ import { transformYouTubeUrl } from "@/utils/movieDetails";
 interface MovieTrailerProps {
   showTrailer: boolean;
   setShowTrailer: (prevState: boolean) => void;
-  trailerUrl: string | undefined;
+  trailerUrl: string;
 }
 
 export const MovieTrailer: FC<MovieTrailerProps> = ({ showTrailer, setShowTrailer, trailerUrl }) => {

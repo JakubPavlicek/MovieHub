@@ -473,12 +473,69 @@ components:
       nullable: false
 
     MovieUserRating:
-      description: A float value representing the movie's rating.
-      additionalProperties: false
       type: object
+      additionalProperties: false
+      description: A float value representing the movie's rating.
+      required:
+        - rating
       properties:
         rating:
           $ref: '#/components/schemas/MovieRating'
+
+    CommentList:
+      type: object
+      description: |
+        A list of comment IDs currently displayed on the page, used for fetching user-specific interactions, such as likes or reactions, for the given comments.
+      additionalProperties: false
+      required:
+        - comments
+      properties:
+        comments:
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/Uuid'
+
+    CommentReaction:
+      type: object
+      additionalProperties: false
+      description: |
+        An object representing the user's reaction to a specific comment. 
+        Contains the ID of the comment and the type of reaction (like or dislike).
+      required:
+        - commentId
+        - reaction
+      properties:
+        commentId:
+          $ref: '#/components/schemas/Uuid'
+        reaction:
+          $ref: '#/components/schemas/Reaction'
+
+    CommentInteractions:
+      type: object
+      additionalProperties: false
+      description: |
+        Represents the user's interactions with comments on a movie.
+        This includes the reactions the user has made on comments (e.g., like or dislike) and the IDs of the comments the user has posted.
+      required:
+        - reactions
+        - comments
+      properties:
+        reactions:
+          type: array
+          maxItems: 50
+          description: |
+            A list of the user's reactions to comments.
+            Each reaction includes the comment ID and the type of reaction (like or dislike).
+          items:
+            $ref: '#/components/schemas/CommentReaction'
+        comments:
+          type: array
+          maxItems: 50
+          description: |
+            A list of comment IDs representing the comments that the user has posted.
+          items:
+            $ref: '#/components/schemas/Uuid'
 
     CreatedAt:
       type: string
@@ -491,7 +548,7 @@ components:
     Text:
       type: string
       example: "Very interesting movie"
-      pattern: "^[\\w\\s.,!?'-]+$"
+      pattern: "^[\\w\\s.,!?'-@]+$"
       minLength: 1
       maxLength: 500
       nullable: false
@@ -513,27 +570,37 @@ components:
       minimum: 0
       maximum: 10000000000
 
+    Reaction:
+      type: string
+      enum:
+        - like
+        - dislike
+        - none
+      description: |
+        The reaction to the comment.
+        This field includes predefined values such as like, dislike or none.
+      example: like
+      nullable: false
+
     ReactionTypeRequest:
       type: object
       additionalProperties: false
+      description: |
+        The reaction to the comment request schema.
+      required:
+        - reactionType
       properties:
         reactionType:
-          type: string
-          enum:
-            - like
-            - dislike
-            - none
-          description: |
-            The reaction to the comment.
-            This field includes predefined values such as like, dislike or none.
-          example: like
-          nullable: false
+          $ref: '#/components/schemas/Reaction'
 
     UserNameAndPictureUrl:
       type: object
       additionalProperties: false
       description: |
         An object representing a user's nickname and their associated profile picture URL.
+      required:
+        - name
+        - pictureUrl
       properties:
         name:
           type: string
@@ -568,6 +635,10 @@ components:
       type: object
       description: "Represents sorting information for ordering query results based on one or more criteria."
       additionalProperties: false
+      required:
+        - empty
+        - sorted
+        - unsorted
       properties:
         empty:
           type: boolean
@@ -592,6 +663,13 @@ components:
       type: object
       description: "Represents pagination and sorting information for querying a paginated dataset."
       additionalProperties: false
+      required:
+        - pageNumber
+        - pageSize
+        - sort
+        - offset
+        - paged
+        - unpaged
       properties:
         pageNumber:
           type: integer
@@ -625,6 +703,18 @@ components:
       type: object
       description: "Represents a page of movies, including pagination and sorting information."
       additionalProperties: false
+      required:
+        - content
+        - pageable
+        - last
+        - totalElements
+        - totalPages
+        - first
+        - size
+        - number
+        - sort
+        - numberOfElements
+        - empty
       properties:
         content:
           type: array
@@ -680,6 +770,18 @@ components:
       type: object
       description: "Represents a page of directors, including pagination and sorting information."
       additionalProperties: false
+      required:
+        - content
+        - pageable
+        - last
+        - totalElements
+        - totalPages
+        - first
+        - size
+        - number
+        - sort
+        - numberOfElements
+        - empty
       properties:
         content:
           type: array
@@ -735,6 +837,18 @@ components:
       type: object
       description: "Represents a page of actors, including pagination and sorting information."
       additionalProperties: false
+      required:
+        - content
+        - pageable
+        - last
+        - totalElements
+        - totalPages
+        - first
+        - size
+        - number
+        - sort
+        - numberOfElements
+        - empty
       properties:
         content:
           type: array
@@ -790,6 +904,18 @@ components:
       type: object
       description: "Represents a page of production companies, including pagination and sorting information."
       additionalProperties: false
+      required:
+        - content
+        - pageable
+        - last
+        - totalElements
+        - totalPages
+        - first
+        - size
+        - number
+        - sort
+        - numberOfElements
+        - empty
       properties:
         content:
           type: array
@@ -845,6 +971,18 @@ components:
       type: object
       description: "Represents a page of comments, including pagination and sorting information."
       additionalProperties: false
+      required:
+        - content
+        - pageable
+        - last
+        - totalElements
+        - totalPages
+        - first
+        - size
+        - number
+        - sort
+        - numberOfElements
+        - empty
       properties:
         content:
           type: array
@@ -896,9 +1034,24 @@ components:
             If `true`, the page has no items; otherwise, it has content.
           example: false
 
-    MovieRequest:
+    AddMovieRequest:
       type: object
-      description: Schema for the request body when creating or updating a movie.
+      additionalProperties: false
+      description: |
+        Schema for adding a new movie to the database.
+        It requires all movie details to be provided.
+      required:
+        - name
+        - filename
+        - releaseDate
+        - duration
+        - description
+        - posterUrl
+        - trailerUrl
+        - cast
+        - productionCompanies
+        - genres
+        - countries
       properties:
         name:
           $ref: '#/components/schemas/MovieName'
@@ -937,31 +1090,49 @@ components:
           items:
             $ref: '#/components/schemas/CountryName'
 
-    AddMovieRequest:
-      description: |
-        Schema for adding a new movie to the database.
-        It requires all movie details to be provided.
-      allOf:
-        - $ref: '#/components/schemas/MovieRequest'
-        - required:
-            - name
-            - filename
-            - releaseDate
-            - duration
-            - description
-            - posterUrl
-            - trailerUrl
-            - cast
-            - productionCompanies
-            - genres
-            - countries
-
     UpdateMovieRequest:
+      type: object
+      additionalProperties: false
       description: |
         Schema for updating an existing movie's details.
         It allows partial updates to movie information based on the existing schema.
-      allOf:
-        - $ref: '#/components/schemas/MovieRequest'
+      properties:
+        name:
+          $ref: '#/components/schemas/MovieName'
+        filename:
+          $ref: '#/components/schemas/MovieFilename'
+        releaseDate:
+          $ref: '#/components/schemas/MovieReleaseDate'
+        duration:
+          $ref: '#/components/schemas/MovieDuration'
+        description:
+          $ref: '#/components/schemas/MovieDescription'
+        posterUrl:
+          $ref: '#/components/schemas/MoviePosterUrl'
+        trailerUrl:
+          $ref: '#/components/schemas/MovieTrailerUrl'
+        director:
+          $ref: '#/components/schemas/PersonName'
+        cast:
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/MovieCastRequest'
+        productionCompanies:
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/ProductionCompanyName'
+        genres:
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/GenreName'
+        countries:
+          type: array
+          maxItems: 50
+          items:
+            $ref: '#/components/schemas/CountryName'
 
     AddCommentRequest:
       type: object
@@ -973,9 +1144,15 @@ components:
         parentCommentId:
           $ref: '#/components/schemas/ParentCommentUuid'
 
-    DirectorRequest:
+    AddDirectorRequest:
       type: object
-      description: Schema for the request body when creating or updating a director.
+      additionalProperties: false
+      description: |
+        Schema for adding a new director to the database.
+        It requires the director's name and gender to be provided.
+      required:
+        - name
+        - gender
       properties:
         name:
           $ref: '#/components/schemas/PersonName'
@@ -984,26 +1161,12 @@ components:
         gender:
           $ref: '#/components/schemas/GenderName'
 
-    AddDirectorRequest:
-      description: |
-        Schema for adding a new director to the database.
-        It requires the director's name and gender to be provided.
-      allOf:
-        - $ref: '#/components/schemas/DirectorRequest'
-        - required:
-          - name
-          - gender
-
     UpdateDirectorRequest:
+      type: object
+      additionalProperties: false
       description: |
         Schema for updating an existing director's details.
         It allows modifications to the director's information based on the existing schema.
-      allOf:
-        - $ref: '#/components/schemas/DirectorRequest'
-
-    ActorRequest:
-      type: object
-      description: Schema for the request body when creating or updating an actor.
       properties:
         name:
           $ref: '#/components/schemas/PersonName'
@@ -1013,21 +1176,35 @@ components:
           $ref: '#/components/schemas/GenderName'
 
     AddActorRequest:
+      type: object
+      additionalProperties: false
       description: |
         Schema for adding a new actor to the database.
         It requires the actor's name and gender to be provided.
-      allOf:
-        - $ref: '#/components/schemas/ActorRequest'
-        - required:
-            - name
-            - gender
+      required:
+        - name
+        - gender
+      properties:
+        name:
+          $ref: '#/components/schemas/PersonName'
+        bio:
+          $ref: '#/components/schemas/PersonBio'
+        gender:
+          $ref: '#/components/schemas/GenderName'
 
     UpdateActorRequest:
+      type: object
+      additionalProperties: false
       description: |
         Schema for updating an existing actor's details.
         It allows changes to the actor's information based on the existing schema.
-      allOf:
-        - $ref: '#/components/schemas/ActorRequest'
+      properties:
+        name:
+          $ref: '#/components/schemas/PersonName'
+        bio:
+          $ref: '#/components/schemas/PersonBio'
+        gender:
+          $ref: '#/components/schemas/GenderName'
 
     MovieCastRequest:
       type: object
@@ -1047,6 +1224,10 @@ components:
       type: object
       description: Provides detailed information about a movie's cast member.
       additionalProperties: false
+      required:
+        - id
+        - name
+        - role
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1059,6 +1240,13 @@ components:
       type: object
       description: Offers preview representation of the movie.
       additionalProperties: false
+      required:
+        - id
+        - name
+        - releaseYear
+        - duration
+        - posterUrl
+        - genres
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1080,6 +1268,21 @@ components:
       type: object
       description: Offers comprehensive details about a movie.
       additionalProperties: false
+      required:
+        - id
+        - name
+        - filename
+        - duration
+        - description
+        - rating
+        - reviewCount
+        - posterUrl
+        - trailerUrl
+        - director
+        - cast
+        - productionCompanies
+        - genres
+        - countries
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1128,6 +1331,9 @@ components:
       type: object
       description: Provides basic information about a director.
       additionalProperties: false
+      required:
+        - id
+        - name
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1138,6 +1344,9 @@ components:
       type: object
       description: Provides details about a production company.
       additionalProperties: false
+      required:
+        - id
+        - name
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1148,6 +1357,9 @@ components:
       type: object
       description: Provides details about a genre.
       additionalProperties: false
+      required:
+        - id
+        - name
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1158,6 +1370,9 @@ components:
       type: object
       description: Provides details about a country.
       additionalProperties: false
+      required:
+        - id
+        - name
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1168,6 +1383,10 @@ components:
       type: object
       description: Contains detailed information about a director.
       additionalProperties: false
+      required:
+        - id
+        - name
+        - gender
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1182,6 +1401,10 @@ components:
       type: object
       description: Contains detailed information about an actor.
       additionalProperties: false
+      required:
+        - id
+        - name
+        - gender
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1196,6 +1419,17 @@ components:
       type: object
       description: Contains detailed information about a comment.
       additionalProperties: false
+      required:
+        - id
+        - movieId
+        - user
+        - createdAt
+        - text
+        - isDeleted
+        - likes
+        - dislikes
+        - parentCommentId
+        - replies
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1227,6 +1461,8 @@ components:
       type: object
       description: Provides a list of all genres available in the system.
       additionalProperties: false
+      required:
+        - genres
       properties:
         genres:
           type: array
@@ -1243,6 +1479,8 @@ components:
       type: object
       description: Provides a list of all countries available in the system.
       additionalProperties: false
+      required:
+        - countries
       properties:
         countries:
           type: array
@@ -1260,6 +1498,12 @@ components:
       title: Problem Detail
       description: "A generic error."
       additionalProperties: false
+      required:
+        - type
+        - title
+        - status
+        - detail
+        - instance
       properties:
         type:
           type: string
@@ -1498,10 +1742,12 @@ paths:
           $ref: '#/components/responses/404MovieNotFound'
         'default':
           $ref: '#/components/responses/Default'
+
+  /movies/{movieId}/user/rating:
     get:
       description: Retrieve the rating given by the currently authenticated user for the specified movie.
       summary: Get authenticated user's movie rating
-      operationId: getRating
+      operationId: getUserMovieRating
       security:
         - bearerAuth: []
       tags:
@@ -1624,6 +1870,36 @@ paths:
           $ref: '#/components/responses/403Forbidden'
         '404':
           $ref: '#/components/responses/404CommentNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
+
+  /comments/user/interactions:
+    get:
+      description: Retrieve the IDs of comments created by the user and the reactions (like/dislike) for comments on the specified movie by the currently authenticated user.
+      summary: Get authenticated user's comment interactions
+      operationId: getUserCommentInteractions
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - comments
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CommentList'
+      responses:
+        '200':
+          description: Successfully retrieved the user's comment interactions (reactions and created comment IDs) for the specified movie.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentInteractions'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404MovieNotFound'
         'default':
           $ref: '#/components/responses/Default'
 

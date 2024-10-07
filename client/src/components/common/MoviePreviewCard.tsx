@@ -33,7 +33,7 @@ export const MoviePreviewCard: FC<MoviePreviewProps> = ({ moviePreview }) => {
           <span>&#8226;</span>
           <span>{moviePreview.duration}m</span>
         </div>
-        <span className="truncate opacity-70">{moviePreview.genres?.join(", ")}</span>
+        <span className="truncate opacity-70">{moviePreview.genres.join(", ")}</span>
       </div>
     </div>
   );
