@@ -1,7 +1,7 @@
 import { type FC, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useApi } from "@/context/ApiProvider";
-import { ButtonSection } from "@/components/movie/ButtonSection";
+import { TrailerButton } from "@/components/movie/TrailerButton";
 import { MovieDetails } from "@/components/movie/MovieDetails";
 import { MovieTrailer } from "@/components/movie/MovieTrailer";
 import { MovieComments } from "@/components/movie/MovieComments";
@@ -9,9 +9,9 @@ import placeholder from "@/assets/video/placeholder.mp4";
 
 export const MoviePage: FC = () => {
   const { movieId = "" } = useParams();
-  const [showTrailer, setShowTrailer] = useState<boolean>(false);
-  const api = useApi();
+  const [showTrailer, setShowTrailer] = useState(false);
 
+  const api = useApi();
   const { data: movieDetails } = api.useQuery("get", "/movies/{movieId}", {
     params: {
       path: { movieId: movieId },
@@ -27,7 +27,7 @@ export const MoviePage: FC = () => {
       <div className="mx-5 my-4 text-white">
         <video src={placeholder} controls className="my-6" />
 
-        <ButtonSection showTrailer={showTrailer} setShowTrailer={setShowTrailer} />
+        <TrailerButton showTrailer={showTrailer} setShowTrailer={setShowTrailer} />
 
         <hr className="mt-10 border-neutral-700" />
 

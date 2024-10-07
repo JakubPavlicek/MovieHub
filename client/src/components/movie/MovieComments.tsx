@@ -1,7 +1,9 @@
-import type { FC } from "react";
+import React, { type FC, useState } from "react";
 import type { components } from "@/api/api";
 import { useApi } from "@/context/ApiProvider";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
+import { CommentInput } from "@/components/movie/CommentInput";
+import { ToastContainer } from "react-toastify";
 
 interface CommentReactionSection {
   comment: components["schemas"]["CommentDetailsResponse"];
@@ -31,6 +33,8 @@ interface MovieCommentProps {
 }
 
 const MovieComment: FC<MovieCommentProps> = ({ comment }) => {
+  const [showInput, setShowInput] = useState(false);
+
   const { user, createdAt, text } = comment;
 
   const date = new Date(createdAt!);
@@ -57,9 +61,22 @@ const MovieComment: FC<MovieCommentProps> = ({ comment }) => {
           </div>
           <span className="text-neutral-200">{text}</span>
           <div className="flex flex-row items-center justify-between">
-            <button className="max-w-fit text-neutral-400 hover:text-cyan-300">Reply</button>
+            <button
+              className="max-w-fit text-neutral-400 hover:text-cyan-300"
+              onClick={() => setShowInput((prev) => !prev)}
+            >
+              Reply
+            </button>
             <CommentReactionSection comment={comment} />
           </div>
+          {showInput && (
+            <CommentInput
+              movieId={comment.movieId}
+              parentCommentId={comment.parentCommentId}
+              replierUserName={comment.user?.name}
+              setShowInput={setShowInput}
+            />
+          )}
           {comment.replies?.map((reply) => <MovieComment comment={reply} key={reply.id} />)}
         </div>
       </div>

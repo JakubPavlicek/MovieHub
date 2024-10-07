@@ -53,7 +53,7 @@ export const MovieTrailer: FC<MovieTrailerProps> = ({ showTrailer, setShowTraile
   return (
     <dialog
       ref={dialogRef}
-      className="container relative aspect-video w-full max-w-[95%] backdrop:bg-gray-950 backdrop:opacity-80 lg:max-w-screen-lg"
+      className="container fixed left-1/2 top-1/2 aspect-video w-full max-w-[95%] -translate-x-1/2 -translate-y-1/2 transform backdrop:bg-gray-950 backdrop:opacity-80 lg:max-w-screen-lg"
     >
       <iframe
         title={trailerUrl}
