@@ -23,7 +23,7 @@ export const MoviePage: FC = () => {
   }
 
   return (
-    <main className="mx-auto 2xl:container">
+    <main className="mx-auto min-h-[70vh] 2xl:container">
       <div className="mx-5 my-4 text-white">
         <video src={placeholder} controls className="my-6" />
 

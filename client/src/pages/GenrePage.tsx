@@ -27,7 +27,7 @@ export const GenrePage: FC = () => {
   }
 
   return (
-    <main className="mx-auto 2xl:container">
+    <main className="mx-auto min-h-[70vh] 2xl:container">
       <div className="mx-5 mt-10 flex flex-col justify-between text-white">
         <div className="mb-6 inline-flex max-w-fit gap-1.5 border-b-2 border-cyan-400 text-3xl font-semibold">
           <span className="capitalize">{genreName}</span>

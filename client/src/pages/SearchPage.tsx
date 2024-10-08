@@ -22,7 +22,7 @@ export const SearchPage: FC = () => {
   }
 
   return (
-    <main className="mx-auto 2xl:container">
+    <main className="mx-auto min-h-[70vh] 2xl:container">
       <div className="mx-5 mt-10 flex flex-col justify-between text-white">
         <div className="mb-6 text-3xl font-semibold">
           <span className="border-b-2 border-cyan-400">{`Search results for "${keyword}"`}</span>
