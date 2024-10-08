@@ -37,7 +37,7 @@ public class CommentService {
 
         comment.setMovie(movie);
         comment.setUser(userService.getUser());
-        comment.setParentComment(getComment(parentCommentId));
+        comment.setParentComment(parentCommentId == null ? null : getComment(parentCommentId));
 
         return commentRepository.save(comment);
     }
@@ -53,7 +53,7 @@ public class CommentService {
     }
 
     public Page<Comment> getComments(Movie movie, Pageable pageable) {
-        Page<Comment> topLevelComments = commentRepository.findAllTopLevelCommentsWithReplies(movie, pageable);
+        Page<Comment> topLevelComments = commentRepository.findAllTopLevelComments(movie, pageable);
 
         User authUser = userService.getUser();
 

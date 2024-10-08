@@ -2,6 +2,7 @@ import { type FC } from "react";
 import { useApi } from "@/context/ApiProvider";
 import { MovieComment } from "@/components/comment/MovieComment";
 import type { components } from "@/api/api";
+import { CommentInput } from "@/components/comment/CommentInput";
 
 interface MovieCommentsProps {
   movieId: components["schemas"]["Uuid"];
@@ -22,14 +23,13 @@ export const MovieComments: FC<MovieCommentsProps> = ({ movieId }) => {
 
   console.log(comments);
 
-  // TODO: add CommentProvider, that will have access to Comment
-
   return (
     <div className="mt-5 text-white">
       <span className="text-2xl font-semibold text-neutral-300">Comments</span>
       {comments.content.map((comment) => (
         <MovieComment key={comment.id} comment={comment} topLevelCommentId={comment.id} />
       ))}
+      <CommentInput movieId={movieId} />
     </div>
   );
 };

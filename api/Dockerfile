@@ -12,4 +12,4 @@ EXPOSE 8080
 RUN groupadd spring && \
     useradd -g spring kuba
 USER kuba
-ENTRYPOINT ["java", "-jar", "MovieManager.jar"]
+ENTRYPOINT ["java", "-Duser.timezone=Europe/Prague", "-jar", "MovieManager.jar"]

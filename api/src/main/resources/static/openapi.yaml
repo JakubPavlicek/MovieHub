@@ -1122,6 +1122,8 @@ components:
       type: object
       description: Schema for the requst body when creating a comment.
       additionalProperties: false
+      required:
+        - text
       properties:
         text:
           $ref: '#/components/schemas/Text'
