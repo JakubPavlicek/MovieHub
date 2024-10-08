@@ -45,8 +45,8 @@ public class ActorController implements ActorsApi {
     }
 
     @Override
-    public ResponseEntity<ActorPage> getActors(Integer page, Integer limit) {
-        Page<Actor> actors = actorService.getActors(page, limit);
+    public ResponseEntity<ActorPage> getActors(Integer page, Integer limit, String name) {
+        Page<Actor> actors = actorService.getActors(page, limit, name);
         ActorPage actorPage = ActorMapper.mapToActorPage(actors);
 
         return ResponseEntity.ok(actorPage);

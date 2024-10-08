@@ -123,6 +123,17 @@ components:
         default: ""
         maxLength: 100
 
+    commentId:
+      name: commentId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
+        maxLength: 255
+      description: "The comment ID."
+      example: c9d6f870-9f9a-4dbf-9079-bb676bc5a1b5
     commentLimit:
       name: limit
       in: query
@@ -147,18 +158,6 @@ components:
         default: createdAt.desc
         example: createdAt.desc
         maxLength: 200
-
-    commentId:
-      name: commentId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: uuid
-        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
-        maxLength: 255
-      description: "The comment ID."
-      example: c9d6f870-9f9a-4dbf-9079-bb676bc5a1b5
 
     directorId:
       name: directorId
@@ -219,6 +218,17 @@ components:
         maxLength: 255
       description: "The production company ID."
       example: 8e9334d2-e021-4ec3-b34b-8dc57032e362
+
+    name:
+      name: name
+      in: query
+      description: "The name of the entity."
+      schema:
+        type: string
+        pattern: "^[A-Za-zÀ-ÿ0-9.,'\"&()\\-: ]+$"
+        maxLength: 255
+        default: ""
+      example: "James Wan"
 
   responses:
 
@@ -1320,9 +1330,6 @@ components:
       type: object
       description: "Provides basic information about a director."
       additionalProperties: false
-      required:
-        - id
-        - name
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
@@ -1488,6 +1495,24 @@ components:
             - id: 3d9e9db7-6544-4613-998e-88cdd6334ce1
               name: Italy
 
+    YearListResponse:
+      type: object
+      description: "Provides a list of all distinct years of the movies available in the system."
+      additionalProperties: false
+      required:
+        - years
+      properties:
+        years:
+          type: array
+          maxItems: 200
+          description: "List of years."
+          items:
+            type: integer
+            format: int32
+            minimum: 1888
+            maximum: 9999
+            example: 2024
+
     ProblemDetail:
       type: object
       title: Problem Detail
@@ -1629,6 +1654,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/MoviePage'
+        'default':
+          $ref: '#/components/responses/Default'
+
+  /movies/years:
+    get:
+      description: |
+        Fetch distinct years of all the movies in the system.
+      summary: List years
+      operationId: getYears
+      tags:
+        - movies
+      responses:
+        '200':
+          description: Successfully retrieved a list of all distinct years of the movies.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/YearListResponse'
         'default':
           $ref: '#/components/responses/Default'
 
@@ -1887,6 +1930,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/name'
       responses:
         '200':
           description: Successfully retrieved the list of directors available in the system.
@@ -2019,6 +2063,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/name'
       responses:
         '200':
           description: Successfully retrieved the list of actors available in the system.
@@ -2153,6 +2198,7 @@ paths:
       parameters:
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/limit'
+        - $ref: '#/components/parameters/name'
       responses:
         '200':
           description: Successfully retrieved the list of production companies available in the system.

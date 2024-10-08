@@ -65,11 +65,15 @@ public class ActorService {
         return actorRepository.save(existingActor);
     }
 
-    public Page<Actor> getActors(Integer page, Integer limit) {
+    public Page<Actor> getActors(Integer page, Integer limit, String name) {
         Sort sort = Sort.by(Sort.Direction.ASC, Actor_.NAME);
         Pageable pageable = PageRequest.of(page, limit, sort);
 
-        return actorRepository.findAll(pageable);
+        if (name.isEmpty()) {
+            return actorRepository.findAll(pageable);
+        }
+
+        return actorRepository.findAllByName(name, pageable);
     }
 
 }

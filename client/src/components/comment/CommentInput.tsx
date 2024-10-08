@@ -53,7 +53,6 @@ export const CommentInput: FC<CommentInputProps> = ({ movieId }) => {
         value={text}
         onChange={(e) => setText(e.target.value)}
         onKeyDown={handleEnterKey}
-        autoFocus
       />
       <button className="p-2 text-white hover:rounded-full hover:bg-gray-700" onClick={() => submitComment(text)}>
         <SendHorizontal strokeWidth={1} size={26} className="fill-cyan-600" />

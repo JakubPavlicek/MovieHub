@@ -29,11 +29,9 @@ export const ChatInput: FC<ChatInputProps> = ({ sendMessage }) => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
         onKeyDown={handleEnterKey}
+        autoFocus
       />
-      <button
-        className="p-2 text-white hover:rounded-full hover:bg-gray-700"
-        onClick={() => submitMessage(message)}
-      >
+      <button className="p-2 text-white hover:rounded-full hover:bg-gray-700" onClick={() => submitMessage(message)}>
         <SendHorizontal strokeWidth={1} size={26} className="fill-cyan-600" />
       </button>
     </div>

@@ -223,3 +223,24 @@ databaseChangeLog:
               - column:
                   name: company_id
                   value: c04f3c9d-d1f8-473a-bfb9-7074dbaddb85 # Legendary Entertainment
+
+        - insert:
+            tableName: movie_production
+            columns:
+              - column:
+                  name: movie_id
+                  value: 62c92d5e-bd34-47e2-ba67-7443014af702 # Inception
+              - column:
+                  name: company_id
+                  value: c894946e-20b1-441d-b9c9-7bf5a0feadd8 # Warner Bros. Pictures
+
+        - insert:
+            tableName: movie_production
+            columns:
+              - column:
+                  name: movie_id
+                  value: 62c92d5e-bd34-47e2-ba67-7443014af702 # Inception
+              - column:
+                  name: company_id
+                  value: ec47044b-d20e-4353-a0d7-baa89fa4ae59 # Syncopy
+

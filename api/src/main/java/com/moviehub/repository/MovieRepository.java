@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -28,5 +29,8 @@ public interface MovieRepository extends JpaRepository<Movie, UUID>, JpaSpecific
 
     @Query("SELECT movie FROM Movie movie INNER JOIN movie.cast movieCast WHERE movieCast.actor = :actor")
     Page<Movie> findAllByActorsContaining(Actor actor, Pageable pageable);
+
+    @Query("SELECT DISTINCT YEAR(m.releaseDate) FROM Movie m ORDER BY YEAR(m.releaseDate) DESC")
+    List<Integer> findDistinctReleaseYears();
 
 }

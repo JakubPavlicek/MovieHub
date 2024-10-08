@@ -1,6 +1,8 @@
 package com.moviehub.repository;
 
 import com.moviehub.entity.Director;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -13,5 +15,7 @@ public interface DirectorRepository extends JpaRepository<Director, UUID> {
     Optional<Director> findByName(String name);
 
     boolean existsByName(String name);
+
+    Page<Director> findAllByName(String name, Pageable pageable);
 
 }

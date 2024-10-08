@@ -7,6 +7,7 @@ import com.moviehub.dto.CommentPage;
 import com.moviehub.dto.MovieDetailsResponse;
 import com.moviehub.dto.MoviePage;
 import com.moviehub.dto.UpdateMovieRequest;
+import com.moviehub.dto.YearListResponse;
 import com.moviehub.entity.Comment;
 import com.moviehub.entity.Movie;
 import com.moviehub.mapper.dto.CommentMapper;
@@ -18,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -105,6 +107,14 @@ public class MovieController implements MoviesApi {
         movieService.addRating(movieId, rating);
 
         return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<YearListResponse> getYears() {
+        List<Integer> years = movieService.getYears();
+        YearListResponse yearListResponse = MovieMapper.mapToYearListResponse(years);
+
+        return ResponseEntity.ok(yearListResponse);
     }
 
 }

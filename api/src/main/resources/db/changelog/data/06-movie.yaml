@@ -443,7 +443,7 @@ databaseChangeLog:
                   value: 'https://image.tmdb.org/t/p/original/aevmNtJCNG4ZlfEeEGZ79frMUes.jpg'
               - column:
                   name: trailer_url
-                  value: 'https://www.youtube.com/watch?v=QjnywVxM-9s'
+                  value: 'https://www.youtube.com/watch?v=sghBNHf_gMw&ab_channel=FilmTrailerChannel'
               - column:
                   name: updated_at
                   value: '2024-08-14T14:26:45.123456'
@@ -682,7 +682,7 @@ databaseChangeLog:
                   value: 'https://image.tmdb.org/t/p/original/xrziXRHRQ7c7YLIehgSJY8GQBsx.jpg'
               - column:
                   name: trailer_url
-                  value: 'https://www.youtube.com/watch?v=7N8wkVA4_8s'
+                  value: 'https://www.youtube.com/watch?v=_eOI3AamSm8&ab_channel=UniversalPicturesIreland'
               - column:
                   name: updated_at
                   value: '2024-08-15T14:28:45.123456'

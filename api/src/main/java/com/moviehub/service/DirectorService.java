@@ -53,11 +53,15 @@ public class DirectorService {
                                  .orElseThrow(() -> new DirectorNotFoundException("Director with ID: " + directorId + " not found"));
     }
 
-    public Page<Director> getDirectors(Integer page, Integer limit) {
+    public Page<Director> getDirectors(Integer page, Integer limit, String name) {
         Sort sort = Sort.by(Sort.Direction.ASC, Director_.NAME);
         Pageable pageable = PageRequest.of(page, limit, sort);
 
-        return directorRepository.findAll(pageable);
+        if (name.isEmpty()) {
+            return directorRepository.findAll(pageable);
+        }
+
+        return directorRepository.findAllByName(name, pageable);
     }
 
     public Director updateDirector(UUID directorId, Director incomingDirector) {

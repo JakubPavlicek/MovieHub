@@ -186,4 +186,8 @@ public class MovieService {
         return searchService.searchMovies(page, limit, sort, keyword);
     }
 
+    public List<Integer> getYears() {
+        return movieRepository.findDistinctReleaseYears();
+    }
+
 }

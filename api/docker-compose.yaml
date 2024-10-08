@@ -4,9 +4,6 @@ services:
     container_name: postgres
     env_file:
       - .env
-    environment:
-      TZ: Europe/Prague
-      PGTZ: Europe/Prague
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
       interval: 10s

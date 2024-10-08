@@ -58,8 +58,9 @@ export const MovieTrailer: FC<MovieTrailerProps> = ({ showTrailer, setShowTraile
       <iframe
         title={trailerUrl}
         src={showTrailer ? trailerSrc : ""}
-        allowFullScreen
         className="aspect-video h-auto w-full bg-black"
+        referrerPolicy="strict-origin-when-cross-origin"
+        allowFullScreen
       />
       <button
         className="absolute right-2 top-2 z-10 rounded-full p-1 text-white hover:bg-gray-800"

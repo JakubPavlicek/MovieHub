@@ -45,8 +45,8 @@ public class DirectorController implements DirectorsApi {
     }
 
     @Override
-    public ResponseEntity<DirectorPage> getDirectors(Integer page, Integer limit) {
-        Page<Director> directors = directorService.getDirectors(page, limit);
+    public ResponseEntity<DirectorPage> getDirectors(Integer page, Integer limit, String name) {
+        Page<Director> directors = directorService.getDirectors(page, limit, name);
         DirectorPage directorPage = DirectorMapper.mapToDirectorPage(directors);
 
         return ResponseEntity.ok(directorPage);

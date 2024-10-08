@@ -5,6 +5,7 @@ import com.moviehub.dto.MovieDetailsResponse;
 import com.moviehub.dto.MoviePage;
 import com.moviehub.dto.MoviePreviewResponse;
 import com.moviehub.dto.UpdateMovieRequest;
+import com.moviehub.dto.YearListResponse;
 import com.moviehub.entity.Movie;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
@@ -121,6 +122,12 @@ public class MovieMapper {
         return movies.stream()
                      .map(MovieMapper::mapToMoviePreviewResponse)
                      .toList();
+    }
+
+    public static YearListResponse mapToYearListResponse(List<Integer> years) {
+        return YearListResponse.builder()
+                               .years(years)
+                               .build();
     }
 
 }

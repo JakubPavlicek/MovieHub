@@ -14,6 +14,10 @@ import { ErrorPage } from "@/pages/ErrorPage";
 import { MoviePage } from "@/pages/MoviePage";
 import { ApiProvider } from "@/context/ApiProvider";
 import { ToastContainer } from "react-toastify";
+import { DirectorPage } from "@/pages/DirectorPage";
+import { ProductionPage } from "@/pages/ProductionPage";
+import { CastPage } from "@/pages/CastPage";
+import { FilterPage } from "@/pages/FilterPage";
 
 // https://auth0.com/blog/complete-guide-to-react-user-authentication/
 
@@ -40,6 +44,22 @@ const router = createBrowserRouter([
       {
         path: "country/:countryName",
         element: <CountryPage />,
+      },
+      {
+        path: "director/:directorName",
+        element: <DirectorPage />,
+      },
+      {
+        path: "production/:companyName",
+        element: <ProductionPage />,
+      },
+      {
+        path: "cast/:actorName",
+        element: <CastPage />,
+      },
+      {
+        path: "filter",
+        element: <FilterPage />,
       },
       {
         path: "search/:keyword",

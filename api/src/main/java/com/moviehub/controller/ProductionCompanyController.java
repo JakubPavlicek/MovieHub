@@ -35,8 +35,8 @@ public class ProductionCompanyController implements ProductionCompaniesApi {
     }
 
     @Override
-    public ResponseEntity<ProductionCompanyPage> getProductionCompanies(Integer page, Integer limit) {
-        Page<ProductionCompany> companies = companyService.getProductionCompanies(page, limit);
+    public ResponseEntity<ProductionCompanyPage> getProductionCompanies(Integer page, Integer limit, String name) {
+        Page<ProductionCompany> companies = companyService.getProductionCompanies(page, limit, name);
         ProductionCompanyPage companyPage = ProductionCompanyMapper.mapToProductionCompanyPage(companies);
 
         return ResponseEntity.ok(companyPage);

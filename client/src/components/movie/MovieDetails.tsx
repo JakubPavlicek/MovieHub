@@ -67,8 +67,8 @@ export const MovieDetails: FC<MovieDetailsProps> = ({ movieDetails }) => {
           <span>{releaseDate}</span>
         </InfoRow>
         <InfoRow label="Director">
-          <Link to={`/director/${director?.name}`} className="text-neutral-300 hover:text-cyan-300">
-            {director?.name}
+          <Link to={`/director/${director.name}`} className="text-neutral-300 hover:text-cyan-300">
+            {director.name}
           </Link>
         </InfoRow>
         <InfoRow label="Production">

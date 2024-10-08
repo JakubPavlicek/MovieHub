@@ -47,11 +47,15 @@ public class ProductionCompanyService {
         return companyRepository.save(productionCompany);
     }
 
-    public Page<ProductionCompany> getProductionCompanies(Integer page, Integer limit) {
+    public Page<ProductionCompany> getProductionCompanies(Integer page, Integer limit, String name) {
         Sort sort = Sort.by(Sort.Direction.ASC, ProductionCompany_.NAME);
         Pageable pageable = PageRequest.of(page, limit, sort);
 
-        return companyRepository.findAll(pageable);
+        if (name.isEmpty()) {
+            return companyRepository.findAll(pageable);
+        }
+
+        return companyRepository.findAllByName(name, pageable);
     }
 
     public ProductionCompany getProductionCompany(UUID companyId) {
