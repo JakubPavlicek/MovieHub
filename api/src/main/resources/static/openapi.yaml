@@ -1,11 +1,11 @@
 openapi: 3.0.1
 info:
   title: Movie Hub
-  description: A Movie Hub API.
+  description: "A Movie Hub API."
   version: '1.0'
 servers:
   - url: http://localhost:8080
-    description: Local server
+    description: "Local server"
 
 security:
   - bearerAuth: []
@@ -24,7 +24,7 @@ components:
     movieId:
       name: movieId
       in: path
-      description: The movie ID.
+      description: "The movie ID."
       schema:
         type: string
         format: uuid
@@ -35,7 +35,7 @@ components:
     page:
       name: page
       in: query
-      description: The page number for pagination.
+      description: "The page number for pagination."
       schema:
         type: integer
         format: int32
@@ -46,7 +46,7 @@ components:
     limit:
       name: limit
       in: query
-      description: The maximum number of items to return per page.
+      description: "The maximum number of items to return per page."
       schema:
         type: integer
         format: int32
@@ -66,8 +66,8 @@ components:
         type: string
         pattern: "^(name|releaseDate|duration)\\.(asc|desc)(,(name|releaseDate|duration)\\.(asc|desc))*$"
         maxLength: 100
-        default: "name.asc"
-        example: "name.asc"
+        default: name.asc
+        example: name.asc
     releaseYear:
       name: releaseYear
       in: query
@@ -80,8 +80,8 @@ components:
         pattern: "^([0-9]{4})|(all)$"
         minLength: 3
         maxLength: 4
-        default: "all"
-        example: "2024"
+        default: all
+        example: 2024
     genre:
       name: genre
       in: query
@@ -94,8 +94,8 @@ components:
         pattern: "^([a-zA-Z]+(,[a-zA-Z]+)*)?$"
         minLength: 1
         maxLength: 300
-        example: "Thriller"
-        default: "all"
+        example: Thriller
+        default: all
     country:
       name: country
       in: query
@@ -108,8 +108,8 @@ components:
         pattern: "^([a-zA-Z ]+(,[a-zA-Z ]+)*)?$"
         minLength: 1
         maxLength: 300
-        example: "South Korea"
-        default: "all"
+        example: South Korea
+        default: all
 
     keyword:
       name: keyword
@@ -126,7 +126,7 @@ components:
     commentLimit:
       name: limit
       in: query
-      description: The maximum number of items to return per page.
+      description: "The maximum number of items to return per page."
       schema:
         type: integer
         format: int32
@@ -140,12 +140,12 @@ components:
       description: |
         Only valid sort key is 'createdAt'.
         It can be sorted by either: asc (ascending order) or desc (descending order).
-        Example usage: ?sort=createdAt.asc.
+        Example usage: ?sort=createdAt.desc.
       schema:
         type: string
         pattern: "^createdAt\\.(asc|desc)$"
-        default: "createdAt.asc"
-        example: "createdAt.asc"
+        default: createdAt.desc
+        example: createdAt.desc
         maxLength: 200
 
     commentId:
@@ -157,7 +157,7 @@ components:
         format: uuid
         pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
         maxLength: 255
-      description: The comment ID.
+      description: "The comment ID."
       example: c9d6f870-9f9a-4dbf-9079-bb676bc5a1b5
 
     directorId:
@@ -169,7 +169,7 @@ components:
         format: uuid
         pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
         maxLength: 255
-      description: The director ID.
+      description: "The director ID."
       example: f22608f8-43bb-4a69-b77a-cb2e3eaf0dfa
 
     actorId:
@@ -181,7 +181,7 @@ components:
         format: uuid
         pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
         maxLength: 255
-      description: The actor ID.
+      description: "The actor ID."
       example: c61a0a7c-c45e-41a0-9e6c-3f86beea1802
 
     genreId:
@@ -193,7 +193,7 @@ components:
         format: uuid
         pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
         maxLength: 255
-      description: The genre ID.
+      description: "The genre ID."
       example: 6b0de5bc-8e6c-4d4c-b13e-49450d7480a7
 
     countryId:
@@ -205,7 +205,7 @@ components:
         format: uuid
         pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
         maxLength: 255
-      description: The country ID.
+      description: "The country ID."
       example: d9ac0050-db90-44c1-a218-f93b0428a073
 
     companyId:
@@ -217,7 +217,7 @@ components:
         format: uuid
         pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
         maxLength: 255
-      description: The production company ID.
+      description: "The production company ID."
       example: 8e9334d2-e021-4ec3-b34b-8dc57032e362
 
   responses:
@@ -392,8 +392,7 @@ components:
       nullable: false
     MovieFilename:
       type: string
-      description: |
-        The filename of the movie, which serves as a reference to the corresponding video file in the storage.
+      description: "The filename of the movie, which serves as a reference to the corresponding video file in the storage."
       example: placeholder.mp4
       pattern: "^[\\w,\\s-]+\\.[A-Za-z0-9]{3,4}$"
       minLength: 1
@@ -417,8 +416,7 @@ components:
       minLength: 1
       maxLength: 2000
       pattern: "^[\x20-\x7E]+$"
-      example: |
-        Patrick Joseph Wilson was born in Norfolk, Virginia and raised in St. Petersburg, Florida, the son of Mary Kathryn (Burton), a voice teacher and professional singer, and John Franklin Wilson, a news anchor.
+      example: Patrick Joseph Wilson was born in Norfolk, Virginia and raised in St. Petersburg, Florida, the son of Mary Kathryn (Burton), a voice teacher and professional singer, and John Franklin Wilson, a news anchor.
     ActorRole:
       type: string
       description: |
@@ -473,28 +471,13 @@ components:
       nullable: false
 
     MovieUserRating:
-      type: object
-      additionalProperties: false
-      description: A float value representing the movie's rating.
-      required:
-        - rating
-      properties:
-        rating:
-          $ref: '#/components/schemas/MovieRating'
-
-    CommentList:
-      type: object
-      description: |
-        A list of comment IDs currently displayed on the page, used for fetching user-specific interactions, such as likes or reactions, for the given comments.
-      additionalProperties: false
-      required:
-        - comments
-      properties:
-        comments:
-          type: array
-          maxItems: 50
-          items:
-            $ref: '#/components/schemas/Uuid'
+      type: number
+      format: double
+      description: "The authenticated user's rating of the movie."
+      example: 8.0
+      minimum: 0
+      maximum: 10
+      default: 0.0
 
     CommentReaction:
       type: object
@@ -541,8 +524,7 @@ components:
       type: string
       format: date-time
       pattern: "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(Z|([+-]\\d{2}:\\d{2}))?$"
-      description: |
-        The creation date of a comment.
+      description: "The creation date of a comment."
       example: "2017-07-21T17:32:28Z"
       nullable: false
     Text:
@@ -563,12 +545,14 @@ components:
       description: "The total count of likes the comment has received."
       minimum: 0
       maximum: 10000000000
+      example: 5
     Dislikes:
       type: integer
       format: int64
       description: "The total count of dislikes the comment has received."
       minimum: 0
       maximum: 10000000000
+      example: 2
 
     Reaction:
       type: string
@@ -576,44 +560,44 @@ components:
         - like
         - dislike
         - none
-      description: |
-        The reaction to the comment.
-        This field includes predefined values such as like, dislike or none.
+      description: "The user's reaction to the comment."
       example: like
       nullable: false
 
     ReactionTypeRequest:
       type: object
       additionalProperties: false
-      description: |
-        The reaction to the comment request schema.
+      description: "The reaction to the comment request schema."
       required:
         - reactionType
       properties:
         reactionType:
           $ref: '#/components/schemas/Reaction'
 
+    isAuthor:
+      type: boolean
+      description: "Indicates if the user created the comment."
+      default: false
+      example: true
+
     UserNameAndPictureUrl:
       type: object
       additionalProperties: false
-      description: |
-        An object representing a user's nickname and their associated profile picture URL.
+      description: "An object representing a user's nickname and their associated profile picture URL."
       required:
         - name
         - pictureUrl
       properties:
         name:
           type: string
-          description: |
-            The nickname of the user.
+          description: "The nickname of the user."
           pattern: "^[a-zA-Z0-9._-]{1,20}$"
           minLength: 1
           maxLength: 20
           nullable: false
         pictureUrl:
           type: string
-          description: |
-            The URL of the user's profile picture.
+          description: "The URL of the user's profile picture."
           pattern: "^(https?://)?(www\\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_+.~#?&//=]*)$"
           minLength: 1
           maxLength: 2000
@@ -1208,7 +1192,7 @@ components:
 
     MovieCastRequest:
       type: object
-      description: Schema for specifying the cast of a movie, including the name of the actor and their role in the film.
+      description: "Schema for specifying the cast of a movie, including the name of the actor and their role in the film."
       required:
         - name
         - role
@@ -1222,7 +1206,7 @@ components:
 
     MovieCastDetailsResponse:
       type: object
-      description: Provides detailed information about a movie's cast member.
+      description: "Provides detailed information about a movie's cast member."
       additionalProperties: false
       required:
         - id
@@ -1238,7 +1222,7 @@ components:
 
     MoviePreviewResponse:
       type: object
-      description: Offers preview representation of the movie.
+      description: "Offers preview representation of the movie."
       additionalProperties: false
       required:
         - id
@@ -1266,7 +1250,7 @@ components:
 
     MovieDetailsResponse:
       type: object
-      description: Offers comprehensive details about a movie.
+      description: "Offers comprehensive details about a movie."
       additionalProperties: false
       required:
         - id
@@ -1276,6 +1260,7 @@ components:
         - description
         - rating
         - reviewCount
+        - userRating
         - posterUrl
         - trailerUrl
         - director
@@ -1300,6 +1285,8 @@ components:
           $ref: '#/components/schemas/MovieRating'
         reviewCount:
           $ref: '#/components/schemas/MovieReviewCount'
+        userRating:
+          $ref: '#/components/schemas/MovieUserRating'
         posterUrl:
           $ref: '#/components/schemas/MoviePosterUrl'
         trailerUrl:
@@ -1329,7 +1316,7 @@ components:
 
     DirectorResponse:
       type: object
-      description: Provides basic information about a director.
+      description: "Provides basic information about a director."
       additionalProperties: false
       required:
         - id
@@ -1342,7 +1329,7 @@ components:
 
     ProductionCompanyDetailsResponse:
       type: object
-      description: Provides details about a production company.
+      description: "Provides details about a production company."
       additionalProperties: false
       required:
         - id
@@ -1355,7 +1342,7 @@ components:
 
     GenreDetailsResponse:
       type: object
-      description: Provides details about a genre.
+      description: "Provides details about a genre."
       additionalProperties: false
       required:
         - id
@@ -1368,7 +1355,7 @@ components:
 
     CountryDetailsResponse:
       type: object
-      description: Provides details about a country.
+      description: "Provides details about a country."
       additionalProperties: false
       required:
         - id
@@ -1381,7 +1368,7 @@ components:
 
     DirectorDetailsResponse:
       type: object
-      description: Contains detailed information about a director.
+      description: "Contains detailed information about a director."
       additionalProperties: false
       required:
         - id
@@ -1399,7 +1386,7 @@ components:
 
     ActorDetailsResponse:
       type: object
-      description: Contains detailed information about an actor.
+      description: "Contains detailed information about an actor."
       additionalProperties: false
       required:
         - id
@@ -1417,25 +1404,27 @@ components:
 
     CommentDetailsResponse:
       type: object
-      description: Contains detailed information about a comment.
+      description: "Contains detailed information about a comment."
       additionalProperties: false
       required:
         - id
         - movieId
-        - user
+        - author
         - createdAt
         - text
         - isDeleted
         - likes
         - dislikes
         - parentCommentId
+        - userReaction
+        - isAuthor
         - replies
       properties:
         id:
           $ref: '#/components/schemas/Uuid'
         movieId:
           $ref: '#/components/schemas/Uuid'
-        user:
+        author:
           $ref: '#/components/schemas/UserNameAndPictureUrl'
         createdAt:
           $ref: '#/components/schemas/CreatedAt'
@@ -1449,6 +1438,10 @@ components:
           $ref: '#/components/schemas/Dislikes'
         parentCommentId:
           $ref: '#/components/schemas/ParentCommentUuid'
+        userReaction:
+          $ref: '#/components/schemas/Reaction'
+        isAuthor:
+          $ref: '#/components/schemas/isAuthor'
         replies:
           type: array
           description: |
@@ -1459,7 +1452,7 @@ components:
 
     GenreListResponse:
       type: object
-      description: Provides a list of all genres available in the system.
+      description: "Provides a list of all genres available in the system."
       additionalProperties: false
       required:
         - genres
@@ -1477,7 +1470,7 @@ components:
 
     CountryListResponse:
       type: object
-      description: Provides a list of all countries available in the system.
+      description: "Provides a list of all countries available in the system."
       additionalProperties: false
       required:
         - countries
@@ -1743,33 +1736,6 @@ paths:
         'default':
           $ref: '#/components/responses/Default'
 
-  /movies/{movieId}/user/rating:
-    get:
-      description: Retrieve the rating given by the currently authenticated user for the specified movie.
-      summary: Get authenticated user's movie rating
-      operationId: getUserMovieRating
-      security:
-        - bearerAuth: []
-      tags:
-        - movies
-      parameters:
-        - $ref: '#/components/parameters/movieId'
-      responses:
-        '200':
-          description: Successfully retrieved the current user's rating for the specified movie.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/MovieUserRating'
-        '401':
-          $ref: '#/components/responses/401Unauthorized'
-        '403':
-          $ref: '#/components/responses/403Forbidden'
-        '404':
-          $ref: '#/components/responses/404MovieNotFound'
-        'default':
-          $ref: '#/components/responses/Default'
-
   /movies/{movieId}/comments:
     post:
       description: Add a comment for the specified movie.
@@ -1870,36 +1836,6 @@ paths:
           $ref: '#/components/responses/403Forbidden'
         '404':
           $ref: '#/components/responses/404CommentNotFound'
-        'default':
-          $ref: '#/components/responses/Default'
-
-  /comments/user/interactions:
-    get:
-      description: Retrieve the IDs of comments created by the user and the reactions (like/dislike) for comments on the specified movie by the currently authenticated user.
-      summary: Get authenticated user's comment interactions
-      operationId: getUserCommentInteractions
-      security:
-        - bearerAuth: [ ]
-      tags:
-        - comments
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CommentList'
-      responses:
-        '200':
-          description: Successfully retrieved the user's comment interactions (reactions and created comment IDs) for the specified movie.
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CommentInteractions'
-        '401':
-          $ref: '#/components/responses/401Unauthorized'
-        '403':
-          $ref: '#/components/responses/403Forbidden'
-        '404':
-          $ref: '#/components/responses/404MovieNotFound'
         'default':
           $ref: '#/components/responses/Default'
 

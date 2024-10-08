@@ -81,6 +81,26 @@ public class MovieMapper {
                                    .build();
     }
 
+    public static MovieDetailsResponse mapToMovieDetailsResponse(Movie movie, Double rating) {
+        return MovieDetailsResponse.builder()
+                                   .id(movie.getId())
+                                   .name(movie.getName())
+                                   .releaseDate(movie.getReleaseDate())
+                                   .duration(movie.getDuration())
+                                   .description(movie.getDescription())
+                                   .rating(movie.getRating())
+                                   .reviewCount(movie.getReviewCount())
+                                   .userRating(rating)
+                                   .posterUrl(movie.getPosterUrl())
+                                   .trailerUrl(movie.getTrailerUrl())
+                                   .director(DirectorMapper.mapToDirectorResponse(movie.getDirector()))
+                                   .cast(MovieCastMapper.mapToMovieCastDetailsResponse(movie.getCast()))
+                                   .productionCompanies(ProductionCompanyMapper.mapToProductionCompanyDetailsResponseList(movie.getProduction()))
+                                   .genres(GenreMapper.mapToGenreDetailsResponseList(movie.getGenres()))
+                                   .countries(CountryMapper.mapToCountryDetailsResponseList(movie.getCountries()))
+                                   .build();
+    }
+
     public static MoviePage mapToMoviePage(Page<Movie> movies) {
         return MoviePage.builder()
                         .content(mapToMoviePreviewResponseList(movies))

@@ -4,7 +4,7 @@ import { useApi } from "@/context/ApiProvider";
 import { TrailerButton } from "@/components/movie/TrailerButton";
 import { MovieDetails } from "@/components/movie/MovieDetails";
 import { MovieTrailer } from "@/components/movie/MovieTrailer";
-import { MovieComments } from "@/components/movie/MovieComments";
+import { MovieComments } from "@/components/comment/MovieComments";
 import placeholder from "@/assets/video/placeholder.mp4";
 
 export const MoviePage: FC = () => {

@@ -1,9 +1,9 @@
 package com.moviehub.service;
 
-import com.moviehub.dto.UserCommentReaction;
 import com.moviehub.entity.Comment;
 import com.moviehub.entity.Movie;
 import com.moviehub.entity.ReactionType;
+import com.moviehub.entity.User;
 import com.moviehub.exception.CommentNotFoundException;
 import com.moviehub.repository.CommentRepository;
 import jakarta.transaction.Transactional;
@@ -12,11 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -57,28 +53,26 @@ public class CommentService {
     }
 
     public Page<Comment> getComments(Movie movie, Pageable pageable) {
-        Page<Comment> topLevelComments = commentRepository.findAllTopLevelComments(movie, pageable);
+        Page<Comment> topLevelComments = commentRepository.findAllTopLevelCommentsWithReplies(movie, pageable);
 
-        // extract the IDs of the top-level comments to fetch their replies
-        List<UUID> commentIds = topLevelComments.getContent()
-                                                .stream()
-                                                .map(Comment::getId)
-                                                .toList();
+        User authUser = userService.getUser();
 
-        // fetch replies in one query for all top-level comments
-        List<Comment> replies = commentRepository.findRepliesForComments(commentIds, pageable.getSort());
-
-        // map the replies to their corresponding top-level comments
-        Map<UUID, List<Comment>> repliesGroupedByCommentId = replies.stream()
-                                                                    .collect(Collectors.groupingBy(reply -> reply.getParentComment().getId()));
-
-        // add replies to the corresponding top-level comments
+        // set transient fields for top-level comments and their replies
         topLevelComments.forEach(comment -> {
-            List<Comment> commentReplies = repliesGroupedByCommentId.getOrDefault(comment.getId(), Collections.emptyList());
-            comment.setReplies(commentReplies);
+            setTransientFields(comment, authUser);
+            comment.getReplies().forEach(reply -> setTransientFields(reply, authUser));
         });
 
         return topLevelComments;
+    }
+
+    private void setTransientFields(Comment comment, User user) {
+        if (user == null) {
+            return;
+        }
+
+        comment.setUserReaction(user);
+        comment.setAuthorFlag(user);
     }
 
     public void deleteComment(UUID commentId) {
@@ -93,14 +87,6 @@ public class CommentService {
     public void addCommentReaction(UUID commentId, ReactionType reactionType) {
         Comment comment = getComment(commentId);
         reactionService.addCommentReaction(comment, reactionType);
-    }
-
-    public List<UserCommentReaction> getUserReactions(List<UUID> commentIds) {
-        return reactionService.getUserReactions(commentIds);
-    }
-
-    public List<UUID> getUserComments(List<UUID> commentIds) {
-        return commentRepository.filterCommentsPostedByUser(commentIds, userService.getUser());
     }
 
 }

@@ -1,6 +1,5 @@
 package com.moviehub.service;
 
-import com.moviehub.dto.UserCommentReaction;
 import com.moviehub.entity.Comment;
 import com.moviehub.entity.CommentReaction;
 import com.moviehub.entity.ReactionType;
@@ -9,9 +8,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 @Transactional
@@ -76,10 +73,6 @@ public class CommentReactionService {
                                                   .build();
 
         return reactionRepository.save(reaction);
-    }
-
-    public List<UserCommentReaction> getUserReactions(List<UUID> commentIds) {
-        return reactionRepository.filterReactionsCreatedByUser(commentIds, userService.getUser());
     }
 
 }

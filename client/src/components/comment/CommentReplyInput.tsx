@@ -38,7 +38,7 @@ export const CommentReplyInput: FC<CommentInputProps> = ({
         path: { movieId: movieId },
       },
       body: {
-        text: `@${replierUserName} ${text}`,
+        text: `@${replierUserName} ${text.trim()}`,
         parentCommentId: parentCommentId,
       },
     });

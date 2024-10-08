@@ -56,12 +56,14 @@ public class MovieRatingService {
         return ratingRepository.getAverageRatingByMovieId(movieId);
     }
 
-    public MovieRating getRating(Movie movie) {
+    public Double getRating(Movie movie) {
         Optional<MovieRating> existingMovieRating = ratingRepository.findByMovieAndUser(movie, userService.getUser());
 
-        return existingMovieRating.orElseGet(() -> MovieRating.builder()
-                                                              .rating(0d)
-                                                              .build());
+        if (existingMovieRating.isEmpty()) {
+            return 0d;
+        }
+
+        return existingMovieRating.get().getRating();
     }
 
 }

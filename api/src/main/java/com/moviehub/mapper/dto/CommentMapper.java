@@ -2,15 +2,11 @@ package com.moviehub.mapper.dto;
 
 import com.moviehub.dto.AddCommentRequest;
 import com.moviehub.dto.CommentDetailsResponse;
-import com.moviehub.dto.CommentInteractions;
 import com.moviehub.dto.CommentPage;
-import com.moviehub.dto.CommentReaction;
-import com.moviehub.dto.UserCommentReaction;
 import com.moviehub.entity.Comment;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
-import java.util.UUID;
 
 public class CommentMapper {
 
@@ -27,12 +23,14 @@ public class CommentMapper {
         return CommentDetailsResponse.builder()
                                      .id(comment.getId())
                                      .movieId(comment.getMovie().getId())
-                                     .user(UserMapper.toUserNameAndPictureUrl(comment.getUser()))
+                                     .author(UserMapper.toUserNameAndPictureUrl(comment.getUser()))
                                      .createdAt(comment.getCreatedAt())
                                      .text(comment.getText())
                                      .isDeleted(comment.getIsDeleted())
                                      .likes(comment.getLikes())
                                      .dislikes(comment.getDislikes())
+                                     .userReaction(ReactionTypeMapper.mapToReactionType(comment.getUserReaction()))
+                                     .isAuthor(comment.isAuthor())
                                      .replies(mapRepliesToCommentDetailsResponse(comment.getReplies()))
                                      .build();
     }
@@ -41,12 +39,14 @@ public class CommentMapper {
         return CommentDetailsResponse.builder()
                                      .id(comment.getId())
                                      .movieId(comment.getMovie().getId())
-                                     .user(UserMapper.toUserNameAndPictureUrl(comment.getUser()))
+                                     .author(UserMapper.toUserNameAndPictureUrl(comment.getUser()))
                                      .createdAt(comment.getCreatedAt())
                                      .text(comment.getText())
                                      .isDeleted(comment.getIsDeleted())
                                      .likes(comment.getLikes())
                                      .dislikes(comment.getDislikes())
+                                     .userReaction(ReactionTypeMapper.mapToReactionType(comment.getUserReaction()))
+                                     .isAuthor(comment.isAuthor())
                                      .build();
     }
 
@@ -76,26 +76,6 @@ public class CommentMapper {
         return comments.stream()
                        .map(CommentMapper::mapToCommentDetailsResponse)
                        .toList();
-    }
-
-    public static CommentInteractions mapToCommentInteractions(List<UserCommentReaction> reactions, List<UUID> comments) {
-        return CommentInteractions.builder()
-                                  .comments(comments)
-                                  .reactions(mapToCommentReactions(reactions))
-                                  .build();
-    }
-
-    private static List<CommentReaction> mapToCommentReactions(List<UserCommentReaction> reactions) {
-        return reactions.stream()
-                        .map(CommentMapper::mapToCommentReaction)
-                        .toList();
-    }
-
-    private static CommentReaction mapToCommentReaction(UserCommentReaction userCommentReaction) {
-        return CommentReaction.builder()
-                              .commentId(userCommentReaction.commentId())
-                              .reaction(ReactionTypeMapper.mapToReactionType(userCommentReaction.reactionType()))
-                              .build();
     }
 
 }

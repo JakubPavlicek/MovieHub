@@ -59,7 +59,9 @@ public class SecurityConfig {
         return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins(clientUrlProperties.getUrl());
+                registry.addMapping("/**")
+                        .allowedOrigins(clientUrlProperties.getUrl())
+                        .allowedMethods(GET.name(), POST.name(), PUT.name(), DELETE.name(), OPTIONS.name());
             }
         };
     }

@@ -2,7 +2,6 @@ package com.moviehub.service;
 
 import com.moviehub.entity.Comment;
 import com.moviehub.entity.Movie;
-import com.moviehub.entity.MovieRating;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -38,7 +37,7 @@ public class MovieInteractionService {
         return ratingService.calculateRating(movieId);
     }
 
-    public MovieRating getRating(Movie movie) {
+    public Double getRating(Movie movie) {
         return ratingService.getRating(movie);
     }
 

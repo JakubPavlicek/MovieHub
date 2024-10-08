@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -98,7 +100,28 @@ public class Comment {
         mappedBy = "parentComment",
         fetch = FetchType.LAZY
     )
+    @OrderBy("createdAt ASC")
     @Builder.Default
     private List<Comment> replies = new ArrayList<>();
+
+    @Transient
+    @Builder.Default
+    private ReactionType userReaction = ReactionType.NONE;
+
+    @Transient
+    @Builder.Default
+    private boolean isAuthor = false;
+
+    public void setUserReaction(User currentUser) {
+        userReaction = reactions.stream()
+                                .filter(r -> r.getUser().getId().equals(currentUser.getId()))
+                                .findFirst()
+                                .map(CommentReaction::getReactionType)
+                                .orElse(ReactionType.NONE);
+    }
+
+    public void setAuthorFlag(User currentUser) {
+        isAuthor = user.getId().equals(currentUser.getId());
+    }
 
 }

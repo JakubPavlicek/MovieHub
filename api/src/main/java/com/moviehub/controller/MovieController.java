@@ -6,14 +6,11 @@ import com.moviehub.dto.AddMovieRequest;
 import com.moviehub.dto.CommentPage;
 import com.moviehub.dto.MovieDetailsResponse;
 import com.moviehub.dto.MoviePage;
-import com.moviehub.dto.MovieUserRating;
 import com.moviehub.dto.UpdateMovieRequest;
 import com.moviehub.entity.Comment;
 import com.moviehub.entity.Movie;
-import com.moviehub.entity.MovieRating;
 import com.moviehub.mapper.dto.CommentMapper;
 import com.moviehub.mapper.dto.MovieMapper;
-import com.moviehub.mapper.dto.MovieRatingMapper;
 import com.moviehub.service.MovieService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -48,7 +45,8 @@ public class MovieController implements MoviesApi {
     @Override
     public ResponseEntity<MovieDetailsResponse> getMovie(UUID movieId) {
         Movie movie = movieService.getMovie(movieId);
-        MovieDetailsResponse movieDetailsResponse = MovieMapper.mapToMovieDetailsResponse(movie);
+        Double rating = movieService.getRating(movie);
+        MovieDetailsResponse movieDetailsResponse = MovieMapper.mapToMovieDetailsResponse(movie, rating);
 
         return ResponseEntity.ok(movieDetailsResponse);
     }
@@ -103,18 +101,10 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<Void> addRating(UUID movieId, MovieUserRating rating) {
-        movieService.addRating(movieId, rating.getRating());
+    public ResponseEntity<Void> addRating(UUID movieId, Double rating) {
+        movieService.addRating(movieId, rating);
 
         return ResponseEntity.noContent().build();
-    }
-
-    @Override
-    public ResponseEntity<MovieUserRating> getUserMovieRating(UUID movieId) {
-        MovieRating movieRating = movieService.getRating(movieId);
-        MovieUserRating rating = MovieRatingMapper.mapToRating(movieRating);
-
-        return ResponseEntity.ok(rating);
     }
 
 }

@@ -7,7 +7,6 @@ import com.moviehub.entity.Director;
 import com.moviehub.entity.Genre;
 import com.moviehub.entity.Movie;
 import com.moviehub.entity.MovieCast;
-import com.moviehub.entity.MovieRating;
 import com.moviehub.entity.ProductionCompany;
 import com.moviehub.exception.MovieNotFoundException;
 import com.moviehub.repository.MovieRepository;
@@ -171,9 +170,7 @@ public class MovieService {
         movieRepository.save(movie);
     }
 
-    public MovieRating getRating(UUID movieId) {
-        Movie movie = getMovie(movieId);
-
+    public Double getRating(Movie movie) {
         return interactionService.getRating(movie);
     }
 

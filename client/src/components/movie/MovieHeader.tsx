@@ -10,6 +10,7 @@ interface MovieStatsProps {
 
 interface MovieRatingProps {
   movieId: components["schemas"]["MovieDetailsResponse"]["id"];
+  userRating: components["schemas"]["MovieDetailsResponse"]["userRating"];
   reviewCount: components["schemas"]["MovieDetailsResponse"]["reviewCount"];
 }
 
@@ -27,10 +28,10 @@ const MovieStats: FC<MovieStatsProps> = ({ rating, duration }) => {
   );
 };
 
-const MovieRating: FC<MovieRatingProps> = ({ movieId, reviewCount }) => {
+const MovieRating: FC<MovieRatingProps> = ({ movieId, userRating, reviewCount }) => {
   return (
     <div className="flex min-w-max gap-1">
-      <StarRating movieId={movieId} />
+      <StarRating movieId={movieId} userRating={userRating} />
       <span>({reviewCount} reviews)</span>
     </div>
   );
@@ -41,15 +42,15 @@ export const MovieHeader: FC<MovieHeaderProps> = ({ movieDetails }) => {
     return <div>Empty</div>;
   }
 
-  const { id, name, rating, duration, reviewCount } = movieDetails;
+  const { id, name, rating, duration, reviewCount, userRating } = movieDetails;
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-2">
       <div className="flex flex-col gap-2">
-        <h1 className="text-4xl font-medium">{name}</h1>
+        <h1 className="text-4xl font-medium text-neutral-300">{name}</h1>
         <MovieStats rating={rating} duration={duration} />
       </div>
-      <MovieRating movieId={id} reviewCount={reviewCount} />
+      <MovieRating movieId={id} userRating={userRating} reviewCount={reviewCount} />
     </div>
   );
 };
