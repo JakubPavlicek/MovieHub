@@ -77,9 +77,9 @@ components:
         To retrieve movies from all years, use the value "all".
       schema:
         type: string
-        pattern: "^([0-9]{4})|(all)$"
+        pattern: "^(all|(\\d{4}(,\\d{4})*))$"
         minLength: 3
-        maxLength: 4
+        maxLength: 300
         default: all
         example: 2024
     genre:

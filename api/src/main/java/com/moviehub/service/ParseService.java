@@ -10,6 +10,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
@@ -50,33 +51,29 @@ public class ParseService {
         return parseSort(sort, CommentFieldMapper::mapToCommentField);
     }
 
-    private Specification<Movie> parseFilter(String filter, Function<String, Specification<Movie>> specificationFunction) {
-        String[] filters = filter.split(COMMA_DELIMITER);
-
-        Specification<Movie> specification = MovieSpecification.conjunction();
-
-        // if the query param contains "all", do not filter the movies
-        if (filters.length == 1 && filters[0].equals(PARAM_ALL)) {
-            return specification;
+    private <T> Specification<Movie> parseFilter(String filter, Function<List<T>, Specification<Movie>> specFunction, Function<String, T> mapper) {
+        if (filter.equals(PARAM_ALL)) {
+            return MovieSpecification.conjunction();
         }
 
-        for (String filterInQuery : filters) {
-            specification.and(specificationFunction.apply(filterInQuery));
-        }
+        List<T> filters = Arrays.stream(filter.split(COMMA_DELIMITER))
+                                .map(mapper)
+                                .toList();
 
-        return specification;
+        return specFunction.apply(filters);
     }
 
     public Specification<Movie> parseReleaseYear(String releaseYear) {
-        return parseFilter(releaseYear, MovieSpecification::releaseYearEqualTo);
+        return parseFilter(releaseYear, MovieSpecification::releaseYearIn, Integer::parseInt);
     }
 
     public Specification<Movie> parseGenre(String genre) {
-        return parseFilter(genre, MovieSpecification::genreEqualTo);
+        return parseFilter(genre, MovieSpecification::genreIn, Function.identity());
     }
 
     public Specification<Movie> parseCountry(String country) {
-        return parseFilter(country, MovieSpecification::countryEqualTo);
+        return parseFilter(country, MovieSpecification::countryIn, Function.identity());
     }
+
 
 }

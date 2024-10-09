@@ -1,4 +1,4 @@
-import { type FC, useState } from "react";
+import { type FC, useEffect, useState } from "react";
 import { MoviePreviewList } from "@/components/common/MoviePreviewList";
 import { useApi } from "@/context/ApiProvider";
 import { Filter } from "lucide-react";
@@ -13,13 +13,13 @@ export const HomePage: FC = () => {
   const [showFilters, setShowFilters] = useState(true);
 
   const api = useApi();
-  const { data: movies } = api.useQuery("get", "/movies", {
-    params: {
-      query: {
-        limit: 20,
-      },
-    },
-  });
+  // const { data: movies } = api.useQuery("get", "/movies", {
+  //   params: {
+  //     query: {
+  //       limit: 20,
+  //     },
+  //   },
+  // });
 
   const { data: yearList } = api.useQuery("get", "/movies/years");
 
@@ -30,9 +30,38 @@ export const HomePage: FC = () => {
   const [selectedCountries, setSelectedCountries] = useState<MultiValue<SelectOption>>([]);
   const [selectedYears, setSelectedYears] = useState<MultiValue<SelectOption>>([]);
 
+  const [selectionFilter, setSelectionFilter] = useState({
+    genres: "all",
+    countries: "all",
+    years: "all",
+  });
+
+  useEffect(() => {
+    setSelectionFilter({
+      genres: selectedGenres.length > 0 ? selectedGenres.map((genre) => genre.value).join(",") : "all",
+      countries: selectedCountries.length > 0 ? selectedCountries.map((country) => country.value).join(",") : "all",
+      years: selectedYears.length > 0 ? selectedYears.map((year) => year.value).join(",") : "all",
+    });
+  }, [selectedGenres, selectedCountries, selectedYears]);
+
+  const { data: movies } = api.useQuery("get", "/movies/filter", {
+    params: {
+      query: {
+        limit: 20,
+        releaseYear: selectionFilter.years,
+        genre: selectionFilter.genres,
+        country: selectionFilter.countries,
+      },
+    },
+  });
+
+  console.log(movies);
+
   if (!movies?.content || !yearList?.years) {
     return <div className="text-white">Empty</div>;
   }
+
+  console.log(`selection filter: ${JSON.stringify(selectionFilter)}`);
 
   return (
     <main className="mx-auto min-h-[70vh] 2xl:container">

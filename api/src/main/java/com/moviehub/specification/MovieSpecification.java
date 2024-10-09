@@ -10,30 +10,23 @@ import com.moviehub.entity.Movie_;
 import com.moviehub.entity.ProductionCompany_;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.util.List;
+
 public class MovieSpecification {
 
     private MovieSpecification() {
     }
 
-    public static Specification<Movie> genreEqualTo(String genre) {
-        return (root, query, cb) -> cb.equal(
-            cb.lower(root.get(Movie_.GENRES).get(Genre_.NAME)),
-            genre.toLowerCase()
-        );
+    public static Specification<Movie> genreIn(List<String> genres) {
+        return (root, query, cb) -> root.get(Movie_.GENRES).get(Genre_.NAME).in(genres);
     }
 
-    public static Specification<Movie> countryEqualTo(String country) {
-        return (root, query, cb) -> cb.equal(
-            cb.lower(root.get(Movie_.COUNTRIES).get(Country_.NAME)),
-            country.toLowerCase()
-        );
+    public static Specification<Movie> countryIn(List<String> countries) {
+        return (root, query, cb) -> root.get(Movie_.COUNTRIES).get(Country_.NAME).in(countries);
     }
 
-    public static Specification<Movie> releaseYearEqualTo(String year) {
-        return (root, query, cb) -> cb.equal(
-            cb.function("YEAR", String.class, root.get(Movie_.RELEASE_DATE)),
-            year
-        );
+    public static Specification<Movie> releaseYearIn(List<Integer> years) {
+        return (root, query, cb) -> cb.function("DATE_PART", Integer.class, cb.literal("year"), root.get(Movie_.RELEASE_DATE)).in(years);
     }
 
     public static Specification<Movie> searchByKeyword(String keyword) {
