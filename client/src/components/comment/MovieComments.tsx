@@ -21,8 +21,6 @@ export const MovieComments: FC<MovieCommentsProps> = ({ movieId }) => {
     return <div className="text-white">Empty</div>;
   }
 
-  console.log(comments);
-
   return (
     <div className="mt-5 text-white">
       <span className="text-2xl font-semibold text-neutral-300">Comments</span>

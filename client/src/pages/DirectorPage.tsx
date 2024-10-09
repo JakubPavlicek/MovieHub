@@ -1,15 +1,13 @@
 import { FC } from "react";
 import { MoviePreviewList } from "@/components/common/MoviePreviewList";
 import { useDirectorMovies } from "@/hooks/useDirectorMovies";
-
-// TODO: make this work without the state
-// TODO: add /directors/filter?name:James Wan - to fetch directors by name
+import { MovieSkeleton } from "@/components/common/MovieSkeleton";
 
 export const DirectorPage: FC = () => {
   const { directorName, movies } = useDirectorMovies();
 
   if (!movies?.content) {
-    return <div>Empty</div>;
+    return <MovieSkeleton />;
   }
 
   return (

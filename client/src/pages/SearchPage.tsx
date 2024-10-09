@@ -2,6 +2,7 @@ import { type FC } from "react";
 import { useParams } from "react-router-dom";
 import { MoviePreviewList } from "@/components/common/MoviePreviewList";
 import { useApi } from "@/context/ApiProvider";
+import { MovieSkeleton } from "@/components/common/MovieSkeleton";
 
 export const SearchPage: FC = () => {
   const { keyword = "" } = useParams();
@@ -18,7 +19,7 @@ export const SearchPage: FC = () => {
   });
 
   if (!movies?.content) {
-    return <div className="text-white">Empty</div>;
+    return <MovieSkeleton />;
   }
 
   return (

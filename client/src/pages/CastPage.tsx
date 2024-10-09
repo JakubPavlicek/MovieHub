@@ -1,12 +1,13 @@
 import { FC } from "react";
 import { MoviePreviewList } from "@/components/common/MoviePreviewList";
 import { useActorMovies } from "@/hooks/useActorMovies";
+import { MovieSkeleton } from "@/components/common/MovieSkeleton";
 
 export const CastPage: FC = () => {
   const { actorName, movies } = useActorMovies();
 
   if (!movies?.content) {
-    return <div>Empty</div>;
+    return <MovieSkeleton />;
   }
 
   return (

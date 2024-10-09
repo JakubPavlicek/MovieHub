@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useCountries } from "@/hooks/useCountries";
 import { MoviePreviewList } from "@/components/common/MoviePreviewList";
 import { useApi } from "@/context/ApiProvider";
+import { MovieSkeleton } from "@/components/common/MovieSkeleton";
 
 export const CountryPage: FC = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ export const CountryPage: FC = () => {
   }, [countryMap, countryName, navigate]);
 
   if (!movies?.content) {
-    return <div>Empty</div>;
+    return <MovieSkeleton />;
   }
 
   return (

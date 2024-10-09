@@ -1,12 +1,13 @@
 import { FC } from "react";
 import { MoviePreviewList } from "@/components/common/MoviePreviewList";
 import { useProductionMovies } from "@/hooks/useProductionMovies";
+import { MovieSkeleton } from "@/components/common/MovieSkeleton";
 
 export const ProductionPage: FC = () => {
   const { companyName, movies } = useProductionMovies();
 
   if (!movies?.content) {
-    return <div>Empty</div>;
+    return <MovieSkeleton />;
   }
 
   return (

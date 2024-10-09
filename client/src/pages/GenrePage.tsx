@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useGenres } from "@/hooks/useGenres";
 import { MoviePreviewList } from "@/components/common/MoviePreviewList";
 import { useApi } from "@/context/ApiProvider";
+import { MovieSkeleton } from "@/components/common/MovieSkeleton";
 
 export const GenrePage: FC = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ export const GenrePage: FC = () => {
   }, [genreMap, genreName, navigate]);
 
   if (!movies?.content) {
-    return <div>Empty</div>;
+    return <MovieSkeleton />;
   }
 
   return (

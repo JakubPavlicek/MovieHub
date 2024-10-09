@@ -6,6 +6,7 @@ import { MovieDetails } from "@/components/movie/MovieDetails";
 import { MovieTrailer } from "@/components/movie/MovieTrailer";
 import { MovieComments } from "@/components/comment/MovieComments";
 import placeholder from "@/assets/video/placeholder.mp4";
+import { MovieSkeleton } from "@/components/common/MovieSkeleton";
 
 export const MoviePage: FC = () => {
   const { movieId = "" } = useParams();
@@ -19,7 +20,7 @@ export const MoviePage: FC = () => {
   });
 
   if (!movieDetails) {
-    return <div className="text-white">Empty</div>;
+    return <MovieSkeleton />;
   }
 
   return (
