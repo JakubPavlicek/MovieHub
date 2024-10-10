@@ -1,32 +1,24 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useApi } from "@/context/ApiProvider";
 import { MoviePreviewList } from "@/components/common/MoviePreviewList";
 import { MovieSkeleton } from "@/components/common/MovieSkeleton";
 import { FilterButton } from "@/components/common/FilterButton";
 import { FilterSelects } from "@/components/common/FilterSelects";
-import { useFilterSelects } from "@/hooks/useFilterSelects";
+import { filterAll, filterParams } from "@/types/filterParams";
+import { useSearchParams } from "react-router-dom";
 
 export const FilterPage: FC = () => {
-  const {
-    selectedGenres,
-    setSelectedGenres,
-    selectedCountries,
-    setSelectedCountries,
-    selectedYears,
-    setSelectedYears,
-    showFilters,
-    setShowFilters,
-    getSelectedOptions,
-  } = useFilterSelects(true, false);
+  const [searchParams] = useSearchParams();
+  const [showFilters, setShowFilters] = useState(true);
 
   const api = useApi();
   const { data: movies } = api.useQuery("get", "/movies/filter", {
     params: {
       query: {
         limit: 20,
-        releaseYear: getSelectedOptions(selectedYears),
-        genre: getSelectedOptions(selectedGenres),
-        country: getSelectedOptions(selectedCountries),
+        releaseYear: searchParams.get(filterParams.years) ?? filterAll,
+        genre: searchParams.get(filterParams.genres) ?? filterAll,
+        country: searchParams.get(filterParams.countries) ?? filterAll,
       },
     },
   });
@@ -44,15 +36,7 @@ export const FilterPage: FC = () => {
           </div>
           <FilterButton toggleFilters={() => setShowFilters((prev) => !prev)} />
         </div>
-        <FilterSelects
-          selectedGenres={selectedGenres}
-          setSelectedGenres={setSelectedGenres}
-          selectedCountries={selectedCountries}
-          setSelectedCountries={setSelectedCountries}
-          selectedYears={selectedYears}
-          setSelectedYears={setSelectedYears}
-          showFilters={showFilters}
-        />
+        <FilterSelects showFilters={showFilters} enableNavigate={false} />
         <MoviePreviewList movies={movies.content} />
       </div>
     </main>

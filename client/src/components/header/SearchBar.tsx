@@ -25,8 +25,6 @@ export const SearchBar: FC<SearchBarProps> = ({ autoFocus }) => {
     }
   }
 
-  // TODO: add useDebounce to show dropdown menu below searchbar of all the movies fetched
-
   return (
     <div className="relative text-white">
       <div className="absolute bottom-0 left-3 top-1/2 -translate-y-1/2">

@@ -1,22 +1,12 @@
-import { type FC } from "react";
+import { type FC, useState } from "react";
 import { MoviePreviewList } from "@/components/common/MoviePreviewList";
 import { useApi } from "@/context/ApiProvider";
 import { MovieSkeleton } from "@/components/common/MovieSkeleton";
 import { FilterButton } from "@/components/common/FilterButton";
 import { FilterSelects } from "@/components/common/FilterSelects";
-import { useFilterSelects } from "@/hooks/useFilterSelects";
 
 export const HomePage: FC = () => {
-  const {
-    selectedGenres,
-    setSelectedGenres,
-    selectedCountries,
-    setSelectedCountries,
-    selectedYears,
-    setSelectedYears,
-    showFilters,
-    setShowFilters,
-  } = useFilterSelects(false, true);
+  const [showFilters, setShowFilters] = useState(false);
 
   const api = useApi();
   const { data: movies } = api.useQuery("get", "/movies", {
@@ -38,15 +28,7 @@ export const HomePage: FC = () => {
           </div>
           <FilterButton toggleFilters={() => setShowFilters((prev) => !prev)} />
         </div>
-        <FilterSelects
-          selectedGenres={selectedGenres}
-          setSelectedGenres={setSelectedGenres}
-          selectedCountries={selectedCountries}
-          setSelectedCountries={setSelectedCountries}
-          selectedYears={selectedYears}
-          setSelectedYears={setSelectedYears}
-          showFilters={showFilters}
-        />
+        <FilterSelects showFilters={showFilters} enableNavigate={true} />
         <MoviePreviewList movies={movies.content} />
       </div>
     </main>

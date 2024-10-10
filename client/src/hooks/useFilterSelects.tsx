@@ -1,46 +1,42 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MultiValue } from "react-select";
 import type { SelectOption } from "@/types/selectOption";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { filterAll, filterParams } from "@/types/filterParams";
 
 const parseSearchParams = (param: string | null): MultiValue<SelectOption> => {
   return param && param !== "all" ? param.split(",").map((item) => ({ value: item, label: item })) : [];
 };
 
-const genresParam = "genres";
-const countriesParam = "countries";
-const releaseYearsParam = "releaseYears";
+const formatSelectedOptions = (selectedValues: MultiValue<SelectOption>): string => {
+  return selectedValues.length > 0 ? selectedValues.map((selectedValue) => selectedValue.value).join(",") : filterAll;
+};
 
-export const useFilterSelects = (isShowFilters: boolean, isNavigate: boolean) => {
-  const [showFilters, setShowFilters] = useState(isShowFilters);
+export const useFilterSelects = (isNavigate: boolean) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const getSelectedOptions = useCallback((selectedValues: MultiValue<SelectOption>): string => {
-    return selectedValues.length > 0 ? selectedValues.map((selectedValue) => selectedValue.value).join(",") : "all";
-  }, []);
-
   const [selectedGenres, setSelectedGenres] = useState<MultiValue<SelectOption>>(
-    parseSearchParams(searchParams.get(genresParam)),
+    parseSearchParams(searchParams.get(filterParams.genres)),
   );
   const [selectedCountries, setSelectedCountries] = useState<MultiValue<SelectOption>>(
-    parseSearchParams(searchParams.get(countriesParam)),
+    parseSearchParams(searchParams.get(filterParams.countries)),
   );
   const [selectedYears, setSelectedYears] = useState<MultiValue<SelectOption>>(
-    parseSearchParams(searchParams.get(releaseYearsParam)),
+    parseSearchParams(searchParams.get(filterParams.years)),
   );
 
   useEffect(() => {
     const params = new URLSearchParams();
 
     if (selectedGenres.length) {
-      params.set(genresParam, getSelectedOptions(selectedGenres));
+      params.set(filterParams.genres, formatSelectedOptions(selectedGenres));
     }
     if (selectedCountries.length) {
-      params.set(countriesParam, getSelectedOptions(selectedCountries));
+      params.set(filterParams.countries, formatSelectedOptions(selectedCountries));
     }
     if (selectedYears.length) {
-      params.set(releaseYearsParam, getSelectedOptions(selectedYears));
+      params.set(filterParams.years, formatSelectedOptions(selectedYears));
     }
 
     if (params.toString() !== searchParams.toString()) {
@@ -59,8 +55,5 @@ export const useFilterSelects = (isShowFilters: boolean, isNavigate: boolean) =>
     setSelectedCountries,
     selectedYears,
     setSelectedYears,
-    showFilters,
-    setShowFilters,
-    getSelectedOptions,
   };
 };

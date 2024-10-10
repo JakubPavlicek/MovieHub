@@ -1,27 +1,23 @@
-import { type FC, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { type FC, useState } from "react";
+import { useParams } from "react-router-dom";
 import { useCountries } from "@/hooks/useCountries";
 import { MoviePreviewList } from "@/components/common/MoviePreviewList";
 import { useApi } from "@/context/ApiProvider";
 import { MovieSkeleton } from "@/components/common/MovieSkeleton";
+import { FilterButton } from "@/components/common/FilterButton";
+import { FilterSelects } from "@/components/common/FilterSelects";
 
 export const CountryPage: FC = () => {
-  const navigate = useNavigate();
+  const [showFilters, setShowFilters] = useState(false);
+
   const { countryName = "" } = useParams();
-  const { countryMap, getCountryId } = useCountries();
-  const countryId = getCountryId(countryName) ?? "";
+  const { getCountryId } = useCountries();
   const api = useApi();
   const { data: movies } = api.useQuery("get", "/countries/{countryId}/movies", {
     params: {
-      path: { countryId: countryId },
+      path: { countryId: getCountryId(countryName) ?? "" },
     },
   });
-
-  useEffect(() => {
-    if (!countryMap.has(countryName)) {
-      navigate("/", { replace: true });
-    }
-  }, [countryMap, countryName, navigate]);
 
   if (!movies?.content) {
     return <MovieSkeleton />;
@@ -30,10 +26,14 @@ export const CountryPage: FC = () => {
   return (
     <main className="mx-auto min-h-[70vh] 2xl:container">
       <div className="mx-5 mt-10 flex flex-col justify-between text-white">
-        <div className="mb-6 inline-flex max-w-fit gap-1.5 border-b-2 border-cyan-400 text-3xl font-semibold">
-          <span className="capitalize">{countryName}</span>
-          <span>movies</span>
+        <div className="flex flex-row items-center justify-between">
+          <div className="mb-6 inline-flex max-w-fit gap-1.5 border-b-2 border-cyan-400 text-3xl font-semibold">
+            <span className="capitalize">{countryName}</span>
+            <span>movies</span>
+          </div>
+          <FilterButton toggleFilters={() => setShowFilters((prev) => !prev)} />
         </div>
+        <FilterSelects showFilters={showFilters} enableNavigate={true} />
         <MoviePreviewList movies={movies.content} />
       </div>
     </main>

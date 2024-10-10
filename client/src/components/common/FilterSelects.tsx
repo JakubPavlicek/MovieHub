@@ -1,34 +1,29 @@
 import type { FC } from "react";
-import type { MultiValue } from "react-select";
-import type { SelectOption } from "@/types/selectOption";
 import { YearSelect } from "@/components/common/YearSelect";
 import { CategorySelect } from "@/components/common/CategorySelect";
 import { useCountries } from "@/hooks/useCountries";
 import { useGenres } from "@/hooks/useGenres";
 import { useYears } from "@/hooks/useYears";
+import { useFilterSelects } from "@/hooks/useFilterSelects";
 
 interface FilterSelectsProps {
-  selectedGenres: MultiValue<SelectOption>;
-  setSelectedGenres: (selected: MultiValue<SelectOption>) => void;
-  selectedCountries: MultiValue<SelectOption>;
-  setSelectedCountries: (selected: MultiValue<SelectOption>) => void;
-  selectedYears: MultiValue<SelectOption>;
-  setSelectedYears: (selected: MultiValue<SelectOption>) => void;
   showFilters: boolean;
+  enableNavigate: boolean;
 }
 
-export const FilterSelects: FC<FilterSelectsProps> = ({
-  selectedGenres,
-  setSelectedGenres,
-  selectedCountries,
-  setSelectedCountries,
-  selectedYears,
-  setSelectedYears,
-  showFilters,
-}) => {
+export const FilterSelects: FC<FilterSelectsProps> = ({ showFilters, enableNavigate }) => {
   const { genres } = useGenres();
   const { countries } = useCountries();
   const { years } = useYears();
+
+  const {
+    selectedGenres,
+    setSelectedGenres,
+    selectedCountries,
+    setSelectedCountries,
+    selectedYears,
+    setSelectedYears,
+  } = useFilterSelects(enableNavigate);
 
   return (
     <div
