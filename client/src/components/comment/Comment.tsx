@@ -9,7 +9,7 @@ interface MovieCommentProps {
   topLevelCommentId: components["schemas"]["CommentDetailsResponse"]["id"];
 }
 
-export const MovieComment: FC<MovieCommentProps> = ({ comment, topLevelCommentId }) => {
+export const Comment: FC<MovieCommentProps> = ({ comment, topLevelCommentId }) => {
   const { author, text, isDeleted, replies } = comment;
 
   return (
@@ -21,7 +21,7 @@ export const MovieComment: FC<MovieCommentProps> = ({ comment, topLevelCommentId
           <CommentBody text={text} isDeleted={isDeleted} />
           <CommentFooter comment={comment} topLevelCommentId={topLevelCommentId} />
           {replies.map((reply) => (
-            <MovieComment key={reply.id} comment={reply} topLevelCommentId={topLevelCommentId} />
+            <Comment key={reply.id} comment={reply} topLevelCommentId={topLevelCommentId} />
           ))}
         </div>
       </div>

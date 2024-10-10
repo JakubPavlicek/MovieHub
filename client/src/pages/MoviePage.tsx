@@ -4,7 +4,7 @@ import { useApi } from "@/context/ApiProvider";
 import { TrailerButton } from "@/components/movie/TrailerButton";
 import { MovieDetails } from "@/components/movie/MovieDetails";
 import { MovieTrailer } from "@/components/movie/MovieTrailer";
-import { MovieComments } from "@/components/comment/MovieComments";
+import { Comments } from "@/components/comment/Comments";
 import placeholder from "@/assets/video/placeholder.mp4";
 import { MovieSkeleton } from "@/components/common/MovieSkeleton";
 
@@ -34,7 +34,7 @@ export const MoviePage: FC = () => {
 
         <MovieDetails movieDetails={movieDetails} />
 
-        <MovieComments movieId={movieId} />
+        <Comments movieId={movieId} />
       </div>
       <MovieTrailer showTrailer={showTrailer} setShowTrailer={setShowTrailer} trailerUrl={movieDetails.trailerUrl} />
     </main>

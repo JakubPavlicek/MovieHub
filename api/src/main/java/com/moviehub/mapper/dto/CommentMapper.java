@@ -45,6 +45,7 @@ public class CommentMapper {
                                      .isDeleted(comment.getIsDeleted())
                                      .likes(comment.getLikes())
                                      .dislikes(comment.getDislikes())
+                                     .parentCommentId(comment.getParentComment().getId())
                                      .userReaction(ReactionTypeMapper.mapToReactionType(comment.getUserReaction()))
                                      .isAuthor(comment.isAuthor())
                                      .build();
