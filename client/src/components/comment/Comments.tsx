@@ -77,23 +77,25 @@ export const Comments: FC<MovieCommentsProps> = ({ movieId }) => {
       {comments.content.map((comment) => (
         <Comment key={comment.id} comment={comment} topLevelCommentId={comment.id} />
       ))}
-      <div className="my-10 flex flex-row justify-center gap-2.5">
-        <button
-          className={`rounded-md border border-neutral-300 px-2 ${comments.first ? "opacity-60" : "hover:border-cyan-300 hover:text-cyan-300"}`}
-          onClick={() => selectNewPage(selectedPage - 1)}
-          disabled={comments.first}
-        >
-          <ChevronLeft size={20} />
-        </button>
-        {renderPaginationButtons()}
-        <button
-          className={`rounded-md border border-neutral-300 px-2 ${comments.last ? "opacity-60" : "hover:border-cyan-300 hover:text-cyan-300"}`}
-          onClick={() => selectNewPage(selectedPage + 1)}
-          disabled={comments.last}
-        >
-          <ChevronRight size={20} />
-        </button>
-      </div>
+      {comments.totalPages !== 0 && (
+        <div className="my-10 flex flex-row justify-center gap-2.5">
+          <button
+            className={`rounded-md border border-neutral-300 px-2 ${comments.first ? "opacity-60" : "hover:border-cyan-300 hover:text-cyan-300"}`}
+            onClick={() => selectNewPage(selectedPage - 1)}
+            disabled={comments.first}
+          >
+            <ChevronLeft size={20} />
+          </button>
+          {renderPaginationButtons()}
+          <button
+            className={`rounded-md border border-neutral-300 px-2 ${comments.last ? "opacity-60" : "hover:border-cyan-300 hover:text-cyan-300"}`}
+            onClick={() => selectNewPage(selectedPage + 1)}
+            disabled={comments.last}
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+      )}
       <CommentInput movieId={movieId} />
     </div>
   );
