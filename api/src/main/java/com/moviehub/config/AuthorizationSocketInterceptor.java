@@ -1,5 +1,6 @@
 package com.moviehub.config;
 
+import com.moviehub.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.MessageChannel;
@@ -23,6 +24,7 @@ public class AuthorizationSocketInterceptor implements ChannelInterceptor {
 
     private final JwtDecoder jwtDecoder;
     private final JwtAuthConverter jwtAuthConverter;
+    private final UserService userService;
 
     @Override
     public Message<?> preSend(Message<?> message, MessageChannel channel) {
@@ -30,20 +32,34 @@ public class AuthorizationSocketInterceptor implements ChannelInterceptor {
 
         if (accessor != null && StompCommand.CONNECT.equals(accessor.getCommand())) {
             String authHeader = accessor.getFirstNativeHeader(AUTHORIZATION);
+            String bearerPrefix = BEARER.getValue() + " ";
 
-            if (authHeader == null || !authHeader.startsWith(BEARER.getValue() + " ")) {
+            if (authHeader == null || !authHeader.startsWith(bearerPrefix)) {
                 throw new AccessDeniedException("Missing or invalid Authorization header");
             }
 
-            String token = authHeader.substring(7);
+            String token = authHeader.substring(bearerPrefix.length());
 
             Jwt jwt = jwtDecoder.decode(token);
 
-            if (jwt != null) {
-                JwtAuthenticationToken authentication = jwtAuthConverter.convert(jwt);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-                accessor.setUser(authentication);
+            if (jwt == null) {
+                return message;
             }
+
+            // set security context
+            JwtAuthenticationToken jwtAuthentication = jwtAuthConverter.convert(jwt);
+            SecurityContextHolder.getContext().setAuthentication(jwtAuthentication);
+            accessor.setUser(jwtAuthentication);
+
+            if (jwtAuthentication == null) {
+                return message;
+            }
+
+            // save authenticated user
+            String userId = jwtAuthentication.getName();
+            String accessToken = jwtAuthentication.getToken().getTokenValue();
+
+            userService.saveAuthenticatedUser(userId, accessToken);
         }
 
         return message;

@@ -19,14 +19,11 @@ public class JwtAuthConverter implements Converter<Jwt, JwtAuthenticationToken> 
 
     private final ClientUrlProperties clientUrlProperties;
 
-    private static final String AUTH0_SUB_PREFIX = "auth0|";
-
     @Override
     public JwtAuthenticationToken convert(@NonNull Jwt jwt) {
         Collection<GrantedAuthority> authorities = extractAuthorities(jwt);
-        String userId = createUserId(jwt);
 
-        return new JwtAuthenticationToken(jwt, authorities, userId);
+        return new JwtAuthenticationToken(jwt, authorities, jwt.getClaimAsString("sub"));
     }
 
     private Collection<GrantedAuthority> extractAuthorities(Jwt jwt) {
@@ -35,11 +32,6 @@ public class JwtAuthConverter implements Converter<Jwt, JwtAuthenticationToken> 
         return userRoles.stream()
                         .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
                         .collect(Collectors.toList());
-    }
-
-    private String createUserId(Jwt jwt) {
-        String sub = jwt.getClaimAsString("sub");
-        return sub.substring(AUTH0_SUB_PREFIX.length());
     }
 
 }

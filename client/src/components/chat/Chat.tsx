@@ -9,6 +9,8 @@ export const Chat: FC = () => {
   const [isChatOpened, setIsChatOpened] = useState(false);
   const { messages, sendMessage } = useChat();
 
+  console.log(messages);
+
   return (
     <>
       <ChatButton isChatOpened={isChatOpened} setIsChatOpened={setIsChatOpened} />

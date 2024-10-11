@@ -15,7 +15,7 @@ databaseChangeLog:
                   value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: user_id
-                  value: "66f8511afb3983f9045fc7c9"
+                  value: "auth0|66f8511afb3983f9045fc7c9"
               - column:
                   name: created_at
                   valueDate: "2024-09-27T14:00:00"
@@ -43,7 +43,7 @@ databaseChangeLog:
                   value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: user_id
-                  value: "66f8511afb3983f9045fc7c9"
+                  value: "auth0|66f8511afb3983f9045fc7c9"
               - column:
                   name: created_at
                   valueDate: "2024-09-27T12:10:00"
@@ -71,7 +71,7 @@ databaseChangeLog:
                   value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: user_id
-                  value: "66e0361a33e90f60811ae8ba"
+                  value: "auth0|66e0361a33e90f60811ae8ba"
               - column:
                   name: created_at
                   valueDate: "2024-09-27T14:10:00"
@@ -102,7 +102,7 @@ databaseChangeLog:
                   value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: user_id
-                  value: "66f8511afb3983f9045fc7c9"
+                  value: "auth0|66f8511afb3983f9045fc7c9"
               - column:
                   name: created_at
                   valueDate: "2024-09-27T14:20:00"
@@ -133,7 +133,7 @@ databaseChangeLog:
                   value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: user_id
-                  value: "66e0361a33e90f60811ae8ba"
+                  value: "auth0|66e0361a33e90f60811ae8ba"
               - column:
                   name: created_at
                   valueDate: "2024-09-27T14:30:00"
@@ -164,7 +164,7 @@ databaseChangeLog:
                   value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: user_id
-                  value: "66f8511afb3983f9045fc7c9"
+                  value: "auth0|66f8511afb3983f9045fc7c9"
               - column:
                   name: created_at
                   valueDate: "2024-09-27T12:50:00"
@@ -192,7 +192,7 @@ databaseChangeLog:
                   value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: user_id
-                  value: "66f8511afb3983f9045fc7c9"
+                  value: "auth0|66f8511afb3983f9045fc7c9"
               - column:
                   name: created_at
                   valueDate: "2024-09-27T12:55:00"
@@ -220,7 +220,7 @@ databaseChangeLog:
                   value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: user_id
-                  value: "66f8511afb3983f9045fc7c9"
+                  value: "auth0|66f8511afb3983f9045fc7c9"
               - column:
                   name: created_at
                   valueDate: "2024-09-27T13:00:00"
@@ -248,7 +248,7 @@ databaseChangeLog:
                   value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: user_id
-                  value: "66f8511afb3983f9045fc7c9"
+                  value: "auth0|66f8511afb3983f9045fc7c9"
               - column:
                   name: created_at
                   valueDate: "2024-09-27T13:05:00"

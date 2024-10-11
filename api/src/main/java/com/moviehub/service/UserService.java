@@ -7,6 +7,7 @@ import com.moviehub.exception.UserNotFoundException;
 import com.moviehub.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Service;
@@ -30,27 +31,29 @@ public class UserService {
     }
 
     public User getUser() {
-        if (!(SecurityContextHolder.getContext().getAuthentication() instanceof JwtAuthenticationToken)) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (!(authentication instanceof JwtAuthenticationToken)) {
             log.info("user is not authenticated, returning null");
             return null;
         }
 
-        String userId = SecurityContextHolder.getContext()
-                                             .getAuthentication()
-                                             .getName();
+        String userId = authentication.getName();
 
-        log.info("userId: {}", userId);
-
-        if (!userRepository.existsById(userId)) {
-            UserInfo userInfo = fetchUserInfo();
-            return createUser(userInfo);
-        }
+        log.info("getting user with ID: {}", userId);
 
         return userRepository.findById(userId)
                              .orElseThrow(() -> new UserNotFoundException("User with ID: " + userId + " not found"));
     }
 
-    private User createUser(UserInfo userInfo) {
+    public void saveAuthenticatedUser(String userId, String accessToken) {
+        if (!userRepository.existsById(userId)) {
+            UserInfo userInfo = fetchUserInfo(accessToken);
+            createUser(userInfo);
+        }
+    }
+
+    private void createUser(UserInfo userInfo) {
         User user = User.builder()
                         .id(userInfo.id())
                         .name(userInfo.name())
@@ -58,20 +61,16 @@ public class UserService {
                         .pictureUrl(userInfo.pictureUrl())
                         .build();
 
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
-    private UserInfo fetchUserInfo() {
-        JwtAuthenticationToken authentication = (JwtAuthenticationToken) SecurityContextHolder.getContext().getAuthentication();
-
-        String accessToken = authentication.getToken().getTokenValue();
-
+    private UserInfo fetchUserInfo(String accessToken) {
         UserInfo userInfo = restClient.get()
                                       .uri("/userinfo?access_token=" + accessToken)
                                       .retrieve()
                                       .body(UserInfo.class);
 
-        log.info("fetching userInfo: {}", userInfo);
+        log.info("fetching userInfo");
 
         return userInfo;
     }

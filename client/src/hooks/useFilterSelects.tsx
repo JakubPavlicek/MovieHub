@@ -40,7 +40,7 @@ export const useFilterSelects = (isNavigate: boolean) => {
     }
 
     if (params.toString() !== searchParams.toString()) {
-      if (isNavigate) {
+      if (isNavigate && !searchParams.has("code")) {
         navigate(`/filter?${params.toString()}`, { replace: true });
       } else {
         setSearchParams(params);

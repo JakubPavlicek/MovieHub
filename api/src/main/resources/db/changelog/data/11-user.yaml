@@ -9,23 +9,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  value: 66f8511afb3983f9045fc7c9
-              - column:
-                  name: name
-                  value: "user"
-              - column:
-                  name: email
-                  value: "user@user.cz"
-              - column:
-                  name: picture_url
-                  value: "https://s.gravatar.com/avatar/4d2acb461e1103a88a20aa53481819ba?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fus.png"
-
-        - insert:
-            tableName: auth_user
-            columns:
-              - column:
-                  name: id
-                  value: 66e0361a33e90f60811ae8ba
+                  value: auth0|66e0361a33e90f60811ae8ba
               - column:
                   name: name
                   value: "admin"
@@ -35,3 +19,19 @@ databaseChangeLog:
               - column:
                   name: picture_url
                   value: "https://s.gravatar.com/avatar/c8fc151e73b8d28924fe54fc850017e0?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fad.png"
+
+        - insert:
+            tableName: auth_user
+            columns:
+              - column:
+                  name: id
+                  value: auth0|66f8511afb3983f9045fc7c9
+              - column:
+                  name: name
+                  value: "user"
+              - column:
+                  name: email
+                  value: "user@user.cz"
+              - column:
+                  name: picture_url
+                  value: "https://s.gravatar.com/avatar/4d2acb461e1103a88a20aa53481819ba?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fus.png"
