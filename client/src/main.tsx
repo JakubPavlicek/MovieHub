@@ -18,6 +18,7 @@ import { DirectorPage } from "@/pages/DirectorPage";
 import { ProductionPage } from "@/pages/ProductionPage";
 import { CastPage } from "@/pages/CastPage";
 import { FilterPage } from "@/pages/FilterPage";
+import { ProfilePage } from "@/pages/ProfilePage";
 
 // https://auth0.com/blog/complete-guide-to-react-user-authentication/
 
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "movies",
         element: <HomePage />,
+      },
+      {
+        path: "profile",
+        element: <ProfilePage />,
       },
       {
         path: "movie/:movieId",
