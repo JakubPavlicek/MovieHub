@@ -60,8 +60,11 @@ public class MovieRatingService {
         Optional<MovieRating> existingMovieRating = ratingRepository.findByMovieAndUser(movie, userService.getUser());
 
         if (existingMovieRating.isEmpty()) {
+            log.info("returning '0' rating");
             return 0d;
         }
+
+        log.info("returning rating '{}'", existingMovieRating.get().getRating());
 
         return existingMovieRating.get().getRating();
     }

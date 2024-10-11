@@ -6,6 +6,7 @@ import com.moviehub.dto.AddMovieRequest;
 import com.moviehub.dto.CommentPage;
 import com.moviehub.dto.MovieDetailsResponse;
 import com.moviehub.dto.MoviePage;
+import com.moviehub.dto.MovieUserRating;
 import com.moviehub.dto.UpdateMovieRequest;
 import com.moviehub.dto.YearListResponse;
 import com.moviehub.entity.Comment;
@@ -47,8 +48,7 @@ public class MovieController implements MoviesApi {
     @Override
     public ResponseEntity<MovieDetailsResponse> getMovie(UUID movieId) {
         Movie movie = movieService.getMovie(movieId);
-        Double rating = movieService.getRating(movie);
-        MovieDetailsResponse movieDetailsResponse = MovieMapper.mapToMovieDetailsResponse(movie, rating);
+        MovieDetailsResponse movieDetailsResponse = MovieMapper.mapToMovieDetailsResponse(movie);
 
         return ResponseEntity.ok(movieDetailsResponse);
     }
@@ -103,10 +103,18 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<Void> addRating(UUID movieId, Double rating) {
-        movieService.addRating(movieId, rating);
+    public ResponseEntity<Void> addRating(UUID movieId, MovieUserRating movieUserRating) {
+        movieService.addRating(movieId, movieUserRating.getRating());
 
         return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<MovieUserRating> getUserRating(UUID movieId) {
+        Double rating = movieService.getRating(movieId);
+        MovieUserRating movieUserRating = MovieMapper.mapToMovieUserRating(rating);
+
+        return ResponseEntity.ok(movieUserRating);
     }
 
     @Override

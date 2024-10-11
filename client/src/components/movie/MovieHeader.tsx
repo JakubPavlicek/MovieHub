@@ -2,6 +2,7 @@ import { type FC } from "react";
 import { StarRating } from "@/components/movie/StarRating";
 import { Star } from "lucide-react";
 import type { components } from "@/api/api";
+import { useApi } from "@/context/ApiProvider";
 
 interface MovieStatsProps {
   rating: components["schemas"]["MovieDetailsResponse"]["rating"];
@@ -10,7 +11,6 @@ interface MovieStatsProps {
 
 interface MovieRatingProps {
   movieId: components["schemas"]["MovieDetailsResponse"]["id"];
-  userRating: components["schemas"]["MovieDetailsResponse"]["userRating"];
   reviewCount: components["schemas"]["MovieDetailsResponse"]["reviewCount"];
 }
 
@@ -28,10 +28,21 @@ const MovieStats: FC<MovieStatsProps> = ({ rating, duration }) => {
   );
 };
 
-const MovieRating: FC<MovieRatingProps> = ({ movieId, userRating, reviewCount }) => {
+const MovieRating: FC<MovieRatingProps> = ({ movieId, reviewCount }) => {
+  const api = useApi();
+  const { data: userRating } = api.useQuery("get", "/movies/{movieId}/ratings/me", {
+    params: {
+      path: { movieId: movieId },
+    },
+  });
+
+  if (!userRating?.rating) {
+    return <></>;
+  }
+
   return (
     <div className="flex min-w-max gap-1">
-      <StarRating movieId={movieId} userRating={userRating} />
+      <StarRating movieId={movieId} userRating={userRating.rating} />
       <span>({reviewCount} reviews)</span>
     </div>
   );
@@ -42,7 +53,7 @@ export const MovieHeader: FC<MovieHeaderProps> = ({ movieDetails }) => {
     return <div>Empty</div>;
   }
 
-  const { id, name, rating, duration, reviewCount, userRating } = movieDetails;
+  const { id, name, rating, duration, reviewCount } = movieDetails;
 
   return (
     <div className="flex flex-wrap items-center justify-between gap-2">
@@ -50,7 +61,7 @@ export const MovieHeader: FC<MovieHeaderProps> = ({ movieDetails }) => {
         <h1 className="text-4xl font-medium text-neutral-300">{name}</h1>
         <MovieStats rating={rating} duration={duration} />
       </div>
-      <MovieRating movieId={id} userRating={userRating} reviewCount={reviewCount} />
+      <MovieRating movieId={id} reviewCount={reviewCount} />
     </div>
   );
 };

@@ -4,6 +4,7 @@ import com.moviehub.dto.AddMovieRequest;
 import com.moviehub.dto.MovieDetailsResponse;
 import com.moviehub.dto.MoviePage;
 import com.moviehub.dto.MoviePreviewResponse;
+import com.moviehub.dto.MovieUserRating;
 import com.moviehub.dto.UpdateMovieRequest;
 import com.moviehub.dto.YearListResponse;
 import com.moviehub.entity.Movie;
@@ -82,26 +83,6 @@ public class MovieMapper {
                                    .build();
     }
 
-    public static MovieDetailsResponse mapToMovieDetailsResponse(Movie movie, Double rating) {
-        return MovieDetailsResponse.builder()
-                                   .id(movie.getId())
-                                   .name(movie.getName())
-                                   .releaseDate(movie.getReleaseDate())
-                                   .duration(movie.getDuration())
-                                   .description(movie.getDescription())
-                                   .rating(movie.getRating())
-                                   .reviewCount(movie.getReviewCount())
-                                   .userRating(rating)
-                                   .posterUrl(movie.getPosterUrl())
-                                   .trailerUrl(movie.getTrailerUrl())
-                                   .director(DirectorMapper.mapToDirectorResponse(movie.getDirector()))
-                                   .cast(MovieCastMapper.mapToMovieCastDetailsResponse(movie.getCast()))
-                                   .productionCompanies(ProductionCompanyMapper.mapToProductionCompanyDetailsResponseList(movie.getProduction()))
-                                   .genres(GenreMapper.mapToGenreDetailsResponseList(movie.getGenres()))
-                                   .countries(CountryMapper.mapToCountryDetailsResponseList(movie.getCountries()))
-                                   .build();
-    }
-
     public static MoviePage mapToMoviePage(Page<Movie> movies) {
         return MoviePage.builder()
                         .content(mapToMoviePreviewResponseList(movies))
@@ -128,6 +109,12 @@ public class MovieMapper {
         return YearListResponse.builder()
                                .years(years)
                                .build();
+    }
+
+    public static MovieUserRating mapToMovieUserRating(Double rating) {
+        return MovieUserRating.builder()
+                              .rating(rating)
+                              .build();
     }
 
 }

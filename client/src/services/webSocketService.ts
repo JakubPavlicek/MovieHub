@@ -12,7 +12,7 @@ export const webSocketService = (): WebSocketService => {
   let client: Stomp.Client | null = null;
 
   const connect = (token: string, connectCallback: () => void) => {
-    const socket = new SockJS("http://localhost:8088/ws");
+    const socket = new SockJS(`${import.meta.env.VITE_API_BASE_URL}/ws`);
     client = Stomp.over(socket);
 
     const authHeader = { Authorization: `Bearer ${token}` };

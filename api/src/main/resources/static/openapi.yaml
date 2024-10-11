@@ -481,13 +481,20 @@ components:
       nullable: false
 
     MovieUserRating:
-      type: number
-      format: double
+      type: object
+      additionalProperties: false
       description: "The authenticated user's rating of the movie."
-      example: 8.0
-      minimum: 0
-      maximum: 10
-      default: 0.0
+      required:
+        - rating
+      properties:
+        rating:
+          type: number
+          format: double
+          description: "The authenticated user's rating (value) of the movie."
+          example: 8.0
+          minimum: 0
+          maximum: 10
+          default: 0.0
 
     CommentReaction:
       type: object
@@ -1272,7 +1279,6 @@ components:
         - description
         - rating
         - reviewCount
-        - userRating
         - posterUrl
         - trailerUrl
         - director
@@ -1297,8 +1303,6 @@ components:
           $ref: '#/components/schemas/MovieRating'
         reviewCount:
           $ref: '#/components/schemas/MovieReviewCount'
-        userRating:
-          $ref: '#/components/schemas/MovieUserRating'
         posterUrl:
           $ref: '#/components/schemas/MoviePosterUrl'
         trailerUrl:
@@ -1772,6 +1776,33 @@ paths:
       responses:
         '204':
           description: Successfully added the movie rating.
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404MovieNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
+
+  /movies/{movieId}/ratings/me:
+    get:
+      description: Get the current user's rating for a specified movie.
+      summary: Get user's rating.
+      operationId: getUserRating
+      security:
+        - bearerAuth: []
+      tags:
+        - movies
+      parameters:
+        - $ref: '#/components/parameters/movieId'
+      responses:
+        '200':
+          description: Successfully retrieved the user's movie rating.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MovieUserRating'
         '401':
           $ref: '#/components/responses/401Unauthorized'
         '403':

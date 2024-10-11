@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 interface StarRatingProps {
   movieId: components["schemas"]["MovieDetailsResponse"]["id"];
-  userRating: components["schemas"]["MovieDetailsResponse"]["userRating"];
+  userRating: components["schemas"]["MovieUserRating"]["rating"];
 }
 
 const multiplier = 2;
@@ -37,7 +37,7 @@ export const StarRating: FC<StarRatingProps> = ({ movieId = "", userRating }) =>
         params: {
           path: { movieId: movieId },
         },
-        body: starIndex * multiplier,
+        body: { rating: starIndex * multiplier },
       });
     },
     [isAuthenticated, movieId, mutate],

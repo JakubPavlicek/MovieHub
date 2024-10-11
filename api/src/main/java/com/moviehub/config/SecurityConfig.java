@@ -40,7 +40,7 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize ->
                 authorize.requestMatchers(OPTIONS).permitAll()
                          .requestMatchers(GET).permitAll()
-                         .requestMatchers(GET, "/movies/*/ratings").hasAnyRole(USER.name(), ADMIN.name())
+                         .requestMatchers(GET, "/movies/*/ratings/me").hasAnyRole(USER.name(), ADMIN.name())
                          .requestMatchers(POST, "/movies", "/directors", "/actors", "/production-companies", "/genres", "/countries").hasRole(ADMIN.name())
                          .requestMatchers(POST, "/movies/*/comments", "/comments/*/reactions").hasAnyRole(USER.name(), ADMIN.name())
                          .requestMatchers(POST, "/movies/*/ratings").hasAnyRole(USER.name(), ADMIN.name())

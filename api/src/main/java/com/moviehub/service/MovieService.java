@@ -170,7 +170,8 @@ public class MovieService {
         movieRepository.save(movie);
     }
 
-    public Double getRating(Movie movie) {
+    public Double getRating(UUID movieId) {
+        Movie movie = getMovie(movieId);
         return interactionService.getRating(movie);
     }
 

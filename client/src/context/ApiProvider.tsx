@@ -14,7 +14,7 @@ export const ApiProvider = ({ children }: { children: ReactNode }) => {
   const authMiddleware = useAuthMiddleware();
 
   const fetchClient = createFetchClient<paths>({
-    baseUrl: "http://localhost:8088/",
+    baseUrl: `${import.meta.env.VITE_API_BASE_URL}/`,
   });
 
   fetchClient.use(authMiddleware);
