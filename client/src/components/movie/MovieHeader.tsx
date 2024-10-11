@@ -36,7 +36,7 @@ const MovieRating: FC<MovieRatingProps> = ({ movieId, reviewCount }) => {
     },
   });
 
-  if (!userRating?.rating) {
+  if (!userRating) {
     return <></>;
   }
 
