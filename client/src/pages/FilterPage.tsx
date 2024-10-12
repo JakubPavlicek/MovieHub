@@ -6,8 +6,10 @@ import { FilterButton } from "@/components/common/FilterButton";
 import { FilterSelects } from "@/components/common/FilterSelects";
 import { filterAll, filterParams } from "@/types/filterParams";
 import { useSearchParams } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export const FilterPage: FC = () => {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const [showFilters, setShowFilters] = useState(true);
 
@@ -32,7 +34,7 @@ export const FilterPage: FC = () => {
       <div className="mx-5 mt-10 flex flex-col justify-between text-white">
         <div className="flex flex-row items-center justify-between">
           <div className="mb-6 text-3xl font-semibold">
-            <span className="border-b-2 border-cyan-400">Online movies</span>
+            <span className="border-b-2 border-cyan-400">{t("components.page.defaultTitle")}</span>
           </div>
           <FilterButton toggleFilters={() => setShowFilters((prev) => !prev)} />
         </div>

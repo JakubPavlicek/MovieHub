@@ -1,9 +1,9 @@
 import { type FC, useState } from "react";
-import LogoutButton from "@/components/header/profile/LogoutButton";
-import ProfileDropdownButton from "@/components/header/profile/ProfileDropdownButton";
-import ProfileButton from "@/components/header/profile/ProfileButton";
+import { LogoutButton } from "@/components/header/profile/LogoutButton";
+import { ProfileDropdownButton } from "@/components/header/profile/ProfileDropdownButton";
+import { ProfileButton } from "@/components/header/profile/ProfileButton";
 
-const ProfileDropdown: FC = () => {
+export const ProfileDropdown: FC = () => {
   const [showDropdown, setShowDropdown] = useState(false);
 
   return (
@@ -19,5 +19,3 @@ const ProfileDropdown: FC = () => {
     </div>
   );
 };
-
-export default ProfileDropdown;

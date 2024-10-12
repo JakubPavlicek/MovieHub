@@ -5,8 +5,10 @@ import { useApi } from "@/context/ApiProvider";
 import { MovieSkeleton } from "@/components/common/MovieSkeleton";
 import { FilterButton } from "@/components/common/FilterButton";
 import { FilterSelects } from "@/components/common/FilterSelects";
+import { useTranslation } from "react-i18next";
 
 export const SearchPage: FC = () => {
+  const { t } = useTranslation();
   const [showFilters, setShowFilters] = useState(false);
 
   const { keyword = "" } = useParams();
@@ -29,7 +31,7 @@ export const SearchPage: FC = () => {
       <div className="mx-5 mt-10 flex flex-col justify-between text-white">
         <div className="flex flex-row items-center justify-between">
           <div className="mb-6 text-3xl font-semibold">
-            <span className="border-b-2 border-cyan-400">{`Search results for "${keyword}"`}</span>
+            <span className="border-b-2 border-cyan-400">{t("components.page.searchResults", { keyword })}</span>
           </div>
           <FilterButton toggleFilters={() => setShowFilters((prev) => !prev)} />
         </div>

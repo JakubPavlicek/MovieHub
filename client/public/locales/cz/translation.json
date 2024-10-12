@@ -1,0 +1,273 @@
+{
+  "components": {
+    "header": {
+      "desktop": {
+        "home": "Domů",
+        "genre": "Žánry",
+        "country": "Země",
+        "login": "Přihlásit se",
+        "searchBarPlaceholder": "Zadejte klíčová slova..."
+      },
+      "mobile": {
+        "language": "Jazyk",
+        "closeMenu": "Zavřít menu",
+        "home": "Domů"
+      },
+      "profile": {
+        "logout": "Odhlásit se",
+        "profile": "Profil"
+      }
+    },
+    "footer": {
+      "copyright": "© 2024 MovieHub. Všechna práva vyhrazena.",
+      "description": "Objevte svůj další oblíbený film s námi! Zůstaňte informováni o nejnovějších vydáních, novinkách a recenzích. Připojte se k naší komunitě filmových nadšenců a sdílejte svou vášeň pro kino.",
+      "inquiries": "Pro dotazy nebo zpětnou vazbu kontaktujte náš tým podpory.",
+      "tagline": "MovieHub je ideálním místem pro všechny vaše filmové potřeby. Užijte si sledování!"
+    },
+    "chat": {
+      "chatWithEveryone": "Chatujte se všemi!",
+      "inputPlaceholder": "Napište zprávu"
+    },
+    "comment": {
+      "title": "Komentáře",
+      "reply": "Odpovědět",
+      "inputPlaceholder": "Napište komentář"
+    },
+    "common": {
+      "filter": "Filtr",
+      "selectGenresPlaceholder": "Vyberte žánry",
+      "selectCountriesPlaceholder": "Vyberte země",
+      "selectYearsPlaceholder": "Vyberte roky",
+      "durationMinutes": "m"
+    },
+    "movie": {
+      "countryLabel": "Země",
+      "genreLabel": "Žánr",
+      "releasedLabel": "Vydáno",
+      "directorLabel": "Režisér",
+      "productionLabel": "Produkce",
+      "castLabel": "Obsazení",
+      "minuteDuration": " min",
+      "reviews_one": "{{count}} recenze",
+      "reviews_other": "{{count}} recenzí",
+      "trailer": "Trailer"
+    },
+    "page": {
+      "movieTitleSuffix": "filmy",
+      "defaultTitle": "Online filmy",
+      "searchResults": "Výsledky hledání pro \"{{keyword}}\"",
+      "profile": {
+        "name": "Jméno",
+        "email": "Email",
+        "address": "Adresa",
+        "nickname": "Přezdívka",
+        "birthDate": "Datum narození",
+        "notProvided": "není uvedeno"
+      },
+      "error": {
+        "pageNotFound": "Tato stránka nebyla nalezena.",
+        "backToHomepage": "Zpět domů",
+        "somethingWentWrong": "Něco se pokazilo!"
+      }
+    }
+  },
+  "toast": {
+    "unauthenticated": "Nepřihlášen"
+  },
+  "genres": {
+    "Action": {
+      "single": "Akční",
+      "plural": "Akční"
+    },
+    "Adventure": {
+      "single": "Dobrodružný",
+      "plural": "Dobrodružné"
+    },
+    "Animation": {
+      "single": "Animovaný",
+      "plural": "Animované"
+    },
+    "Biography": {
+      "single": "Životopisný",
+      "plural": "Životopisné"
+    },
+    "Comedy": {
+      "single": "Komediální",
+      "plural": "Komediální"
+    },
+    "Crime": {
+      "single": "Krimi",
+      "plural": "Kriminální"
+    },
+    "Documentary": {
+      "single": "Dokumentární",
+      "plural": "Dokumentární"
+    },
+    "Drama": {
+      "single": "Drama",
+      "plural": "Dramatické"
+    },
+    "Family": {
+      "single": "Rodinný",
+      "plural": "Rodinné"
+    },
+    "Fantasy": {
+      "single": "Fantasy",
+      "plural": "Fantasy"
+    },
+    "Film-Noir": {
+      "single": "Film-Noir",
+      "plural": "Film-Noir"
+    },
+    "History": {
+      "single": "Historie",
+      "plural": "Historické"
+    },
+    "Horror": {
+      "single": "Horor",
+      "plural": "Horor"
+    },
+    "Music": {
+      "single": "Hudební",
+      "plural": "Hudební"
+    },
+    "Musical": {
+      "single": "Muzikál",
+      "plural": "Muzikálové"
+    },
+    "Mystery": {
+      "single": "Tajemný",
+      "plural": "Tajemné"
+    },
+    "Romance": {
+      "single": "Romantický",
+      "plural": "Romantické"
+    },
+    "Sci-Fi": {
+      "single": "Sci-Fi",
+      "plural": "Sci-Fi"
+    },
+    "Sport": {
+      "single": "Sportovní",
+      "plural": "Sportovní"
+    },
+    "Superhero": {
+      "single": "Superhrdinný",
+      "plural": "Superhrdinské"
+    },
+    "Thriller": {
+      "single": "Thriller",
+      "plural": "Thriller"
+    },
+    "War": {
+      "single": "Válečný",
+      "plural": "Válečné"
+    },
+    "Western": {
+      "single": "Western",
+      "plural": "Western"
+    }
+  },
+  "countries": {
+    "Argentina": {
+      "single": "Argentina",
+      "plural": "Argentinské"
+    },
+    "Australia": {
+      "single": "Austrálie",
+      "plural": "Australské"
+    },
+    "Belgium": {
+      "single": "Belgie",
+      "plural": "Belgické"
+    },
+    "Brazil": {
+      "single": "Brazílie",
+      "plural": "Brazilské"
+    },
+    "Canada": {
+      "single": "Kanada",
+      "plural": "Kanadské"
+    },
+    "China": {
+      "single": "Čína",
+      "plural": "Čínské"
+    },
+    "Denmark": {
+      "single": "Dánsko",
+      "plural": "Dánské"
+    },
+    "Finland": {
+      "single": "Finsko",
+      "plural": "Finské"
+    },
+    "France": {
+      "single": "Francie",
+      "plural": "Francouzské"
+    },
+    "Germany": {
+      "single": "Německo",
+      "plural": "Německé"
+    },
+    "India": {
+      "single": "Indie",
+      "plural": "Indické"
+    },
+    "Italy": {
+      "single": "Itálie",
+      "plural": "Italské"
+    },
+    "Japan": {
+      "single": "Japonsko",
+      "plural": "Japonské"
+    },
+    "Mexico": {
+      "single": "Mexiko",
+      "plural": "Mexické"
+    },
+    "Netherlands": {
+      "single": "Nizozemsko",
+      "plural": "Nizozemské"
+    },
+    "New Zealand": {
+      "single": "Nový Zéland",
+      "plural": "Novozélandské"
+    },
+    "Norway": {
+      "single": "Norsko",
+      "plural": "Norské"
+    },
+    "Russia": {
+      "single": "Rusko",
+      "plural": "Ruské"
+    },
+    "South Africa": {
+      "single": "Jižní Afrika",
+      "plural": "Jihoafrické"
+    },
+    "South Korea": {
+      "single": "Jižní Korea",
+      "plural": "Jihokorejské"
+    },
+    "Spain": {
+      "single": "Španělsko",
+      "plural": "Španělské"
+    },
+    "Sweden": {
+      "single": "Švédsko",
+      "plural": "Švédské"
+    },
+    "Switzerland": {
+      "single": "Švýcarsko",
+      "plural": "Švýcarské"
+    },
+    "United Kingdom": {
+      "single": "Spojené království",
+      "plural": "Britské"
+    },
+    "United States": {
+      "single": "Spojené státy",
+      "plural": "Americké"
+    }
+  }
+}

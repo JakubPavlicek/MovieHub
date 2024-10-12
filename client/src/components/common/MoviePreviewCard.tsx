@@ -2,13 +2,16 @@ import type { FC } from "react";
 import { Link } from "react-router-dom";
 import { Play } from "lucide-react";
 import { components } from "@/api/api";
+import { useTranslation } from "react-i18next";
 
 interface MoviePreviewProps {
   moviePreview: components["schemas"]["MoviePreviewResponse"];
 }
 
 export const MoviePreviewCard: FC<MoviePreviewProps> = ({ moviePreview }) => {
+  const { t } = useTranslation();
   const destination = `/movie/${moviePreview.id}`;
+  const translatedGenres = moviePreview.genres.map((genre) => t(`genres.${genre}.single`));
 
   return (
     <div className="flex flex-col gap-2">
@@ -31,9 +34,12 @@ export const MoviePreviewCard: FC<MoviePreviewProps> = ({ moviePreview }) => {
         <div className="space-x-1.5 truncate opacity-50">
           <span>{moviePreview.releaseYear}</span>
           <span>&#8226;</span>
-          <span>{moviePreview.duration}m</span>
+          <span>
+            {moviePreview.duration}
+            {t("components.common.durationMinutes")}
+          </span>
         </div>
-        <span className="truncate opacity-70">{moviePreview.genres.join(", ")}</span>
+        <span className="truncate opacity-70">{translatedGenres.join(", ")}</span>
       </div>
     </div>
   );

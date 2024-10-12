@@ -1,13 +1,13 @@
 import { type FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { supportedLanguages } from "@/i18n/i18n";
 
 export const LanguageDropdown: FC = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const { i18n } = useTranslation();
-  const languages = Object.keys(i18n.options.resources ?? []);
 
-  const [selectedLanguage, setSelectedLanguage] = useState<string>();
+  const [selectedLanguage, setSelectedLanguage] = useState<string>(i18n.language);
 
   useEffect(() => {
     setSelectedLanguage(i18n.language);
@@ -28,11 +28,14 @@ export const LanguageDropdown: FC = () => {
       </button>
       {showDropdown && (
         <div className="absolute right-0 top-12 z-10 flex flex-col gap-2 rounded-md bg-gray-800 p-2">
-          {languages.map((language) => (
+          {supportedLanguages.map((language) => (
             <button
               key={language}
               className="rounded-md px-4 py-1.5 hover:bg-gray-950 hover:text-cyan-300"
-              onClick={() => changeLanguage(language)}
+              onClick={() => {
+                changeLanguage(language);
+                setShowDropdown(false);
+              }}
             >
               {language}
             </button>

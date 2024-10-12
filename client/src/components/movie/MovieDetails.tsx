@@ -2,6 +2,7 @@ import { type FC, Fragment, type ReactNode } from "react";
 import { MovieHeader } from "@/components/movie/MovieHeader";
 import type { components } from "@/api/api";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface InfoRowProps {
   label: string;
@@ -26,12 +27,29 @@ interface LinkListProps {
 }
 
 const LinkList: FC<LinkListProps> = ({ items, type }) => {
+  const { t } = useTranslation();
+
+  const getTranslatedName = (name: string) => {
+    switch (type) {
+      case "genre":
+        name = t(`genres.${name}.single`);
+        break;
+      case "country":
+        name = t(`countries.${name}.single`);
+        break;
+      default:
+        break;
+    }
+
+    return name;
+  };
+
   return (
     <div>
       {items.map((item, index) => (
         <Fragment key={item.id}>
           <Link to={`/${type}/${item.name}`} className="text-neutral-300 hover:text-cyan-300">
-            {item.name}
+            {getTranslatedName(item.name)}
           </Link>
           {index + 1 < (items.length || 0) && ", "}
         </Fragment>
@@ -45,6 +63,7 @@ interface MovieDetailsProps {
 }
 
 export const MovieDetails: FC<MovieDetailsProps> = ({ movieDetails }) => {
+  const { t } = useTranslation();
   const { name, description, countries, genres, releaseDate, posterUrl, director, productionCompanies, cast } =
     movieDetails;
 
@@ -57,24 +76,24 @@ export const MovieDetails: FC<MovieDetailsProps> = ({ movieDetails }) => {
 
         <p className="my-4">{description}</p>
 
-        <InfoRow label="Country">
+        <InfoRow label={t("components.movie.countryLabel")}>
           <LinkList items={countries} type="country" />
         </InfoRow>
-        <InfoRow label="Genres">
+        <InfoRow label={t("components.movie.genreLabel")}>
           <LinkList items={genres} type="genre" />
         </InfoRow>
-        <InfoRow label="Released">
+        <InfoRow label={t("components.movie.releasedLabel")}>
           <span>{releaseDate}</span>
         </InfoRow>
-        <InfoRow label="Director">
+        <InfoRow label={t("components.movie.directorLabel")}>
           <Link to={`/director/${director.name}`} className="text-neutral-300 hover:text-cyan-300">
             {director.name}
           </Link>
         </InfoRow>
-        <InfoRow label="Production">
+        <InfoRow label={t("components.movie.productionLabel")}>
           <LinkList items={productionCompanies} type="production" />
         </InfoRow>
-        <InfoRow label="Cast">
+        <InfoRow label={t("components.movie.castLabel")}>
           <LinkList items={cast} type="cast" />
         </InfoRow>
       </div>

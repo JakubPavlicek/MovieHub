@@ -5,12 +5,14 @@ import { useApi } from "@/context/ApiProvider";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 interface CommentInputProps {
   movieId: components["schemas"]["Uuid"];
 }
 
 export const CommentInput: FC<CommentInputProps> = ({ movieId }) => {
+  const { t } = useTranslation();
   const [text, setText] = useState<string>("");
   const { isAuthenticated } = useAuth0();
   const queryClient = useQueryClient();
@@ -21,7 +23,7 @@ export const CommentInput: FC<CommentInputProps> = ({ movieId }) => {
 
   const submitComment = (text: string) => {
     if (!isAuthenticated) {
-      toast.error(import.meta.env.VITE_NOT_AUTHENTICATED_MESSAGE);
+      toast.error(t("toast.unauthenticated"));
       return;
     }
 
@@ -48,7 +50,7 @@ export const CommentInput: FC<CommentInputProps> = ({ movieId }) => {
     <div className="mt-6 flex min-h-11 justify-center gap-2">
       <input
         type="text"
-        placeholder="Write a comment"
+        placeholder={t("components.comment.inputPlaceholder")}
         className="w-full rounded-full border-transparent bg-gray-700 px-4 text-white placeholder:text-gray-400 focus:border-cyan-300 focus:outline-none md:w-1/2"
         value={text}
         onChange={(e) => setText(e.target.value)}

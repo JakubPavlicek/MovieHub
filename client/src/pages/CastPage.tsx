@@ -4,8 +4,10 @@ import { useActorMovies } from "@/hooks/useActorMovies";
 import { MovieSkeleton } from "@/components/common/MovieSkeleton";
 import { FilterButton } from "@/components/common/FilterButton";
 import { FilterSelects } from "@/components/common/FilterSelects";
+import { useTranslation } from "react-i18next";
 
 export const CastPage: FC = () => {
+  const { t } = useTranslation();
   const [showFilters, setShowFilters] = useState(false);
 
   const { actorName, movies } = useActorMovies();
@@ -20,7 +22,7 @@ export const CastPage: FC = () => {
         <div className="flex flex-row items-center justify-between">
           <div className="mb-6 inline-flex max-w-fit gap-1.5 border-b-2 border-cyan-400 text-3xl font-semibold">
             <span className="capitalize">'{actorName}'</span>
-            <span>movies</span>
+            <span>{t("components.page.movieTitleSuffix")}</span>
           </div>
           <FilterButton toggleFilters={() => setShowFilters((prev) => !prev)} />
         </div>

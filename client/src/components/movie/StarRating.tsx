@@ -5,6 +5,7 @@ import { useApi } from "@/context/ApiProvider";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuth0 } from "@auth0/auth0-react";
 import { toast } from "react-toastify";
+import { useTranslation } from "react-i18next";
 
 interface StarRatingProps {
   movieId: components["schemas"]["MovieDetailsResponse"]["id"];
@@ -14,6 +15,7 @@ interface StarRatingProps {
 const multiplier = 2;
 
 export const StarRating: FC<StarRatingProps> = ({ movieId = "", userRating }) => {
+  const { t } = useTranslation();
   const [rating, setRating] = useState(userRating / multiplier);
   const [hoverRating, setHoverRating] = useState(0);
   const { isAuthenticated } = useAuth0();
@@ -27,7 +29,7 @@ export const StarRating: FC<StarRatingProps> = ({ movieId = "", userRating }) =>
   const submitRating = useCallback(
     async (starIndex: number) => {
       if (!isAuthenticated) {
-        toast.error(import.meta.env.VITE_NOT_AUTHENTICATED_MESSAGE);
+        toast.error(t("toast.unauthenticated"));
         return;
       }
 

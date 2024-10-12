@@ -2,6 +2,7 @@ import type { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useDropdownMenu } from "@/hooks/useDropdownMenu";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { supportedLanguages } from "@/i18n/i18n";
 
 interface LanguageProps {
   language: string;
@@ -25,17 +26,17 @@ const Language: FC<LanguageProps> = ({ language, changeLanguage, isOpen }) => {
 };
 
 export const MobileLanguageDropdown: FC = () => {
+  const { t } = useTranslation();
   const { isOpen, toggleDropdown } = useDropdownMenu();
   const { i18n } = useTranslation();
-  const languages = Object.keys(i18n.options.resources ?? []);
 
   return (
     <div className="w-full">
       <button className="inline-flex w-full justify-between py-3 hover:text-cyan-300" onClick={toggleDropdown}>
-        Language
+        {t("components.header.mobile.language")}
         {isOpen ? <ChevronUp size={24} /> : <ChevronDown size={24} />}
       </button>
-      {languages.map((language) => (
+      {supportedLanguages.map((language) => (
         <Language
           key={language}
           language={language}

@@ -1,8 +1,7 @@
 import type { FC } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { MovieSkeleton } from "@/components/common/MovieSkeleton";
-
-const notProvided = "not provided";
+import { useTranslation } from "react-i18next";
 
 const UserInfo: FC<{ label: string; value: string }> = ({ label, value }) => (
   <div className="grid grid-cols-[150px_1fr] sm:grid-cols-[200px_1fr]">
@@ -12,6 +11,7 @@ const UserInfo: FC<{ label: string; value: string }> = ({ label, value }) => (
 );
 
 export const ProfilePage: FC = () => {
+  const { t } = useTranslation();
   const { user } = useAuth0();
 
   if (!user) {
@@ -19,13 +19,14 @@ export const ProfilePage: FC = () => {
   }
 
   const { picture, nickname, name, address, birthdate, email } = user;
+  const notProvided = t("components.page.profile.notProvided");
 
   const userInfoList = [
-    { label: "Name", value: name ?? notProvided },
-    { label: "Email", value: email ?? notProvided },
-    { label: "Address", value: address ?? notProvided },
-    { label: "Nickname", value: nickname ?? notProvided },
-    { label: "Birth date", value: birthdate ?? notProvided },
+    { label: t("components.page.profile.name"), value: name ?? notProvided },
+    { label: t("components.page.profile.email"), value: email ?? notProvided },
+    { label: t("components.page.profile.address"), value: address ?? notProvided },
+    { label: t("components.page.profile.nickname"), value: nickname ?? notProvided },
+    { label: t("components.page.profile.birthDate"), value: birthdate ?? notProvided },
   ];
 
   return (

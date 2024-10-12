@@ -1,0 +1,273 @@
+{
+  "components": {
+    "header": {
+      "desktop": {
+        "home": "Home",
+        "genre": "Genre",
+        "country": "Country",
+        "login": "Login",
+        "searchBarPlaceholder": "Enter keywords..."
+      },
+      "mobile": {
+        "language": "Language",
+        "closeMenu": "Close menu",
+        "home": "Home"
+      },
+      "profile": {
+        "logout": "Logout",
+        "profile": "Profile"
+      }
+    },
+    "footer": {
+      "copyright": "\u00A9 2024 MovieHub. All Rights Reserved.",
+      "description": "Discover your next favorite movie with us! Stay updated with the latest releases, news, and reviews. Join our community of movie enthusiasts and share your passion for cinema.",
+      "inquiries": "For inquiries or feedback, please contact our support team.",
+      "tagline": "MovieHub is the perfect place for all your movie needs. Enjoy watching!"
+    },
+    "chat": {
+      "chatWithEveryone": "Chat with everyone!",
+      "inputPlaceholder": "Write a message"
+    },
+    "comment": {
+      "title": "Comments",
+      "reply": "Reply",
+      "inputPlaceholder": "Write a comment"
+    },
+    "common": {
+      "filter": "Filter",
+      "selectGenresPlaceholder": "Select genres",
+      "selectCountriesPlaceholder": "Select countries",
+      "selectYearsPlaceholder": "Select years",
+      "durationMinutes": "m"
+    },
+    "movie": {
+      "countryLabel": "Country",
+      "genreLabel": "Genre",
+      "releasedLabel": "Released",
+      "directorLabel": "Director",
+      "productionLabel": "Production",
+      "castLabel": "Cast",
+      "minuteDuration": " min",
+      "reviews_one": "{{count}} review",
+      "reviews_other": "{{count}} reviews",
+      "trailer": "Trailer"
+    },
+    "page": {
+      "movieTitleSuffix": "movies",
+      "defaultTitle": "Online movies",
+      "searchResults": "Search results for \"{{keyword}}\"",
+      "profile": {
+        "name": "Name",
+        "email": "Email",
+        "address": "Address",
+        "nickname": "Nickname",
+        "birthDate": "Birth date",
+        "notProvided": "not provided"
+      },
+      "error": {
+        "pageNotFound": "This page could not be found.",
+        "backToHomepage": "Back To Homepage",
+        "somethingWentWrong": "Something went wrong!"
+      }
+    }
+  },
+  "toast": {
+    "unauthenticated": "Not authenticated"
+  },
+  "genres": {
+    "Action": {
+      "single": "Action",
+      "plural": "Action"
+    },
+    "Adventure": {
+      "single": "Adventure",
+      "plural": "Adventure"
+    },
+    "Animation": {
+      "single": "Animated",
+      "plural": "Animated"
+    },
+    "Biography": {
+      "single": "Biography",
+      "plural": "Biography"
+    },
+    "Comedy": {
+      "single": "Comedy",
+      "plural": "Comedy"
+    },
+    "Crime": {
+      "single": "Crime",
+      "plural": "Crime"
+    },
+    "Documentary": {
+      "single": "Documentary",
+      "plural": "Documentary"
+    },
+    "Drama": {
+      "single": "Drama",
+      "plural": "Drama"
+    },
+    "Family": {
+      "single": "Family",
+      "plural": "Family"
+    },
+    "Fantasy": {
+      "single": "Fantasy",
+      "plural": "Fantasy"
+    },
+    "Film-Noir": {
+      "single": "Film-Noir",
+      "plural": "Film-Noir"
+    },
+    "History": {
+      "single": "History",
+      "plural": "History"
+    },
+    "Horror": {
+      "single": "Horror",
+      "plural": "Horror"
+    },
+    "Music": {
+      "single": "Music",
+      "plural": "Music"
+    },
+    "Musical": {
+      "single": "Musical",
+      "plural": "Musical"
+    },
+    "Mystery": {
+      "single": "Mystery",
+      "plural": "Mystery"
+    },
+    "Romance": {
+      "single": "Romance",
+      "plural": "Romance"
+    },
+    "Sci-Fi": {
+      "single": "Sci-Fi",
+      "plural": "Sci-Fi"
+    },
+    "Sport": {
+      "single": "Sport",
+      "plural": "Sport"
+    },
+    "Superhero": {
+      "single": "Superhero",
+      "plural": "Superhero"
+    },
+    "Thriller": {
+      "single": "Thriller",
+      "plural": "Thriller"
+    },
+    "War": {
+      "single": "War",
+      "plural": "War"
+    },
+    "Western": {
+      "single": "Western",
+      "plural": "Western"
+    }
+  },
+  "countries": {
+    "Argentina": {
+      "single": "Argentina",
+      "plural": "Argentinian"
+    },
+    "Australia": {
+      "single": "Australia",
+      "plural": "Australian"
+    },
+    "Belgium": {
+      "single": "Belgium",
+      "plural": "Belgian"
+    },
+    "Brazil": {
+      "single": "Brazil",
+      "plural": "Brazilian"
+    },
+    "Canada": {
+      "single": "Canada",
+      "plural": "Canadian"
+    },
+    "China": {
+      "single": "China",
+      "plural": "Chinese"
+    },
+    "Denmark": {
+      "single": "Denmark",
+      "plural": "Danish"
+    },
+    "Finland": {
+      "single": "Finland",
+      "plural": "Finnish"
+    },
+    "France": {
+      "single": "France",
+      "plural": "French"
+    },
+    "Germany": {
+      "single": "Germany",
+      "plural": "German"
+    },
+    "India": {
+      "single": "India",
+      "plural": "Indian"
+    },
+    "Italy": {
+      "single": "Italy",
+      "plural": "Italian"
+    },
+    "Japan": {
+      "single": "Japan",
+      "plural": "Japanese"
+    },
+    "Mexico": {
+      "single": "Mexico",
+      "plural": "Mexican"
+    },
+    "Netherlands": {
+      "single": "Netherlands",
+      "plural": "Dutch"
+    },
+    "New Zealand": {
+      "single": "New Zealand",
+      "plural": "New Zealander"
+    },
+    "Norway": {
+      "single": "Norway",
+      "plural": "Norwegian"
+    },
+    "Russia": {
+      "single": "Russia",
+      "plural": "Russian"
+    },
+    "South Africa": {
+      "single": "South Africa",
+      "plural": "South African"
+    },
+    "South Korea": {
+      "single": "South Korea",
+      "plural": "South Korean"
+    },
+    "Spain": {
+      "single": "Spain",
+      "plural": "Spanish"
+    },
+    "Sweden": {
+      "single": "Sweden",
+      "plural": "Swedish"
+    },
+    "Switzerland": {
+      "single": "Switzerland",
+      "plural": "Swiss"
+    },
+    "United Kingdom": {
+      "single": "United Kingdom",
+      "plural": "British"
+    },
+    "United States": {
+      "single": "United States",
+      "plural": "American"
+    }
+  }
+}

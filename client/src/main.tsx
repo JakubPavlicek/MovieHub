@@ -1,6 +1,6 @@
 import "@/styles/index.css";
 import "react-toastify/dist/ReactToastify.min.css";
-import "@/utils/i18n";
+import "@/i18n/i18n";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
@@ -20,8 +20,6 @@ import { ProductionPage } from "@/pages/ProductionPage";
 import { CastPage } from "@/pages/CastPage";
 import { FilterPage } from "@/pages/FilterPage";
 import { ProfilePage } from "@/pages/ProfilePage";
-
-// https://auth0.com/blog/complete-guide-to-react-user-authentication/
 
 const queryClient = new QueryClient();
 

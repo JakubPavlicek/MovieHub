@@ -1,19 +1,16 @@
 import type { FC } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
-import { MobileMenuButton } from "@/components/header/MobileMenuButton";
-import { SearchBar } from "@/components/header/SearchBar";
-import { LoginButton } from "@/components/header/LoginButton";
-import { MobileSearchButton } from "@/components/header/MobileSearchButton";
-import { Logo } from "@/components/header/Logo";
-import { NavMenu } from "@/components/header/NavMenu";
-import ProfileDropdown from "@/components/header/profile/ProfileDropdown";
-import { MobileMenu } from "@/components/header/MobileMenu";
+import { MobileMenuButton } from "@/components/header/mobile/MobileMenuButton";
+import { SearchBar } from "@/components/header/desktop/SearchBar";
+import { LoginButton } from "@/components/header/desktop/LoginButton";
+import { MobileSearchButton } from "@/components/header/mobile/MobileSearchButton";
+import { Logo } from "@/components/header/desktop/Logo";
+import { NavMenu } from "@/components/header/desktop/NavMenu";
+import { ProfileDropdown } from "@/components/header/profile/ProfileDropdown";
+import { MobileMenu } from "@/components/header/mobile/MobileMenu";
 import { useMobileMenu } from "@/hooks/useMobileMenu";
 import { useMobileSearch } from "@/hooks/useMobileSearch";
-import { LanguageDropdown } from "@/components/header/LanguageDropdown";
-
-// https://github.com/codyseibert/online-classroom/blob/cbcc7f6987e269be4ef125561aa0f532b8e055e2/src/components/common/Header/Header.tsx
-// NodeJS: https://github.com/nodejs/nodejs.org/tree/4139bbbd21d3a6bdbde5c89fb94ebf1c17d6ccc2/apps/site
+import { LanguageDropdown } from "@/components/header/desktop/LanguageDropdown";
 
 export const Header: FC = () => {
   const { isAuthenticated } = useAuth0();

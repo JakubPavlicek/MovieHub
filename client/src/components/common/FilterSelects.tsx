@@ -5,6 +5,7 @@ import { useCountries } from "@/hooks/useCountries";
 import { useGenres } from "@/hooks/useGenres";
 import { useYears } from "@/hooks/useYears";
 import { useFilterSelects } from "@/hooks/useFilterSelects";
+import { useTranslation } from "react-i18next";
 
 interface FilterSelectsProps {
   showFilters: boolean;
@@ -12,6 +13,7 @@ interface FilterSelectsProps {
 }
 
 export const FilterSelects: FC<FilterSelectsProps> = ({ showFilters, enableNavigate }) => {
+  const { t } = useTranslation();
   const { genres } = useGenres();
   const { countries } = useCountries();
   const { years } = useYears();
@@ -33,19 +35,21 @@ export const FilterSelects: FC<FilterSelectsProps> = ({ showFilters, enableNavig
     >
       <div className="flex flex-row flex-wrap items-center justify-center gap-4 sm:justify-start">
         <CategorySelect
-          placeholder="Select genres"
+          placeholder={t("components.common.selectGenresPlaceholder")}
+          type="genres"
           items={genres}
           selectedItems={selectedGenres}
           setSelectedItems={setSelectedGenres}
         />
         <CategorySelect
-          placeholder="Select countries"
+          placeholder={t("components.common.selectCountriesPlaceholder")}
+          type="countries"
           items={countries}
           selectedItems={selectedCountries}
           setSelectedItems={setSelectedCountries}
         />
         <YearSelect
-          placeholder="Select years"
+          placeholder={t("components.common.selectYearsPlaceholder")}
           years={years}
           selectedYears={selectedYears}
           setSelectedYears={setSelectedYears}

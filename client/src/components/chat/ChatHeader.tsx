@@ -1,12 +1,14 @@
 import type { FC } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { X } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface ChatHeaderProps {
   setIsChatOpened: (state: boolean) => void;
 }
 
 export const ChatHeader: FC<ChatHeaderProps> = ({ setIsChatOpened }) => {
+  const { t } = useTranslation();
   const { user } = useAuth0();
 
   return (
@@ -14,7 +16,7 @@ export const ChatHeader: FC<ChatHeaderProps> = ({ setIsChatOpened }) => {
       <img src={user?.picture} alt={user?.nickname} className="size-12 rounded-full border border-cyan-300" />
       <div className="flex flex-col gap-0.5 overflow-hidden">
         <span className="truncate font-medium text-white">{user?.nickname}</span>
-        <span className="truncate text-sm text-gray-200">Chat with everyone!</span>
+        <span className="truncate text-sm text-gray-200">{t("components.chat.chatWithEveryone")}</span>
       </div>
       <button
         className="absolute right-3 top-3 rounded-2xl p-1 hover:bg-cyan-500"

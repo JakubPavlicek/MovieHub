@@ -1,14 +1,17 @@
 import type { FC } from "react";
 import { Link } from "react-router-dom";
 import type { components } from "@/api/api";
+import { useTranslation } from "react-i18next";
 
 interface DropdownProps {
-  title: "Genre" | "Country";
+  title: string;
   type: "genre" | "country";
   items: components["schemas"]["GenreDetailsResponse"][] | components["schemas"]["CountryDetailsResponse"][];
 }
 
 export const DropdownMenu: FC<DropdownProps> = ({ title, type, items }) => {
+  const { t } = useTranslation();
+
   return (
     <div className="group relative">
       <button className="p-3 group-hover:text-cyan-300">{title}</button>
@@ -21,7 +24,7 @@ export const DropdownMenu: FC<DropdownProps> = ({ title, type, items }) => {
               key={item.id}
               className="w-full truncate rounded-md px-3 py-1 text-left hover:bg-gray-950 hover:text-cyan-300"
             >
-              {item.name}
+              {type === "genre" ? t(`genres.${item.name}.single`) : t(`countries.${item.name}.single`)}
             </Link>
           ))}
         </div>

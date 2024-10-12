@@ -5,12 +5,14 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useApi } from "@/context/ApiProvider";
 import { toast } from "react-toastify";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface CommentReactionSection {
   comment: components["schemas"]["CommentDetailsResponse"];
 }
 
 export const CommentReactionSection: FC<CommentReactionSection> = ({ comment }) => {
+  const { t } = useTranslation();
   const { isAuthenticated } = useAuth0();
   const queryClient = useQueryClient();
   const api = useApi();
@@ -20,7 +22,7 @@ export const CommentReactionSection: FC<CommentReactionSection> = ({ comment }) 
 
   const submitReaction = (reaction: components["schemas"]["Reaction"]) => {
     if (!isAuthenticated) {
-      toast.error(import.meta.env.VITE_NOT_AUTHENTICATED_MESSAGE);
+      toast.error(t("toast.unauthenticated"));
       return;
     }
 

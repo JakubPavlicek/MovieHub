@@ -15,6 +15,7 @@
     "@tanstack/react-query": "^5.54.1",
     "@tanstack/react-query-devtools": "^5.54.1",
     "i18next": "^23.15.2",
+    "i18next-http-backend": "^2.6.2",
     "lucide-react": "^0.437.0",
     "net": "^1.0.2",
     "openapi-fetch": "^0.12.2",
