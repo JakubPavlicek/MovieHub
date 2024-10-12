@@ -7,8 +7,8 @@ export const LoginButton: FC = () => {
 
   return (
     <button className="inline-flex items-center hover:text-cyan-300" onClick={() => loginWithRedirect()}>
-      <CircleUserRound size={32} className="lg:mr-3" />
-      <span className="hidden lg:block">Login</span>
+      <CircleUserRound size={32} className="md:mr-3" />
+      <span className="hidden md:block">Login</span>
     </button>
   );
 };

@@ -10,6 +10,7 @@ import ProfileDropdown from "@/components/header/profile/ProfileDropdown";
 import { MobileMenu } from "@/components/header/MobileMenu";
 import { useMobileMenu } from "@/hooks/useMobileMenu";
 import { useMobileSearch } from "@/hooks/useMobileSearch";
+import { LanguageDropdown } from "@/components/header/LanguageDropdown";
 
 // https://github.com/codyseibert/online-classroom/blob/cbcc7f6987e269be4ef125561aa0f532b8e055e2/src/components/common/Header/Header.tsx
 // NodeJS: https://github.com/nodejs/nodejs.org/tree/4139bbbd21d3a6bdbde5c89fb94ebf1c17d6ccc2/apps/site
@@ -36,6 +37,9 @@ export const Header: FC = () => {
         </div>
         <div className="flex sm:hidden">
           <MobileSearchButton showMobileSearch={showMobileSearch} toggleMobileSearch={toggleMobileSearch} />
+        </div>
+        <div className="hidden lg:block">
+          <LanguageDropdown />
         </div>
         {isAuthenticated ? <ProfileDropdown /> : <LoginButton />}
       </nav>

@@ -1,7 +1,7 @@
 import { type FC, useState } from "react";
+import type { components } from "@/api/api";
 import { useApi } from "@/context/ApiProvider";
 import { Comment } from "@/components/comment/Comment";
-import type { components } from "@/api/api";
 import { CommentInput } from "@/components/comment/CommentInput";
 import { Pagination } from "@/components/comment/Pagination";
 

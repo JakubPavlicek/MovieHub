@@ -4,12 +4,15 @@ import { Link } from "react-router-dom";
 import { useGenres } from "@/hooks/useGenres";
 import { useCountries } from "@/hooks/useCountries";
 import { MobileDropdownMenu } from "@/components/header/mobile/MobileDropdownMenu";
+import { MobileLanguageDropdown } from "@/components/header/mobile/MobileLanguageDropdown";
+import { useTranslation } from "react-i18next";
 
 interface MobileMenuProps {
   toggleMobileMenu: () => void;
 }
 
 export const MobileMenu: FC<MobileMenuProps> = ({ toggleMobileMenu }) => {
+  const { t } = useTranslation();
   const { genres } = useGenres();
   const { countries } = useCountries();
 
@@ -22,12 +25,14 @@ export const MobileMenu: FC<MobileMenuProps> = ({ toggleMobileMenu }) => {
         </button>
       </div>
       <Link to="/" className="w-full py-3 hover:text-cyan-300">
-        Home
+        {t("home")}
       </Link>
       <hr className="w-full border-neutral-700" />
       <MobileDropdownMenu title="Genres" type="genre" items={genres} />
       <hr className="w-full border-neutral-700" />
       <MobileDropdownMenu title="Countries" type="country" items={countries} />
+      <hr className="w-full border-neutral-700" />
+      <MobileLanguageDropdown />
     </nav>
   );
 };

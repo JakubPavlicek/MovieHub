@@ -1,5 +1,6 @@
 import "@/styles/index.css";
 import "react-toastify/dist/ReactToastify.min.css";
+import "@/utils/i18n";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
