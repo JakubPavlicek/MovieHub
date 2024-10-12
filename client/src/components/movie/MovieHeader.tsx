@@ -10,15 +10,6 @@ interface MovieStatsProps {
   duration: components["schemas"]["MovieDetailsResponse"]["duration"];
 }
 
-interface MovieRatingProps {
-  movieId: components["schemas"]["MovieDetailsResponse"]["id"];
-  reviewCount: components["schemas"]["MovieDetailsResponse"]["reviewCount"];
-}
-
-interface MovieHeaderProps {
-  movieDetails: components["schemas"]["MovieDetailsResponse"];
-}
-
 const MovieStats: FC<MovieStatsProps> = ({ rating, duration }) => {
   const { t } = useTranslation();
   return (
@@ -32,6 +23,11 @@ const MovieStats: FC<MovieStatsProps> = ({ rating, duration }) => {
     </div>
   );
 };
+
+interface MovieRatingProps {
+  movieId: components["schemas"]["MovieDetailsResponse"]["id"];
+  reviewCount: components["schemas"]["MovieDetailsResponse"]["reviewCount"];
+}
 
 const MovieRating: FC<MovieRatingProps> = ({ movieId, reviewCount }) => {
   const { t } = useTranslation();
@@ -53,6 +49,10 @@ const MovieRating: FC<MovieRatingProps> = ({ movieId, reviewCount }) => {
     </div>
   );
 };
+
+interface MovieHeaderProps {
+  movieDetails: components["schemas"]["MovieDetailsResponse"];
+}
 
 export const MovieHeader: FC<MovieHeaderProps> = ({ movieDetails }) => {
   if (!movieDetails) {

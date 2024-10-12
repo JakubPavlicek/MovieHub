@@ -10,7 +10,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.kuba</groupId>
+	<groupId>com.moviehub</groupId>
 	<artifactId>api</artifactId>
 	<name>MovieHub API</name>
 	<description>Spring Boot API for MovieHub</description>
