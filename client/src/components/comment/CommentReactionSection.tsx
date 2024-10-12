@@ -26,6 +26,11 @@ export const CommentReactionSection: FC<CommentReactionSection> = ({ comment }) 
       return;
     }
 
+    // user wants to remove the reaction
+    if (comment.userReaction === reaction) {
+      reaction = "none";
+    }
+
     mutate({
       params: {
         path: { commentId: comment.id },
