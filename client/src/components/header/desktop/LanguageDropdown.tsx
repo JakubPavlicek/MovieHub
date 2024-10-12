@@ -7,14 +7,16 @@ export const LanguageDropdown: FC = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const { i18n } = useTranslation();
 
-  const [selectedLanguage, setSelectedLanguage] = useState<string>(i18n.language);
+  const [selectedLanguage, setSelectedLanguage] = useState<string>(localStorage.getItem("language") ?? i18n.language);
 
   useEffect(() => {
-    setSelectedLanguage(i18n.language);
-  }, [i18n.language]);
+    i18n.changeLanguage(localStorage.getItem("language") ?? i18n.language);
+  }, [i18n]);
 
   const changeLanguage = (language: string) => {
     i18n.changeLanguage(language);
+    localStorage.setItem("language", language);
+    setSelectedLanguage(language);
   };
 
   return (

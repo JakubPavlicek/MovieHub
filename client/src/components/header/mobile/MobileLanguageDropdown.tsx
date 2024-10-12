@@ -30,6 +30,11 @@ export const MobileLanguageDropdown: FC = () => {
   const { isOpen, toggleDropdown } = useDropdownMenu();
   const { i18n } = useTranslation();
 
+  const changeLanguage = (language: string) => {
+    i18n.changeLanguage(language);
+    localStorage.setItem("language", language);
+  };
+
   return (
     <div className="w-full">
       <button className="inline-flex w-full justify-between py-3 hover:text-cyan-300" onClick={toggleDropdown}>
@@ -40,7 +45,10 @@ export const MobileLanguageDropdown: FC = () => {
         <Language
           key={language}
           language={language}
-          changeLanguage={() => i18n.changeLanguage(language)}
+          changeLanguage={() => {
+            changeLanguage(language);
+            toggleDropdown();
+          }}
           isOpen={isOpen}
         />
       ))}

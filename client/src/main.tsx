@@ -91,8 +91,7 @@ createRoot(document.getElementById("root")!).render(
       <ApiProvider>
         <QueryClientProvider client={queryClient}>
           <RouterProvider router={router} />
-          {/*<ReactQueryDevtools initialIsOpen={false} />*/}
-          <ToastContainer theme="colored" autoClose={2500} />
+          <ToastContainer theme="colored" autoClose={2500} pauseOnHover={false} />
         </QueryClientProvider>
       </ApiProvider>
     </Auth0Provider>

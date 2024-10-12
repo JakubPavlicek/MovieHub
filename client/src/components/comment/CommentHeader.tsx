@@ -20,8 +20,6 @@ export const CommentHeader: FC<CommentHeaderProps> = ({ comment }) => {
   });
 
   const deleteComment = () => {
-    // TODO: show dialog (Are you sure you wanna delete this comment ? - YES/NO buttons)
-
     mutate({
       params: {
         path: { commentId: id },
