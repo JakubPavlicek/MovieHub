@@ -25,7 +25,7 @@ public class CommentService {
 
     private final UserService userService;
 
-    private static final String DELETION_TEXT = "Comment deleted.";
+    private static final String COMMENT_DELETED = "Comment deleted.";
 
     public Comment getComment(UUID commentId) {
         return commentRepository.findById(commentId)
@@ -78,7 +78,7 @@ public class CommentService {
     public void deleteComment(UUID commentId) {
         Comment comment = getComment(commentId);
 
-        comment.setText(DELETION_TEXT);
+        comment.setText(COMMENT_DELETED);
         comment.setIsDeleted(true);
 
         commentRepository.save(comment);

@@ -43,7 +43,7 @@ public class MovieService {
         List<ProductionCompany> savedProduction = metadataService.getSavedProductions(movie.getProduction());
         movie.setProduction(savedProduction);
 
-        // Movie has to to exist in db so it can be used in MovieCast
+        // Movie has to be persisted so it can be used in MovieCast
         Movie savedMovie = movieRepository.save(movie);
 
         List<MovieCast> savedCast = crewService.getSavedMovieCasts(movie.getCast(), savedMovie);
