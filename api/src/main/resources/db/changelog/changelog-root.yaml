@@ -7,3 +7,4 @@ databaseChangeLog:
       path: db/changelog/constraints
   - includeAll:
       path: db/changelog/data
+      context: "!test"
