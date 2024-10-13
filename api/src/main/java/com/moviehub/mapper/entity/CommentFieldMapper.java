@@ -9,12 +9,16 @@ public class CommentFieldMapper {
 
     public enum Field {
         COMMENT_ID,
-        MOVIE_ID,
+        MOVIE,
         USER,
         CREATED_AT,
         TEXT,
+        IS_DELETED,
+        REPLIES,
         PARENT_COMMENT,
-        REACTIONS
+        REACTIONS,
+        DISLIKES,
+        LIKES,
     }
 
     public static String mapToCommentField(String field) {
@@ -23,12 +27,16 @@ public class CommentFieldMapper {
 
         return switch (commentField) {
             case COMMENT_ID -> Comment_.ID;
-            case MOVIE_ID -> Comment_.MOVIE;
+            case MOVIE -> Comment_.MOVIE;
             case USER -> Comment_.USER;
             case CREATED_AT -> Comment_.CREATED_AT;
             case TEXT -> Comment_.TEXT;
+            case IS_DELETED -> Comment_.IS_DELETED;
+            case REPLIES -> Comment_.REPLIES;
             case PARENT_COMMENT -> Comment_.PARENT_COMMENT;
             case REACTIONS -> Comment_.REACTIONS;
+            case DISLIKES -> Comment_.DISLIKES;
+            case LIKES -> Comment_.LIKES;
         };
     }
 

@@ -35,6 +35,22 @@ public class CommentMapper {
                                      .build();
     }
 
+    public static CommentPage mapToCommentPage(Page<Comment> comments) {
+        return CommentPage.builder()
+                          .content(mapToCommentDetailsResponse(comments))
+                          .pageable(PageableMapper.mapToPageableDTO(comments.getPageable()))
+                          .last(comments.isLast())
+                          .totalElements(comments.getTotalElements())
+                          .totalPages(comments.getTotalPages())
+                          .first(comments.isFirst())
+                          .size(comments.getSize())
+                          .number(comments.getNumber())
+                          .sort(SortMapper.mapToSortDTO(comments.getSort()))
+                          .numberOfElements(comments.getNumberOfElements())
+                          .empty(comments.isEmpty())
+                          .build();
+    }
+
     private static CommentDetailsResponse mapReplyToCommentDetailsResponse(Comment comment) {
         return CommentDetailsResponse.builder()
                                      .id(comment.getId())
@@ -55,22 +71,6 @@ public class CommentMapper {
         return replies.stream()
                       .map(CommentMapper::mapReplyToCommentDetailsResponse)
                       .toList();
-    }
-
-    public static CommentPage mapToCommentPage(Page<Comment> comments) {
-        return CommentPage.builder()
-                          .content(mapToCommentDetailsResponse(comments))
-                          .pageable(PageableMapper.mapToPageableDTO(comments.getPageable()))
-                          .last(comments.isLast())
-                          .totalElements(comments.getTotalElements())
-                          .totalPages(comments.getTotalPages())
-                          .first(comments.isFirst())
-                          .size(comments.getSize())
-                          .number(comments.getNumber())
-                          .sort(SortMapper.mapToSortDTO(comments.getSort()))
-                          .numberOfElements(comments.getNumberOfElements())
-                          .empty(comments.isEmpty())
-                          .build();
     }
 
     private static List<CommentDetailsResponse> mapToCommentDetailsResponse(Page<Comment> comments) {
