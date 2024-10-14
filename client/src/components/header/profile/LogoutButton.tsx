@@ -9,7 +9,7 @@ export const LogoutButton: FC = () => {
 
   return (
     <button
-      className="p inline-flex items-center gap-3 text-red-500 hover:text-red-400"
+      className="inline-flex items-center gap-3 text-red-500 hover:text-red-400"
       onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}
     >
       <LogOut size={22} />

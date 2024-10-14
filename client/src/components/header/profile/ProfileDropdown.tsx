@@ -10,7 +10,7 @@ export const ProfileDropdown: FC = () => {
     <div className="relative">
       <ProfileDropdownButton showDropdown={showDropdown} setShowDropdown={setShowDropdown} />
       {showDropdown && (
-        <div className="absolute right-0 top-12 z-10 flex flex-col gap-3 rounded-md bg-gray-800 p-4">
+        <div className="absolute right-0 top-12 z-10 flex min-w-40 flex-col gap-3 rounded-md bg-gray-800 p-4">
           <ProfileButton />
           <hr className="w-full border-neutral-600" />
           <LogoutButton />

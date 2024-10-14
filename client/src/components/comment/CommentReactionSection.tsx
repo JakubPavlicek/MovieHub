@@ -41,8 +41,6 @@ export const CommentReactionSection: FC<CommentReactionSection> = ({ comment }) 
     });
   };
 
-  console.log(comment);
-
   return (
     <div className="flex flex-row gap-4">
       <div className="flex flex-row items-center gap-1 text-neutral-300">

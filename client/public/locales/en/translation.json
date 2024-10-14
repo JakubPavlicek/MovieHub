@@ -10,6 +10,8 @@
       },
       "mobile": {
         "language": "Language",
+        "genres": "Genres",
+        "countries": "Countries",
         "closeMenu": "Close menu",
         "home": "Home"
       },

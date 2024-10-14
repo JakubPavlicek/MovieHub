@@ -28,9 +28,9 @@ export const MobileMenu: FC<MobileMenuProps> = ({ toggleMobileMenu }) => {
         {t("components.header.mobile.home")}
       </Link>
       <hr className="w-full border-neutral-700" />
-      <MobileDropdownMenu title="Genres" type="genre" items={genres} />
+      <MobileDropdownMenu title={t("components.header.mobile.genres")} type="genre" items={genres} />
       <hr className="w-full border-neutral-700" />
-      <MobileDropdownMenu title="Countries" type="country" items={countries} />
+      <MobileDropdownMenu title={t("components.header.mobile.countries")} type="country" items={countries} />
       <hr className="w-full border-neutral-700" />
       <MobileLanguageDropdown />
     </nav>

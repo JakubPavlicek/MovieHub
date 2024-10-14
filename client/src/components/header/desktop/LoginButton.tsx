@@ -9,7 +9,7 @@ export const LoginButton: FC = () => {
 
   return (
     <button className="inline-flex min-w-fit items-center hover:text-cyan-300" onClick={() => loginWithRedirect()}>
-      <CircleUserRound size={32} className="shrink-0 md:mr-3" />
+      <CircleUserRound size={32} className="shrink-0 md:mr-2" />
       <span className="hidden md:block">{t("components.header.desktop.login")}</span>
     </button>
   );

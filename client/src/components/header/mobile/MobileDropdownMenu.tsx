@@ -5,7 +5,7 @@ import { useDropdownMenu } from "@/hooks/useDropdownMenu";
 import type { components } from "@/api/api";
 
 interface MobileMenuDropdownProps {
-  title: "Genres" | "Countries";
+  title: string;
   type: "genre" | "country";
   items: components["schemas"]["GenreDetailsResponse"][] | components["schemas"]["CountryDetailsResponse"][];
 }

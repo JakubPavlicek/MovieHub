@@ -10,6 +10,8 @@
       },
       "mobile": {
         "language": "Jazyk",
+        "genres": "Žánry",
+        "countries": "Země",
         "closeMenu": "Zavřít menu",
         "home": "Domů"
       },
@@ -152,7 +154,7 @@
       "plural": "Sportovní"
     },
     "Superhero": {
-      "single": "Superhrdinný",
+      "single": "Superhrdinský",
       "plural": "Superhrdinské"
     },
     "Thriller": {
