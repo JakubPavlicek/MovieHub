@@ -21,7 +21,7 @@ import static org.springframework.security.oauth2.core.OAuth2AccessToken.TokenTy
 
 @Component
 @RequiredArgsConstructor
-public class AuthorizationSocketInterceptor implements ChannelInterceptor {
+public class WebSocketAuthorizationInterceptor implements ChannelInterceptor {
 
     private final JwtDecoder jwtDecoder;
     private final JwtAuthConverter jwtAuthConverter;

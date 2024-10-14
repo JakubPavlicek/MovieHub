@@ -175,14 +175,6 @@ public class Movie {
     )
     private LocalDateTime updatedAt;
 
-    public void addComment(Comment comment) {
-        comments.add(comment);
-    }
-
-    public void addMovieRating(MovieRating rating) {
-        ratings.add(rating);
-    }
-
     public void setName(String newName) {
         if (newName != null) {
             name = newName;
