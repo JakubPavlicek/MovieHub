@@ -72,13 +72,13 @@ class CommentMapperTest {
         assertThat(result.getTotalPages()).isEqualTo(page.getTotalPages());
     }
 
-    private AddCommentRequest createAddCommentRequest() {
+    private static AddCommentRequest createAddCommentRequest() {
         AddCommentRequest request = new AddCommentRequest();
         request.setText(FIRST_COMMENT_TEXT);
         return request;
     }
 
-    private User createUser() {
+    private static User createUser() {
         return User.builder()
                    .id("auth0|1")
                    .name("user")
@@ -86,13 +86,13 @@ class CommentMapperTest {
                    .build();
     }
 
-    private Movie createMovie() {
+    private static Movie createMovie() {
         return Movie.builder()
                     .name("Movie")
                     .build();
     }
 
-    private Comment createComment(UUID id, User user, Movie movie, String text, Comment parentComment) {
+    private static Comment createComment(UUID id, User user, Movie movie, String text, Comment parentComment) {
         return Comment.builder()
                       .id(id)
                       .text(text)

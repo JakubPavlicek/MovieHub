@@ -76,7 +76,7 @@ class ActorMapperTest {
         assertThat(actorPageResponse.getLast()).isTrue();
     }
 
-    private AddActorRequest buildAddActorRequest() {
+    private static AddActorRequest buildAddActorRequest() {
         return AddActorRequest.builder()
                               .name(ACTOR_NAME)
                               .bio(ACTOR_BIO)
@@ -84,7 +84,7 @@ class ActorMapperTest {
                               .build();
     }
 
-    private UpdateActorRequest buildUpdateActorRequest() {
+    private static UpdateActorRequest buildUpdateActorRequest() {
         return UpdateActorRequest.builder()
                                  .name(ACTOR_NAME)
                                  .bio(ACTOR_BIO)
@@ -92,7 +92,7 @@ class ActorMapperTest {
                                  .build();
     }
 
-    private Actor buildActor(UUID id, String name, String bio, Gender gender) {
+    private static Actor buildActor(UUID id, String name, String bio, Gender gender) {
         return Actor.builder()
                     .id(id)
                     .name(name)

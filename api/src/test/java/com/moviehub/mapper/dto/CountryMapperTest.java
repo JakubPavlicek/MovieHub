@@ -85,14 +85,14 @@ class CountryMapperTest {
         assertThat(countryListResponse.getCountries().get(1).getName()).isEqualTo(CANADA);
     }
     
-    private Country createCountry(UUID id, String name) {
+    private static Country createCountry(UUID id, String name) {
         return Country.builder()
                       .id(id)
                       .name(name)
                       .build();
     }
 
-    private List<String> createCountryNamesList() {
+    private static List<String> createCountryNamesList() {
         return List.of(USA, CANADA, FRANCE);
     }
 

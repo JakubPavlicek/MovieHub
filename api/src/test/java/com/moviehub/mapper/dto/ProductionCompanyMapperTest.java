@@ -86,7 +86,7 @@ class ProductionCompanyMapperTest {
         assertThat(productionCompanyPage.getLast()).isTrue();
     }
 
-    private ProductionCompany buildProductionCompany(UUID id, String name) {
+    private static ProductionCompany buildProductionCompany(UUID id, String name) {
         return ProductionCompany.builder()
                                 .id(id)
                                 .name(name)

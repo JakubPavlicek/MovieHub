@@ -74,7 +74,7 @@ public class Comment {
         mappedBy = "comment",
         fetch = FetchType.LAZY
     )
-    List<CommentReaction> reactions;
+    List<CommentReaction> reactions = new ArrayList<>();
 
     @Column(
         nullable = false

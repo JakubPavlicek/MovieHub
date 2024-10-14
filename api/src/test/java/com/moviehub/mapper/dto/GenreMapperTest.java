@@ -85,14 +85,14 @@ class GenreMapperTest {
         assertThat(genreListResponse.getGenres().get(1).getName()).isEqualTo(COMEDY);
     }
 
-    private Genre createGenre(UUID id, String name) {
+    private static Genre createGenre(UUID id, String name) {
         return Genre.builder()
                     .id(id)
                     .name(name)
                     .build();
     }
 
-    private List<String> createGenreNamesList() {
+    private static List<String> createGenreNamesList() {
         return List.of(ACTION, DRAMA, COMEDY);
     }
 

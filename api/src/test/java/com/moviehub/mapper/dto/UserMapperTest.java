@@ -43,7 +43,7 @@ class UserMapperTest {
         assertThat(userNameAndPictureUrl.getPictureUrl()).isEqualTo(PICTURE_URL);
     }
 
-    private User createUser(String name, String pictureUrl) {
+    private static User createUser(String name, String pictureUrl) {
         return User.builder()
                    .name(name)
                    .pictureUrl(pictureUrl)

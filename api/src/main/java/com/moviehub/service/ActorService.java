@@ -66,7 +66,7 @@ public class ActorService {
     }
 
     public Page<Actor> getActors(Integer page, Integer limit, String name) {
-        Sort sort = Sort.by(Sort.Direction.ASC, Actor_.NAME);
+        Sort sort = Sort.by(Actor_.NAME).ascending();
         Pageable pageable = PageRequest.of(page, limit, sort);
 
         if (name.isEmpty()) {

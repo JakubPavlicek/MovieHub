@@ -115,7 +115,7 @@ class DirectorMapperTest {
         assertThat(directorPageResponse.getLast()).isTrue();
     }
 
-    private Director createDirector(UUID id, String name, String bio, Gender gender) {
+    private static Director createDirector(UUID id, String name, String bio, Gender gender) {
         return Director.builder()
                        .id(id)
                        .name(name)
@@ -124,7 +124,7 @@ class DirectorMapperTest {
                        .build();
     }
     
-    private AddDirectorRequest createAddDirectorRequest(String name, String bio, GenderName gender) {
+    private static AddDirectorRequest createAddDirectorRequest(String name, String bio, GenderName gender) {
         return AddDirectorRequest.builder()
                                  .name(name)
                                  .bio(bio)
@@ -132,7 +132,7 @@ class DirectorMapperTest {
                                  .build();
     }
 
-    private UpdateDirectorRequest createUpdateDirectorRequest(String name, String bio, GenderName gender) {
+    private static UpdateDirectorRequest createUpdateDirectorRequest(String name, String bio, GenderName gender) {
         return UpdateDirectorRequest.builder()
                                     .name(name)
                                     .bio(bio)

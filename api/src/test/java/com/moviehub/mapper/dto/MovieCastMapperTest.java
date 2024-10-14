@@ -78,14 +78,14 @@ class MovieCastMapperTest {
         assertThat(castDetailsResponses).isEmpty();
     }
 
-    private MovieCastRequest createMovieCastRequest(String name, String role) {
+    private static MovieCastRequest createMovieCastRequest(String name, String role) {
         return MovieCastRequest.builder()
                                .name(name)
                                .role(role)
                                .build();
     }
 
-    private MovieCast createMovieCast(UUID actorId, String actorName, String role) {
+    private static MovieCast createMovieCast(UUID actorId, String actorName, String role) {
         Actor actor = Actor.builder()
                            .id(actorId)
                            .name(actorName)

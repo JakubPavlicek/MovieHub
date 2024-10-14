@@ -141,7 +141,7 @@ class MovieMapperTest {
         assertThat(response.getRating()).isEqualTo(rating);
     }
 
-    private AddMovieRequest createAddMovieRequest() {
+    private static AddMovieRequest createAddMovieRequest() {
         return AddMovieRequest.builder()
                               .name("Inception")
                               .filename("inception.mp4")
@@ -158,7 +158,7 @@ class MovieMapperTest {
                               .build();
     }
 
-    private UpdateMovieRequest createUpdateMovieRequest() {
+    private static UpdateMovieRequest createUpdateMovieRequest() {
         return UpdateMovieRequest.builder()
                                  .name("Inception Updated")
                                  .filename("inception_updated.mp4")
@@ -175,7 +175,7 @@ class MovieMapperTest {
                                  .build();
     }
 
-    private Movie createMovie() {
+    private static Movie createMovie() {
         return Movie.builder()
                     .id(UUID.randomUUID())
                     .name("Inception")
@@ -194,7 +194,7 @@ class MovieMapperTest {
                     .build();
     }
 
-    private MovieCastRequest createMovieCastRequest() {
+    private static MovieCastRequest createMovieCastRequest() {
         return MovieCastRequest.builder()
                                .name("Leonardo DiCaprio")
                                .role("Cobb")
