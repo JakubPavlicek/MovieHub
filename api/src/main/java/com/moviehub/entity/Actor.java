@@ -40,4 +40,22 @@ public class Actor {
     @Builder.Default
     private Gender gender = Gender.UNSPECIFIED;
 
+    public void setName(String newName) {
+        if (newName != null) {
+            name = newName;
+        }
+    }
+
+    public void setBio(String newBio) {
+        if (newBio != null) {
+            bio = newBio;
+        }
+    }
+
+    public void setGender(Gender newGender) {
+        if (newGender != null) {
+            gender = newGender;
+        }
+    }
+
 }

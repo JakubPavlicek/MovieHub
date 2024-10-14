@@ -106,11 +106,9 @@ class ActorServiceTest {
 
     @Test
     void shouldThrowActorNotFoundExceptionWhenActorDoesNotExist() {
-        UUID actorId = UUID.fromString("5759868d-3063-42ec-95aa-ba259d9e52de");
-
         when(actorRepository.findById(any())).thenReturn(Optional.empty());
 
-        assertThatExceptionOfType(ActorNotFoundException.class).isThrownBy(() -> actorService.getActor(actorId));
+        assertThatExceptionOfType(ActorNotFoundException.class).isThrownBy(() -> actorService.getActor(ACTOR_ID));
     }
 
     private static Stream<Arguments> provideActorsForUpdateTest() {

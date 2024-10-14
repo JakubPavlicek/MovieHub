@@ -81,10 +81,9 @@ class CommentServiceTest {
         when(commentRepository.save(any(Comment.class))).thenReturn(comment);
         when(commentRepository.findById(PARENT_COMMENT_ID)).thenReturn(Optional.of(parentComment));
 
-        Comment savedComment = commentService.saveComment(movie, comment, PARENT_COMMENT_ID);
+        commentService.saveComment(movie, comment, PARENT_COMMENT_ID);
 
-        assertThat(savedComment.getText()).isEqualTo(comment.getText());
-        assertThat(savedComment.getParentComment()).isEqualTo(parentComment);
+        verify(commentRepository).save(any(Comment.class));
     }
 
     @Test
@@ -95,10 +94,9 @@ class CommentServiceTest {
         when(userService.getUser()).thenReturn(new User());
         when(commentRepository.save(any(Comment.class))).thenReturn(comment);
 
-        Comment savedComment = commentService.saveComment(movie, comment, null);
+        commentService.saveComment(movie, comment, null);
 
-        assertThat(savedComment.getText()).isEqualTo(comment.getText());
-        assertThat(savedComment.getParentComment()).isNull();
+        verify(commentRepository).save(any(Comment.class));
     }
 
     @Test
@@ -168,7 +166,7 @@ class CommentServiceTest {
         assertThat(resultPage.getContent()).containsExactlyInAnyOrder(comment1, comment2);
     }
 
-    private Comment createComment(String text) {
+    private static Comment createComment(String text) {
         User user = createUser();
 
         Comment comment = Comment.builder()
@@ -184,14 +182,14 @@ class CommentServiceTest {
         return comment;
     }
 
-    private User createUser() {
+    private static User createUser() {
         return User.builder()
                    .id("auth0|1")
                    .name("Arnold")
                    .build();
     }
 
-    private CommentReaction createCommentReaction(Comment comment, User user) {
+    private static CommentReaction createCommentReaction(Comment comment, User user) {
         return CommentReaction.builder()
                               .comment(comment)
                               .user(user)

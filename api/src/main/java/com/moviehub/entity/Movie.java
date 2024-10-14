@@ -183,4 +183,40 @@ public class Movie {
         ratings.add(rating);
     }
 
+    public void setName(String newName) {
+        if (newName != null) {
+            name = newName;
+        }
+    }
+
+    public void setReleaseDate(LocalDate newReleaseDate) {
+        if (newReleaseDate != null) {
+            releaseDate = newReleaseDate;
+        }
+    }
+
+    public void setDuration(Integer newDuration) {
+        if (newDuration != null) {
+            duration = newDuration;
+        }
+    }
+
+    public void setDescription(String newDescription) {
+        if (newDescription != null) {
+            description = newDescription;
+        }
+    }
+
+    public void setPosterUrl(String newPosterUrl) {
+        if (newPosterUrl != null) {
+            posterUrl = newPosterUrl;
+        }
+    }
+
+    public void setTrailerUrl(String newTrailerUrl) {
+        if (newTrailerUrl != null) {
+            trailerUrl = newTrailerUrl;
+        }
+    }
+
 }

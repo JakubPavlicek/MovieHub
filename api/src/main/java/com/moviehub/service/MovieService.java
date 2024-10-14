@@ -72,49 +72,66 @@ public class MovieService {
     }
 
     private static void updateMovieFields(Movie existingMovie, Movie incomingMovie) {
-        if (incomingMovie.getName() != null) {
-            existingMovie.setName(incomingMovie.getName());
-        }
-        if (incomingMovie.getReleaseDate() != null) {
-            existingMovie.setReleaseDate(incomingMovie.getReleaseDate());
-        }
-        if (incomingMovie.getDuration() != null) {
-            existingMovie.setDuration(incomingMovie.getDuration());
-        }
-        if (incomingMovie.getDescription() != null) {
-            existingMovie.setDescription(incomingMovie.getDescription());
-        }
-        if (incomingMovie.getPosterUrl() != null) {
-            existingMovie.setPosterUrl(incomingMovie.getPosterUrl());
-        }
-        if (incomingMovie.getTrailerUrl() != null) {
-            existingMovie.setTrailerUrl(incomingMovie.getTrailerUrl());
-        }
+        existingMovie.setName(incomingMovie.getName());
+        existingMovie.setReleaseDate(incomingMovie.getReleaseDate());
+        existingMovie.setDuration(incomingMovie.getDuration());
+        existingMovie.setDescription(incomingMovie.getDescription());
+        existingMovie.setPosterUrl(incomingMovie.getPosterUrl());
+        existingMovie.setTrailerUrl(incomingMovie.getTrailerUrl());
     }
 
     private void updateMovieRelatedEntities(Movie existingMovie, Movie incomingMovie) {
-        if (incomingMovie.getDirector() != null) {
-            Director savedDirector = crewService.getSavedDirector(incomingMovie.getDirector());
-            existingMovie.setDirector(savedDirector);
-        }
-        if (incomingMovie.getCast() != null && !incomingMovie.getCast().isEmpty()) {
-            crewService.deleteAllMovieCastsByMovie(existingMovie);
+        updateDirector(existingMovie, incomingMovie);
+        updateCast(existingMovie, incomingMovie);
+        updateProduction(existingMovie, incomingMovie);
+        updateCountries(existingMovie, incomingMovie);
+        updateGenres(existingMovie, incomingMovie);
+    }
 
-            List<MovieCast> savedMovieCasts = crewService.getSavedMovieCasts(incomingMovie.getCast(), existingMovie);
-            existingMovie.setCast(savedMovieCasts);
+    private void updateDirector(Movie existingMovie, Movie incomingMovie) {
+        if (incomingMovie.getDirector() == null) {
+            return;
         }
-        if (incomingMovie.getProduction() != null && !incomingMovie.getProduction().isEmpty()) {
-            List<ProductionCompany> savedProduction = metadataService.getSavedProductions(incomingMovie.getProduction());
-            existingMovie.setProduction(savedProduction);
+
+        Director savedDirector = crewService.getSavedDirector(incomingMovie.getDirector());
+        existingMovie.setDirector(savedDirector);
+    }
+
+    private void updateCast(Movie existingMovie, Movie incomingMovie) {
+        if (incomingMovie.getCast() == null || incomingMovie.getCast().isEmpty()) {
+            return;
         }
-        if (incomingMovie.getCountries() != null && !incomingMovie.getCountries().isEmpty()) {
-            List<Country> savedCountries = metadataService.getSavedCountries(incomingMovie.getCountries());
-            existingMovie.setCountries(savedCountries);
+
+        crewService.deleteAllMovieCastsByMovie(existingMovie);
+        List<MovieCast> savedMovieCasts = crewService.getSavedMovieCasts(incomingMovie.getCast(), existingMovie);
+        existingMovie.setCast(savedMovieCasts);
+    }
+
+    private void updateProduction(Movie existingMovie, Movie incomingMovie) {
+        if (incomingMovie.getProduction() == null || incomingMovie.getProduction().isEmpty()) {
+            return;
         }
-        if (incomingMovie.getGenres() != null && !incomingMovie.getGenres().isEmpty()) {
-            List<Genre> savedGenres = metadataService.getSavedGenres(incomingMovie.getGenres());
-            existingMovie.setGenres(savedGenres);
+
+        List<ProductionCompany> savedProduction = metadataService.getSavedProductions(incomingMovie.getProduction());
+        existingMovie.setProduction(savedProduction);
+    }
+
+    private void updateCountries(Movie existingMovie, Movie incomingMovie) {
+        if (incomingMovie.getCountries() == null || incomingMovie.getCountries().isEmpty()) {
+            return;
         }
+
+        List<Country> savedCountries = metadataService.getSavedCountries(incomingMovie.getCountries());
+        existingMovie.setCountries(savedCountries);
+    }
+
+    private void updateGenres(Movie existingMovie, Movie incomingMovie) {
+        if (incomingMovie.getGenres() == null || incomingMovie.getGenres().isEmpty()) {
+            return;
+        }
+
+        List<Genre> savedGenres = metadataService.getSavedGenres(incomingMovie.getGenres());
+        existingMovie.setGenres(savedGenres);
     }
 
     public Page<Movie> getMoviesWithGenre(UUID genreId, Integer page, Integer limit) {
@@ -175,8 +192,8 @@ public class MovieService {
         return interactionService.getRating(movie);
     }
 
-    public Page<Movie> listMovies(Integer page, Integer limit, String sort) {
-        return searchService.listMovies(page, limit, sort);
+    public Page<Movie> getMovies(Integer page, Integer limit, String sort) {
+        return searchService.getMovies(page, limit, sort);
     }
 
     public Page<Movie> filterMovies(Integer page, Integer limit, String sort, String releaseYear, String genre, String country) {

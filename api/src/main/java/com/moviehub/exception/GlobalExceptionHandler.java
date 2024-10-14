@@ -26,14 +26,6 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     private static final String INVALID_VALUE = "Invalid Value";
     private static final String CONTEXT_INFO = "contextInfo";
 
-    @ExceptionHandler({FilterException.class, SortException.class, ParseException.class})
-    public ProblemDetail handleFilterAndSortAndParseException(Exception e) {
-        ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.BAD_REQUEST, e.getMessage());
-        problemDetail.setTitle(INVALID_VALUE);
-
-        return problemDetail;
-    }
-
     @ExceptionHandler(MovieNotFoundException.class)
     public ProblemDetail handleMovieNotFoundException(MovieNotFoundException e) {
         ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.getMessage());

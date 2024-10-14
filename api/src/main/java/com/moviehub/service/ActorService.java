@@ -28,14 +28,14 @@ public class ActorService {
     }
 
     public Actor addActor(Actor actor) {
-        verifyActorUniqueness(actor);
+        verifyActorUniqueness(actor.getName());
 
         return saveActor(actor);
     }
 
-    private void verifyActorUniqueness(Actor actor) {
-        if (actorRepository.existsByName(actor.getName())) {
-            throw new ActorAlreadyExistsException("Actor with name: " + actor.getName() + " already exists");
+    private void verifyActorUniqueness(String actorName) {
+        if (actorName != null && actorRepository.existsByName(actorName)) {
+            throw new ActorAlreadyExistsException("Actor with name: " + actorName + " already exists");
         }
     }
 
@@ -51,16 +51,11 @@ public class ActorService {
     public Actor updateActor(UUID actorId, Actor incomingActor) {
         Actor existingActor = getActor(actorId);
 
-        if (incomingActor.getName() != null) {
-            verifyActorUniqueness(incomingActor);
-            existingActor.setName(incomingActor.getName());
-        }
-        if (incomingActor.getBio() != null) {
-            existingActor.setBio(incomingActor.getBio());
-        }
-        if (incomingActor.getGender() != null) {
-            existingActor.setGender(incomingActor.getGender());
-        }
+        verifyActorUniqueness(incomingActor.getName());
+
+        existingActor.setName(incomingActor.getName());
+        existingActor.setBio(incomingActor.getBio());
+        existingActor.setGender(incomingActor.getGender());
 
         return actorRepository.save(existingActor);
     }

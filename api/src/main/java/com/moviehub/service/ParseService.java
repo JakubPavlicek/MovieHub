@@ -1,7 +1,6 @@
 package com.moviehub.service;
 
 import com.moviehub.entity.Movie;
-import com.moviehub.exception.SortException;
 import com.moviehub.mapper.entity.CommentFieldMapper;
 import com.moviehub.mapper.entity.MovieFieldMapper;
 import com.moviehub.specification.MovieSpecification;
@@ -34,10 +33,6 @@ public class ParseService {
             Sort.Direction direction = Sort.Direction.fromString(values[1]);
 
             orders.add(new Sort.Order(direction, field));
-        }
-
-        if (orders.isEmpty()) {
-            throw new SortException("Invalid sort value: " + sort);
         }
 
         return Sort.by(orders);

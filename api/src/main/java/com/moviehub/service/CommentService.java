@@ -32,14 +32,14 @@ public class CommentService {
                                 .orElseThrow(() -> new CommentNotFoundException("Comment with ID: " + commentId + " not found"));
     }
 
-    public Comment saveComment(Movie movie, Comment comment, UUID parentCommentId) {
+    public void saveComment(Movie movie, Comment comment, UUID parentCommentId) {
         ensureValidParentCommentId(parentCommentId);
 
         comment.setMovie(movie);
         comment.setUser(userService.getUser());
         comment.setParentComment(parentCommentId == null ? null : getComment(parentCommentId));
 
-        return commentRepository.save(comment);
+        commentRepository.save(comment);
     }
 
     private void ensureValidParentCommentId(UUID parentCommentId) {

@@ -5,7 +5,6 @@ import com.moviehub.entity.Genre_;
 import com.moviehub.exception.GenreAlreadyExistsException;
 import com.moviehub.exception.GenreNotFoundException;
 import com.moviehub.repository.GenreRepository;
-import com.moviehub.repository.MovieRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,6 @@ import java.util.stream.Collectors;
 public class GenreService {
 
     private final GenreRepository genreRepository;
-    private final MovieRepository movieRepository;
 
     public List<Genre> getSavedGenres(List<Genre> genres) {
         return genres.stream()
@@ -34,7 +32,7 @@ public class GenreService {
     }
 
     public List<Genre> getGenres() {
-        Sort sort = Sort.by(Sort.Direction.ASC, Genre_.NAME);
+        Sort sort = Sort.by(Genre_.NAME).ascending();
 
         return genreRepository.findAll(sort);
     }

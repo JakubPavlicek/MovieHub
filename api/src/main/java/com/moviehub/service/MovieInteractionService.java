@@ -20,8 +20,8 @@ public class MovieInteractionService {
     private final MovieRatingService ratingService;
     private final ParseService parseService;
 
-    public Comment saveComment(Movie movie, Comment comment, UUID parentCommentId) {
-        return commentService.saveComment(movie, comment, parentCommentId);
+    public void saveComment(Movie movie, Comment comment, UUID parentCommentId) {
+        commentService.saveComment(movie, comment, parentCommentId);
     }
 
     public Page<Comment> getComments(Movie movie, Integer page, Integer limit, String sort) {

@@ -1595,8 +1595,8 @@ paths:
       description: |
         Retrieve a list of movies in the system.
         The results can be customized with various filters, sorting options, and pagination to refine the list based on specific preferences.
-      summary: List movies
-      operationId: listMovies
+      summary: Get movies
+      operationId: getMovies
       tags:
         - movies
       parameters:

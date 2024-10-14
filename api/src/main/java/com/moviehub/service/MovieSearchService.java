@@ -60,7 +60,7 @@ public class MovieSearchService {
         return movieRepository.findAllByActorsContaining(actor, pageable);
     }
 
-    public Page<Movie> listMovies(Integer page, Integer limit, String sort) {
+    public Page<Movie> getMovies(Integer page, Integer limit, String sort) {
         Pageable pageable = PageRequest.of(page, limit, parseService.parseMovieSort(sort));
 
         return movieRepository.findAll(pageable);

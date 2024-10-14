@@ -2,6 +2,7 @@ package com.moviehub.service;
 
 import com.moviehub.entity.Movie;
 import com.moviehub.entity.MovieRating;
+import com.moviehub.entity.User;
 import com.moviehub.repository.MovieRatingRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,8 @@ public class MovieRatingService {
     public boolean saveRating(Movie movie, Double rating) {
         log.info("Saving rating {} for movie {}", rating, movie.getId());
 
-        Optional<MovieRating> existingMovieRating = ratingRepository.findByMovieAndUser(movie, userService.getUser());
+        User user = userService.getUser();
+        Optional<MovieRating> existingMovieRating = ratingRepository.findByMovieAndUser(movie, user);
 
         // user has already rated the movie -> update the rating
         if (existingMovieRating.isPresent()) {
@@ -32,8 +34,7 @@ public class MovieRatingService {
             return true;
         }
 
-        createNewRating(movie, rating);
-
+        createNewRating(movie, user, rating);
         return false;
     }
 
@@ -42,10 +43,10 @@ public class MovieRatingService {
         ratingRepository.save(existingRating);
     }
 
-    private void createNewRating(Movie movie, Double rating) {
+    private void createNewRating(Movie movie, User user, Double rating) {
         MovieRating movieRating = MovieRating.builder()
                                              .movie(movie)
-                                             .user(userService.getUser())
+                                             .user(user)
                                              .rating(rating)
                                              .build();
 
@@ -59,14 +60,11 @@ public class MovieRatingService {
     public Double getRating(Movie movie) {
         Optional<MovieRating> existingMovieRating = ratingRepository.findByMovieAndUser(movie, userService.getUser());
 
-        if (existingMovieRating.isEmpty()) {
-            log.info("returning '0' rating");
-            return 0d;
-        }
+        Double rating = existingMovieRating.map(MovieRating::getRating).orElse(0d);
 
-        log.info("returning rating '{}'", existingMovieRating.get().getRating());
+        log.info("retrieved rating: {}", rating);
 
-        return existingMovieRating.get().getRating();
+        return rating;
     }
 
 }

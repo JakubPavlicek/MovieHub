@@ -48,7 +48,7 @@ public class ProductionCompanyService {
     }
 
     public Page<ProductionCompany> getProductionCompanies(Integer page, Integer limit, String name) {
-        Sort sort = Sort.by(Sort.Direction.ASC, ProductionCompany_.NAME);
+        Sort sort = Sort.by(ProductionCompany_.NAME).ascending();
         Pageable pageable = PageRequest.of(page, limit, sort);
 
         if (name.isEmpty()) {

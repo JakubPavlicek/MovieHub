@@ -33,14 +33,14 @@ public class DirectorService {
     }
 
     public Director addDirector(Director director) {
-        verifyDirectorUniqueness(director);
+        verifyDirectorUniqueness(director.getName());
 
         return saveDirector(director);
     }
 
-    private void verifyDirectorUniqueness(Director director) {
-        if (directorRepository.existsByName(director.getName())) {
-            throw new DirectorAlreadyExistsException("Director with name: " + director.getName() + " already exists");
+    private void verifyDirectorUniqueness(String directorName) {
+        if (directorName != null && directorRepository.existsByName(directorName)) {
+            throw new DirectorAlreadyExistsException("Director with name: " + directorName + " already exists");
         }
     }
 
@@ -54,7 +54,7 @@ public class DirectorService {
     }
 
     public Page<Director> getDirectors(Integer page, Integer limit, String name) {
-        Sort sort = Sort.by(Sort.Direction.ASC, Director_.NAME);
+        Sort sort = Sort.by(Director_.NAME).ascending();
         Pageable pageable = PageRequest.of(page, limit, sort);
 
         if (name.isEmpty()) {
@@ -67,16 +67,11 @@ public class DirectorService {
     public Director updateDirector(UUID directorId, Director incomingDirector) {
         Director existingDirector = getDirector(directorId);
 
-        if (incomingDirector.getName() != null) {
-            verifyDirectorUniqueness(incomingDirector);
-            existingDirector.setName(incomingDirector.getName());
-        }
-        if (incomingDirector.getBio() != null) {
-            existingDirector.setBio(incomingDirector.getBio());
-        }
-        if (incomingDirector.getGender() != null) {
-            existingDirector.setGender(incomingDirector.getGender());
-        }
+        verifyDirectorUniqueness(incomingDirector.getName());
+
+        existingDirector.setName(incomingDirector.getName());
+        existingDirector.setBio(incomingDirector.getBio());
+        existingDirector.setGender(incomingDirector.getGender());
 
         return directorRepository.save(existingDirector);
     }

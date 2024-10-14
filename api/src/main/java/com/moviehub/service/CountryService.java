@@ -45,7 +45,7 @@ public class CountryService {
     }
 
     public List<Country> getCountries() {
-        Sort sort = Sort.by(Sort.Direction.ASC, Country_.NAME);
+        Sort sort = Sort.by(Country_.NAME).ascending();
 
         return countryRepository.findAll(sort);
     }

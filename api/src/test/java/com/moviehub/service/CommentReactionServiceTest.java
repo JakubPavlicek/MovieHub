@@ -32,8 +32,8 @@ class CommentReactionServiceTest {
     @InjectMocks
     private CommentReactionService reactionService;
 
-    private User user;
-    private Comment comment;
+    private static User user;
+    private static Comment comment;
 
     @BeforeEach
     void setUp() {
@@ -94,7 +94,7 @@ class CommentReactionServiceTest {
         assertThat(comment.getDislikes()).isEqualTo(5);
     }
 
-    private CommentReaction createLikeReaction() {
+    private static CommentReaction createLikeReaction() {
         return CommentReaction.builder()
                               .user(user)
                               .comment(comment)
