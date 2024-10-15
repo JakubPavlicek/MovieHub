@@ -15,7 +15,7 @@ public class CommentMapper {
 
     public static Comment mapToComment(AddCommentRequest addCommentRequest) {
         return Comment.builder()
-                      .text(addCommentRequest.getText())
+//                      .text(addCommentRequest.getText())
                       .build();
     }
 
@@ -31,7 +31,7 @@ public class CommentMapper {
                                      .dislikes(comment.getDislikes())
                                      .userReaction(ReactionTypeMapper.mapToReactionType(comment.getUserReaction()))
                                      .isAuthor(comment.isAuthor())
-                                     .replies(mapRepliesToCommentDetailsResponse(comment.getReplies()))
+//                                     .replies(mapRepliesToCommentDetailsResponse(comment.getReplies()))
                                      .build();
     }
 
@@ -61,7 +61,7 @@ public class CommentMapper {
                                      .isDeleted(comment.getIsDeleted())
                                      .likes(comment.getLikes())
                                      .dislikes(comment.getDislikes())
-                                     .parentCommentId(comment.getParentComment().getId())
+//                                     .parentCommentId(comment.getParentComment().getId())
                                      .userReaction(ReactionTypeMapper.mapToReactionType(comment.getUserReaction()))
                                      .isAuthor(comment.isAuthor())
                                      .build();

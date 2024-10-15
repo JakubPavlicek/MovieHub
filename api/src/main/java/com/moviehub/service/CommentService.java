@@ -8,12 +8,14 @@ import com.moviehub.exception.CommentNotFoundException;
 import com.moviehub.repository.CommentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Log4j2
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -37,7 +39,7 @@ public class CommentService {
 
         comment.setMovie(movie);
         comment.setUser(userService.getUser());
-        comment.setParentComment(parentCommentId == null ? null : getComment(parentCommentId));
+//        comment.setParentComment(parentCommentId == null ? null : getComment(parentCommentId));
 
         commentRepository.save(comment);
     }
@@ -53,17 +55,21 @@ public class CommentService {
     }
 
     public Page<Comment> getComments(Movie movie, Pageable pageable) {
-        Page<Comment> topLevelComments = commentRepository.findAllTopLevelComments(movie, pageable);
+        log.info("fetching comments for movie with ID: {}", movie.getId());
+
+//        Page<Comment> topLevelComments = commentRepository.findAllTopLevelComments(movie, pageable);
 
         User authUser = userService.getUser();
 
         // set transient fields for top-level comments and their replies
-        topLevelComments.forEach(comment -> {
-            setTransientFields(comment, authUser);
-            comment.getReplies().forEach(reply -> setTransientFields(reply, authUser));
-        });
+//        topLevelComments.forEach(comment -> {
+//            log.info("setting transient fields for comment with ID: {}", comment.getId());
+//            setTransientFields(comment, authUser);
+//            comment.getReplies().forEach(reply -> setTransientFields(reply, authUser));
+//        });
 
-        return topLevelComments;
+//        return topLevelComments;
+        return null;
     }
 
     private void setTransientFields(Comment comment, User user) {

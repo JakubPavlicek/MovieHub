@@ -3,6 +3,7 @@ package com.moviehub.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,7 +23,7 @@ import java.util.UUID;
 @Entity
 @Table(
     uniqueConstraints = @UniqueConstraint(
-        columnNames = {"comment_id", "user_id"},
+        columnNames = {"comment_info_id", "user_id"},
         name = "uq_comment_user"
     )
 )
@@ -37,15 +38,19 @@ public class CommentReaction {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(
-        name = "comment_id",
-        referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "fk_comment")
+    @ManyToOne(
+        fetch = FetchType.LAZY
     )
-    private Comment comment;
+    @JoinColumn(
+        name = "comment_info_id",
+        referencedColumnName = "id",
+        foreignKey = @ForeignKey(name = "fk_comment_info")
+    )
+    private CommentInfo commentInfo;
 
-    @ManyToOne
+    @ManyToOne(
+        fetch = FetchType.LAZY
+    )
     @JoinColumn(
         name = "user_id",
         referencedColumnName = "id",

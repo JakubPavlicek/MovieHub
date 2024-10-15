@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 
 @Service
+@Transactional
 @Log4j2
 public class UserService {
 
@@ -45,7 +46,6 @@ public class UserService {
                              .orElseThrow(() -> new UserNotFoundException("User with ID: " + userId + " not found"));
     }
 
-    @Transactional
     public void saveAuthenticatedUser(String userId, String accessToken) {
         if (!userRepository.existsById(userId)) {
             UserInfo userInfo = fetchUserInfo(accessToken);
@@ -70,7 +70,7 @@ public class UserService {
                                       .retrieve()
                                       .body(UserInfo.class);
 
-        log.info("fetching userInfo");
+        log.info("fetched user's info");
 
         return userInfo;
     }

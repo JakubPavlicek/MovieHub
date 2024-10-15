@@ -13,30 +13,37 @@ databaseChangeLog:
 
         - addForeignKeyConstraint:
             baseTableName: comment
+            baseColumnNames: id
+            constraintName: fk_comment_info
+            referencedTableName: comment_info
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            baseTableName: comment
             baseColumnNames: movie_id
             constraintName: fk_movie
             referencedTableName: movie
             referencedColumnNames: id
 
         - addForeignKeyConstraint:
-            baseTableName: comment
-            baseColumnNames: parent_comment_id
-            constraintName: fk_parent_comment
-            referencedTableName: comment
+            baseTableName: comment_reply
+            baseColumnNames: id
+            constraintName: fk_comment_info
+            referencedTableName: comment_info
             referencedColumnNames: id
 
         - addForeignKeyConstraint:
-            baseTableName: comment
-            baseColumnNames: user_id
-            constraintName: fk_user
-            referencedTableName: auth_user
+            baseTableName: comment_reply
+            baseColumnNames: comment_id
+            constraintName: fk_comment
+            referencedTableName: comment_info
             referencedColumnNames: id
 
         - addForeignKeyConstraint:
               baseTableName: comment_reaction
-              baseColumnNames: comment_id
-              constraintName: fk_comment
-              referencedTableName: comment
+              baseColumnNames: comment_info_id
+              constraintName: fk_comment_info
+              referencedTableName: comment_info
               referencedColumnNames: id
 
         - addForeignKeyConstraint:

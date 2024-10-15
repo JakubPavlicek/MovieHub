@@ -5,14 +5,11 @@ databaseChangeLog:
       changes:
 
         - insert:
-            tableName: comment
+            tableName: comment_info
             columns:
               - column:
                   name: id
                   value: c9d6f870-9f9a-4dbf-9079-bb676bc5a1b5
-              - column:
-                  name: movie_id
-                  value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: user_id
                   value: "auth0|66f8511afb3983f9045fc7c9"
@@ -33,14 +30,11 @@ databaseChangeLog:
                   value: "0"
 
         - insert:
-            tableName: comment
+            tableName: comment_info
             columns:
               - column:
                   name: id
                   value: 72c8a1de-6f7a-42b3-8263-e3b56b9d5f0e
-              - column:
-                  name: movie_id
-                  value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: user_id
                   value: "auth0|66f8511afb3983f9045fc7c9"
@@ -61,107 +55,11 @@ databaseChangeLog:
                   value: "0"
 
         - insert:
-            tableName: comment
-            columns:
-              - column:
-                  name: id
-                  value: f97bfa82-4b64-48c1-b9b6-b52eec19104f
-              - column:
-                  name: movie_id
-                  value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
-              - column:
-                  name: user_id
-                  value: "auth0|66e0361a33e90f60811ae8ba"
-              - column:
-                  name: created_at
-                  valueDate: "2024-09-27T14:10:00"
-              - column:
-                  name: text
-                  value: "I agree! That twist was insane, I did not see it coming at all!"
-              - column:
-                  name: parent_comment_id
-                  value: c9d6f870-9f9a-4dbf-9079-bb676bc5a1b5
-              - column:
-                  name: is_deleted
-                  value: "false"
-              - column:
-                  name: likes
-                  value: "0"
-              - column:
-                  name: dislikes
-                  value: "0"
-
-        - insert:
-            tableName: comment
-            columns:
-              - column:
-                  name: id
-                  value: 35e4de5b-b805-45b6-b5b5-91b51b9fbb1f
-              - column:
-                  name: movie_id
-                  value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
-              - column:
-                  name: user_id
-                  value: "auth0|66f8511afb3983f9045fc7c9"
-              - column:
-                  name: created_at
-                  valueDate: "2024-09-27T14:20:00"
-              - column:
-                  name: text
-                  value: "Same here! I had to rewatch the last 30 minutes just to catch all the clues."
-              - column:
-                  name: parent_comment_id
-                  value: c9d6f870-9f9a-4dbf-9079-bb676bc5a1b5
-              - column:
-                  name: is_deleted
-                  value: "false"
-              - column:
-                  name: likes
-                  value: "0"
-              - column:
-                  name: dislikes
-                  value: "0"
-
-        - insert:
-            tableName: comment
-            columns:
-              - column:
-                  name: id
-                  value: e4d0f179-7919-437f-b28b-4d73f3f246e5
-              - column:
-                  name: movie_id
-                  value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
-              - column:
-                  name: user_id
-                  value: "auth0|66e0361a33e90f60811ae8ba"
-              - column:
-                  name: created_at
-                  valueDate: "2024-09-27T14:30:00"
-              - column:
-                  name: text
-                  value: "It’s rare to see such a well-crafted visual experience. The director’s vision was spot on!"
-              - column:
-                  name: parent_comment_id
-                  value: c9d6f870-9f9a-4dbf-9079-bb676bc5a1b5
-              - column:
-                  name: is_deleted
-                  value: "false"
-              - column:
-                  name: likes
-                  value: "0"
-              - column:
-                  name: dislikes
-                  value: "0"
-
-        - insert:
-            tableName: comment
+            tableName: comment_info
             columns:
               - column:
                   name: id
                   value: 7a9c1d71-bd8d-46ff-b2c6-678b6b64f983
-              - column:
-                  name: movie_id
-                  value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: user_id
                   value: "auth0|66f8511afb3983f9045fc7c9"
@@ -182,14 +80,11 @@ databaseChangeLog:
                   value: "0"
 
         - insert:
-            tableName: comment
+            tableName: comment_info
             columns:
               - column:
                   name: id
                   value: c58c8a57-c5ef-4736-9631-0b79c55b4654
-              - column:
-                  name: movie_id
-                  value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: user_id
                   value: "auth0|66f8511afb3983f9045fc7c9"
@@ -210,14 +105,11 @@ databaseChangeLog:
                   value: "0"
 
         - insert:
-            tableName: comment
+            tableName: comment_info
             columns:
               - column:
                   name: id
                   value: b65d21d4-65e4-45e8-8a7b-c0f8e6c5a0af
-              - column:
-                  name: movie_id
-                  value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: user_id
                   value: "auth0|66f8511afb3983f9045fc7c9"
@@ -238,14 +130,11 @@ databaseChangeLog:
                   value: "0"
 
         - insert:
-            tableName: comment
+            tableName: comment_info
             columns:
               - column:
                   name: id
                   value: f4c77f07-d495-45a2-9c8e-79918ebf0662
-              - column:
-                  name: movie_id
-                  value: 8c328172-a60f-4ea6-93b1-ca2a5cca2bf0 # Interstellar
               - column:
                   name: user_id
                   value: "auth0|66f8511afb3983f9045fc7c9"
@@ -255,6 +144,81 @@ databaseChangeLog:
               - column:
                   name: text
                   value: "This movie was such a pleasant surprise. I really enjoyed it!"
+              - column:
+                  name: is_deleted
+                  value: "false"
+              - column:
+                  name: likes
+                  value: "0"
+              - column:
+                  name: dislikes
+                  value: "0"
+
+        - insert:
+            tableName: comment_info
+            columns:
+              - column:
+                  name: id
+                  value: f97bfa82-4b64-48c1-b9b6-b52eec19104f
+              - column:
+                  name: user_id
+                  value: "auth0|66e0361a33e90f60811ae8ba"
+              - column:
+                  name: created_at
+                  valueDate: "2024-09-27T14:10:00"
+              - column:
+                  name: text
+                  value: "I agree! That twist was insane, I did not see it coming at all!"
+              - column:
+                  name: is_deleted
+                  value: "false"
+              - column:
+                  name: likes
+                  value: "0"
+              - column:
+                  name: dislikes
+                  value: "0"
+
+        - insert:
+            tableName: comment_info
+            columns:
+              - column:
+                  name: id
+                  value: 35e4de5b-b805-45b6-b5b5-91b51b9fbb1f
+              - column:
+                  name: user_id
+                  value: "auth0|66f8511afb3983f9045fc7c9"
+              - column:
+                  name: created_at
+                  valueDate: "2024-09-27T14:20:00"
+              - column:
+                  name: text
+                  value: "Same here! I had to rewatch the last 30 minutes just to catch all the clues."
+              - column:
+                  name: is_deleted
+                  value: "false"
+              - column:
+                  name: likes
+                  value: "0"
+              - column:
+                  name: dislikes
+                  value: "0"
+
+        - insert:
+            tableName: comment_info
+            columns:
+              - column:
+                  name: id
+                  value: e4d0f179-7919-437f-b28b-4d73f3f246e5
+              - column:
+                  name: user_id
+                  value: "auth0|66e0361a33e90f60811ae8ba"
+              - column:
+                  name: created_at
+                  valueDate: "2024-09-27T14:30:00"
+              - column:
+                  name: text
+                  value: "It’s rare to see such a well-crafted visual experience. The director’s vision was spot on!"
               - column:
                   name: is_deleted
                   value: "false"

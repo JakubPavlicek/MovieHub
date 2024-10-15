@@ -25,12 +25,13 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
-#    show-sql: true
+    show-sql: true
     open-in-view: false
     properties:
       hibernate:
 #        generate_statistics: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
 
 springdoc:
   api-docs:

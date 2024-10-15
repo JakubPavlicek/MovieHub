@@ -4,7 +4,7 @@ databaseChangeLog:
       author: JakubPavlicek
       changes:
         - createTable:
-            tableName: comment
+            tableName: comment_reply
             columns:
               - column:
                   name: id
@@ -15,8 +15,8 @@ databaseChangeLog:
                     unique: true
                     foreignKeyName: fk_comment_info
               - column:
-                  name: movie_id
+                  name: comment_id
                   type: uuid
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_movie
+                    foreignKeyName: fk_comment

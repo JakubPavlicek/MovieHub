@@ -1,19 +1,22 @@
 package com.moviehub.repository;
 
-import com.moviehub.entity.Comment;
 import com.moviehub.entity.CommentReaction;
-import com.moviehub.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface CommentReactionRepository extends JpaRepository<CommentReaction, UUID> {
 
-    Optional<CommentReaction> findByCommentAndUser(Comment comment, User user);
-
-    void removeByCommentAndUser(Comment comment, User user);
+//    @Query("""
+//           SELECT cr FROM CommentReaction cr
+//           LEFT JOIN FETCH cr.comment c
+//           LEFT JOIN FETCH cr.user u
+//           WHERE cr.comment.id = :commentId AND cr.user.id = :userId
+//           """)
+//    Optional<CommentReaction> findByCommentIdAndUserId(UUID commentId, String userId);
+//
+//    void removeByComment_IdAndUser_Id(UUID commentId, String userId);
 
 }

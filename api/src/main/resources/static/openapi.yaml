@@ -1595,7 +1595,7 @@ paths:
       description: |
         Retrieve a list of movies in the system.
         The results can be customized with various filters, sorting options, and pagination to refine the list based on specific preferences.
-      summary: Get movies
+      summary: List movies
       operationId: getMovies
       tags:
         - movies
@@ -1788,7 +1788,7 @@ paths:
   /movies/{movieId}/ratings/me:
     get:
       description: Get the current user's rating for a specified movie.
-      summary: Get user's rating.
+      summary: Get user's rating
       operationId: getUserRating
       security:
         - bearerAuth: []
@@ -1889,7 +1889,7 @@ paths:
   /comments/{commentId}/reactions:
     post:
       description: Add a reaction for a comment with the specified ID.
-      summary: Add a reaction to a comment
+      summary: Add reaction to a comment
       operationId: addCommentReaction
       security:
         - bearerAuth: []

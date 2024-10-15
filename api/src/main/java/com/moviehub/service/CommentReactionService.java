@@ -9,8 +9,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -22,14 +20,14 @@ public class CommentReactionService {
 
     public void addCommentReaction(Comment comment, ReactionType reactionType) {
         User user = userService.getUser();
-        Optional<CommentReaction> existingReaction = reactionRepository.findByCommentAndUser(comment, user);
+//        Optional<CommentReaction> existingReaction = reactionRepository.findByCommentAndUser(comment, user);
 
-        existingReaction.ifPresentOrElse(
-            // user has already reacted to the comment -> update the reaction
-            reaction -> updateExistingReaction(reaction, comment, reactionType),
-            // user has reacted for the first time -> create new reaction
-            () -> saveNewReaction(comment, user, reactionType)
-        );
+//        existingReaction.ifPresentOrElse(
+//            // user has already reacted to the comment -> update the reaction
+//            reaction -> updateExistingReaction(reaction, comment, reactionType),
+//            // user has reacted for the first time -> create new reaction
+//            () -> saveNewReaction(comment, user, reactionType)
+//        );
     }
 
     private void updateExistingReaction(CommentReaction reaction, Comment comment, ReactionType newReaction) {
@@ -66,13 +64,13 @@ public class CommentReactionService {
     }
 
     private void saveNewReaction(Comment comment, User user, ReactionType reactionType) {
-        CommentReaction reaction = CommentReaction.builder()
-                                                  .comment(comment)
-                                                  .user(user)
-                                                  .reactionType(reactionType)
-                                                  .build();
-
-        reactionRepository.save(reaction);
+//        CommentReaction reaction = CommentReaction.builder()
+//                                                  .comment(comment)
+//                                                  .user(user)
+//                                                  .reactionType(reactionType)
+//                                                  .build();
+//
+//        reactionRepository.save(reaction);
 
         updateCommentReactions(comment, ReactionType.NONE, reactionType);
     }

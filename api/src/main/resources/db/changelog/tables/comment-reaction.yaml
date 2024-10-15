@@ -15,11 +15,11 @@ databaseChangeLog:
                     nullable: false
                     unique: true
               - column:
-                  name: comment_id
+                  name: comment_info_id
                   type: uuid
                   constraints:
                     nullable: false
-                    foreignKeyName: fk_comment
+                    foreignKeyName: fk_comment_info
               - column:
                   name: user_id
                   type: varchar(255)

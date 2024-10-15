@@ -88,7 +88,9 @@ public class Movie {
     )
     private String trailerUrl;
 
-    @ManyToOne
+    @ManyToOne(
+        fetch = FetchType.LAZY
+    )
     @JoinColumn(
         name = "director_id",
         referencedColumnName = "id",
@@ -104,13 +106,13 @@ public class Movie {
 
     @OneToMany(
         mappedBy = "movie",
-        fetch = FetchType.EAGER,
+        fetch = FetchType.LAZY,
         cascade = CascadeType.REMOVE
     )
     private List<MovieCast> cast;
 
     @ManyToMany(
-        fetch = FetchType.EAGER
+        fetch = FetchType.LAZY
     )
     @JoinTable(
         name = "movie_production",
@@ -128,7 +130,7 @@ public class Movie {
     private List<ProductionCompany> production;
 
     @ManyToMany(
-        fetch = FetchType.EAGER
+        fetch = FetchType.LAZY
     )
     @JoinTable(
         name = "movie_genre",
@@ -146,7 +148,7 @@ public class Movie {
     private List<Genre> genres;
 
     @ManyToMany(
-        fetch = FetchType.EAGER
+        fetch = FetchType.LAZY
     )
     @JoinTable(
         name = "movie_country",

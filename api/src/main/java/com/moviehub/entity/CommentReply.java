@@ -5,16 +5,11 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OrderBy;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
@@ -22,24 +17,16 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class Comment extends CommentInfo {
+public class CommentReply extends CommentInfo {
 
     @ManyToOne(
         fetch = FetchType.LAZY
     )
     @JoinColumn(
-        name = "movie_id",
+        name = "comment_id",
         referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "fk_movie")
+        foreignKey = @ForeignKey(name = "fk_comment")
     )
-    private Movie movie;
-
-    @OneToMany(
-        mappedBy = "comment",
-        fetch = FetchType.LAZY
-    )
-    @OrderBy("createdAt ASC")
-    @Builder.Default
-    private List<CommentReply> replies = new ArrayList<>();
+    private CommentInfo comment;
 
 }

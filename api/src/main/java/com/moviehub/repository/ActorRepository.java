@@ -17,4 +17,5 @@ public interface ActorRepository extends JpaRepository<Actor, UUID> {
     Optional<Actor> findByName(String name);
 
     boolean existsByName(String name);
+
 }

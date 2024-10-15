@@ -7,7 +7,7 @@ databaseChangeLog:
         # ensure that a user can only react once to a given comment
         - addUniqueConstraint:
             tableName: comment_reaction
-            columnNames: comment_id, user_id
+            columnNames: comment_info_id, user_id
             constraintName: uq_comment_user
 
         # ensure that a user can only rate a given movie once
