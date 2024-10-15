@@ -16,17 +16,17 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class MovieInteractionService {
 
-    private final CommentService commentService;
+    private final CommentInfoService commentInfoService;
     private final MovieRatingService ratingService;
     private final ParseService parseService;
 
-    public void saveComment(Movie movie, Comment comment, UUID parentCommentId) {
-        commentService.saveComment(movie, comment, parentCommentId);
+    public void addComment(Movie movie, String text) {
+        commentInfoService.addComment(movie, text);
     }
 
-    public Page<Comment> getComments(Movie movie, Integer page, Integer limit, String sort) {
+    public Page<Comment> getComments(UUID movieId, Integer page, Integer limit, String sort) {
         Pageable pageable = PageRequest.of(page, limit, parseService.parseCommentSort(sort));
-        return commentService.getComments(movie, pageable);
+        return commentInfoService.getComments(movieId, pageable);
     }
 
     public boolean saveRating(Movie movie, Double rating) {

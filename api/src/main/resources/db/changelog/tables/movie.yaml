@@ -43,7 +43,7 @@ databaseChangeLog:
                   name: director_id
                   type: uuid
                   constraints:
-                    nullable: true
+                    nullable: false
                     foreignKeyName: fk_director
               - column:
                   name: rating

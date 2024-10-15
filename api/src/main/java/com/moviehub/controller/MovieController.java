@@ -3,7 +3,7 @@ package com.moviehub.controller;
 import com.moviehub.MoviesApi;
 import com.moviehub.dto.AddCommentRequest;
 import com.moviehub.dto.AddMovieRequest;
-import com.moviehub.dto.CommentPage;
+import com.moviehub.dto.CommentInfoPage;
 import com.moviehub.dto.MovieDetailsResponse;
 import com.moviehub.dto.MoviePage;
 import com.moviehub.dto.MovieUserRating;
@@ -11,7 +11,7 @@ import com.moviehub.dto.UpdateMovieRequest;
 import com.moviehub.dto.YearListResponse;
 import com.moviehub.entity.Comment;
 import com.moviehub.entity.Movie;
-import com.moviehub.mapper.dto.CommentMapper;
+import com.moviehub.mapper.dto.CommentInfoMapper;
 import com.moviehub.mapper.dto.MovieMapper;
 import com.moviehub.service.MovieService;
 import lombok.RequiredArgsConstructor;
@@ -47,7 +47,7 @@ public class MovieController implements MoviesApi {
 
     @Override
     public ResponseEntity<MovieDetailsResponse> getMovie(UUID movieId) {
-        Movie movie = movieService.getMovie(movieId);
+        Movie movie = movieService.getMovieWithDetails(movieId);
         MovieDetailsResponse movieDetailsResponse = MovieMapper.mapToMovieDetailsResponse(movie);
 
         return ResponseEntity.ok(movieDetailsResponse);
@@ -88,18 +88,17 @@ public class MovieController implements MoviesApi {
 
     @Override
     public ResponseEntity<Void> addComment(UUID movieId, AddCommentRequest addCommentRequest) {
-        Comment comment = CommentMapper.mapToComment(addCommentRequest);
-        movieService.addComment(movieId, comment, addCommentRequest.getParentCommentId());
+        movieService.addComment(movieId, addCommentRequest.getText());
 
         return ResponseEntity.noContent().build();
     }
 
     @Override
-    public ResponseEntity<CommentPage> getComments(UUID movieId, Integer page, Integer limit, String sort) {
+    public ResponseEntity<CommentInfoPage> getComments(UUID movieId, Integer page, Integer limit, String sort) {
         Page<Comment> comments = movieService.getComments(movieId, page, limit, sort);
-        CommentPage commentPage = CommentMapper.mapToCommentPage(comments);
+        CommentInfoPage commentInfoPage = CommentInfoMapper.mapToCommentInfoPage(comments);
 
-        return ResponseEntity.ok(commentPage);
+        return ResponseEntity.ok(commentInfoPage);
     }
 
     @Override

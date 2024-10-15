@@ -94,13 +94,15 @@ public class Movie {
     @JoinColumn(
         name = "director_id",
         referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "fk_director")
+        foreignKey = @ForeignKey(name = "fk_director"),
+        nullable = false
     )
     private Director director;
 
     @OneToMany(
         mappedBy = "movie",
-        fetch = FetchType.LAZY
+        fetch = FetchType.LAZY,
+        cascade = CascadeType.REMOVE
     )
     private List<Comment> comments;
 
@@ -119,12 +121,14 @@ public class Movie {
         joinColumns = @JoinColumn(
             name = "movie_id",
             referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_movie")
+            foreignKey = @ForeignKey(name = "fk_movie"),
+            nullable = false
         ),
         inverseJoinColumns = @JoinColumn(
             name = "company_id",
             referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_company")
+            foreignKey = @ForeignKey(name = "fk_company"),
+            nullable = false
         )
     )
     private List<ProductionCompany> production;
@@ -137,12 +141,14 @@ public class Movie {
         joinColumns = @JoinColumn(
             name = "movie_id",
             referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_movie")
+            foreignKey = @ForeignKey(name = "fk_movie"),
+            nullable = false
         ),
         inverseJoinColumns = @JoinColumn(
             name = "genre_id",
             referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_genre")
+            foreignKey = @ForeignKey(name = "fk_genre"),
+            nullable = false
         )
     )
     private List<Genre> genres;
@@ -155,19 +161,22 @@ public class Movie {
         joinColumns = @JoinColumn(
             name = "movie_id",
             referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_movie")
+            foreignKey = @ForeignKey(name = "fk_movie"),
+            nullable = false
         ),
         inverseJoinColumns = @JoinColumn(
             name = "country_id",
             referencedColumnName = "id",
-            foreignKey = @ForeignKey(name = "fk_country")
+            foreignKey = @ForeignKey(name = "fk_country"),
+            nullable = false
         )
     )
     private List<Country> countries;
 
     @OneToMany(
         mappedBy = "movie",
-        fetch = FetchType.LAZY
+        fetch = FetchType.LAZY,
+        cascade = CascadeType.REMOVE
     )
     private List<MovieRating> ratings;
 

@@ -50,7 +50,7 @@ class MovieInteractionServiceTest {
 
         movieInteractionService.saveComment(movie, comment, null);
 
-        verify(commentService, times(1)).saveComment(movie, comment, null);
+        verify(commentService, times(1)).addComment(movie, comment, null);
     }
 
     @Test

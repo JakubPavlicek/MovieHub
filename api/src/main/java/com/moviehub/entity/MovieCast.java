@@ -35,7 +35,8 @@ public class MovieCast {
     @JoinColumn(
         name = "movie_id",
         referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "fk_movie")
+        foreignKey = @ForeignKey(name = "fk_movie"),
+        nullable = false
     )
     private Movie movie;
 
@@ -45,7 +46,8 @@ public class MovieCast {
     @JoinColumn(
         name = "actor_id",
         referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "fk_actor")
+        foreignKey = @ForeignKey(name = "fk_actor"),
+        nullable = false
     )
     private Actor actor;
 

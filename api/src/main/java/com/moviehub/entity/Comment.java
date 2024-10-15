@@ -1,5 +1,6 @@
 package com.moviehub.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
@@ -30,13 +31,15 @@ public class Comment extends CommentInfo {
     @JoinColumn(
         name = "movie_id",
         referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "fk_movie")
+        foreignKey = @ForeignKey(name = "fk_movie"),
+        nullable = false
     )
     private Movie movie;
 
     @OneToMany(
         mappedBy = "comment",
-        fetch = FetchType.LAZY
+        fetch = FetchType.LAZY,
+        cascade = CascadeType.REMOVE
     )
     @OrderBy("createdAt ASC")
     @Builder.Default

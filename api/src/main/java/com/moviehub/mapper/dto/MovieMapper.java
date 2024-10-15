@@ -68,6 +68,7 @@ public class MovieMapper {
         return MovieDetailsResponse.builder()
                                    .id(movie.getId())
                                    .name(movie.getName())
+                                   .filename(movie.getFilename())
                                    .releaseDate(movie.getReleaseDate())
                                    .duration(movie.getDuration())
                                    .description(movie.getDescription())

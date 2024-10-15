@@ -15,7 +15,6 @@ public class CommentFieldMapper {
         TEXT,
         IS_DELETED,
         REPLIES,
-        PARENT_COMMENT,
         REACTIONS,
         DISLIKES,
         LIKES,
@@ -33,7 +32,6 @@ public class CommentFieldMapper {
             case TEXT -> Comment_.TEXT;
             case IS_DELETED -> Comment_.IS_DELETED;
             case REPLIES -> Comment_.REPLIES;
-            case PARENT_COMMENT -> Comment_.PARENT_COMMENT;
             case REACTIONS -> Comment_.REACTIONS;
             case DISLIKES -> Comment_.DISLIKES;
             case LIKES -> Comment_.LIKES;

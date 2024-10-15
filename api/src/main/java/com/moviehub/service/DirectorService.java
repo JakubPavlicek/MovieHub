@@ -23,11 +23,6 @@ public class DirectorService {
     private final DirectorRepository directorRepository;
 
     public Director getSavedDirector(Director director) {
-        // director is optional
-        if (director == null) {
-            return null;
-        }
-
         return directorRepository.findByName(director.getName())
                                  .orElseGet(() -> saveDirector(director));
     }

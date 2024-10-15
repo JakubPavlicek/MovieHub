@@ -159,6 +159,18 @@ components:
         example: createdAt.desc
         maxLength: 200
 
+    replyId:
+      name: replyId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+        pattern: "^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89AB][0-9a-f]{3}-[0-9a-f]{12}$"
+        maxLength: 255
+      description: "The reply ID."
+      example: c9d6f870-9f9a-4dbf-9079-bb676bc5a1b5
+
     directorId:
       name: directorId
       in: path
@@ -327,7 +339,6 @@ components:
     MovieReleaseDate:
       type: string
       format: date
-      pattern: "^([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))$"
       description: |
         The release date of the movie, formatted as `YYYY-MM-DD`.
         This indicates when the movie was officially released.
@@ -968,9 +979,9 @@ components:
             If `true`, the page has no items; otherwise, it has content.
           example: false
 
-    CommentPage:
+    CommentInfoPage:
       type: object
-      description: "Represents a page of comments, including pagination and sorting information."
+      description: "Represents a page of comments/replies, including pagination and sorting information."
       additionalProperties: false
       required:
         - content
@@ -987,10 +998,10 @@ components:
       properties:
         content:
           type: array
-          description: "List of comments."
+          description: "List of comments/replies."
           maxItems: 50
           items:
-            $ref: '#/components/schemas/CommentDetailsResponse'
+            $ref: '#/components/schemas/CommentInfoDetailsResponse'
         pageable:
           $ref: '#/components/schemas/PageableDTO'
         last:
@@ -1144,8 +1155,6 @@ components:
       properties:
         text:
           $ref: '#/components/schemas/Text'
-        parentCommentId:
-          $ref: '#/components/schemas/ParentCommentUuid'
 
     AddDirectorRequest:
       type: object
@@ -1415,27 +1424,22 @@ components:
         gender:
           $ref: '#/components/schemas/GenderName'
 
-    CommentDetailsResponse:
+    CommentInfoDetailsResponse:
       type: object
-      description: "Contains detailed information about a comment."
+      description: "Contains detailed information about a comment/reply."
       additionalProperties: false
       required:
         - id
-        - movieId
         - author
         - createdAt
         - text
         - isDeleted
         - likes
         - dislikes
-        - parentCommentId
         - userReaction
         - isAuthor
-        - replies
       properties:
         id:
-          $ref: '#/components/schemas/Uuid'
-        movieId:
           $ref: '#/components/schemas/Uuid'
         author:
           $ref: '#/components/schemas/UserNameAndPictureUrl'
@@ -1449,19 +1453,10 @@ components:
           $ref: '#/components/schemas/Likes'
         dislikes:
           $ref: '#/components/schemas/Dislikes'
-        parentCommentId:
-          $ref: '#/components/schemas/ParentCommentUuid'
         userReaction:
           $ref: '#/components/schemas/Reaction'
         isAuthor:
           $ref: '#/components/schemas/isAuthor'
-        replies:
-          type: array
-          description: |
-            A list of replies to the comment.
-          maxItems: 20
-          items:
-            $ref: '#/components/schemas/CommentDetailsResponse'
 
     GenreListResponse:
       type: object
@@ -1857,7 +1852,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/CommentPage'
+                $ref: '#/components/schemas/CommentInfoPage'
         '404':
           $ref: '#/components/responses/404MovieNotFound'
         'default':
@@ -1886,6 +1881,56 @@ paths:
         'default':
           $ref: '#/components/responses/Default'
 
+  /comments/{commentId}/replies:
+    post:
+      description: Add a reply for the specified comment.
+      summary: Add reply
+      operationId: addReply
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - comments
+      parameters:
+        - $ref: '#/components/parameters/commentId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddCommentRequest'
+      responses:
+        '204':
+          description: Sucessfully added a reply for the specified comment.
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404MovieNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
+    get:
+      description: Retrieve a list of replies of the specified comment.
+      summary: List replies
+      operationId: getReplies
+      tags:
+        - comments
+      parameters:
+        - $ref: '#/components/parameters/commentId'
+        - $ref: '#/components/parameters/page'
+        - $ref: '#/components/parameters/commentLimit'
+        - $ref: '#/components/parameters/commentSort'
+      responses:
+        '200':
+          description: Successfully retrieved a list of replies of the specified comment.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CommentInfoPage'
+        '404':
+          $ref: '#/components/responses/404MovieNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
+
   /comments/{commentId}/reactions:
     post:
       description: Add a reaction for a comment with the specified ID.
@@ -1906,6 +1951,58 @@ paths:
       responses:
         '204':
           description: Successfully reacted to the specified comment.
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404CommentNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
+
+  /replies/{replyId}:
+    delete:
+      description: Delete a comment reply with the specified ID.
+      summary: Delete reply
+      operationId: deleteReply
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - replies
+      parameters:
+        - $ref: '#/components/parameters/replyId'
+      responses:
+        '204':
+          description: Successfully deleted a reply with the given ID.
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+        '404':
+          $ref: '#/components/responses/404CommentNotFound'
+        'default':
+          $ref: '#/components/responses/Default'
+
+  /replies/{replyId}/reactions:
+    post:
+      description: Add a reaction for a comment reply with the specified ID.
+      summary: Add reaction to a reply
+      operationId: addReplyReaction
+      security:
+        - bearerAuth: [ ]
+      tags:
+        - replies
+      parameters:
+        - $ref: '#/components/parameters/replyId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReactionTypeRequest'
+      responses:
+        '204':
+          description: Successfully reacted to the specified comment reply.
         '401':
           $ref: '#/components/responses/401Unauthorized'
         '403':

@@ -34,7 +34,7 @@ class CommentServiceTest {
     private CommentRepository commentRepository;
 
     @Mock
-    private CommentReactionService reactionService;
+    private CommentInfoReactionService reactionService;
 
     @Mock
     private UserService userService;
@@ -71,7 +71,7 @@ class CommentServiceTest {
     }
 
     @Test
-    void shouldSaveCommentWithValidParentComment() {
+    void shouldAddCommentWithValidParentComment() {
         Movie movie = new Movie();
         Comment comment = createComment(FIRST_COMMENT_TEXT);
         Comment parentComment = createComment(SECOND_COMMENT_TEXT);
@@ -81,20 +81,20 @@ class CommentServiceTest {
         when(commentRepository.save(any(Comment.class))).thenReturn(comment);
         when(commentRepository.findById(PARENT_COMMENT_ID)).thenReturn(Optional.of(parentComment));
 
-        commentService.saveComment(movie, comment, PARENT_COMMENT_ID);
+        commentService.addComment(movie, comment, PARENT_COMMENT_ID);
 
         verify(commentRepository).save(any(Comment.class));
     }
 
     @Test
-    void shouldSaveCommentWithNoParentComment() {
+    void shouldAddCommentWithNoParentComment() {
         Movie movie = new Movie();
         Comment comment = createComment(FIRST_COMMENT_TEXT);
 
         when(userService.getUser()).thenReturn(new User());
         when(commentRepository.save(any(Comment.class))).thenReturn(comment);
 
-        commentService.saveComment(movie, comment, null);
+        commentService.addComment(movie, comment, null);
 
         verify(commentRepository).save(any(Comment.class));
     }
@@ -106,7 +106,7 @@ class CommentServiceTest {
         when(commentRepository.existsById(PARENT_COMMENT_ID)).thenReturn(false);
 
         assertThatExceptionOfType(CommentNotFoundException.class)
-            .isThrownBy(() -> commentService.saveComment(movie, comment, PARENT_COMMENT_ID));
+            .isThrownBy(() -> commentService.addComment(movie, comment, PARENT_COMMENT_ID));
     }
 
     @Test
@@ -131,7 +131,7 @@ class CommentServiceTest {
 
         commentService.addCommentReaction(COMMENT_ID, reactionType);
 
-        verify(reactionService).addCommentReaction(comment, reactionType);
+        verify(reactionService).addCommentInfoReaction(comment, reactionType);
     }
 
     @Test

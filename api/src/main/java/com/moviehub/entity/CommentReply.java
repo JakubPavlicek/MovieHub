@@ -25,8 +25,9 @@ public class CommentReply extends CommentInfo {
     @JoinColumn(
         name = "comment_id",
         referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "fk_comment")
+        foreignKey = @ForeignKey(name = "fk_comment"),
+        nullable = false
     )
-    private CommentInfo comment;
+    private Comment comment;
 
 }

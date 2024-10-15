@@ -57,6 +57,21 @@ public class MovieService {
                               .orElseThrow(() -> new MovieNotFoundException("Movie with ID: " + movieId + " not found"));
     }
 
+    public Movie getMovieWithDetails(UUID movieId) {
+        if (!movieRepository.existsById(movieId)) {
+            throw new MovieNotFoundException("Movie with ID: " + movieId + " not found");
+        }
+
+        // only fetch data that are needed
+        Movie movie = movieRepository.getMovieWithDirector(movieId);
+        movie = movieRepository.getMovieWithGenres(movie);
+        movie = movieRepository.getMovieWithProduction(movie);
+        movie = movieRepository.getMovieWithCastAndActors(movie);
+        movie = movieRepository.getMovieWithCountries(movie);
+
+        return movie;
+    }
+
     public void deleteMovie(UUID movieId) {
         Movie movie = getMovie(movieId);
         movieRepository.delete(movie);
@@ -73,6 +88,7 @@ public class MovieService {
 
     private static void updateMovieFields(Movie existingMovie, Movie incomingMovie) {
         existingMovie.setName(incomingMovie.getName());
+        existingMovie.setFilename(incomingMovie.getFilename());
         existingMovie.setReleaseDate(incomingMovie.getReleaseDate());
         existingMovie.setDuration(incomingMovie.getDuration());
         existingMovie.setDescription(incomingMovie.getDescription());
@@ -84,8 +100,8 @@ public class MovieService {
         updateDirector(existingMovie, incomingMovie);
         updateCast(existingMovie, incomingMovie);
         updateProduction(existingMovie, incomingMovie);
-        updateCountries(existingMovie, incomingMovie);
         updateGenres(existingMovie, incomingMovie);
+        updateCountries(existingMovie, incomingMovie);
     }
 
     private void updateDirector(Movie existingMovie, Movie incomingMovie) {
@@ -116,15 +132,6 @@ public class MovieService {
         existingMovie.setProduction(savedProduction);
     }
 
-    private void updateCountries(Movie existingMovie, Movie incomingMovie) {
-        if (incomingMovie.getCountries() == null || incomingMovie.getCountries().isEmpty()) {
-            return;
-        }
-
-        List<Country> savedCountries = metadataService.getSavedCountries(incomingMovie.getCountries());
-        existingMovie.setCountries(savedCountries);
-    }
-
     private void updateGenres(Movie existingMovie, Movie incomingMovie) {
         if (incomingMovie.getGenres() == null || incomingMovie.getGenres().isEmpty()) {
             return;
@@ -132,6 +139,15 @@ public class MovieService {
 
         List<Genre> savedGenres = metadataService.getSavedGenres(incomingMovie.getGenres());
         existingMovie.setGenres(savedGenres);
+    }
+
+    private void updateCountries(Movie existingMovie, Movie incomingMovie) {
+        if (incomingMovie.getCountries() == null || incomingMovie.getCountries().isEmpty()) {
+            return;
+        }
+
+        List<Country> savedCountries = metadataService.getSavedCountries(incomingMovie.getCountries());
+        existingMovie.setCountries(savedCountries);
     }
 
     public Page<Movie> getMoviesWithGenre(UUID genreId, Integer page, Integer limit) {
@@ -159,15 +175,15 @@ public class MovieService {
         return searchService.getMoviesWithActor(actor, page, limit);
     }
 
-    public void addComment(UUID movieId, Comment comment, UUID parentCommentId) {
+    public void addComment(UUID movieId, String text) {
         Movie movie = getMovie(movieId);
 
-        interactionService.saveComment(movie, comment, parentCommentId);
+        interactionService.addComment(movie, text);
     }
 
     public Page<Comment> getComments(UUID movieId, Integer page, Integer limit, String sort) {
-        Movie movie = getMovie(movieId);
-        return interactionService.getComments(movie, page, limit, sort);
+        getMovie(movieId);
+        return interactionService.getComments(movieId, page, limit, sort);
     }
 
     public void addRating(UUID movieId, Double rating) {

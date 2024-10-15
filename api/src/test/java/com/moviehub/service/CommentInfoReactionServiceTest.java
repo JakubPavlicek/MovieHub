@@ -21,7 +21,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class CommentReactionServiceTest {
+class CommentInfoReactionServiceTest {
 
     @Mock
     private CommentReactionRepository reactionRepository;
@@ -30,7 +30,7 @@ class CommentReactionServiceTest {
     private UserService userService;
 
     @InjectMocks
-    private CommentReactionService reactionService;
+    private CommentInfoReactionService reactionService;
 
     private static User user;
     private static Comment comment;
@@ -49,7 +49,7 @@ class CommentReactionServiceTest {
     void shouldAddNewLikeReaction() {
         when(reactionRepository.findByCommentAndUser(comment, user)).thenReturn(Optional.empty());
 
-        reactionService.addCommentReaction(comment, ReactionType.LIKE);
+        reactionService.addCommentInfoReaction(comment, ReactionType.LIKE);
 
         verify(reactionRepository).save(any(CommentReaction.class));
         assertThat(comment.getLikes()).isEqualTo(11);
@@ -61,7 +61,7 @@ class CommentReactionServiceTest {
         CommentReaction existingReaction = createLikeReaction();
         when(reactionRepository.findByCommentAndUser(comment, user)).thenReturn(Optional.of(existingReaction));
 
-        reactionService.addCommentReaction(comment, ReactionType.DISLIKE);
+        reactionService.addCommentInfoReaction(comment, ReactionType.DISLIKE);
 
         verify(reactionRepository).save(existingReaction);
         assertThat(existingReaction.getReactionType()).isEqualTo(ReactionType.DISLIKE);
@@ -74,7 +74,7 @@ class CommentReactionServiceTest {
         CommentReaction existingReaction = createLikeReaction();
         when(reactionRepository.findByCommentAndUser(comment, user)).thenReturn(Optional.of(existingReaction));
 
-        reactionService.addCommentReaction(comment, ReactionType.NONE);
+        reactionService.addCommentInfoReaction(comment, ReactionType.NONE);
 
         verify(reactionRepository).delete(existingReaction);
         assertThat(comment.getLikes()).isEqualTo(9);
@@ -86,7 +86,7 @@ class CommentReactionServiceTest {
         CommentReaction existingReaction = createLikeReaction();
         when(reactionRepository.findByCommentAndUser(comment, user)).thenReturn(Optional.of(existingReaction));
 
-        reactionService.addCommentReaction(comment, ReactionType.LIKE);
+        reactionService.addCommentInfoReaction(comment, ReactionType.LIKE);
 
         verify(reactionRepository, never()).delete(existingReaction);
         verify(reactionRepository).save(existingReaction);

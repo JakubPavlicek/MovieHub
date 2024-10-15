@@ -1,9 +1,8 @@
 package com.moviehub.service;
 
 import com.moviehub.entity.Comment;
+import com.moviehub.entity.CommentReply;
 import com.moviehub.entity.Movie;
-import com.moviehub.entity.ReactionType;
-import com.moviehub.entity.User;
 import com.moviehub.exception.CommentNotFoundException;
 import com.moviehub.repository.CommentRepository;
 import jakarta.transaction.Transactional;
@@ -13,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @Log4j2
@@ -23,8 +23,7 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
 
-    private final CommentReactionService reactionService;
-
+    private final CommentInfoReactionService reactionService;
     private final UserService userService;
 
     private static final String COMMENT_DELETED = "Comment deleted.";
@@ -34,51 +33,20 @@ public class CommentService {
                                 .orElseThrow(() -> new CommentNotFoundException("Comment with ID: " + commentId + " not found"));
     }
 
-    public void saveComment(Movie movie, Comment comment, UUID parentCommentId) {
-        ensureValidParentCommentId(parentCommentId);
+    public void addComment(Movie movie, String text) {
+        Comment comment = new Comment();
 
         comment.setMovie(movie);
         comment.setUser(userService.getUser());
-//        comment.setParentComment(parentCommentId == null ? null : getComment(parentCommentId));
+        comment.setText(text);
 
         commentRepository.save(comment);
     }
 
-    private void ensureValidParentCommentId(UUID parentCommentId) {
-        if (parentCommentId == null) {
-            return;
-        }
+    public Page<Comment> getComments(UUID movieId, Pageable pageable) {
+        log.info("fetching comments for movie with ID: {}", movieId);
 
-        if (!commentRepository.existsById(parentCommentId)) {
-            throw new CommentNotFoundException("Parent comment with ID: " + parentCommentId + " not found");
-        }
-    }
-
-    public Page<Comment> getComments(Movie movie, Pageable pageable) {
-        log.info("fetching comments for movie with ID: {}", movie.getId());
-
-//        Page<Comment> topLevelComments = commentRepository.findAllTopLevelComments(movie, pageable);
-
-        User authUser = userService.getUser();
-
-        // set transient fields for top-level comments and their replies
-//        topLevelComments.forEach(comment -> {
-//            log.info("setting transient fields for comment with ID: {}", comment.getId());
-//            setTransientFields(comment, authUser);
-//            comment.getReplies().forEach(reply -> setTransientFields(reply, authUser));
-//        });
-
-//        return topLevelComments;
-        return null;
-    }
-
-    private void setTransientFields(Comment comment, User user) {
-        if (user == null) {
-            return;
-        }
-
-        comment.setUserReaction(user);
-        comment.setAuthorFlag(user);
+        return commentRepository.findAllCommentsWithReplies(movieId, pageable);
     }
 
     public void deleteComment(UUID commentId) {
@@ -90,9 +58,12 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
-    public void addCommentReaction(UUID commentId, ReactionType reactionType) {
-        Comment comment = getComment(commentId);
-        reactionService.addCommentReaction(comment, reactionType);
+    public Optional<Comment> getCommentById(UUID commentId) {
+        return commentRepository.findById(commentId);
+    }
+
+    public Page<CommentReply> getReplies(UUID commentId, Pageable pageable) {
+        return commentRepository.findAllReplies(commentId, pageable);
     }
 
 }

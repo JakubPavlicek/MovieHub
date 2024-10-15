@@ -33,4 +33,19 @@ public interface MovieRepository extends JpaRepository<Movie, UUID>, JpaSpecific
     @Query("SELECT DISTINCT YEAR(m.releaseDate) FROM Movie m ORDER BY YEAR(m.releaseDate) DESC")
     List<Integer> findDistinctReleaseYears();
 
+    @Query("SELECT m FROM Movie m JOIN FETCH m.director WHERE m.id = :movieId")
+    Movie getMovieWithDirector(UUID movieId);
+
+    @Query("SELECT m FROM Movie m JOIN FETCH m.cast mc JOIN FETCH mc.actor WHERE m = :movie")
+    Movie getMovieWithCastAndActors(Movie movie);
+
+    @Query("SELECT m FROM Movie m JOIN FETCH m.production WHERE m = :movie")
+    Movie getMovieWithProduction(Movie movie);
+
+    @Query("SELECT m FROM Movie m JOIN FETCH m.genres WHERE m = :movie")
+    Movie getMovieWithGenres(Movie movie);
+
+    @Query("SELECT m FROM Movie m JOIN FETCH m.countries WHERE m = :movie")
+    Movie getMovieWithCountries(Movie movie);
+
 }

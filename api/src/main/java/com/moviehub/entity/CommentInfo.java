@@ -42,7 +42,8 @@ public abstract class CommentInfo {
     @JoinColumn(
         name = "user_id",
         referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "fk_user")
+        foreignKey = @ForeignKey(name = "fk_user"),
+        nullable = false
     )
     private User user;
 

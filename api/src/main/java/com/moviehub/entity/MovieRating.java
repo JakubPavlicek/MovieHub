@@ -43,7 +43,8 @@ public class MovieRating {
     @JoinColumn(
         name = "movie_id",
         referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "fk_movie")
+        foreignKey = @ForeignKey(name = "fk_movie"),
+        nullable = false
     )
     private Movie movie;
 
@@ -53,7 +54,8 @@ public class MovieRating {
     @JoinColumn(
         name = "user_id",
         referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "fk_user")
+        foreignKey = @ForeignKey(name = "fk_user"),
+        nullable = false
     )
     private User user;
 

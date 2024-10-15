@@ -17,7 +17,7 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-class CommentMapperTest {
+class CommentInfoMapperTest {
 
     private static final UUID FIRST_COMMENT_ID = UUID.fromString("bbefebac-b1d9-4a59-8a61-c04f2aeef660");
     private static final UUID SECOND_COMMENT_ID = UUID.fromString("d519841e-5826-4de2-8aca-3510f9e54cfc");
@@ -29,21 +29,21 @@ class CommentMapperTest {
     void shouldMapToComment() {
         AddCommentRequest request = createAddCommentRequest();
 
-        Comment result = CommentMapper.mapToComment(request);
+        Comment result = CommentInfoMapper.mapToComment(request);
 
         assertThat(result).isNotNull();
         assertThat(result.getText()).isEqualTo(FIRST_COMMENT_TEXT);
     }
 
     @Test
-    void shouldMapToCommentDetailsResponse() {
+    void shouldMapToCommentInfoDetailsResponse() {
         User user = createUser();
         Movie movie = createMovie();
         Comment comment = createComment(FIRST_COMMENT_ID, user, movie, FIRST_COMMENT_TEXT, null);
         Comment reply = createComment(SECOND_COMMENT_ID, user, movie, SECOND_COMMENT_TEXT, comment);
         comment.getReplies().add(reply);
 
-        CommentDetailsResponse response = CommentMapper.mapToCommentDetailsResponse(comment);
+        CommentDetailsResponse response = CommentInfoMapper.mapToCommentInfoDetailsResponse(comment);
 
         assertThat(response).isNotNull();
         assertThat(response.getId()).isEqualTo(comment.getId());
@@ -56,7 +56,7 @@ class CommentMapperTest {
     }
 
     @Test
-    void shouldMapToCommentPage() {
+    void shouldMapToCommentInfoPage() {
         List<Comment> comments = List.of(
             createComment(FIRST_COMMENT_ID, createUser(), createMovie(), FIRST_COMMENT_TEXT, null),
             createComment(SECOND_COMMENT_ID, createUser(), createMovie(), SECOND_COMMENT_TEXT, null)
@@ -64,7 +64,7 @@ class CommentMapperTest {
 
         Page<Comment> page = new PageImpl<>(comments, Pageable.ofSize(5), comments.size());
 
-        CommentPage result = CommentMapper.mapToCommentPage(page);
+        CommentPage result = CommentInfoMapper.mapToCommentPage(page);
 
         assertThat(result).isNotNull();
         assertThat(result.getContent()).hasSize(comments.size());

@@ -44,7 +44,8 @@ public class CommentReaction {
     @JoinColumn(
         name = "comment_info_id",
         referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "fk_comment_info")
+        foreignKey = @ForeignKey(name = "fk_comment_info"),
+        nullable = false
     )
     private CommentInfo commentInfo;
 
@@ -54,7 +55,8 @@ public class CommentReaction {
     @JoinColumn(
         name = "user_id",
         referencedColumnName = "id",
-        foreignKey = @ForeignKey(name = "fk_user")
+        foreignKey = @ForeignKey(name = "fk_user"),
+        nullable = false
     )
     private User user;
 
