@@ -74,13 +74,20 @@ class DirectorServiceTest {
     }
 
     @Test
-    void shouldReturnNullWhenDirectorIsNull() {
-        assertThat(directorService.getSavedDirector(null)).isNull();
+    void shouldAddDirectorWhenDirectorDoesNotExist() {
+        Director director = createDirector();
+
+        when(directorRepository.save(director)).thenReturn(director);
+
+        Director addedDirector = directorService.addDirector(director);
+
+        assertThat(addedDirector.getName()).isEqualTo(director.getName());
     }
 
     @Test
-    void shouldAddDirectorIfDirectorDoesNotExist() {
+    void shouldAddDirectorWhenDirectorDoesNotExistAndIdIsNull() {
         Director director = createDirector();
+        director.setId(null);
 
         when(directorRepository.existsByName(director.getName())).thenReturn(false);
         when(directorRepository.save(director)).thenReturn(director);
@@ -94,7 +101,7 @@ class DirectorServiceTest {
     void shouldThrowDirectorAlreadyExistsExceptionWhenDirectorAlreadyExists() {
         Director director = createDirector();
 
-        when(directorRepository.existsByName(director.getName())).thenReturn(true);
+        when(directorRepository.existsByNameAndIdNot(director.getName(), director.getId())).thenReturn(true);
 
         assertThatExceptionOfType(DirectorAlreadyExistsException.class)
             .isThrownBy(() -> directorService.addDirector(director));
@@ -136,9 +143,6 @@ class DirectorServiceTest {
         Director director = createDirector(FIRST_DIRECTOR_NAME, FIRST_DIRECTOR_BIO, FIRST_DIRECTOR_GENDER);
 
         when(directorRepository.findById(director.getId())).thenReturn(Optional.of(director));
-        if (name != null) {
-            when(directorRepository.existsByName(name)).thenReturn(false);
-        }
         when(directorRepository.save(director)).thenReturn(expectedDirector);
 
         Director updatedDirector = directorService.updateDirector(director.getId(), createDirector(name, bio, gender));

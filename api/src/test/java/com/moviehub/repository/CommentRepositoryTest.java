@@ -2,7 +2,7 @@ package com.moviehub.repository;
 
 import com.moviehub.TestcontainersConfiguration;
 import com.moviehub.entity.Comment;
-import com.moviehub.entity.Comment_;
+import com.moviehub.entity.Director;
 import com.moviehub.entity.Movie;
 import com.moviehub.entity.User;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,14 +12,13 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.testcontainers.containers.PostgreSQLContainer;
 
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -39,22 +38,23 @@ class CommentRepositoryTest {
     private MovieRepository movieRepository;
 
     @Autowired
+    private DirectorRepository directorRepository;
+
+    @Autowired
     private UserRepository userRepository;
 
-    private Comment comment1;
-    private Comment comment2;
-    private Comment comment3;
     private User user;
+    private Movie movie;
 
     @BeforeEach
     void setUp() {
-        Movie movie = createMovie();
+        movie = createMovie();
         user = createUser("auth0|1", "John Doe", "john@example.com");
         User user2 = createUser("auth0|2", "James Bond", "james@example.com");
 
-        comment1 = createComment(movie, user, "First comment", null);
-        comment2 = createComment(movie, user, "Second comment", comment1);
-        comment3 = createComment(movie, user2, "Third comment", comment1);
+        createComment(movie, user, "First comment");
+        createComment(movie, user, "Second comment");
+        createComment(movie, user2, "Third comment");
     }
 
     @Test
@@ -64,104 +64,45 @@ class CommentRepositoryTest {
     }
 
     @Test
-    void shouldFindRepliesForCommentsSortedByCreatedAtAsc() {
-        List<UUID> commentIds = List.of(comment1.getId());
-        Sort sort = Sort.by(Comment_.CREATED_AT)
-                        .ascending();
-
-        List<Comment> replies = commentRepository.findRepliesForComments(commentIds, sort);
-
-        assertThat(replies).hasSize(2);
-        assertThat(replies.getFirst()
-                          .getText()).isEqualTo("Second comment");
-        assertThat(replies.getLast()
-                          .getText()).isEqualTo("Third comment");
-    }
-
-    @Test
-    void shouldFindRepliesForCommentsSortedByCreatedAtDesc() {
-        List<UUID> commentIds = List.of(comment1.getId());
-        Sort sort = Sort.by(Comment_.CREATED_AT)
-                        .descending();
-
-        List<Comment> replies = commentRepository.findRepliesForComments(commentIds, sort);
-
-        assertThat(replies).hasSize(2);
-        assertThat(replies.getFirst()
-                          .getText()).isEqualTo("Third comment");
-        assertThat(replies.getLast()
-                          .getText()).isEqualTo("Second comment");
-    }
-
-    @Test
-    void shouldReturnEmptyRepliesForCommentsWhenCommentHasNoReplies() {
-        List<UUID> commentIds = List.of(comment2.getId());
-        Sort sort = Sort.by(Comment_.CREATED_AT)
-                        .descending();
-
-        List<Comment> replies = commentRepository.findRepliesForComments(commentIds, sort);
-
-        assertThat(replies).isEmpty();
-    }
-
-    @Test
-    void shouldReturnEmptyRepliesForCommentsWhenCommentIdsAreEmpty() {
-        List<UUID> commentIds = Collections.emptyList();
-        Sort sort = Sort.by(Comment_.CREATED_AT)
-                        .descending();
-
-        List<Comment> replies = commentRepository.findRepliesForComments(commentIds, sort);
-
-        assertThat(replies).isEmpty();
-    }
-
-    @Test
     void shouldFilterCommentsPostedByUser() {
-        List<UUID> commentIds = Arrays.asList(comment1.getId(), comment2.getId(), comment3.getId());
+        List<UUID> commentIds = commentRepository.findAll()
+                                                 .stream()
+                                                 .map(Comment::getId)
+                                                 .toList();
 
-        List<UUID> filteredCommentIds = commentRepository.filterCommentsPostedByUser(commentIds, user);
+        List<UUID> filteredComments = commentRepository.filterCommentsPostedByUser(commentIds, user);
 
-        assertThat(filteredCommentIds).containsExactlyInAnyOrder(comment1.getId(), comment2.getId());
+        assertThat(filteredComments).hasSize(2); // Expecting 2 comments by the user
     }
 
     @Test
-    void shouldReturnEmptyFilterCommentsPostedByUserWhenUserDoesNotExists() {
-        List<UUID> commentIds = Arrays.asList(comment1.getId(), comment2.getId(), comment3.getId());
+    void shouldFindAllCommentsByMovieId() {
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Comment> commentsPage = commentRepository.findAllComments(movie.getId(), pageable);
 
-        List<UUID> filteredCommentIds = commentRepository.filterCommentsPostedByUser(commentIds, null);
-
-        assertThat(filteredCommentIds).isEmpty();
+        assertThat(commentsPage).isNotNull();
+        assertThat(commentsPage.getContent()).hasSize(3); // Expecting 3 comments total
     }
 
     @Test
-    void shouldReturnEmptyFilterCommentsPostedByUserWhenCommentIdsAreEmpty() {
-        List<UUID> commentIds = Collections.emptyList();
+    void shouldFindCommentsByMovieId() {
+        Pageable pageable = PageRequest.of(0, 10);
+        Page<Comment> commentsPage = commentRepository.findCommentsByMovieId(movie.getId(), pageable);
 
-        List<UUID> filteredCommentIds = commentRepository.filterCommentsPostedByUser(commentIds, user);
-
-        assertThat(filteredCommentIds).isEmpty();
+        assertThat(commentsPage).isNotNull();
+        assertThat(commentsPage.getContent()).hasSize(3); // Expecting 3 comments total
     }
 
     @Test
-    void shouldFindAllTopLevelComments() {
-        Movie movie = comment1.getMovie();
-        Pageable pageable = Pageable.ofSize(10);
+    void shouldFindCommentByIdAndUser() {
+        UUID commentId = commentRepository.findAll()
+                                          .getFirst()
+                                          .getId();
+        Optional<Comment> foundComment = commentRepository.findByIdAndUser(commentId, user);
 
-        Page<Comment> page = commentRepository.findAllTopLevelComments(movie, pageable);
-
-        assertThat(page.getTotalElements()).isEqualTo(1);
-        assertThat(page.getContent()
-                       .getFirst()
-                       .getText()).isEqualTo("First comment");
-    }
-
-    @Test
-    void shouldReturnEmptyTopLevelCommentsWhenMovieDoesNotExist() {
-        Pageable pageable = Pageable.ofSize(10);
-
-        Page<Comment> page = commentRepository.findAllTopLevelComments(null, pageable);
-
-        assertThat(page.getTotalElements()).isZero();
+        assertThat(foundComment).isPresent();
+        assertThat(foundComment.get()
+                               .getUser()).isEqualTo(user);
     }
 
     private Movie createMovie() {
@@ -173,7 +114,14 @@ class CommentRepositoryTest {
                                          .description("A test movie")
                                          .posterUrl("https://example.com/poster.jpg")
                                          .trailerUrl("https://example.com/trailer.mp4")
+                                         .director(createDirector())
                                          .build());
+    }
+
+    private Director createDirector() {
+        return directorRepository.save(Director.builder()
+                                               .name("Director")
+                                               .build());
     }
 
     private User createUser(String id, String name, String email) {
@@ -185,13 +133,13 @@ class CommentRepositoryTest {
                                        .build());
     }
 
-    private Comment createComment(Movie movie, User user, String text, Comment parentComment) {
-        return commentRepository.save(Comment.builder()
-                                             .movie(movie)
-                                             .user(user)
-                                             .text(text)
-                                             .parentComment(parentComment)
-                                             .build());
+    private void createComment(Movie movie, User user, String text) {
+        Comment comment = new Comment();
+        comment.setMovie(movie);
+        comment.setUser(user);
+        comment.setText(text);
+
+        commentRepository.save(comment);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.moviehub.repository;
 
 import com.moviehub.TestcontainersConfiguration;
+import com.moviehub.entity.Director;
 import com.moviehub.entity.Movie;
 import com.moviehub.entity.MovieRating;
 import com.moviehub.entity.User;
@@ -28,6 +29,9 @@ class MovieRatingRepositoryTest {
 
     @Autowired
     private MovieRepository movieRepository;
+
+    @Autowired
+    private DirectorRepository directorRepository;
 
     @Autowired
     private UserRepository userRepository;
@@ -69,7 +73,14 @@ class MovieRatingRepositoryTest {
                                          .description("A test movie")
                                          .posterUrl("https://example.com/poster.jpg")
                                          .trailerUrl("https://example.com/trailer.mp4")
+                                         .director(createDirector())
                                          .build());
+    }
+
+    private Director createDirector() {
+        return directorRepository.save(Director.builder()
+                                               .name("Director")
+                                               .build());
     }
 
     private User createUser(String name) {

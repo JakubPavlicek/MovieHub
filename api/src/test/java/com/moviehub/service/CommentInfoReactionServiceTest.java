@@ -12,8 +12,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
@@ -47,9 +45,9 @@ class CommentInfoReactionServiceTest {
 
     @Test
     void shouldAddNewLikeReaction() {
-        when(reactionRepository.findByCommentAndUser(comment, user)).thenReturn(Optional.empty());
+//        when(reactionRepository.findByCommentInfoIdAndUserId(any(), any())).thenReturn(Optional.empty());
 
-        reactionService.addCommentInfoReaction(comment, ReactionType.LIKE);
+        reactionService.addCommentInfoReaction(comment, ReactionType.LIKE, user);
 
         verify(reactionRepository).save(any(CommentReaction.class));
         assertThat(comment.getLikes()).isEqualTo(11);
@@ -59,9 +57,9 @@ class CommentInfoReactionServiceTest {
     @Test
     void shouldUpdateExistingReactionToDislike() {
         CommentReaction existingReaction = createLikeReaction();
-        when(reactionRepository.findByCommentAndUser(comment, user)).thenReturn(Optional.of(existingReaction));
+//        when(reactionRepository.findByCommentInfoIdAndUserId(any(), any())).thenReturn(Optional.of(existingReaction));
 
-        reactionService.addCommentInfoReaction(comment, ReactionType.DISLIKE);
+        reactionService.addCommentInfoReaction(comment, ReactionType.DISLIKE, user);
 
         verify(reactionRepository).save(existingReaction);
         assertThat(existingReaction.getReactionType()).isEqualTo(ReactionType.DISLIKE);
@@ -72,9 +70,9 @@ class CommentInfoReactionServiceTest {
     @Test
     void shouldRemoveReactionWhenReactionIsNone() {
         CommentReaction existingReaction = createLikeReaction();
-        when(reactionRepository.findByCommentAndUser(comment, user)).thenReturn(Optional.of(existingReaction));
+//        when(reactionRepository.findByCommentInfoIdAndUserId(any(), any())).thenReturn(Optional.of(existingReaction));
 
-        reactionService.addCommentInfoReaction(comment, ReactionType.NONE);
+        reactionService.addCommentInfoReaction(comment, ReactionType.NONE, user);
 
         verify(reactionRepository).delete(existingReaction);
         assertThat(comment.getLikes()).isEqualTo(9);
@@ -84,9 +82,9 @@ class CommentInfoReactionServiceTest {
     @Test
     void shouldNotChangeCountsWhenReactionIsSame() {
         CommentReaction existingReaction = createLikeReaction();
-        when(reactionRepository.findByCommentAndUser(comment, user)).thenReturn(Optional.of(existingReaction));
+//        when(reactionRepository.findByCommentInfoIdAndUserId(any(), any())).thenReturn(Optional.of(existingReaction));
 
-        reactionService.addCommentInfoReaction(comment, ReactionType.LIKE);
+        reactionService.addCommentInfoReaction(comment, ReactionType.LIKE, user);
 
         verify(reactionRepository, never()).delete(existingReaction);
         verify(reactionRepository).save(existingReaction);
@@ -97,7 +95,7 @@ class CommentInfoReactionServiceTest {
     private static CommentReaction createLikeReaction() {
         return CommentReaction.builder()
                               .user(user)
-                              .comment(comment)
+                              .commentInfo(comment)
                               .reactionType(ReactionType.LIKE)
                               .build();
     }

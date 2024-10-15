@@ -22,7 +22,6 @@ class CommentFieldMapperTest {
             Arguments.of(CommentFieldMapper.Field.TEXT, Comment_.TEXT),
             Arguments.of(CommentFieldMapper.Field.IS_DELETED, Comment_.IS_DELETED),
             Arguments.of(CommentFieldMapper.Field.REPLIES, Comment_.REPLIES),
-            Arguments.of(CommentFieldMapper.Field.PARENT_COMMENT, Comment_.PARENT_COMMENT),
             Arguments.of(CommentFieldMapper.Field.REACTIONS, Comment_.REACTIONS),
             Arguments.of(CommentFieldMapper.Field.DISLIKES, Comment_.DISLIKES),
             Arguments.of(CommentFieldMapper.Field.LIKES, Comment_.LIKES)
@@ -33,8 +32,7 @@ class CommentFieldMapperTest {
         return Stream.of(
             Arguments.of("commentId", Comment_.ID),
             Arguments.of("createdAt", Comment_.CREATED_AT),
-            Arguments.of("isDeleted", Comment_.IS_DELETED),
-            Arguments.of("parentComment", Comment_.PARENT_COMMENT)
+            Arguments.of("isDeleted", Comment_.IS_DELETED)
         );
     }
 
