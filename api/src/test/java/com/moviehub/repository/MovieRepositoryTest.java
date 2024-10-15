@@ -50,7 +50,7 @@ class MovieRepositoryTest {
         Actor actor = createActor();
         createMovieCast(movie, actor);
 
-        Page<Movie> movies = movieRepository.findAllByActorsContaining(actor, pageable);
+        Page<Movie> movies = movieRepository.findMovieIdsByActorId(actor, pageable);
 
         assertThat(movies.getContent()).hasSize(1);
         assertThat(movies.getContent()
@@ -60,7 +60,7 @@ class MovieRepositoryTest {
 
     @Test
     void shouldReturnEmptyMoviesWhenActorIsInvalid() {
-        Page<Movie> movies = movieRepository.findAllByActorsContaining(null, pageable);
+        Page<Movie> movies = movieRepository.findMovieIdsByActorId(null, pageable);
 
         assertThat(movies.getContent()).isEmpty();
     }

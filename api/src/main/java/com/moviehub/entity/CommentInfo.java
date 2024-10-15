@@ -86,15 +86,15 @@ public abstract class CommentInfo {
     @Transient
     private boolean isAuthor = false;
 
-    public void setUserReaction(User currentUser) {
+    public void setUserReaction(List<CommentReaction> reactions) {
         userReaction = reactions.stream()
-                                .filter(r -> r.getUser().getId().equals(currentUser.getId()))
-                                .findFirst()
+                                .filter(r -> r.getCommentInfo().getId().equals(id))
                                 .map(CommentReaction::getReactionType)
+                                .findFirst()
                                 .orElse(ReactionType.NONE);
     }
 
-    public void setAuthorFlag(User currentUser) {
+    public void setIsAuthor(User currentUser) {
         isAuthor = user.getId().equals(currentUser.getId());
     }
 

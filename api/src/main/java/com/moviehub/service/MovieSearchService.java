@@ -1,23 +1,22 @@
 package com.moviehub.service;
 
-import com.moviehub.entity.Actor;
-import com.moviehub.entity.Country;
-import com.moviehub.entity.Director;
-import com.moviehub.entity.Genre;
 import com.moviehub.entity.Movie;
 import com.moviehub.entity.Movie_;
-import com.moviehub.entity.ProductionCompany;
 import com.moviehub.repository.MovieRepository;
 import com.moviehub.specification.MovieSpecification;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.UUID;
 
 @Log4j2
 @Service
@@ -30,40 +29,55 @@ public class MovieSearchService {
 
     private static final Sort SORT_BY_UPDATED_AT_DESC = Sort.by(Sort.Direction.DESC, Movie_.UPDATED_AT);
 
-    public Page<Movie> getMoviesWithGenre(Genre genre, Integer page, Integer limit) {
+    public Page<Movie> getMoviesWithGenre(UUID genreId, Integer page, Integer limit) {
         Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
 
-        return movieRepository.findAllByGenresContaining(genre, pageable);
+        Page<UUID> movieIds = movieRepository.findMovieIdsByGenreId(genreId, pageable);
+        List<Movie> moviesWithGenresByIds = movieRepository.findMoviesWithGenresByIds(movieIds.getContent());
+
+        return new PageImpl<>(moviesWithGenresByIds, pageable, movieIds.getTotalElements());
     }
 
-    public Page<Movie> getMoviesWithCountry(Country country, Integer page, Integer limit) {
+    public Page<Movie> getMoviesWithCountry(UUID countryId, Integer page, Integer limit) {
         Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
 
-        return movieRepository.findAllByCountriesContaining(country, pageable);
+        Page<UUID> movieIds = movieRepository.findMovieIdsByCountryId(countryId, pageable);
+        List<Movie> moviesWithGenresByIds = movieRepository.findMoviesWithGenresByIds(movieIds.getContent());
+
+        return new PageImpl<>(moviesWithGenresByIds, pageable, movieIds.getTotalElements());
     }
 
-    public Page<Movie> getMoviesWithProductionCompany(ProductionCompany productionCompany, Integer page, Integer limit) {
+    public Page<Movie> getMoviesWithProductionCompany(UUID companyId, Integer page, Integer limit) {
         Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
 
-        return movieRepository.findAllByProductionContaining(productionCompany, pageable);
+        Page<UUID> movieIds = movieRepository.findMovieIdsByCompanyId(companyId, pageable);
+        List<Movie> moviesWithGenresByIds = movieRepository.findMoviesWithGenresByIds(movieIds.getContent());
+
+        return new PageImpl<>(moviesWithGenresByIds, pageable, movieIds.getTotalElements());
     }
 
-    public Page<Movie> getMoviesWithDirector(Director director, Integer page, Integer limit) {
+    public Page<Movie> getMoviesWithDirector(UUID directorId, Integer page, Integer limit) {
         Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
 
-        return movieRepository.findAllByDirector(director, pageable);
+        Page<UUID> movieIds = movieRepository.findMovieIdsByDirectorId(directorId, pageable);
+        List<Movie> moviesWithGenresByIds = movieRepository.findMoviesWithGenresByIds(movieIds.getContent());
+
+        return new PageImpl<>(moviesWithGenresByIds, pageable, movieIds.getTotalElements());
     }
 
-    public Page<Movie> getMoviesWithActor(Actor actor, Integer page, Integer limit) {
+    public Page<Movie> getMoviesWithActor(UUID actorId, Integer page, Integer limit) {
         Pageable pageable = PageRequest.of(page, limit, SORT_BY_UPDATED_AT_DESC);
 
-        return movieRepository.findAllByActorsContaining(actor, pageable);
+        Page<UUID> movieIds = movieRepository.findMovieIdsByActorId(actorId, pageable);
+        List<Movie> moviesWithGenresByIds = movieRepository.findMoviesWithGenresByIds(movieIds.getContent());
+
+        return new PageImpl<>(moviesWithGenresByIds, pageable, movieIds.getTotalElements());
     }
 
     public Page<Movie> getMovies(Integer page, Integer limit, String sort) {
         Pageable pageable = PageRequest.of(page, limit, parseService.parseMovieSort(sort));
 
-        return movieRepository.findAll(pageable);
+        return movieRepository.getMoviePreviews(pageable);
     }
 
     public Page<Movie> filterMovies(Integer page, Integer limit, String sort, String releaseYear, String genre, String country) {
@@ -73,14 +87,14 @@ public class MovieSearchService {
                                                           .and(parseService.parseGenre(genre))
                                                           .and(parseService.parseCountry(country));
 
-        return movieRepository.findAll(specification, pageable);
+        return movieRepository.getMoviePreviews(specification, pageable);
     }
 
     public Page<Movie> searchMovies(Integer page, Integer limit, String sort, String keyword) {
         Pageable pageable = PageRequest.of(page, limit, parseService.parseMovieSort(sort));
         Specification<Movie> specification = MovieSpecification.searchByKeyword(keyword);
 
-        return movieRepository.findAll(specification, pageable);
+        return movieRepository.getMoviePreviews(specification, pageable);
     }
 
 }

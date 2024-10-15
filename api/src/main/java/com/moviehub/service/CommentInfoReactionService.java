@@ -9,7 +9,9 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @Transactional
@@ -18,10 +20,7 @@ public class CommentInfoReactionService {
 
     private final CommentReactionRepository reactionRepository;
 
-    private final UserService userService;
-
-    public void addCommentInfoReaction(CommentInfo commentInfo, ReactionType reactionType) {
-        User user = userService.getUser();
+    public void addCommentInfoReaction(CommentInfo commentInfo, ReactionType reactionType, User user) {
         Optional<CommentReaction> existingReaction = reactionRepository.findByCommentInfoIdAndUserId(commentInfo.getId(), user.getId());
 
         existingReaction.ifPresentOrElse(
@@ -75,6 +74,10 @@ public class CommentInfoReactionService {
         reactionRepository.save(reaction);
 
         updateCommentInfoReactions(commentInfo, ReactionType.NONE, reactionType);
+    }
+
+    public List<CommentReaction> getUserReactionsForComments(String userId, List<UUID> commentIds) {
+        return reactionRepository.findUserReactionsByCommentIds(userId, commentIds);
     }
 
 }

@@ -5,19 +5,30 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Repository
 public interface CommentReactionRepository extends JpaRepository<CommentReaction, UUID> {
 
-    @Query("""
-           SELECT cr FROM CommentReaction cr
-           LEFT JOIN FETCH cr.commentInfo ci
-           LEFT JOIN FETCH cr.user u
-           WHERE cr.commentInfo.id = :commentInfoId AND cr.user.id = :userId
-           """)
+    @Query(
+        """
+        SELECT cr FROM CommentReaction cr
+        JOIN FETCH cr.commentInfo ci
+        JOIN FETCH cr.user u
+        WHERE ci.id = :commentInfoId AND u.id = :userId
+        """
+    )
     Optional<CommentReaction> findByCommentInfoIdAndUserId(UUID commentInfoId, String userId);
+
+    @Query(
+        """
+        SELECT cr FROM CommentReaction cr
+        WHERE cr.user.id = :userId AND cr.commentInfo.id IN :commentIds
+        """
+    )
+    List<CommentReaction> findUserReactionsByCommentIds(String userId, List<UUID> commentIds);
 
     void removeByCommentInfo_IdAndUser_Id(UUID commentInfoId, String userId);
 

@@ -37,8 +37,8 @@ public class CommentController implements CommentsApi {
     }
 
     @Override
-    public ResponseEntity<CommentInfoPage> getReplies(UUID commentId, Integer page, Integer limit, String sort) {
-        Page<CommentReply> replies = commentInfoService.getReplies(commentId, page, limit, sort);
+    public ResponseEntity<CommentInfoPage> getReplies(UUID commentId, Integer page, Integer limit) {
+        Page<CommentReply> replies = commentInfoService.getReplies(commentId, page, limit);
         CommentInfoPage commentInfoPage = CommentInfoMapper.mapToCommentInfoPage(replies);
 
         return ResponseEntity.ok(commentInfoPage);

@@ -237,7 +237,7 @@ components:
       description: "The name of the entity."
       schema:
         type: string
-        pattern: "^[A-Za-zÀ-ÿ0-9.,'\"&()\\-: ]+$"
+        pattern: "^[A-Za-zÀ-ÿ0-9.,'\"&()\\-: ]*$"
         maxLength: 255
         default: ""
       example: "James Wan"
@@ -1918,7 +1918,6 @@ paths:
         - $ref: '#/components/parameters/commentId'
         - $ref: '#/components/parameters/page'
         - $ref: '#/components/parameters/commentLimit'
-        - $ref: '#/components/parameters/commentSort'
       responses:
         '200':
           description: Successfully retrieved a list of replies of the specified comment.

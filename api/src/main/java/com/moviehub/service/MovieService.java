@@ -1,6 +1,5 @@
 package com.moviehub.service;
 
-import com.moviehub.entity.Actor;
 import com.moviehub.entity.Comment;
 import com.moviehub.entity.Country;
 import com.moviehub.entity.Director;
@@ -151,28 +150,28 @@ public class MovieService {
     }
 
     public Page<Movie> getMoviesWithGenre(UUID genreId, Integer page, Integer limit) {
-        Genre genre = metadataService.getGenre(genreId);
-        return searchService.getMoviesWithGenre(genre, page, limit);
+        metadataService.getGenre(genreId);
+        return searchService.getMoviesWithGenre(genreId, page, limit);
     }
 
     public Page<Movie> getMoviesWithCountry(UUID countryId, Integer page, Integer limit) {
-        Country country = metadataService.getCountry(countryId);
-        return searchService.getMoviesWithCountry(country, page, limit);
+        metadataService.getCountry(countryId);
+        return searchService.getMoviesWithCountry(countryId, page, limit);
     }
 
     public Page<Movie> getMoviesWithProductionCompany(UUID companyId, Integer page, Integer limit) {
-        ProductionCompany productionCompany = metadataService.getProductionCompany(companyId);
-        return searchService.getMoviesWithProductionCompany(productionCompany, page, limit);
+        metadataService.getProductionCompany(companyId);
+        return searchService.getMoviesWithProductionCompany(companyId, page, limit);
     }
 
     public Page<Movie> getMoviesWithDirector(UUID directorId, Integer page, Integer limit) {
-        Director director = crewService.getDirector(directorId);
-        return searchService.getMoviesWithDirector(director, page, limit);
+        crewService.getDirector(directorId);
+        return searchService.getMoviesWithDirector(directorId, page, limit);
     }
 
     public Page<Movie> getMoviesWithActor(UUID actorId, Integer page, Integer limit) {
-        Actor actor = crewService.getActor(actorId);
-        return searchService.getMoviesWithActor(actor, page, limit);
+        crewService.getActor(actorId);
+        return searchService.getMoviesWithActor(actorId, page, limit);
     }
 
     public void addComment(UUID movieId, String text) {

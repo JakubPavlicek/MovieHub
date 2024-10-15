@@ -28,13 +28,21 @@ public class DirectorService {
     }
 
     public Director addDirector(Director director) {
-        verifyDirectorUniqueness(director.getName());
+        verifyDirectorUniqueness(director.getName(), director.getId());
 
         return saveDirector(director);
     }
 
-    private void verifyDirectorUniqueness(String directorName) {
-        if (directorName != null && directorRepository.existsByName(directorName)) {
+    private void verifyDirectorUniqueness(String directorName, UUID directorId) {
+        boolean isNameTaken;
+
+        if (directorId != null) {
+            isNameTaken = directorRepository.existsByNameAndIdNot(directorName, directorId);
+        } else {
+            isNameTaken = directorRepository.existsByName(directorName);
+        }
+
+        if (isNameTaken) {
             throw new DirectorAlreadyExistsException("Director with name: " + directorName + " already exists");
         }
     }
@@ -62,7 +70,7 @@ public class DirectorService {
     public Director updateDirector(UUID directorId, Director incomingDirector) {
         Director existingDirector = getDirector(directorId);
 
-        verifyDirectorUniqueness(incomingDirector.getName());
+        verifyDirectorUniqueness(incomingDirector.getName(), directorId);
 
         existingDirector.setName(incomingDirector.getName());
         existingDirector.setBio(incomingDirector.getBio());

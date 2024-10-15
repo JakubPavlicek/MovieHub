@@ -70,11 +70,11 @@ class MovieSearchServiceTest {
     @Test
     void shouldReturnMoviesWithProductionCompany() {
         ProductionCompany productionCompany = createProductionCompany();
-        when(movieRepository.findAllByProductionContaining(productionCompany, PAGEABLE)).thenReturn(MOVIE_PAGE);
+        when(movieRepository.findMovieIdsByCompanyId(productionCompany, PAGEABLE)).thenReturn(MOVIE_PAGE);
 
         Page<Movie> moviePage = movieSearchService.getMoviesWithProductionCompany(productionCompany, 0, 10);
 
-        verify(movieRepository).findAllByProductionContaining(productionCompany, PAGEABLE);
+        verify(movieRepository).findMovieIdsByCompanyId(productionCompany, PAGEABLE);
         assertThat(moviePage).isNotNull();
         assertThat(moviePage.getContent()).hasSize(1);
     }
@@ -82,11 +82,11 @@ class MovieSearchServiceTest {
     @Test
     void shouldReturnMoviesWithDirector() {
         Director director = createDirector();
-        when(movieRepository.findAllByDirector(director, PAGEABLE)).thenReturn(MOVIE_PAGE);
+        when(movieRepository.findMovieIdsByDirectorId(director, PAGEABLE)).thenReturn(MOVIE_PAGE);
 
         Page<Movie> moviePage = movieSearchService.getMoviesWithDirector(director, 0, 10);
 
-        verify(movieRepository).findAllByDirector(director, PAGEABLE);
+        verify(movieRepository).findMovieIdsByDirectorId(director, PAGEABLE);
         assertThat(moviePage).isNotNull();
         assertThat(moviePage.getContent()).hasSize(1);
     }
@@ -94,11 +94,11 @@ class MovieSearchServiceTest {
     @Test
     void shouldReturnMoviesWithActor() {
         Actor actor = createActor();
-        when(movieRepository.findAllByActorsContaining(actor, PAGEABLE)).thenReturn(MOVIE_PAGE);
+        when(movieRepository.findMovieIdsByActorId(actor, PAGEABLE)).thenReturn(MOVIE_PAGE);
 
         Page<Movie> moviePage = movieSearchService.getMoviesWithActor(actor, 0, 10);
 
-        verify(movieRepository).findAllByActorsContaining(actor, PAGEABLE);
+        verify(movieRepository).findMovieIdsByActorId(actor, PAGEABLE);
         assertThat(moviePage).isNotNull();
         assertThat(moviePage.getContent()).hasSize(1);
     }

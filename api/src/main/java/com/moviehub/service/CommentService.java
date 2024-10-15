@@ -1,8 +1,8 @@
 package com.moviehub.service;
 
 import com.moviehub.entity.Comment;
-import com.moviehub.entity.CommentReply;
 import com.moviehub.entity.Movie;
+import com.moviehub.entity.User;
 import com.moviehub.exception.CommentNotFoundException;
 import com.moviehub.repository.CommentRepository;
 import jakarta.transaction.Transactional;
@@ -23,9 +23,6 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
 
-    private final CommentInfoReactionService reactionService;
-    private final UserService userService;
-
     private static final String COMMENT_DELETED = "Comment deleted.";
 
     public Comment getComment(UUID commentId) {
@@ -33,11 +30,16 @@ public class CommentService {
                                 .orElseThrow(() -> new CommentNotFoundException("Comment with ID: " + commentId + " not found"));
     }
 
-    public void addComment(Movie movie, String text) {
+    public Comment getCommentByUser(UUID commentId, User user) {
+        return commentRepository.findByIdAndUser(commentId, user)
+                                .orElseThrow(() -> new CommentNotFoundException("Comment with ID: " + commentId + " not found"));
+    }
+
+    public void addComment(Movie movie, String text, User user) {
         Comment comment = new Comment();
 
         comment.setMovie(movie);
-        comment.setUser(userService.getUser());
+        comment.setUser(user);
         comment.setText(text);
 
         commentRepository.save(comment);
@@ -46,11 +48,11 @@ public class CommentService {
     public Page<Comment> getComments(UUID movieId, Pageable pageable) {
         log.info("fetching comments for movie with ID: {}", movieId);
 
-        return commentRepository.findAllCommentsWithReplies(movieId, pageable);
+        return commentRepository.findCommentsByMovieId(movieId, pageable);
     }
 
-    public void deleteComment(UUID commentId) {
-        Comment comment = getComment(commentId);
+    public void deleteComment(UUID commentId, User user) {
+        Comment comment = getCommentByUser(commentId, user);
 
         comment.setText(COMMENT_DELETED);
         comment.setIsDeleted(true);
@@ -60,10 +62,6 @@ public class CommentService {
 
     public Optional<Comment> getCommentById(UUID commentId) {
         return commentRepository.findById(commentId);
-    }
-
-    public Page<CommentReply> getReplies(UUID commentId, Pageable pageable) {
-        return commentRepository.findAllReplies(commentId, pageable);
     }
 
 }

@@ -1,7 +1,6 @@
 package com.moviehub.repository;
 
 import com.moviehub.entity.Comment;
-import com.moviehub.entity.CommentReply;
 import com.moviehub.entity.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -18,18 +18,24 @@ public interface CommentRepository extends JpaRepository<Comment, UUID> {
     @Query("SELECT c.id FROM Comment c WHERE c.user = :user AND c.id IN :commentIds")
     List<UUID> filterCommentsPostedByUser(List<UUID> commentIds, User user);
 
-    @Query("""
-           SELECT c FROM Comment c
-           LEFT JOIN FETCH c.replies
-           WHERE c.movie.id = :movieId
-           """)
-    Page<Comment> findAllCommentsWithReplies(UUID movieId, Pageable pageable);
+    @Query(
+        """
+        SELECT c FROM Comment c
+        JOIN FETCH c.user
+        WHERE c.movie.id = :movieId
+        """
+    )
+    Page<Comment> findAllComments(UUID movieId, Pageable pageable);
 
-    @Query("""
-           SELECT c FROM Comment c
-           LEFT JOIN FETCH c.replies
-           WHERE c.id = :commentId
-           """)
-    Page<CommentReply> findAllReplies(UUID commentId, Pageable pageable);
+    @Query(
+        """
+        SELECT c FROM Comment c
+        JOIN FETCH c.user
+        WHERE c.movie.id = :movieId
+        """
+    )
+    Page<Comment> findCommentsByMovieId(UUID movieId, Pageable pageable);
+
+    Optional<Comment> findByIdAndUser(UUID commentId, User user);
 
 }

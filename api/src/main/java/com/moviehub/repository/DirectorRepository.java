@@ -16,6 +16,8 @@ public interface DirectorRepository extends JpaRepository<Director, UUID> {
 
     boolean existsByName(String name);
 
+    boolean existsByNameAndIdNot(String name, UUID directorId);
+
     Page<Director> findAllByName(String name, Pageable pageable);
 
 }

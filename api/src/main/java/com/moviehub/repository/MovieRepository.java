@@ -1,13 +1,9 @@
 package com.moviehub.repository;
 
-import com.moviehub.entity.Actor;
-import com.moviehub.entity.Country;
-import com.moviehub.entity.Director;
-import com.moviehub.entity.Genre;
 import com.moviehub.entity.Movie;
-import com.moviehub.entity.ProductionCompany;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -19,16 +15,23 @@ import java.util.UUID;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, UUID>, JpaSpecificationExecutor<Movie> {
 
-    Page<Movie> findAllByDirector(Director director, Pageable pageable);
+    @Query("SELECT m.id FROM Movie m JOIN m.director d WHERE d.id = :directorId")
+    Page<UUID> findMovieIdsByDirectorId(UUID directorId, Pageable pageable);
 
-    Page<Movie> findAllByProductionContaining(ProductionCompany company, Pageable pageable);
+    @Query("SELECT m.id FROM Movie m JOIN m.production p WHERE p.id = :companyId")
+    Page<UUID> findMovieIdsByCompanyId(UUID companyId, Pageable pageable);
 
-    Page<Movie> findAllByGenresContaining(Genre genre, Pageable pageable);
+    @Query("SELECT m.id FROM Movie m JOIN m.genres g WHERE g.id = :genreId")
+    Page<UUID> findMovieIdsByGenreId(UUID genreId, Pageable pageable);
 
-    Page<Movie> findAllByCountriesContaining(Country country, Pageable pageable);
+    @Query("SELECT m.id FROM Movie m JOIN m.countries c WHERE c.id = :countryId")
+    Page<UUID> findMovieIdsByCountryId(UUID countryId, Pageable pageable);
 
-    @Query("SELECT movie FROM Movie movie INNER JOIN movie.cast movieCast WHERE movieCast.actor = :actor")
-    Page<Movie> findAllByActorsContaining(Actor actor, Pageable pageable);
+    @Query("SELECT m.id FROM Movie m JOIN m.cast mc WHERE mc.actor.id = :actorId")
+    Page<UUID> findMovieIdsByActorId(UUID actorId, Pageable pageable);
+
+    @Query("SELECT m FROM Movie m JOIN FETCH m.genres WHERE m.id IN :movieIds")
+    List<Movie> findMoviesWithGenresByIds(List<UUID> movieIds);
 
     @Query("SELECT DISTINCT YEAR(m.releaseDate) FROM Movie m ORDER BY YEAR(m.releaseDate) DESC")
     List<Integer> findDistinctReleaseYears();
@@ -47,5 +50,11 @@ public interface MovieRepository extends JpaRepository<Movie, UUID>, JpaSpecific
 
     @Query("SELECT m FROM Movie m JOIN FETCH m.countries WHERE m = :movie")
     Movie getMovieWithCountries(Movie movie);
+
+    @Query("SELECT m FROM Movie m JOIN FETCH m.genres")
+    Page<Movie> getMoviePreviews(Pageable pageable);
+
+    @Query("SELECT m FROM Movie m JOIN FETCH m.genres")
+    Page<Movie> getMoviePreviews(Specification<Movie> specification, Pageable pageable);
 
 }
