@@ -15,7 +15,7 @@ import java.util.UUID;
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, UUID>, JpaSpecificationExecutor<Movie> {
 
-    @Query("SELECT m.id FROM Movie m JOIN m.director d WHERE d.id = :directorId")
+    @Query("SELECT m.id FROM Movie m WHERE m.director.id = :directorId")
     Page<UUID> findMovieIdsByDirectorId(UUID directorId, Pageable pageable);
 
     @Query("SELECT m.id FROM Movie m JOIN m.production p WHERE p.id = :companyId")

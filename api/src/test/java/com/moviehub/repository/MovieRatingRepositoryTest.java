@@ -3,17 +3,20 @@ package com.moviehub.repository;
 import com.moviehub.TestcontainersConfiguration;
 import com.moviehub.entity.Director;
 import com.moviehub.entity.Movie;
-import com.moviehub.entity.MovieRating;
 import com.moviehub.entity.User;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.context.annotation.Import;
 import org.testcontainers.containers.PostgreSQLContainer;
 
-import java.time.LocalDate;
-
+import static com.moviehub.EntityBuilder.createDirector;
+import static com.moviehub.EntityBuilder.createMovie;
+import static com.moviehub.EntityBuilder.createMovieRating;
+import static com.moviehub.EntityBuilder.createUser;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest(properties = {"spring.liquibase.contexts=test"})
@@ -28,13 +31,19 @@ class MovieRatingRepositoryTest {
     private MovieRatingRepository movieRatingRepository;
 
     @Autowired
-    private MovieRepository movieRepository;
+    private TestEntityManager entityManager;
 
-    @Autowired
-    private DirectorRepository directorRepository;
+    private static Movie movie;
 
-    @Autowired
-    private UserRepository userRepository;
+    @BeforeEach
+    void setUp() {
+        movie = createMovie("Movie");
+
+        Director director = entityManager.persistAndFlush(createDirector("Director"));
+        movie.setDirector(director);
+
+        movie = entityManager.persistAndFlush(movie);
+    }
 
     @Test
     void shouldConnectToPostgres() {
@@ -44,11 +53,11 @@ class MovieRatingRepositoryTest {
 
     @Test
     void shouldGetAverageRating() {
-        Movie movie = createMovie();
-        User user = createUser("Test User");
+        User user1 = entityManager.persistAndFlush(createUser("Test User"));
+        User user2 = entityManager.persistAndFlush(createUser("Another User"));
 
-        createMovieRating(movie, user, 4.0);
-        createMovieRating(movie, createUser("Another User"), 5.0);
+        entityManager.persistAndFlush(createMovieRating(movie, user1, 4.0));
+        entityManager.persistAndFlush(createMovieRating(movie, user2, 5.0));
 
         Double averageRating = movieRatingRepository.getAverageRatingByMovieId(movie.getId());
 
@@ -57,47 +66,9 @@ class MovieRatingRepositoryTest {
 
     @Test
     void shouldReturnNullRatingWhenMovieHasNoRating() {
-        Movie movie = createMovie();
-
         Double averageRating = movieRatingRepository.getAverageRatingByMovieId(movie.getId());
 
         assertThat(averageRating).isNull();
-    }
-
-    private Movie createMovie() {
-        return movieRepository.save(Movie.builder()
-                                         .name("Movie")
-                                         .filename("movie.mp4")
-                                         .releaseDate(LocalDate.parse("2024-10-13"))
-                                         .duration(120)
-                                         .description("A test movie")
-                                         .posterUrl("https://example.com/poster.jpg")
-                                         .trailerUrl("https://example.com/trailer.mp4")
-                                         .director(createDirector())
-                                         .build());
-    }
-
-    private Director createDirector() {
-        return directorRepository.save(Director.builder()
-                                               .name("Director")
-                                               .build());
-    }
-
-    private User createUser(String name) {
-        return userRepository.save(User.builder()
-                                       .id("auth0|" + name)
-                                       .name(name)
-                                       .email("test@example.com")
-                                       .pictureUrl("https://example.com/image.jpg")
-                                       .build());
-    }
-
-    private void createMovieRating(Movie movie, User user, double rating) {
-        movieRatingRepository.save(MovieRating.builder()
-                                              .movie(movie)
-                                              .user(user)
-                                              .rating(rating)
-                                              .build());
     }
 
 }

@@ -30,6 +30,4 @@ public interface CommentReactionRepository extends JpaRepository<CommentReaction
     )
     List<CommentReaction> findUserReactionsByCommentIds(String userId, List<UUID> commentIds);
 
-    void removeByCommentInfo_IdAndUser_Id(UUID commentInfoId, String userId);
-
 }
