@@ -37,14 +37,6 @@ public class ActorController implements ActorsApi {
     }
 
     @Override
-    public ResponseEntity<ActorDetailsResponse> getActorById(UUID actorId) {
-        Actor actor = actorService.getActor(actorId);
-        ActorDetailsResponse actorDetailsResponse = ActorMapper.mapToActorDetailsResponse(actor);
-
-        return ResponseEntity.ok(actorDetailsResponse);
-    }
-
-    @Override
     public ResponseEntity<ActorPage> getActors(Integer page, Integer limit, String name) {
         Page<Actor> actors = actorService.getActors(page, limit, name);
         ActorPage actorPage = ActorMapper.mapToActorPage(actors);
@@ -53,11 +45,11 @@ public class ActorController implements ActorsApi {
     }
 
     @Override
-    public ResponseEntity<MoviePage> getMoviesWithActor(UUID actorId, Integer page, Integer limit) {
-        Page<Movie> movies = movieService.getMoviesWithActor(actorId, page, limit);
-        MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
+    public ResponseEntity<ActorDetailsResponse> getActor(UUID actorId) {
+        Actor actor = actorService.getActor(actorId);
+        ActorDetailsResponse actorDetailsResponse = ActorMapper.mapToActorDetailsResponse(actor);
 
-        return ResponseEntity.ok(moviePage);
+        return ResponseEntity.ok(actorDetailsResponse);
     }
 
     @Override
@@ -67,6 +59,14 @@ public class ActorController implements ActorsApi {
         ActorDetailsResponse actorDetailsResponse = ActorMapper.mapToActorDetailsResponse(actor);
 
         return ResponseEntity.ok(actorDetailsResponse);
+    }
+
+    @Override
+    public ResponseEntity<MoviePage> getMoviesWithActor(UUID actorId, Integer page, Integer limit) {
+        Page<Movie> movies = movieService.getMoviesWithActor(actorId, page, limit);
+        MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
+
+        return ResponseEntity.ok(moviePage);
     }
 
 }

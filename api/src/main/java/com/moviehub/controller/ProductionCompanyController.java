@@ -43,19 +43,11 @@ public class ProductionCompanyController implements ProductionCompaniesApi {
     }
 
     @Override
-    public ResponseEntity<ProductionCompanyDetailsResponse> getProductionCompanyById(UUID companyId) {
+    public ResponseEntity<ProductionCompanyDetailsResponse> getProductionCompany(UUID companyId) {
         ProductionCompany company = companyService.getProductionCompany(companyId);
         ProductionCompanyDetailsResponse companyDetailsResponse = ProductionCompanyMapper.mapToProductionCompanyDetailsResponse(company);
 
         return ResponseEntity.ok(companyDetailsResponse);
-    }
-
-    @Override
-    public ResponseEntity<MoviePage> getMoviesWithProductionCompany(UUID companyId, Integer page, Integer limit) {
-        Page<Movie> movies = movieService.getMoviesWithProductionCompany(companyId, page, limit);
-        MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
-
-        return ResponseEntity.ok(moviePage);
     }
 
     @Override
@@ -64,6 +56,14 @@ public class ProductionCompanyController implements ProductionCompaniesApi {
         ProductionCompanyDetailsResponse companyResponse = ProductionCompanyMapper.mapToProductionCompanyDetailsResponse(company);
 
         return ResponseEntity.ok(companyResponse);
+    }
+
+    @Override
+    public ResponseEntity<MoviePage> getMoviesWithProductionCompany(UUID companyId, Integer page, Integer limit) {
+        Page<Movie> movies = movieService.getMoviesWithProductionCompany(companyId, page, limit);
+        MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
+
+        return ResponseEntity.ok(moviePage);
     }
 
 }

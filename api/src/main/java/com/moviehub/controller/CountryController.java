@@ -44,7 +44,7 @@ public class CountryController implements CountriesApi {
     }
 
     @Override
-    public ResponseEntity<CountryDetailsResponse> getCountryById(UUID countryId) {
+    public ResponseEntity<CountryDetailsResponse> getCountry(UUID countryId) {
         Country country = countryService.getCountry(countryId);
         CountryDetailsResponse countryResponse = CountryMapper.mapToCountryDetailsResponse(country);
 

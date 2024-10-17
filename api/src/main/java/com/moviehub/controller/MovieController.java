@@ -39,30 +39,6 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<Void> deleteMovie(UUID movieId) {
-        movieService.deleteMovie(movieId);
-
-        return ResponseEntity.noContent().build();
-    }
-
-    @Override
-    public ResponseEntity<MovieDetailsResponse> getMovie(UUID movieId) {
-        Movie movie = movieService.getMovieWithDetails(movieId);
-        MovieDetailsResponse movieDetailsResponse = MovieMapper.mapToMovieDetailsResponse(movie);
-
-        return ResponseEntity.ok(movieDetailsResponse);
-    }
-
-    @Override
-    public ResponseEntity<MovieDetailsResponse> updateMovie(UUID movieId, UpdateMovieRequest updateMovieRequest) {
-        Movie movie = MovieMapper.mapToMovie(updateMovieRequest);
-        movie = movieService.updateMovie(movieId, movie);
-        MovieDetailsResponse movieResponse = MovieMapper.mapToMovieDetailsResponse(movie);
-
-        return ResponseEntity.ok(movieResponse);
-    }
-
-    @Override
     public ResponseEntity<MoviePage> getMovies(Integer page, Integer limit, String sort) {
         Page<Movie> movies = movieService.getMovies(page, limit, sort);
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
@@ -87,18 +63,35 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<Void> addComment(UUID movieId, AddCommentRequest addCommentRequest) {
-        movieService.addComment(movieId, addCommentRequest.getText());
+    public ResponseEntity<YearListResponse> getYears() {
+        List<Integer> years = movieService.getYears();
+        YearListResponse yearListResponse = MovieMapper.mapToYearListResponse(years);
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(yearListResponse);
     }
 
     @Override
-    public ResponseEntity<CommentInfoPage> getComments(UUID movieId, Integer page, Integer limit, String sort) {
-        Page<Comment> comments = movieService.getComments(movieId, page, limit, sort);
-        CommentInfoPage commentInfoPage = CommentInfoMapper.mapToCommentInfoPage(comments);
+    public ResponseEntity<MovieDetailsResponse> getMovie(UUID movieId) {
+        Movie movie = movieService.getMovieWithDetails(movieId);
+        MovieDetailsResponse movieDetailsResponse = MovieMapper.mapToMovieDetailsResponse(movie);
 
-        return ResponseEntity.ok(commentInfoPage);
+        return ResponseEntity.ok(movieDetailsResponse);
+    }
+
+    @Override
+    public ResponseEntity<MovieDetailsResponse> updateMovie(UUID movieId, UpdateMovieRequest updateMovieRequest) {
+        Movie movie = MovieMapper.mapToMovie(updateMovieRequest);
+        movie = movieService.updateMovie(movieId, movie);
+        MovieDetailsResponse movieResponse = MovieMapper.mapToMovieDetailsResponse(movie);
+
+        return ResponseEntity.ok(movieResponse);
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteMovie(UUID movieId) {
+        movieService.deleteMovie(movieId);
+
+        return ResponseEntity.noContent().build();
     }
 
     @Override
@@ -117,11 +110,18 @@ public class MovieController implements MoviesApi {
     }
 
     @Override
-    public ResponseEntity<YearListResponse> getYears() {
-        List<Integer> years = movieService.getYears();
-        YearListResponse yearListResponse = MovieMapper.mapToYearListResponse(years);
+    public ResponseEntity<Void> addComment(UUID movieId, AddCommentRequest addCommentRequest) {
+        movieService.addComment(movieId, addCommentRequest.getText());
 
-        return ResponseEntity.ok(yearListResponse);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<CommentInfoPage> getComments(UUID movieId, Integer page, Integer limit, String sort) {
+        Page<Comment> comments = movieService.getComments(movieId, page, limit, sort);
+        CommentInfoPage commentInfoPage = CommentInfoMapper.mapToCommentInfoPage(comments);
+
+        return ResponseEntity.ok(commentInfoPage);
     }
 
 }

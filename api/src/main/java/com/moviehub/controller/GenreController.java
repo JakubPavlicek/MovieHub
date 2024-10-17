@@ -36,6 +36,14 @@ public class GenreController implements GenresApi {
     }
 
     @Override
+    public ResponseEntity<GenreDetailsResponse> getGenre(UUID genreId) {
+        Genre genre = genreService.getGenre(genreId);
+        GenreDetailsResponse genreReponse = GenreMapper.mapToGenreDetailsResponse(genre);
+
+        return ResponseEntity.ok(genreReponse);
+    }
+
+    @Override
     public ResponseEntity<GenreListResponse> getGenres() {
         List<Genre> genres = genreService.getGenres();
         GenreListResponse genreListResponse = GenreMapper.mapToGenreListResponse(genres);
@@ -44,11 +52,11 @@ public class GenreController implements GenresApi {
     }
 
     @Override
-    public ResponseEntity<GenreDetailsResponse> getGenreById(UUID genreId) {
-        Genre genre = genreService.getGenre(genreId);
-        GenreDetailsResponse genreReponse = GenreMapper.mapToGenreDetailsResponse(genre);
+    public ResponseEntity<GenreDetailsResponse> updateGenre(UUID genreId, AddGenreRequest addGenreRequest) {
+        Genre genre = genreService.updateGenre(genreId, addGenreRequest.getName());
+        GenreDetailsResponse genreDetailsResponse = GenreMapper.mapToGenreDetailsResponse(genre);
 
-        return ResponseEntity.ok(genreReponse);
+        return ResponseEntity.ok(genreDetailsResponse);
     }
 
     @Override
@@ -57,14 +65,6 @@ public class GenreController implements GenresApi {
         MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
 
         return ResponseEntity.ok(moviePage);
-    }
-
-    @Override
-    public ResponseEntity<GenreDetailsResponse> updateGenre(UUID genreId, AddGenreRequest addGenreRequest) {
-        Genre genre = genreService.updateGenre(genreId, addGenreRequest.getName());
-        GenreDetailsResponse genreDetailsResponse = GenreMapper.mapToGenreDetailsResponse(genre);
-
-        return ResponseEntity.ok(genreDetailsResponse);
     }
 
 }

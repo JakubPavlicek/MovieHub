@@ -1,12 +1,12 @@
 package com.moviehub.controller;
 
 import com.moviehub.config.SecurityConfig;
+import com.moviehub.entity.Country;
 import com.moviehub.entity.Movie;
-import com.moviehub.entity.ProductionCompany;
-import com.moviehub.exception.ProductionCompanyAlreadyExistsException;
-import com.moviehub.exception.ProductionCompanyNotFoundException;
+import com.moviehub.exception.CountryAlreadyExistsException;
+import com.moviehub.exception.CountryNotFoundException;
+import com.moviehub.service.CountryService;
 import com.moviehub.service.MovieService;
-import com.moviehub.service.ProductionCompanyService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -22,9 +22,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 import java.util.UUID;
 
+import static com.moviehub.EntityBuilder.createCountry;
 import static com.moviehub.EntityBuilder.createGenres;
 import static com.moviehub.EntityBuilder.createMovie;
-import static com.moviehub.EntityBuilder.createProductionCompany;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -33,35 +33,35 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(ProductionCompanyController.class)
+@WebMvcTest(CountryController.class)
 @Import(SecurityConfig.class)
-class ProductionCompanyControllerTest {
+class CountryControllerTest {
 
     @Autowired
     private MockMvc mvc;
 
     @MockBean
-    private ProductionCompanyService companyService;
+    private CountryService countryService;
 
     @MockBean
     private MovieService movieService;
 
-    private static final String NAME = "A24";
+    private static final String NAME = "USA";
     private static final UUID ID = UUID.fromString("fcd11167-74db-4e60-bf9f-4bd8d5196014");
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void shouldAddProductionCompany() throws Exception {
-        ProductionCompany company = createProductionCompany(NAME);
-        company.setId(ID);
+    void shouldAddCountry() throws Exception {
+        Country country = createCountry(NAME);
+        country.setId(ID);
 
-        when(companyService.addProductionCompany(NAME)).thenReturn(company);
+        when(countryService.addCountry(NAME)).thenReturn(country);
 
-        mvc.perform(post("/production-companies")
+        mvc.perform(post("/countries")
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
-                          "name": "A24"
+                          "name": "USA"
                         }
                         """))
            .andExpectAll(
@@ -72,12 +72,12 @@ class ProductionCompanyControllerTest {
     }
 
     @Test
-    void shouldNotAddProductionCompanyWhenUserIsNotAuthenticated() throws Exception {
-        mvc.perform(post("/production-companies")
+    void shouldNotAddCountryWhenUserIsNotAuthenticated() throws Exception {
+        mvc.perform(post("/countries")
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
-                          "name": "A24"
+                          "name": "USA"
                         }
                         """))
            .andExpect(status().isUnauthorized());
@@ -85,12 +85,12 @@ class ProductionCompanyControllerTest {
 
     @Test
     @WithMockUser
-    void shouldNotAddProductionCompanyWhenUserIsNotAdmin() throws Exception {
-        mvc.perform(post("/production-companies")
+    void shouldNotAddCountryWhenUserIsNotAdmin() throws Exception {
+        mvc.perform(post("/countries")
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
-                          "name": "A24"
+                          "name": "USA"
                         }
                         """))
            .andExpect(status().isForbidden());
@@ -98,8 +98,8 @@ class ProductionCompanyControllerTest {
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void shouldNotAddProductionCompanyWhenCompanyNameIsInvalid() throws Exception {
-        mvc.perform(post("/production-companies")
+    void shouldNotAddCountryWhenCountryNameIsInvalid() throws Exception {
+        mvc.perform(post("/countries")
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
@@ -114,14 +114,14 @@ class ProductionCompanyControllerTest {
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void shouldThrowProductionCompanyAlreadyExistsExceptionWhenProductionNameAlreadyExists() throws Exception {
-        when(companyService.addProductionCompany(NAME)).thenThrow(ProductionCompanyAlreadyExistsException.class);
+    void shouldThrowCountryAlreadyExistsExceptionWhenCountryNameAlreadyExists() throws Exception {
+        when(countryService.addCountry(NAME)).thenThrow(CountryAlreadyExistsException.class);
 
-        mvc.perform(post("/production-companies")
+        mvc.perform(post("/countries")
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
-                          "name": "A24"
+                          "name": "USA"
                         }
                         """))
            .andExpectAll(
@@ -131,49 +131,30 @@ class ProductionCompanyControllerTest {
     }
 
     @Test
-    void shouldGetProductionCompanies() throws Exception {
-        ProductionCompany company = createProductionCompany(NAME);
-        company.setId(ID);
-        Page<ProductionCompany> companies = new PageImpl<>(List.of(company), PageRequest.of(0, 10), 1L);
+    void shouldGetCountries() throws Exception {
+        Country country = createCountry(NAME);
+        country.setId(ID);
 
-        when(companyService.getProductionCompanies(0, 10, NAME)).thenReturn(companies);
+        when(countryService.getCountries()).thenReturn(List.of(country));
 
-        mvc.perform(get("/production-companies")
-               .param("page", "0")
-               .param("limit", "10")
-               .param("name", NAME))
+        mvc.perform(get("/countries"))
            .andExpectAll(
                status().isOk(),
                content().contentType(MediaType.APPLICATION_JSON),
-               jsonPath("$.content").exists(),
-               jsonPath("$.content[0].id").value(ID.toString()),
-               jsonPath("$.content[0].name").value(NAME)
+               jsonPath("$.countries").exists(),
+               jsonPath("$.countries[0].id").value(ID.toString()),
+               jsonPath("$.countries[0].name").value(NAME)
            );
     }
 
     @Test
-    void shouldNotGetProductionCompaniesWhenParamsAreInvalid() throws Exception {
-        mvc.perform(get("/production-companies")
-               .param("page", "-1")
-               .param("limit", "-1")
-               .param("name", "<script>"))
-           .andExpectAll(
-               status().isBadRequest(),
-               content().contentType(MediaType.APPLICATION_PROBLEM_JSON),
-               jsonPath("$.contextInfo.page").exists(),
-               jsonPath("$.contextInfo.limit").exists(),
-               jsonPath("$.contextInfo.name").exists()
-           );
-    }
+    void shouldGetCountry() throws Exception {
+        Country country = createCountry(NAME);
+        country.setId(ID);
 
-    @Test
-    void shouldGetProductionCompany() throws Exception {
-        ProductionCompany company = createProductionCompany(NAME);
-        company.setId(ID);
+        when(countryService.getCountry(ID)).thenReturn(country);
 
-        when(companyService.getProductionCompany(ID)).thenReturn(company);
-
-        mvc.perform(get("/production-companies/{companyId}", ID))
+        mvc.perform(get("/countries/{countryId}", ID))
            .andExpectAll(
                status().isOk(),
                jsonPath("$.id").value(ID.toString()),
@@ -182,10 +163,10 @@ class ProductionCompanyControllerTest {
     }
 
     @Test
-    void shouldThrowProductionCompanyNotFoundWhenCompanyDoesNotExist() throws Exception {
-        when(companyService.getProductionCompany(ID)).thenThrow(ProductionCompanyNotFoundException.class);
+    void shouldThrowCountryNotFoundWhenCountryDoesNotExist() throws Exception {
+        when(countryService.getCountry(ID)).thenThrow(CountryNotFoundException.class);
 
-        mvc.perform(get("/production-companies/{companyId}", ID))
+        mvc.perform(get("/countries/{countryId}", ID))
            .andExpectAll(
                status().isNotFound(),
                content().contentType(MediaType.APPLICATION_PROBLEM_JSON)
@@ -194,30 +175,30 @@ class ProductionCompanyControllerTest {
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void shouldUpdateProductionCompany() throws Exception {
-        ProductionCompany company = createProductionCompany("New Name");
-        company.setId(ID);
+    void shouldUpdateCountry() throws Exception {
+        Country country = createCountry(NAME);
+        country.setId(ID);
 
-        when(companyService.updateProductionCompany(ID, "New Name")).thenReturn(company);
+        when(countryService.updateCountry(ID, "Name")).thenReturn(country);
 
-        mvc.perform(put("/production-companies/{companyId}", ID)
+        mvc.perform(put("/countries/{countryId}", ID)
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
-                          "name": "New Name"
+                          "name": "Name"
                         }
                         """))
            .andExpectAll(
                status().isOk(),
                jsonPath("$.id").value(ID.toString()),
-               jsonPath("$.name").value("New Name")
+               jsonPath("$.name").value(NAME)
            );
     }
 
     @Test
     @WithMockUser
-    void shouldNotUpdateProductionCompanyWhenUserHasNoAdminRole() throws Exception {
-        mvc.perform(put("/production-companies/{companyId}", ID)
+    void shouldNotUpdateCountryWhenUserHasNoAdminRole() throws Exception {
+        mvc.perform(put("/countries/{countryId}", ID)
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
@@ -228,8 +209,8 @@ class ProductionCompanyControllerTest {
     }
 
     @Test
-    void shouldNotUpdateProductionCompanyWhenUserIsNotAuthenticated() throws Exception {
-        mvc.perform(put("/production-companies/{companyId}", ID)
+    void shouldNotUpdateCountryWhenUserIsNotAuthenticated() throws Exception {
+        mvc.perform(put("/countries/{countryId}", ID)
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
@@ -241,13 +222,13 @@ class ProductionCompanyControllerTest {
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void shouldThrowProductionCompanyNotFoundWhenCompanyDoesNotExistForUpdate() throws Exception {
-        ProductionCompany company = createProductionCompany("Name");
-        company.setId(ID);
+    void shouldThrowCountryNotFoundWhenCountryDoesNotExistForUpdate() throws Exception {
+        Country country = createCountry(NAME);
+        country.setId(ID);
 
-        when(companyService.updateProductionCompany(ID, "Name")).thenThrow(ProductionCompanyNotFoundException.class);
+        when(countryService.updateCountry(ID, "Name")).thenThrow(CountryNotFoundException.class);
 
-        mvc.perform(put("/production-companies/{companyId}", ID)
+        mvc.perform(put("/countries/{countryId}", ID)
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
@@ -261,7 +242,7 @@ class ProductionCompanyControllerTest {
     }
 
     @Test
-    void shouldGetMoviesWithProductionCompany() throws Exception {
+    void shouldGetMoviesWithCountry() throws Exception {
         String movieId = "b36e7821-0410-4b2d-b36c-405a1e31028f";
 
         Movie movie = createMovie("Movie");
@@ -270,9 +251,9 @@ class ProductionCompanyControllerTest {
 
         Page<Movie> movies = new PageImpl<>(List.of(movie), PageRequest.of(0, 10), 1L);
 
-        when(movieService.getMoviesWithProductionCompany(ID, 0, 10)).thenReturn(movies);
+        when(movieService.getMoviesWithCountry(ID, 0, 10)).thenReturn(movies);
 
-        mvc.perform(get("/production-companies/{companyId}/movies", ID)
+        mvc.perform(get("/countries/{countryId}/movies", ID)
                .param("page", "0")
                .param("limit", "10"))
            .andExpectAll(
@@ -284,8 +265,8 @@ class ProductionCompanyControllerTest {
     }
 
     @Test
-    void shoulNotGetMoviesWithProductionCompanyWhenParamsAreInvalid() throws Exception {
-        mvc.perform(get("/production-companies/{companyId}/movies", ID)
+    void shoulNotGetMoviesWithCountryWhenParamsAreInvalid() throws Exception {
+        mvc.perform(get("/countries/{countryId}/movies", ID)
                .param("page", "-1")
                .param("limit", "-1"))
            .andExpectAll(
@@ -297,10 +278,10 @@ class ProductionCompanyControllerTest {
     }
 
     @Test
-    void shouldThrowProductionCompanyNotFoundWhenCompanyDoesNotExistForMovies() throws Exception {
-        when(movieService.getMoviesWithProductionCompany(ID, 0, 10)).thenThrow(ProductionCompanyNotFoundException.class);
+    void shouldThrowCountryNotFoundWhenCountryDoesNotExistForMovies() throws Exception {
+        when(movieService.getMoviesWithCountry(ID, 0, 10)).thenThrow(CountryNotFoundException.class);
 
-        mvc.perform(get("/production-companies/{companyId}/movies", ID)
+        mvc.perform(get("/countries/{countryId}/movies", ID)
                .param("page", "0")
                .param("limit", "10"))
            .andExpectAll(

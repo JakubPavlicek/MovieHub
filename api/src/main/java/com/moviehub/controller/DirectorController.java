@@ -37,14 +37,6 @@ public class DirectorController implements DirectorsApi {
     }
 
     @Override
-    public ResponseEntity<DirectorDetailsResponse> getDirectorById(UUID directorId) {
-        Director director = directorService.getDirector(directorId);
-        DirectorDetailsResponse directorDetailsResponse = DirectorMapper.mapToDirectorDetailsResponse(director);
-
-        return ResponseEntity.ok(directorDetailsResponse);
-    }
-
-    @Override
     public ResponseEntity<DirectorPage> getDirectors(Integer page, Integer limit, String name) {
         Page<Director> directors = directorService.getDirectors(page, limit, name);
         DirectorPage directorPage = DirectorMapper.mapToDirectorPage(directors);
@@ -53,11 +45,11 @@ public class DirectorController implements DirectorsApi {
     }
 
     @Override
-    public ResponseEntity<MoviePage> getMoviesWithDirector(UUID directorId, Integer page, Integer limit) {
-        Page<Movie> movies = movieService.getMoviesWithDirector(directorId, page, limit);
-        MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
+    public ResponseEntity<DirectorDetailsResponse> getDirector(UUID directorId) {
+        Director director = directorService.getDirector(directorId);
+        DirectorDetailsResponse directorDetailsResponse = DirectorMapper.mapToDirectorDetailsResponse(director);
 
-        return ResponseEntity.ok(moviePage);
+        return ResponseEntity.ok(directorDetailsResponse);
     }
 
     @Override
@@ -67,6 +59,14 @@ public class DirectorController implements DirectorsApi {
         DirectorDetailsResponse directorResponse = DirectorMapper.mapToDirectorDetailsResponse(director);
 
         return ResponseEntity.ok(directorResponse);
+    }
+
+    @Override
+    public ResponseEntity<MoviePage> getMoviesWithDirector(UUID directorId, Integer page, Integer limit) {
+        Page<Movie> movies = movieService.getMoviesWithDirector(directorId, page, limit);
+        MoviePage moviePage = MovieMapper.mapToMoviePage(movies);
+
+        return ResponseEntity.ok(moviePage);
     }
 
 }

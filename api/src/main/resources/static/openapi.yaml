@@ -2079,7 +2079,7 @@ paths:
     get:
       description: Retrieve detailed information about a specific director.
       summary: Get director details
-      operationId: getDirectorById
+      operationId: getDirector
       tags:
         - directors
       parameters:
@@ -2212,7 +2212,7 @@ paths:
     get:
       description: Retrieve detailed information about a specific actor.
       summary: Get actor details
-      operationId: getActorById
+      operationId: getActor
       tags:
         - actors
       parameters:
@@ -2347,7 +2347,7 @@ paths:
     get:
       description: Retrieve detailed information about a specific production company.
       summary: Get production company details
-      operationId: getProductionCompanyById
+      operationId: getProductionCompany
       tags:
         - production-companies
       parameters:
@@ -2483,7 +2483,7 @@ paths:
     get:
       description: Retrieve detailed information about a specific genre.
       summary: Get genre details
-      operationId: getGenreById
+      operationId: getGenre
       tags:
         - genres
       parameters:
@@ -2620,7 +2620,7 @@ paths:
     get:
       description: Retrieve detailed information about a specific country.
       summary: Get country details
-      operationId: getCountryById
+      operationId: getCountry
       tags:
         - countries
       parameters:

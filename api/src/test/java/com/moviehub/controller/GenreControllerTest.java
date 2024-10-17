@@ -1,12 +1,13 @@
 package com.moviehub.controller;
 
 import com.moviehub.config.SecurityConfig;
+import com.moviehub.entity.Genre;
 import com.moviehub.entity.Movie;
 import com.moviehub.entity.ProductionCompany;
-import com.moviehub.exception.ProductionCompanyAlreadyExistsException;
-import com.moviehub.exception.ProductionCompanyNotFoundException;
+import com.moviehub.exception.GenreAlreadyExistsException;
+import com.moviehub.exception.GenreNotFoundException;
+import com.moviehub.service.GenreService;
 import com.moviehub.service.MovieService;
-import com.moviehub.service.ProductionCompanyService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -22,6 +23,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import java.util.List;
 import java.util.UUID;
 
+import static com.moviehub.EntityBuilder.createGenre;
 import static com.moviehub.EntityBuilder.createGenres;
 import static com.moviehub.EntityBuilder.createMovie;
 import static com.moviehub.EntityBuilder.createProductionCompany;
@@ -33,35 +35,35 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(ProductionCompanyController.class)
+@WebMvcTest(GenreController.class)
 @Import(SecurityConfig.class)
-class ProductionCompanyControllerTest {
+class GenreControllerTest {
 
     @Autowired
     private MockMvc mvc;
 
     @MockBean
-    private ProductionCompanyService companyService;
+    private GenreService genreService;
 
     @MockBean
     private MovieService movieService;
 
-    private static final String NAME = "A24";
+    private static final String NAME = "Action";
     private static final UUID ID = UUID.fromString("fcd11167-74db-4e60-bf9f-4bd8d5196014");
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void shouldAddProductionCompany() throws Exception {
-        ProductionCompany company = createProductionCompany(NAME);
-        company.setId(ID);
+    void shouldAddGenre() throws Exception {
+        Genre genre = createGenre(NAME);
+        genre.setId(ID);
 
-        when(companyService.addProductionCompany(NAME)).thenReturn(company);
+        when(genreService.addGenre(NAME)).thenReturn(genre);
 
-        mvc.perform(post("/production-companies")
+        mvc.perform(post("/genres")
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
-                          "name": "A24"
+                          "name": "Action"
                         }
                         """))
            .andExpectAll(
@@ -72,12 +74,12 @@ class ProductionCompanyControllerTest {
     }
 
     @Test
-    void shouldNotAddProductionCompanyWhenUserIsNotAuthenticated() throws Exception {
-        mvc.perform(post("/production-companies")
+    void shouldNotAddGenreWhenUserIsNotAuthenticated() throws Exception {
+        mvc.perform(post("/genres")
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
-                          "name": "A24"
+                          "name": "Action"
                         }
                         """))
            .andExpect(status().isUnauthorized());
@@ -85,12 +87,12 @@ class ProductionCompanyControllerTest {
 
     @Test
     @WithMockUser
-    void shouldNotAddProductionCompanyWhenUserIsNotAdmin() throws Exception {
-        mvc.perform(post("/production-companies")
+    void shouldNotAddGenreWhenUserIsNotAdmin() throws Exception {
+        mvc.perform(post("/genres")
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
-                          "name": "A24"
+                          "name": "Action"
                         }
                         """))
            .andExpect(status().isForbidden());
@@ -98,8 +100,8 @@ class ProductionCompanyControllerTest {
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void shouldNotAddProductionCompanyWhenCompanyNameIsInvalid() throws Exception {
-        mvc.perform(post("/production-companies")
+    void shouldNotAddGenreWhenGenreNameIsInvalid() throws Exception {
+        mvc.perform(post("/genres")
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
@@ -114,14 +116,14 @@ class ProductionCompanyControllerTest {
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void shouldThrowProductionCompanyAlreadyExistsExceptionWhenProductionNameAlreadyExists() throws Exception {
-        when(companyService.addProductionCompany(NAME)).thenThrow(ProductionCompanyAlreadyExistsException.class);
+    void shouldThrowGenreAlreadyExistsExceptionWhenGenreNameAlreadyExists() throws Exception {
+        when(genreService.addGenre(NAME)).thenThrow(GenreAlreadyExistsException.class);
 
-        mvc.perform(post("/production-companies")
+        mvc.perform(post("/genres")
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
-                          "name": "A24"
+                          "name": "Action"
                         }
                         """))
            .andExpectAll(
@@ -131,49 +133,30 @@ class ProductionCompanyControllerTest {
     }
 
     @Test
-    void shouldGetProductionCompanies() throws Exception {
-        ProductionCompany company = createProductionCompany(NAME);
-        company.setId(ID);
-        Page<ProductionCompany> companies = new PageImpl<>(List.of(company), PageRequest.of(0, 10), 1L);
+    void shouldGetGenres() throws Exception {
+        Genre genre = createGenre(NAME);
+        genre.setId(ID);
 
-        when(companyService.getProductionCompanies(0, 10, NAME)).thenReturn(companies);
+        when(genreService.getGenres()).thenReturn(List.of(genre));
 
-        mvc.perform(get("/production-companies")
-               .param("page", "0")
-               .param("limit", "10")
-               .param("name", NAME))
+        mvc.perform(get("/genres"))
            .andExpectAll(
                status().isOk(),
                content().contentType(MediaType.APPLICATION_JSON),
-               jsonPath("$.content").exists(),
-               jsonPath("$.content[0].id").value(ID.toString()),
-               jsonPath("$.content[0].name").value(NAME)
+               jsonPath("$.genres").exists(),
+               jsonPath("$.genres[0].id").value(ID.toString()),
+               jsonPath("$.genres[0].name").value(NAME)
            );
     }
 
     @Test
-    void shouldNotGetProductionCompaniesWhenParamsAreInvalid() throws Exception {
-        mvc.perform(get("/production-companies")
-               .param("page", "-1")
-               .param("limit", "-1")
-               .param("name", "<script>"))
-           .andExpectAll(
-               status().isBadRequest(),
-               content().contentType(MediaType.APPLICATION_PROBLEM_JSON),
-               jsonPath("$.contextInfo.page").exists(),
-               jsonPath("$.contextInfo.limit").exists(),
-               jsonPath("$.contextInfo.name").exists()
-           );
-    }
+    void shouldGetGenre() throws Exception {
+        Genre genre = createGenre(NAME);
+        genre.setId(ID);
 
-    @Test
-    void shouldGetProductionCompany() throws Exception {
-        ProductionCompany company = createProductionCompany(NAME);
-        company.setId(ID);
+        when(genreService.getGenre(ID)).thenReturn(genre);
 
-        when(companyService.getProductionCompany(ID)).thenReturn(company);
-
-        mvc.perform(get("/production-companies/{companyId}", ID))
+        mvc.perform(get("/genres/{genreId}", ID))
            .andExpectAll(
                status().isOk(),
                jsonPath("$.id").value(ID.toString()),
@@ -182,10 +165,10 @@ class ProductionCompanyControllerTest {
     }
 
     @Test
-    void shouldThrowProductionCompanyNotFoundWhenCompanyDoesNotExist() throws Exception {
-        when(companyService.getProductionCompany(ID)).thenThrow(ProductionCompanyNotFoundException.class);
+    void shouldThrowGenreNotFoundWhenGenreDoesNotExist() throws Exception {
+        when(genreService.getGenre(ID)).thenThrow(GenreNotFoundException.class);
 
-        mvc.perform(get("/production-companies/{companyId}", ID))
+        mvc.perform(get("/genres/{genreId}", ID))
            .andExpectAll(
                status().isNotFound(),
                content().contentType(MediaType.APPLICATION_PROBLEM_JSON)
@@ -194,30 +177,30 @@ class ProductionCompanyControllerTest {
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void shouldUpdateProductionCompany() throws Exception {
-        ProductionCompany company = createProductionCompany("New Name");
-        company.setId(ID);
+    void shouldUpdateGenre() throws Exception {
+        Genre genre = createGenre(NAME);
+        genre.setId(ID);
 
-        when(companyService.updateProductionCompany(ID, "New Name")).thenReturn(company);
+        when(genreService.updateGenre(ID, "Name")).thenReturn(genre);
 
-        mvc.perform(put("/production-companies/{companyId}", ID)
+        mvc.perform(put("/genres/{genreId}", ID)
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
-                          "name": "New Name"
+                          "name": "Name"
                         }
                         """))
            .andExpectAll(
                status().isOk(),
                jsonPath("$.id").value(ID.toString()),
-               jsonPath("$.name").value("New Name")
+               jsonPath("$.name").value(NAME)
            );
     }
 
     @Test
     @WithMockUser
-    void shouldNotUpdateProductionCompanyWhenUserHasNoAdminRole() throws Exception {
-        mvc.perform(put("/production-companies/{companyId}", ID)
+    void shouldNotUpdateGenreWhenUserHasNoAdminRole() throws Exception {
+        mvc.perform(put("/genres/{genreId}", ID)
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
@@ -228,8 +211,8 @@ class ProductionCompanyControllerTest {
     }
 
     @Test
-    void shouldNotUpdateProductionCompanyWhenUserIsNotAuthenticated() throws Exception {
-        mvc.perform(put("/production-companies/{companyId}", ID)
+    void shouldNotUpdateGenreWhenUserIsNotAuthenticated() throws Exception {
+        mvc.perform(put("/genres/{genreId}", ID)
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
@@ -241,13 +224,13 @@ class ProductionCompanyControllerTest {
 
     @Test
     @WithMockUser(roles = "ADMIN")
-    void shouldThrowProductionCompanyNotFoundWhenCompanyDoesNotExistForUpdate() throws Exception {
+    void shouldThrowGenreNotFoundWhenGenreDoesNotExistForUpdate() throws Exception {
         ProductionCompany company = createProductionCompany("Name");
         company.setId(ID);
 
-        when(companyService.updateProductionCompany(ID, "Name")).thenThrow(ProductionCompanyNotFoundException.class);
+        when(genreService.updateGenre(ID, "Name")).thenThrow(GenreNotFoundException.class);
 
-        mvc.perform(put("/production-companies/{companyId}", ID)
+        mvc.perform(put("/genres/{genreId}", ID)
                .contentType(MediaType.APPLICATION_JSON)
                .content("""
                         {
@@ -261,7 +244,7 @@ class ProductionCompanyControllerTest {
     }
 
     @Test
-    void shouldGetMoviesWithProductionCompany() throws Exception {
+    void shouldGetMoviesWithGenre() throws Exception {
         String movieId = "b36e7821-0410-4b2d-b36c-405a1e31028f";
 
         Movie movie = createMovie("Movie");
@@ -270,9 +253,9 @@ class ProductionCompanyControllerTest {
 
         Page<Movie> movies = new PageImpl<>(List.of(movie), PageRequest.of(0, 10), 1L);
 
-        when(movieService.getMoviesWithProductionCompany(ID, 0, 10)).thenReturn(movies);
+        when(movieService.getMoviesWithGenre(ID, 0, 10)).thenReturn(movies);
 
-        mvc.perform(get("/production-companies/{companyId}/movies", ID)
+        mvc.perform(get("/genres/{genreId}/movies", ID)
                .param("page", "0")
                .param("limit", "10"))
            .andExpectAll(
@@ -284,8 +267,8 @@ class ProductionCompanyControllerTest {
     }
 
     @Test
-    void shoulNotGetMoviesWithProductionCompanyWhenParamsAreInvalid() throws Exception {
-        mvc.perform(get("/production-companies/{companyId}/movies", ID)
+    void shoulNotGetMoviesWithGenreWhenParamsAreInvalid() throws Exception {
+        mvc.perform(get("/genres/{genreId}/movies", ID)
                .param("page", "-1")
                .param("limit", "-1"))
            .andExpectAll(
@@ -297,10 +280,10 @@ class ProductionCompanyControllerTest {
     }
 
     @Test
-    void shouldThrowProductionCompanyNotFoundWhenCompanyDoesNotExistForMovies() throws Exception {
-        when(movieService.getMoviesWithProductionCompany(ID, 0, 10)).thenThrow(ProductionCompanyNotFoundException.class);
+    void shouldThrowGenreNotFoundWhenGenreDoesNotExistForMovies() throws Exception {
+        when(movieService.getMoviesWithGenre(ID, 0, 10)).thenThrow(GenreNotFoundException.class);
 
-        mvc.perform(get("/production-companies/{companyId}/movies", ID)
+        mvc.perform(get("/genres/{genreId}/movies", ID)
                .param("page", "0")
                .param("limit", "10"))
            .andExpectAll(
