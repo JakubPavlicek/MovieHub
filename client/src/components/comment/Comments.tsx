@@ -39,7 +39,7 @@ export const Comments: FC<MovieCommentsProps> = ({ movieId }) => {
     <div className="mt-5 text-white">
       <span className="text-2xl font-semibold text-neutral-300">{t("components.comment.title")}</span>
       {comments.content.map((comment) => (
-        <Comment key={comment.id} comment={comment} topLevelCommentId={comment.id} />
+        <Comment key={comment.id} comment={comment} movieId={movieId} />
       ))}
       {comments.totalPages !== 0 && (
         <Pagination selectedPage={selectedPage} onPageChange={selectNewPage} totalPages={comments.totalPages} />

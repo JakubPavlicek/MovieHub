@@ -13,7 +13,7 @@ export const HomePage: FC = () => {
   const api = useApi();
   const { data: movies } = api.useQuery("get", "/movies", {
     params: {
-      query: { limit: 20 },
+      query: { limit: 20, sort: "releaseDate.asc" },
     },
   });
 

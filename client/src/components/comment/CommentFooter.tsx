@@ -5,11 +5,11 @@ import { CommentReplyInput } from "@/components/comment/CommentReplyInput";
 import { useTranslation } from "react-i18next";
 
 interface CommentFooterProps {
-  comment: components["schemas"]["CommentDetailsResponse"];
-  topLevelCommentId: components["schemas"]["ParentCommentUuid"];
+  comment: components["schemas"]["CommentInfoDetailsResponse"];
+  movieId: components["schemas"]["MovieDetailsResponse"]["id"];
 }
 
-export const CommentFooter: FC<CommentFooterProps> = ({ comment, topLevelCommentId }) => {
+export const CommentFooter: FC<CommentFooterProps> = ({ comment, movieId }) => {
   const { t } = useTranslation();
   const [showInput, setShowInput] = useState(false);
 
@@ -29,12 +29,7 @@ export const CommentFooter: FC<CommentFooterProps> = ({ comment, topLevelComment
         )}
       </div>
       {showInput && (
-        <CommentReplyInput
-          movieId={comment.movieId}
-          parentCommentId={topLevelCommentId}
-          replierUserName={comment.author.name}
-          setShowInput={setShowInput}
-        />
+        <CommentReplyInput movieId={movieId} replierUserName={comment.author.name} setShowInput={setShowInput} />
       )}
     </>
   );

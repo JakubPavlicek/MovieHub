@@ -9,17 +9,11 @@ import { useTranslation } from "react-i18next";
 
 interface CommentInputProps {
   movieId?: components["schemas"]["Uuid"];
-  parentCommentId?: components["schemas"]["ParentCommentUuid"];
   replierUserName: components["schemas"]["UserNameAndPictureUrl"]["name"];
   setShowInput: (prev: boolean) => void;
 }
 
-export const CommentReplyInput: FC<CommentInputProps> = ({
-  movieId = "",
-  parentCommentId,
-  replierUserName,
-  setShowInput,
-}) => {
+export const CommentReplyInput: FC<CommentInputProps> = ({ movieId = "", replierUserName, setShowInput }) => {
   const { t } = useTranslation();
   const [text, setText] = useState<string>("");
   const { isAuthenticated } = useAuth0();
@@ -41,7 +35,6 @@ export const CommentReplyInput: FC<CommentInputProps> = ({
       },
       body: {
         text: `@${replierUserName} ${text.trim()}`,
-        parentCommentId: parentCommentId,
       },
     });
     setText("");

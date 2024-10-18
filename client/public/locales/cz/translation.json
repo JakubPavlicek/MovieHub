@@ -33,7 +33,8 @@
     "comment": {
       "title": "Komentáře",
       "reply": "Odpovědět",
-      "inputPlaceholder": "Napište komentář"
+      "inputPlaceholder": "Napište komentář",
+      "commentDeleted": "Komentář smazán."
     },
     "common": {
       "filter": "Filtr",

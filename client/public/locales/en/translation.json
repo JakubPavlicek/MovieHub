@@ -33,7 +33,8 @@
     "comment": {
       "title": "Comments",
       "reply": "Reply",
-      "inputPlaceholder": "Write a comment"
+      "inputPlaceholder": "Write a comment",
+      "commentDeleted": "Comment deleted."
     },
     "common": {
       "filter": "Filter",

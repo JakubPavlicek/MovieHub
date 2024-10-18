@@ -1,28 +1,28 @@
-import type { components } from "@/api/api";
 import type { FC } from "react";
 import { formatDate } from "@/utils/commentDetails";
-import { X } from "lucide-react";
-import { useApi } from "@/context/ApiProvider";
 import { useQueryClient } from "@tanstack/react-query";
+import { useApi } from "@/context/ApiProvider";
+import { X } from "lucide-react";
+import type { components } from "@/api/api";
 
-interface CommentHeaderProps {
-  comment: components["schemas"]["CommentInfoDetailsResponse"];
+interface ReplyHeaderProps {
+  reply: components["schemas"]["CommentInfoDetailsResponse"];
 }
 
-export const CommentHeader: FC<CommentHeaderProps> = ({ comment }) => {
-  const { id, isAuthor, author, isDeleted, createdAt } = comment;
+export const ReplyHeader: FC<ReplyHeaderProps> = ({ reply }) => {
+  const { id, isAuthor, author, isDeleted, createdAt } = reply;
   const formattedDate = formatDate(createdAt);
 
   const queryClient = useQueryClient();
   const api = useApi();
-  const { mutate } = api.useMutation("delete", "/comments/{commentId}", {
-    onSuccess: async () => queryClient.invalidateQueries({ queryKey: ["get", "/movies/{movieId}/comments"] }),
+  const { mutate } = api.useMutation("delete", "/replies/{replyId}", {
+    onSuccess: async () => queryClient.invalidateQueries({ queryKey: ["get", "/comments/{commentId}/replies"] }),
   });
 
   const deleteComment = () => {
     mutate({
       params: {
-        path: { commentId: id },
+        path: { replyId: id },
       },
     });
   };
