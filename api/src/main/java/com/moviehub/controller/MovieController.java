@@ -113,7 +113,7 @@ public class MovieController implements MoviesApi {
     public ResponseEntity<Void> addComment(UUID movieId, AddCommentRequest addCommentRequest) {
         movieService.addComment(movieId, addCommentRequest.getText());
 
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @Override

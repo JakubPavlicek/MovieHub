@@ -39,8 +39,8 @@ public class SecurityConfig {
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authorize ->
                 authorize.requestMatchers(OPTIONS).permitAll()
-                         .requestMatchers(GET).permitAll()
                          .requestMatchers(GET, "/movies/*/ratings/me").hasAnyRole(USER.name(), ADMIN.name())
+                         .requestMatchers(GET).permitAll()
                          .requestMatchers(POST, "/movies", "/directors", "/actors", "/production-companies", "/genres", "/countries").hasRole(ADMIN.name())
                          .requestMatchers(POST, "/movies/*/comments", "/comments/*/reactions", "/movies/*/ratings", "/comments/*/replies", "/replies/*/reactions").hasAnyRole(USER.name(), ADMIN.name())
                          .requestMatchers(PUT, "/movies/*", "/directors/*", "/actors/*", "/production-companies/*", "/genres/*", "/countries/*").hasRole(ADMIN.name())

@@ -115,8 +115,8 @@ components:
       name: keyword
       in: query
       description: |
-        A query parameter used to filter movies based on a specific keyword.
-        This parameter is useful for searching movies by name.
+        A query parameter used to filter movies based on a keyword.
+        This parameter allows searching movies by matching the keyword to various fields, including the movie name, director name, actor name, and production company name.
       schema:
         type: string
         pattern: "^[A-Za-z0-9.,'\"&()\\-: ]*$"

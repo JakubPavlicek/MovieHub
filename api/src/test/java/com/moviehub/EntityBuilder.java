@@ -88,8 +88,26 @@ public class EntityBuilder {
                        .build();
     }
 
+    public static Director createDirector(UUID id, String name) {
+        return Director.builder()
+                       .id(id)
+                       .name(name)
+                       .bio(BIO)
+                       .gender(Gender.MALE)
+                       .build();
+    }
+
     public static Actor createActor(String name) {
         return Actor.builder()
+                    .name(name)
+                    .bio(BIO)
+                    .gender(Gender.MALE)
+                    .build();
+    }
+
+    public static Actor createActor(UUID id, String name) {
+        return Actor.builder()
+                    .id(id)
                     .name(name)
                     .bio(BIO)
                     .gender(Gender.MALE)
@@ -127,8 +145,22 @@ public class EntityBuilder {
                     .build();
     }
 
+    public static Genre createGenre(UUID id, String name) {
+        return Genre.builder()
+                    .id(id)
+                    .name(name)
+                    .build();
+    }
+
     public static Country createCountry(String name) {
         return Country.builder()
+                      .name(name)
+                      .build();
+    }
+
+    public static Country createCountry(UUID id, String name) {
+        return Country.builder()
+                      .id(id)
                       .name(name)
                       .build();
     }
@@ -139,11 +171,26 @@ public class EntityBuilder {
                                 .build();
     }
 
+    public static ProductionCompany createProductionCompany(UUID id, String name) {
+        return ProductionCompany.builder()
+                                .id(id)
+                                .name(name)
+                                .build();
+    }
+
     public static MovieCast createMovieCast(Movie movie, Actor actor) {
         return MovieCast.builder()
                         .movie(movie)
                         .actor(actor)
                         .role("role")
+                        .build();
+    }
+
+    public static MovieCast createMovieCast(Movie movie, Actor actor, String role) {
+        return MovieCast.builder()
+                        .movie(movie)
+                        .actor(actor)
+                        .role(role)
                         .build();
     }
 
