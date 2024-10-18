@@ -19,7 +19,7 @@ import java.util.List;
 @Configuration
 @EnableWebSocketMessageBroker
 @RequiredArgsConstructor
-@Order(Ordered.HIGHEST_PRECEDENCE + 99)
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     private final ClientUrlProperties clientUrlProperties;
