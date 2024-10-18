@@ -51,10 +51,10 @@ public interface MovieRepository extends JpaRepository<Movie, UUID>, JpaSpecific
     @Query("SELECT m FROM Movie m JOIN FETCH m.countries WHERE m = :movie")
     Movie getMovieWithCountries(Movie movie);
 
-    @Query("SELECT m FROM Movie m JOIN FETCH m.genres")
-    Page<Movie> getMoviePreviews(Pageable pageable);
+    @Query("SELECT m.id FROM Movie m")
+    Page<UUID> findAllMovieIds(Pageable pageable);
 
-    @Query("SELECT m FROM Movie m JOIN FETCH m.genres")
-    Page<Movie> getMoviePreviews(Specification<Movie> specification, Pageable pageable);
+    @Query("SELECT m.id FROM Movie m")
+    Page<UUID> findAllMovieIds(Specification<Movie> specification, Pageable pageable);
 
 }

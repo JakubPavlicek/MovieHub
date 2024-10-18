@@ -20,6 +20,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
@@ -104,6 +105,7 @@ public class Movie {
         fetch = FetchType.LAZY,
         cascade = CascadeType.REMOVE
     )
+    @BatchSize(size = 10)
     private List<Comment> comments;
 
     @OneToMany(
@@ -111,6 +113,7 @@ public class Movie {
         fetch = FetchType.LAZY,
         cascade = CascadeType.REMOVE
     )
+    @BatchSize(size = 5)
     private List<MovieCast> cast;
 
     @ManyToMany(
@@ -131,6 +134,7 @@ public class Movie {
             nullable = false
         )
     )
+    @BatchSize(size = 5)
     private List<ProductionCompany> production;
 
     @ManyToMany(
@@ -151,6 +155,7 @@ public class Movie {
             nullable = false
         )
     )
+    @BatchSize(size = 5)
     private List<Genre> genres;
 
     @ManyToMany(
@@ -171,6 +176,7 @@ public class Movie {
             nullable = false
         )
     )
+    @BatchSize(size = 5)
     private List<Country> countries;
 
     @OneToMany(

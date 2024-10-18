@@ -77,7 +77,10 @@ public class MovieSearchService {
     public Page<Movie> getMovies(Integer page, Integer limit, String sort) {
         Pageable pageable = PageRequest.of(page, limit, parseService.parseMovieSort(sort));
 
-        return movieRepository.getMoviePreviews(pageable);
+        Page<UUID> movieIds = movieRepository.findAllMovieIds(pageable);
+        List<Movie> movies = movieRepository.findMoviesWithGenresByIds(movieIds.getContent());
+
+        return new PageImpl<>(movies, pageable, movieIds.getTotalElements());
     }
 
     public Page<Movie> filterMovies(Integer page, Integer limit, String sort, String releaseYear, String genre, String country) {
@@ -87,14 +90,22 @@ public class MovieSearchService {
                                                           .and(parseService.parseGenre(genre))
                                                           .and(parseService.parseCountry(country));
 
-        return movieRepository.getMoviePreviews(specification, pageable);
+        return getMoviePage(specification, pageable);
     }
 
     public Page<Movie> searchMovies(Integer page, Integer limit, String sort, String keyword) {
         Pageable pageable = PageRequest.of(page, limit, parseService.parseMovieSort(sort));
         Specification<Movie> specification = MovieSpecification.searchByKeyword(keyword);
 
-        return movieRepository.getMoviePreviews(specification, pageable);
+        return getMoviePage(specification, pageable);
+    }
+
+    private PageImpl<Movie> getMoviePage(Specification<Movie> specification, Pageable pageable) {
+        Page<Movie> movies = movieRepository.findAll(specification, pageable);
+        List<UUID> movieIds = movies.getContent().stream().map(Movie::getId).toList();
+        List<Movie> movieList = movieRepository.findMoviesWithGenresByIds(movieIds);
+
+        return new PageImpl<>(movieList, pageable, movies.getTotalElements());
     }
 
 }

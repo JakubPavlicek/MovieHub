@@ -4,6 +4,7 @@ import { Star } from "lucide-react";
 import type { components } from "@/api/api";
 import { useApi } from "@/context/ApiProvider";
 import { useTranslation } from "react-i18next";
+import { useAuth0 } from "@auth0/auth0-react";
 
 interface MovieStatsProps {
   rating: components["schemas"]["MovieDetailsResponse"]["rating"];
@@ -31,20 +32,26 @@ interface MovieRatingProps {
 
 const MovieRating: FC<MovieRatingProps> = ({ movieId, reviewCount }) => {
   const { t } = useTranslation();
+  const { isAuthenticated } = useAuth0();
   const api = useApi();
-  const { data: userRating } = api.useQuery("get", "/movies/{movieId}/ratings/me", {
-    params: {
-      path: { movieId: movieId },
+  const { data: userRating } = api.useQuery(
+    "get",
+    "/movies/{movieId}/ratings/me",
+    {
+      params: {
+        path: { movieId: movieId },
+      },
     },
-  });
+    {
+      enabled: isAuthenticated,
+    },
+  );
 
-  if (!userRating) {
-    return <></>;
-  }
+  const rating = userRating?.rating ?? 0;
 
   return (
     <div className="flex min-w-max gap-1">
-      <StarRating movieId={movieId} userRating={userRating.rating} />
+      <StarRating movieId={movieId} userRating={rating} />
       <span>({t("components.movie.reviews", { count: reviewCount })})</span>
     </div>
   );

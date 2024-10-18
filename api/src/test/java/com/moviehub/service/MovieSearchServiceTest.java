@@ -13,11 +13,13 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
+import static com.moviehub.EntityBuilder.createMovie;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -119,38 +121,46 @@ class MovieSearchServiceTest {
     @Test
     void shouldGetMovies() {
         when(parseService.parseMovieSort(any(String.class))).thenReturn(Sort.by(NAME).ascending());
-        when(movieRepository.getMoviePreviews(any(Pageable.class))).thenReturn(new PageImpl<>(MOVIES, PAGEABLE, 1));
+        when(movieRepository.findAllMovieIds(any(Pageable.class))).thenReturn(new PageImpl<>(List.of(DEFAULT_ID), PAGEABLE, 1));
+        when(movieRepository.findMoviesWithGenresByIds(any())).thenReturn(MOVIES);
 
         Page<Movie> moviePage = movieSearchService.getMovies(0, 10, NAME);
 
         verify(parseService).parseMovieSort(NAME);
-        verify(movieRepository).getMoviePreviews(any(Pageable.class));
+        verify(movieRepository).findAllMovieIds(any(Pageable.class));
+        verify(movieRepository).findMoviesWithGenresByIds(any());
         assertThat(moviePage).isNotNull();
         assertThat(moviePage.getContent()).hasSize(1);
     }
 
     @Test
     void shouldFilterMovies() {
+        Movie movie = createMovie("Movie");
+        movie.setId(DEFAULT_ID);
+
         when(parseService.parseMovieSort(any(String.class))).thenReturn(Sort.by(NAME).ascending());
-        when(movieRepository.getMoviePreviews(any(), any(Pageable.class))).thenReturn(new PageImpl<>(MOVIES, PAGEABLE, 1));
+        when(movieRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(new PageImpl<>(List.of(movie), PAGEABLE, 1));
+        when(movieRepository.findMoviesWithGenresByIds(any())).thenReturn(MOVIES);
 
         Page<Movie> moviePage = movieSearchService.filterMovies(0, 10, NAME, "2022", "Action", "USA");
 
         verify(parseService).parseMovieSort(NAME);
-        verify(movieRepository).getMoviePreviews(any(), any(Pageable.class));
         assertThat(moviePage).isNotNull();
         assertThat(moviePage.getContent()).hasSize(1);
     }
 
     @Test
     void shouldSearchMovies() {
+        Movie movie = createMovie("Movie");
+        movie.setId(DEFAULT_ID);
+
         when(parseService.parseMovieSort(any(String.class))).thenReturn(Sort.by(NAME).ascending());
-        when(movieRepository.getMoviePreviews(any(), any(Pageable.class))).thenReturn(new PageImpl<>(MOVIES, PAGEABLE, 1));
+        when(movieRepository.findAll(any(Specification.class), any(Pageable.class))).thenReturn(new PageImpl<>(List.of(movie), PAGEABLE, 1));
+        when(movieRepository.findMoviesWithGenresByIds(any())).thenReturn(MOVIES);
 
         Page<Movie> moviePage = movieSearchService.searchMovies(0, 10, NAME, "keyword");
 
         verify(parseService).parseMovieSort(NAME);
-        verify(movieRepository).getMoviePreviews(any(), any(Pageable.class));
         assertThat(moviePage).isNotNull();
         assertThat(moviePage.getContent()).hasSize(1);
     }

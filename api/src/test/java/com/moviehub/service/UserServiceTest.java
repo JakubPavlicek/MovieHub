@@ -6,6 +6,7 @@ import com.moviehub.config.JwtAuthConverter;
 import com.moviehub.config.SecurityConfig;
 import com.moviehub.dto.UserInfo;
 import com.moviehub.entity.User;
+import com.moviehub.exception.UserNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -17,6 +18,7 @@ import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -58,6 +60,21 @@ class UserServiceTest {
         assertThat(user.getName()).isEqualTo("user");
         assertThat(user.getEmail()).isEqualTo("user@user.cz");
         assertThat(user.getPictureUrl()).isEqualTo("https://s.gravatar.com/avatar/4d2acb461e1103a88a20aa53481819ba?s=480&r=pg&d=https%3A%2F%2Fcdn.auth0.com%2Favatars%2Fus.png");
+    }
+
+    @Test
+    void shouldThrowUserNotFoundExceptionWhenUserNameDoesNotExist() {
+        Jwt jwt = Jwt.withTokenValue("mocked-token")
+                     .header("alg", "RS256")
+                     .claim("sub", "")
+                     .claim(clientUrlProperties.getUrl() + "/roles", "USER")
+                     .build();
+
+        JwtAuthenticationToken jwtAuthenticationToken = jwtAuthConverter.convert(jwt);
+
+        SecurityContextHolder.getContext().setAuthentication(jwtAuthenticationToken);
+
+        assertThatThrownBy(() -> userService.getUser()).isInstanceOf(UserNotFoundException.class);
     }
 
     @Test

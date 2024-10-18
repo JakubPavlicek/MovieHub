@@ -88,6 +88,10 @@ public class CommentInfoService {
     private <T extends CommentInfo> Page<T> setUserReactions(Page<T> commentInfoPage) {
         User user = userService.getUser();
 
+        if (user == null) {
+            return commentInfoPage;
+        }
+
         // fetch reactions for comments/replies in one query
         List<UUID> commentInfoIds = commentInfoPage.stream().map(CommentInfo::getId).toList();
         List<CommentReaction> reactions = reactionService.getUserReactionsForComments(user.getId(), commentInfoIds);

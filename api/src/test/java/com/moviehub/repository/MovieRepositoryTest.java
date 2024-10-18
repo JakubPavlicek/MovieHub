@@ -190,20 +190,20 @@ class MovieRepositoryTest {
     }
 
     @Test
-    void shouldGetMoviePreviews() {
-        Page<Movie> result = movieRepository.getMoviePreviews(PAGEABLE);
+    void shouldFindAllMovieIdsByPageable() {
+        Page<UUID> result = movieRepository.findAllMovieIds(PAGEABLE);
 
         assertThat(result.getContent()).hasSize(1);
-        assertThat(result.getContent().getFirst().getGenres()).contains(movie.getGenres().getFirst());
+        assertThat(result.getContent().getFirst()).isEqualTo(movie.getId());
     }
 
     @Test
-    void shouldGetMoviePreviewsBySpecification() {
+    void shouldFindAllMovieIdsBySpecification() {
         Specification<Movie> specification = MovieSpecification.releaseYearIn(List.of(2024));
-        Page<Movie> result = movieRepository.getMoviePreviews(specification, PAGEABLE);
+        Page<UUID> result = movieRepository.findAllMovieIds(specification, PAGEABLE);
 
         assertThat(result.getContent()).hasSize(1);
-        assertThat(result.getContent().getFirst().getGenres()).contains(movie.getGenres().getFirst());
+        assertThat(result.getContent().getFirst()).isEqualTo(movie.getId());
     }
 
     private void createMovieWithYearAndDirector(String name, int year, String directorName) {

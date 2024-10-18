@@ -3,14 +3,24 @@ import { type FC } from "react";
 import { CommentHeader } from "@/components/comment/CommentHeader";
 import { CommentBody } from "@/components/comment/CommentBody";
 import { CommentFooter } from "@/components/comment/CommentFooter";
+import { useApi } from "@/context/ApiProvider";
 
 interface MovieCommentProps {
-  comment: components["schemas"]["CommentDetailsResponse"];
-  topLevelCommentId: components["schemas"]["CommentDetailsResponse"]["id"];
+  comment: components["schemas"]["CommentInfoDetailsResponse"];
+  topLevelCommentId: components["schemas"]["CommentInfoDetailsResponse"]["id"];
 }
 
 export const Comment: FC<MovieCommentProps> = ({ comment, topLevelCommentId }) => {
-  const { author, text, isDeleted, replies } = comment;
+  const { id, author, text, isDeleted } = comment;
+
+  const api = useApi();
+  const { data: replies } = api.useQuery("get", "/comments/{commentId}/replies", {
+    params: {
+      path: {
+        commentId: id,
+      },
+    },
+  });
 
   return (
     <div>
@@ -20,7 +30,7 @@ export const Comment: FC<MovieCommentProps> = ({ comment, topLevelCommentId }) =
           <CommentHeader comment={comment} />
           <CommentBody text={text} isDeleted={isDeleted} />
           <CommentFooter comment={comment} topLevelCommentId={topLevelCommentId} />
-          {replies.map((reply) => (
+          {replies?.content.map((reply) => (
             <Comment key={reply.id} comment={reply} topLevelCommentId={topLevelCommentId} />
           ))}
         </div>

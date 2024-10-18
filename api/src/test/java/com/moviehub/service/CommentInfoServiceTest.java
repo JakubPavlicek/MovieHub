@@ -151,6 +151,20 @@ class CommentInfoServiceTest {
     }
 
     @Test
+    void shouldGetCommentsWithoutUserReactions() {
+        Comment comment = (Comment) createComment(null, null, COMMENT_TEXT);
+        Page<Comment> commentsPage = new PageImpl<>(List.of(comment), PAGEABLE, 1);
+
+        when(userService.getUser()).thenReturn(null);
+        when(commentService.getComments(MOVIE_ID, PAGEABLE)).thenReturn(commentsPage);
+
+        Page<Comment> resultPage = commentInfoService.getComments(MOVIE_ID, PAGEABLE);
+
+        assertThat(resultPage.getTotalElements()).isEqualTo(1);
+        assertThat(resultPage.getContent()).containsExactly(comment);
+    }
+
+    @Test
     void shouldGetReplies() {
         CommentReply reply = (CommentReply) createReply(null, user, REPLY_TEXT);
         Page<CommentReply> repliesPage = new PageImpl<>(List.of(reply));
