@@ -25,6 +25,7 @@ export const CommentInput: FC<CommentInputProps> = ({ commentId, replierUserName
       queryClient.invalidateQueries({
         queryKey: ["get", "/comments/{commentId}/replies", { params: { path: { commentId } } }],
       }),
+    onError: () => toast.error(t("toast.invalidText")),
   });
 
   const submitReply = (text: string) => {

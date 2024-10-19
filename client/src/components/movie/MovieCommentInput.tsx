@@ -19,6 +19,7 @@ export const MovieCommentInput: FC<CommentInputProps> = ({ movieId }) => {
   const api = useApi();
   const { mutate } = api.useMutation("post", "/movies/{movieId}/comments", {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["get", "/movies/{movieId}/comments"] }),
+    onError: () => toast.error(t("toast.invalidText")),
   });
 
   const submitComment = (text: string) => {

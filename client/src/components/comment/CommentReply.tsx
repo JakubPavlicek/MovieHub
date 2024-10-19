@@ -12,8 +12,6 @@ interface CommentReplyProps {
 export const CommentReply: FC<CommentReplyProps> = ({ reply, commentId }) => {
   const { author, text, isDeleted } = reply;
 
-  console.log("commentId: " + commentId);
-
   return (
     <div>
       <div className="mt-6 flex flex-row gap-4">

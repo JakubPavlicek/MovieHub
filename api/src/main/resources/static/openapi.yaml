@@ -565,7 +565,7 @@ components:
     Text:
       type: string
       example: "Very interesting movie"
-      pattern: "^[\\w\\s.,!?'-@]+$"
+      pattern: "^[\\w\\s.,!?'\"\\-@]+$"
       minLength: 1
       maxLength: 500
       nullable: false

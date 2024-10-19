@@ -12,6 +12,14 @@ export const useAuthMiddleware = () => {
       }
       return request;
     },
+
+    async onResponse({ response }) {
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        throw new Error(`API Error: ${response.status} ${errorMessage}`);
+      }
+      return response;
+    },
   };
 
   return authMiddleware;

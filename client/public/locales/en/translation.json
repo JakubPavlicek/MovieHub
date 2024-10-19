@@ -75,7 +75,8 @@
     }
   },
   "toast": {
-    "unauthenticated": "Not authenticated"
+    "unauthenticated": "Not authenticated",
+    "invalidText": "Invalid text"
   },
   "genres": {
     "Action": {
