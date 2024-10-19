@@ -24,7 +24,7 @@ export const MobileMenu: FC<MobileMenuProps> = ({ toggleMobileMenu }) => {
           {t("components.header.mobile.closeMenu")}
         </button>
       </div>
-      <Link to="/" className="w-full py-3 hover:text-cyan-300">
+      <Link to="/" className="mt-2 w-full py-3 hover:text-cyan-300">
         {t("components.header.mobile.home")}
       </Link>
       <hr className="w-full border-neutral-700" />

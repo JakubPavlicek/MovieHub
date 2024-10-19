@@ -1,9 +1,9 @@
 import { type FC, useState } from "react";
-import { useChat } from "@/hooks/useChat";
 import { ChatMessages } from "@/components/chat/ChatMessages";
 import { ChatButton } from "@/components/chat/ChatButton";
 import { ChatHeader } from "@/components/chat/ChatHeader";
 import { ChatInput } from "@/components/chat/ChatInput";
+import { useChat } from "@/hooks/useChat";
 
 export const Chat: FC = () => {
   const [isChatOpened, setIsChatOpened] = useState(false);

@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import { type FC, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { MobileMenuButton } from "@/components/header/mobile/MobileMenuButton";
 import { SearchBar } from "@/components/header/desktop/SearchBar";
@@ -8,20 +8,22 @@ import { Logo } from "@/components/header/desktop/Logo";
 import { NavMenu } from "@/components/header/desktop/NavMenu";
 import { ProfileDropdown } from "@/components/header/profile/ProfileDropdown";
 import { MobileMenu } from "@/components/header/mobile/MobileMenu";
-import { useMobileMenu } from "@/hooks/useMobileMenu";
 import { useMobileSearch } from "@/hooks/useMobileSearch";
 import { LanguageDropdown } from "@/components/header/desktop/LanguageDropdown";
 
 export const Header: FC = () => {
   const { isAuthenticated } = useAuth0();
-  const { showMobileMenu, toggleMobileMenu } = useMobileMenu();
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const { showMobileSearch, toggleMobileSearch } = useMobileSearch();
 
   return (
     <header className="mx-auto mt-6 text-white 2xl:container">
       <nav className="mx-5 flex min-h-12 flex-nowrap items-center gap-2.5">
         <div className="flex lg:hidden">
-          <MobileMenuButton showMobileMenu={showMobileMenu} toggleMobileMenu={toggleMobileMenu} />
+          <MobileMenuButton
+            showMobileMenu={showMobileMenu}
+            toggleMobileMenu={() => setShowMobileMenu((prev) => !prev)}
+          />
         </div>
         <div className="mr-auto flex flex-shrink-0 items-center gap-4 text-gray-300 xl:gap-8">
           <Logo />
@@ -42,7 +44,7 @@ export const Header: FC = () => {
       </nav>
       {showMobileMenu && (
         <div className="lg:hidden">
-          <MobileMenu toggleMobileMenu={toggleMobileMenu} />
+          <MobileMenu toggleMobileMenu={() => setShowMobileMenu((prev) => !prev)} />
         </div>
       )}
       {showMobileSearch && (

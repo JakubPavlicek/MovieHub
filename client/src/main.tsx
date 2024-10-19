@@ -20,6 +20,7 @@ import { ProductionPage } from "@/pages/ProductionPage";
 import { CastPage } from "@/pages/CastPage";
 import { FilterPage } from "@/pages/FilterPage";
 import { ProfilePage } from "@/pages/ProfilePage";
+import { AuthStompProvider } from "@/context/AuthStompProvider";
 
 const queryClient = new QueryClient();
 
@@ -88,12 +89,14 @@ createRoot(document.getElementById("root")!).render(
       }}
       cacheLocation="localstorage"
     >
-      <ApiProvider>
-        <QueryClientProvider client={queryClient}>
-          <RouterProvider router={router} />
-          <ToastContainer theme="colored" autoClose={2500} pauseOnHover={false} />
-        </QueryClientProvider>
-      </ApiProvider>
+      <AuthStompProvider>
+        <ApiProvider>
+          <QueryClientProvider client={queryClient}>
+            <RouterProvider router={router} />
+            <ToastContainer theme="colored" autoClose={2500} pauseOnHover={false} />
+          </QueryClientProvider>
+        </ApiProvider>
+      </AuthStompProvider>
     </Auth0Provider>
   </StrictMode>,
 );

@@ -26,6 +26,7 @@
     "react-router-dom": "^6.26.1",
     "react-select": "^5.8.1",
     "react-stomp": "^5.1.0",
+    "react-stomp-hooks": "^3.0.1",
     "react-toastify": "^10.0.5",
     "sockjs": "^0.3.24",
     "sockjs-client": "^1.6.1"
