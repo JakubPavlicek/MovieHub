@@ -3,17 +3,19 @@ import { ReactNode, useEffect, useState } from "react";
 import { StompSessionProvider } from "react-stomp-hooks";
 
 export const AuthStompProvider = ({ children }: { children: ReactNode }) => {
-  const { getAccessTokenSilently } = useAuth0();
+  const { getAccessTokenSilently, isAuthenticated } = useAuth0();
   const [accessToken, setAccessToken] = useState("");
 
   useEffect(() => {
+    if (!isAuthenticated) return;
+
     const fetchToken = async () => {
       const token = await getAccessTokenSilently();
       setAccessToken(token);
     };
 
     fetchToken();
-  }, [getAccessTokenSilently]);
+  }, [isAuthenticated, getAccessTokenSilently]);
 
   return (
     <StompSessionProvider
@@ -21,6 +23,7 @@ export const AuthStompProvider = ({ children }: { children: ReactNode }) => {
       connectHeaders={{
         Authorization: `Bearer ${accessToken}`,
       }}
+      enabled={isAuthenticated}
     >
       {children}
     </StompSessionProvider>
