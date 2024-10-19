@@ -1,27 +1,25 @@
 import { useCallback, useMemo } from "react";
 import { useApi } from "@/context/ApiProvider";
-import { useNavigate } from "react-router-dom";
 
 export const useGenres = () => {
-  const navigate = useNavigate();
   const api = useApi();
-  const { data } = api.useQuery("get", "/genres");
+  const { data, isLoading } = api.useQuery("get", "/genres");
 
   const { genres, genreMap } = useMemo(() => {
-    const genres = data?.genres ?? [];
-    const genreMap = new Map(genres.map(({ name, id }) => [name, id]));
-    return { genres, genreMap };
+    if (!data?.genres) return { genres: [], genreMap: new Map() };
+
+    const genreMap = new Map(data.genres.map(({ name, id }) => [name, id]));
+    return { genres: data.genres, genreMap };
   }, [data]);
 
   const getGenreId = useCallback(
-    (genreName: string) => {
-      if (!genreMap.has(genreName)) {
-        navigate("/", { replace: true });
-      }
-      return genreMap.get(genreName);
+    (genreName: string | undefined) => {
+      if (!genreName || isLoading) return null;
+
+      return genreMap.get(genreName) || null;
     },
-    [genreMap, navigate],
+    [genreMap, isLoading],
   );
 
-  return { genres, genreMap, getGenreId };
+  return { genres, genreMap, getGenreId, isLoading };
 };

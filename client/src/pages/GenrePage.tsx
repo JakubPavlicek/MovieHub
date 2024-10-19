@@ -1,27 +1,19 @@
 import { FC, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useGenres } from "@/hooks/useGenres";
 import { MoviePreviewList } from "@/components/common/MoviePreviewList";
-import { useApi } from "@/context/ApiProvider";
 import { MovieSkeleton } from "@/components/common/MovieSkeleton";
 import { FilterButton } from "@/components/common/FilterButton";
 import { FilterSelects } from "@/components/common/FilterSelects";
 import { useTranslation } from "react-i18next";
+import { useFetchMoviesByGenre } from "@/hooks/useFetchMoviesByGenre";
 
 export const GenrePage: FC = () => {
   const { t } = useTranslation();
+  const { genreName } = useParams();
   const [showFilters, setShowFilters] = useState(false);
+  const movies = useFetchMoviesByGenre(genreName);
 
-  const { genreName = "" } = useParams();
-  const { getGenreId } = useGenres();
-  const api = useApi();
-  const { data: movies } = api.useQuery("get", "/genres/{genreId}/movies", {
-    params: {
-      path: { genreId: getGenreId(genreName) ?? "" },
-    },
-  });
-
-  if (!movies?.content) {
+  if (!movies) {
     return <MovieSkeleton />;
   }
 

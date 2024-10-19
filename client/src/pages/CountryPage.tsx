@@ -1,27 +1,19 @@
 import { type FC, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useCountries } from "@/hooks/useCountries";
 import { MoviePreviewList } from "@/components/common/MoviePreviewList";
-import { useApi } from "@/context/ApiProvider";
 import { MovieSkeleton } from "@/components/common/MovieSkeleton";
 import { FilterButton } from "@/components/common/FilterButton";
 import { FilterSelects } from "@/components/common/FilterSelects";
 import { useTranslation } from "react-i18next";
+import { useFetchMoviesByCountry } from "@/hooks/useFetchMoviesByCountry";
 
 export const CountryPage: FC = () => {
   const { t } = useTranslation();
   const [showFilters, setShowFilters] = useState(false);
+  const { countryName } = useParams();
+  const movies = useFetchMoviesByCountry(countryName);
 
-  const { countryName = "" } = useParams();
-  const { getCountryId } = useCountries();
-  const api = useApi();
-  const { data: movies } = api.useQuery("get", "/countries/{countryId}/movies", {
-    params: {
-      path: { countryId: getCountryId(countryName) ?? "" },
-    },
-  });
-
-  if (!movies?.content) {
+  if (!movies) {
     return <MovieSkeleton />;
   }
 

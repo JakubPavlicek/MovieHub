@@ -1,27 +1,25 @@
 import { useCallback, useMemo } from "react";
 import { useApi } from "@/context/ApiProvider";
-import { useNavigate } from "react-router-dom";
 
 export const useCountries = () => {
-  const navigate = useNavigate();
   const api = useApi();
-  const { data } = api.useQuery("get", "/countries");
+  const { data, isLoading } = api.useQuery("get", "/countries");
 
   const { countries, countryMap } = useMemo(() => {
-    const countries = data?.countries ?? [];
-    const countryMap = new Map(countries.map(({ name, id }) => [name, id]));
-    return { countries, countryMap };
+    if (!data?.countries) return { countries: [], countryMap: new Map() };
+
+    const countryMap = new Map(data.countries.map(({ name, id }) => [name, id]));
+    return { countries: data.countries, countryMap };
   }, [data]);
 
   const getCountryId = useCallback(
-    (countryName: string) => {
-      if (!countryMap.has(countryName)) {
-        navigate("/", { replace: true });
-      }
-      return countryMap.get(countryName);
+    (countryName: string | undefined) => {
+      if (!countryName || isLoading) return null;
+
+      return countryMap.get(countryName) || null;
     },
-    [countryMap, navigate],
+    [countryMap, isLoading],
   );
 
-  return { countries, countryMap, getCountryId };
+  return { countries, countryMap, getCountryId, isLoading };
 };
