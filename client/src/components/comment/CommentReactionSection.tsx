@@ -7,17 +7,23 @@ import { toast } from "react-toastify";
 import { ThumbsDown, ThumbsUp } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-interface CommentReactionSection {
-  comment: components["schemas"]["CommentInfoDetailsResponse"];
+interface CommentReactionSectionProps {
+  item: components["schemas"]["CommentInfoDetailsResponse"];
+  isReply?: boolean;
 }
 
-export const CommentReactionSection: FC<CommentReactionSection> = ({ comment }) => {
+export const CommentReactionSection: FC<CommentReactionSectionProps> = ({ item, isReply = false }) => {
   const { t } = useTranslation();
   const { isAuthenticated } = useAuth0();
   const queryClient = useQueryClient();
   const api = useApi();
-  const { mutate } = api.useMutation("post", "/comments/{commentId}/reactions", {
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["get", "/movies/{movieId}/comments"] }),
+
+  const endpoint = isReply ? "/replies/{replyId}/reactions" : "/comments/{commentId}/reactions";
+  const { mutate } = api.useMutation("post", endpoint, {
+    onSuccess: async () => {
+      const queryKey = isReply ? ["get", "/comments/{commentId}/replies"] : ["get", "/movies/{movieId}/comments"];
+      await queryClient.invalidateQueries({ queryKey });
+    },
   });
 
   const submitReaction = (reaction: components["schemas"]["Reaction"]) => {
@@ -27,13 +33,32 @@ export const CommentReactionSection: FC<CommentReactionSection> = ({ comment }) 
     }
 
     // user wants to remove the reaction
-    if (comment.userReaction === reaction) {
+    if (item.userReaction === reaction) {
       reaction = "none";
     }
 
+    if (isReply) {
+      submitReplyReaction(reaction);
+    } else {
+      submitCommentReaction(reaction);
+    }
+  };
+
+  const submitCommentReaction = (reaction: components["schemas"]["Reaction"]) => {
     mutate({
       params: {
-        path: { commentId: comment.id },
+        path: { commentId: item.id },
+      },
+      body: {
+        reactionType: reaction,
+      },
+    });
+  };
+
+  const submitReplyReaction = (reaction: components["schemas"]["Reaction"]) => {
+    mutate({
+      params: {
+        path: { replyId: item.id },
       },
       body: {
         reactionType: reaction,
@@ -44,18 +69,18 @@ export const CommentReactionSection: FC<CommentReactionSection> = ({ comment }) 
   return (
     <div className="flex flex-row gap-4">
       <div className="flex flex-row items-center gap-1 text-neutral-300">
-        <span>{comment.likes}</span>
+        <span>{item.likes}</span>
         <button
-          className={`p-1 hover:text-cyan-300 ${comment.userReaction === "like" && "text-lime-400"}`}
+          className={`p-1 hover:text-cyan-300 ${item.userReaction === "like" && "text-lime-400"}`}
           onClick={() => submitReaction("like")}
         >
           <ThumbsUp size={20} strokeWidth={2} />
         </button>
       </div>
       <div className="flex flex-row items-center gap-1 text-neutral-300">
-        <span>{comment.dislikes}</span>
+        <span>{item.dislikes}</span>
         <button
-          className={`p-1 hover:text-cyan-300 ${comment.userReaction === "dislike" && "text-red-400"}`}
+          className={`p-1 hover:text-cyan-300 ${item.userReaction === "dislike" && "text-red-400"}`}
           onClick={() => submitReaction("dislike")}
         >
           <ThumbsDown size={20} strokeWidth={2} />

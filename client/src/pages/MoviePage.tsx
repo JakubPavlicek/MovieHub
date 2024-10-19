@@ -7,6 +7,7 @@ import { MovieTrailer } from "@/components/movie/MovieTrailer";
 import { Comments } from "@/components/comment/Comments";
 import placeholder from "@/assets/video/placeholder.mp4";
 import { MovieSkeleton } from "@/components/common/MovieSkeleton";
+import { MovieCommentInput } from "@/components/movie/MovieCommentInput";
 
 export const MoviePage: FC = () => {
   const { movieId = "" } = useParams();
@@ -35,6 +36,8 @@ export const MoviePage: FC = () => {
         <MovieDetails movieDetails={movieDetails} />
 
         <Comments movieId={movieId} />
+
+        <MovieCommentInput movieId={movieId} />
       </div>
       <MovieTrailer showTrailer={showTrailer} setShowTrailer={setShowTrailer} trailerUrl={movieDetails.trailerUrl} />
     </main>

@@ -8,12 +8,10 @@ import { toast } from "react-toastify";
 import { useTranslation } from "react-i18next";
 
 interface CommentInputProps {
-  movieId?: components["schemas"]["Uuid"];
-  replierUserName: components["schemas"]["UserNameAndPictureUrl"]["name"];
-  setShowInput: (prev: boolean) => void;
+  movieId: components["schemas"]["Uuid"];
 }
 
-export const CommentReplyInput: FC<CommentInputProps> = ({ movieId = "", replierUserName, setShowInput }) => {
+export const MovieCommentInput: FC<CommentInputProps> = ({ movieId }) => {
   const { t } = useTranslation();
   const [text, setText] = useState<string>("");
   const { isAuthenticated } = useAuth0();
@@ -34,11 +32,10 @@ export const CommentReplyInput: FC<CommentInputProps> = ({ movieId = "", replier
         path: { movieId: movieId },
       },
       body: {
-        text: `@${replierUserName} ${text.trim()}`,
+        text: text.trim(),
       },
     });
     setText("");
-    setShowInput(false);
   };
 
   const handleEnterKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -49,15 +46,14 @@ export const CommentReplyInput: FC<CommentInputProps> = ({ movieId = "", replier
   };
 
   return (
-    <div className="mt-2 flex min-h-11 gap-2">
+    <div className="mt-6 flex min-h-11 justify-center gap-2">
       <input
         type="text"
         placeholder={t("components.comment.inputPlaceholder")}
-        className="w-full rounded-full border-transparent bg-gray-700 px-4 text-white placeholder:text-gray-400 focus:border-cyan-300 focus:outline-none md:w-1/2 lg:w-1/3"
+        className="w-full rounded-full border-transparent bg-gray-700 px-4 text-white placeholder:text-gray-400 focus:border-cyan-300 focus:outline-none md:w-1/2"
         value={text}
         onChange={(e) => setText(e.target.value)}
         onKeyDown={handleEnterKey}
-        autoFocus
       />
       <button className="p-2 text-white hover:rounded-full hover:bg-gray-700" onClick={() => submitComment(text)}>
         <SendHorizontal strokeWidth={1} size={26} className="fill-cyan-600" />

@@ -6,23 +6,35 @@ import { useApi } from "@/context/ApiProvider";
 import { useQueryClient } from "@tanstack/react-query";
 
 interface CommentHeaderProps {
-  comment: components["schemas"]["CommentInfoDetailsResponse"];
+  item: components["schemas"]["CommentInfoDetailsResponse"];
+  isReply?: boolean;
 }
 
-export const CommentHeader: FC<CommentHeaderProps> = ({ comment }) => {
-  const { id, isAuthor, author, isDeleted, createdAt } = comment;
+export const CommentHeader: FC<CommentHeaderProps> = ({ item, isReply = false }) => {
+  const { id, isAuthor, author, isDeleted, createdAt } = item;
   const formattedDate = formatDate(createdAt);
 
   const queryClient = useQueryClient();
   const api = useApi();
-  const { mutate } = api.useMutation("delete", "/comments/{commentId}", {
-    onSuccess: async () => queryClient.invalidateQueries({ queryKey: ["get", "/movies/{movieId}/comments"] }),
+  const { mutate } = api.useMutation("delete", isReply ? "/replies/{replyId}" : "/comments/{commentId}", {
+    onSuccess: async () => {
+      const queryKey = isReply ? ["get", "/comments/{commentId}/replies"] : ["get", "/movies/{movieId}/comments"];
+      await queryClient.invalidateQueries({ queryKey });
+    },
   });
 
   const deleteComment = () => {
     mutate({
       params: {
         path: { commentId: id },
+      },
+    });
+  };
+
+  const deleteReply = () => {
+    mutate({
+      params: {
+        path: { replyId: id },
       },
     });
   };
@@ -34,7 +46,10 @@ export const CommentHeader: FC<CommentHeaderProps> = ({ comment }) => {
         <span className="text-sm text-neutral-400">{formattedDate}</span>
       </div>
       {isAuthor && !isDeleted && (
-        <button className="rounded-full p-1 text-red-400 hover:bg-gray-800" onClick={deleteComment}>
+        <button
+          className="rounded-full p-1 text-red-400 hover:bg-gray-800"
+          onClick={isReply ? deleteReply : deleteComment}
+        >
           <X />
         </button>
       )}

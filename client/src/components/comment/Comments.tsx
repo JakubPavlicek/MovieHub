@@ -2,7 +2,6 @@ import { type FC, useState } from "react";
 import type { components } from "@/api/api";
 import { useApi } from "@/context/ApiProvider";
 import { Comment } from "@/components/comment/Comment";
-import { CommentInput } from "@/components/comment/CommentInput";
 import { Pagination } from "@/components/comment/Pagination";
 import { useTranslation } from "react-i18next";
 
@@ -39,12 +38,11 @@ export const Comments: FC<MovieCommentsProps> = ({ movieId }) => {
     <div className="mt-5 text-white">
       <span className="text-2xl font-semibold text-neutral-300">{t("components.comment.title")}</span>
       {comments.content.map((comment) => (
-        <Comment key={comment.id} comment={comment} movieId={movieId} />
+        <Comment key={comment.id} comment={comment} />
       ))}
       {comments.totalPages !== 0 && (
         <Pagination selectedPage={selectedPage} onPageChange={selectNewPage} totalPages={comments.totalPages} />
       )}
-      <CommentInput movieId={movieId} />
     </div>
   );
 };

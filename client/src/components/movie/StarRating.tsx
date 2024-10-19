@@ -1,4 +1,4 @@
-import { type FC, useCallback, useMemo, useState } from "react";
+import { type FC, useCallback, useEffect, useMemo, useState } from "react";
 import { Star } from "lucide-react";
 import type { components } from "@/api/api";
 import { useApi } from "@/context/ApiProvider";
@@ -9,18 +9,35 @@ import { useTranslation } from "react-i18next";
 
 interface StarRatingProps {
   movieId: components["schemas"]["MovieDetailsResponse"]["id"];
-  userRating: components["schemas"]["MovieUserRating"]["rating"];
 }
 
 const multiplier = 2;
 
-export const StarRating: FC<StarRatingProps> = ({ movieId = "", userRating }) => {
-  const { t } = useTranslation();
-  const [rating, setRating] = useState(userRating / multiplier);
+export const StarRating: FC<StarRatingProps> = ({ movieId = "" }) => {
+  const [rating, setRating] = useState(0);
   const [hoverRating, setHoverRating] = useState(0);
+  const { t } = useTranslation();
   const { isAuthenticated } = useAuth0();
   const queryClient = useQueryClient();
+
   const api = useApi();
+
+  const { data: userRating, isFetched } = api.useQuery(
+    "get",
+    "/movies/{movieId}/ratings/me",
+    {
+      params: {
+        path: { movieId: movieId },
+      },
+    },
+    {
+      enabled: isAuthenticated,
+    },
+  );
+
+  useEffect(() => {
+    if (isFetched) setRating(userRating!.rating / multiplier);
+  }, [isFetched, userRating]);
 
   const { mutate } = api.useMutation("post", "/movies/{movieId}/ratings", {
     onSuccess: async () => queryClient.invalidateQueries({ queryKey: ["get", "/movies/{movieId}"] }),
