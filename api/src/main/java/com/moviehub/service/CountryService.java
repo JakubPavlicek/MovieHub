@@ -16,14 +16,24 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Service class for managing countries.
+/// This class provides methods for adding, retrieving, and updating country entities.
 @Service
 @Transactional
 @Log4j2
 @AllArgsConstructor
 public class CountryService {
 
+    /// Repository for managing Country entities.
     private final CountryRepository countryRepository;
 
+    /// Retrieves saved countries by checking their existence in the database.
+    ///
+    /// @param countries The list of countries to check for existence.
+    /// @return A list of saved Country entities.
     public List<Country> getSavedCountries(List<Country> countries) {
         log.info("retrieving saved countries");
 
@@ -32,11 +42,19 @@ public class CountryService {
                         .collect(Collectors.toCollection(ArrayList::new));
     }
 
+    /// Retrieves a saved country by its name.
+    /// Throws a CountryNotFoundException if the country does not exist.
+    ///
+    /// @param country The country to check.
+    /// @return The Country entity associated with the specified name.
     private Country getSavedCountry(Country country) {
         return countryRepository.findByName(country.getName())
                                 .orElseThrow(() -> new CountryNotFoundException("Country with name: " + country.getName() + " not found"));
     }
 
+    /// Retrieves all countries from the database, sorted by name in ascending order.
+    ///
+    /// @return A list of all Country entities.
     public List<Country> getCountries() {
         log.info("retrieving all countries");
 
@@ -45,6 +63,11 @@ public class CountryService {
         return countryRepository.findAll(sort);
     }
 
+    /// Retrieves a country by its ID.
+    /// Throws a CountryNotFoundException if the country does not exist.
+    ///
+    /// @param countryId The ID of the country to retrieve.
+    /// @return The Country entity associated with the specified ID.
     public Country getCountry(UUID countryId) {
         log.info("retrieving country: {}", countryId);
 
@@ -52,6 +75,11 @@ public class CountryService {
                                 .orElseThrow(() -> new CountryNotFoundException("Country with ID: " + countryId + " not found"));
     }
 
+    /// Adds a new country to the database.
+    /// Throws a CountryAlreadyExistsException if a country with the same name already exists.
+    ///
+    /// @param name The name of the country to add.
+    /// @return The newly created Country entity.
     public Country addCountry(String name) {
         if (countryRepository.existsByName(name)) {
             throw new CountryAlreadyExistsException("Country with name: " + name + " already exists");
@@ -65,6 +93,12 @@ public class CountryService {
         return countryRepository.save(country);
     }
 
+    /// Updates the name of an existing country.
+    /// Throws a CountryNotFoundException if the country does not exist.
+    ///
+    /// @param countryId The ID of the country to update.
+    /// @param name The new name for the country.
+    /// @return The updated Country entity.
     public Country updateCountry(UUID countryId, String name) {
         log.info("updating country: {} to name: {}", countryId, name);
 

@@ -28,6 +28,10 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Entity class representing a movie.
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

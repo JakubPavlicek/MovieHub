@@ -20,11 +20,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Controller class for managing genres.
+/// It provides endpoints for adding genres, retrieving genre details,
+/// updating genres, and retrieving movies associated with a specific genre.
 @RestController
 @RequiredArgsConstructor
 public class GenreController implements GenresApi {
 
+    /// Service for handling operations related to genres.
     private final GenreService genreService;
+    /// Service for handling operations related to movies.
     private final MovieService movieService;
 
     @Override

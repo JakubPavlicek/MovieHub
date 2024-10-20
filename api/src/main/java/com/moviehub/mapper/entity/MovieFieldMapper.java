@@ -3,12 +3,18 @@ package com.moviehub.mapper.entity;
 import com.moviehub.entity.Movie_;
 import lombok.extern.log4j.Log4j2;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Mapper class for mapping movie fields to their corresponding database entity fields.
 @Log4j2
 public class MovieFieldMapper {
 
+    // Private constructor to prevent instantiation.
     private MovieFieldMapper() {
     }
 
+    /// Enumeration of the fields related to movies.
     public enum Field {
         MOVIE_ID,
         NAME,
@@ -30,6 +36,10 @@ public class MovieFieldMapper {
         UPDATED_AT
     }
 
+    /// Maps a given movie field string to the corresponding entity field.
+    ///
+    /// @param field The name of the movie field to map.
+    /// @return The corresponding entity field name as a string.
     public static String mapToMovieField(String field) {
         log.debug("mapping movie field: {}", field);
         // replaceAll: insert "_" before every uppercased letter

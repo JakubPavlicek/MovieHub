@@ -20,11 +20,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Controller class for managing directors.
+/// It provides endpoints for adding directors, retrieving director details,
+/// updating directors, and retrieving movies associated with a specific director.
 @RestController
 @RequiredArgsConstructor
 public class DirectorController implements DirectorsApi {
 
+    /// Service for handling operations related to directors.
     private final DirectorService directorService;
+    /// Service for handling operations related to movies.
     private final MovieService movieService;
 
     @Override

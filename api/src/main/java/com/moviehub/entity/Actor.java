@@ -15,6 +15,10 @@ import lombok.Setter;
 
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Entity class representing an actor.
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

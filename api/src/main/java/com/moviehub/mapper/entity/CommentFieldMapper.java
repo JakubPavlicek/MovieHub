@@ -4,12 +4,18 @@ import com.moviehub.entity.CommentInfo_;
 import com.moviehub.entity.Comment_;
 import lombok.extern.log4j.Log4j2;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Mapper class for mapping comment fields to their corresponding database entity fields.
 @Log4j2
 public class CommentFieldMapper {
 
+    // Private constructor to prevent instantiation.
     private CommentFieldMapper() {
     }
 
+    /// Enumeration of the fields related to comments.
     public enum Field {
         COMMENT_ID,
         MOVIE,
@@ -23,6 +29,10 @@ public class CommentFieldMapper {
         LIKES,
     }
 
+    /// Maps a given comment field string to the corresponding entity field.
+    ///
+    /// @param field The name of the comment field to map.
+    /// @return The corresponding entity field name as a string.
     public static String mapToCommentField(String field) {
         log.debug("mapping comment field: {}", field);
         // replaceAll: insert "_" before every uppercased letter

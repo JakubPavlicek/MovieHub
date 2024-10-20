@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Repository interface for managing CommentReaction entities.
 @Repository
 public interface CommentReactionRepository extends JpaRepository<CommentReaction, UUID> {
 

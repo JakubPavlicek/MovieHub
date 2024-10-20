@@ -19,11 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Controller class for managing production companies.
+/// It provides endpoints for performing operations related to production companies and their associated movies.
 @RestController
 @RequiredArgsConstructor
 public class ProductionCompanyController implements ProductionCompaniesApi {
 
+    /// Service for handling operations related to production companies.
     private final ProductionCompanyService companyService;
+    /// Service for handling operations related to movies.
     private final MovieService movieService;
 
     @Override

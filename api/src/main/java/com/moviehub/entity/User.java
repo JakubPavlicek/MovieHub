@@ -10,6 +10,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Entity class representing a user.
 @Entity
 @Table(name = "auth_user")
 @AllArgsConstructor

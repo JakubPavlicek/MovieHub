@@ -17,10 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Controller class for managing comments and their replies.
+/// It provides endpoints for adding comments, replying to comments, deleting comments, and reacting to comments.
 @RestController
 @RequiredArgsConstructor
 public class CommentController implements CommentsApi {
 
+    /// Service for handling operations related to comment information.
     private final CommentInfoService commentInfoService;
 
     @Override

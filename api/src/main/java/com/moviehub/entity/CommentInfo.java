@@ -24,6 +24,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Entity class representing a comment/reply info.
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
@@ -88,7 +92,9 @@ public abstract class CommentInfo {
 
     public void setUserReaction(List<CommentReaction> reactions) {
         userReaction = reactions.stream()
-                                .filter(r -> r.getCommentInfo().getId().equals(id))
+                                .filter(r -> r.getCommentInfo()
+                                              .getId()
+                                              .equals(id))
                                 .map(CommentReaction::getReactionType)
                                 .findFirst()
                                 .orElse(ReactionType.NONE);

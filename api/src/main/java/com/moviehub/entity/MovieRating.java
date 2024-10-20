@@ -19,10 +19,14 @@ import lombok.Setter;
 
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Entity class representing a movie rating.
 @Entity
 @Table(
     uniqueConstraints = @UniqueConstraint(
-        columnNames = {"movie_id", "user_id"},
+        columnNames = { "movie_id", "user_id" },
         name = "uq_movie_user"
     )
 )

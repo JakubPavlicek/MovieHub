@@ -17,6 +17,10 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Entity class representing a comment.
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

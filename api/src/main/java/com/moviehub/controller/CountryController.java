@@ -20,11 +20,19 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Controller class for managing countries.
+/// It provides endpoints for adding, retrieving, and updating countries,
+/// as well as retrieving movies associated with a specific country.
 @RestController
 @RequiredArgsConstructor
 public class CountryController implements CountriesApi {
 
+    /// Service for handling operations related to countries.
     private final CountryService countryService;
+    /// Service for handling operations related to movies.
     private final MovieService movieService;
 
     @Override

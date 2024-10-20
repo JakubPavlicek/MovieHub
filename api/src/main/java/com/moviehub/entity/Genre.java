@@ -13,6 +13,10 @@ import lombok.Setter;
 
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Entity class representing a genre.
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

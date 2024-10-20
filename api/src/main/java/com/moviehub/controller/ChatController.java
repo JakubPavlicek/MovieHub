@@ -12,13 +12,20 @@ import org.springframework.stereotype.Controller;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Controller class for handling chat messages.
+/// It listens for incoming chat messages and broadcasts them to all connected clients.
 @Log4j2
 @Controller
 @RequiredArgsConstructor
 public class ChatController {
 
+    /// Service for retrieving user information.
     private final UserService userService;
 
+    /// Formatter for formatting the current time in HH:mm format.
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
     @MessageMapping("/chat")

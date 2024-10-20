@@ -6,6 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Main application class for the Movie Hub application.
 @SpringBootApplication
 @EnableConfigurationProperties({ClientUrlProperties.class, Auth0Properties.class})
 public class MovieHubApplication {

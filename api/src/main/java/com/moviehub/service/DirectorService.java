@@ -16,14 +16,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Service class for managing directors.
+/// This class provides methods for adding, retrieving, and updating director entities.
 @Service
 @Transactional
 @Log4j2
 @AllArgsConstructor
 public class DirectorService {
 
+    /// Repository for managing Director entities.
     private final DirectorRepository directorRepository;
 
+    /// Retrieves a saved director by name or saves a new one if not found.
+    ///
+    /// @param director The Director entity to check for existence.
+    /// @return The existing Director entity if found, otherwise saves and returns the new one.
     public Director getSavedDirector(Director director) {
         log.info("retrieving saved director: {}", director.getName());
 
@@ -31,6 +41,11 @@ public class DirectorService {
                                  .orElseGet(() -> saveDirector(director));
     }
 
+    /// Adds a new director to the database.
+    /// Throws a DirectorAlreadyExistsException if a director with the same name already exists.
+    ///
+    /// @param director The Director entity to add.
+    /// @return The newly created Director entity.
     public Director addDirector(Director director) {
         log.info("adding director: {}", director.getName());
 
@@ -39,6 +54,11 @@ public class DirectorService {
         return saveDirector(director);
     }
 
+    /// Verifies the uniqueness of the director's name.
+    /// Throws a DirectorAlreadyExistsException if a director with the same name exists.
+    ///
+    /// @param directorName The name of the director to check.
+    /// @param directorId The ID of the director (if updating).
     private void verifyDirectorUniqueness(String directorName, UUID directorId) {
         log.debug("verifying director uniqueness: {}", directorName);
 
@@ -46,7 +66,8 @@ public class DirectorService {
 
         if (directorId != null) {
             isNameTaken = directorRepository.existsByNameAndIdNot(directorName, directorId);
-        } else {
+        }
+        else {
             isNameTaken = directorRepository.existsByName(directorName);
         }
 
@@ -55,11 +76,20 @@ public class DirectorService {
         }
     }
 
+    /// Saves a director to the database.
+    ///
+    /// @param director The Director entity to save.
+    /// @return The saved Director entity.
     private Director saveDirector(Director director) {
         log.info("saving director: {}", director.getName());
         return directorRepository.save(director);
     }
 
+    /// Retrieves a director by their ID.
+    /// Throws a DirectorNotFoundException if the director does not exist.
+    ///
+    /// @param directorId The ID of the director to retrieve.
+    /// @return The Director entity associated with the specified ID.
     public Director getDirector(UUID directorId) {
         log.info("retrieving director: {}", directorId);
 
@@ -67,6 +97,12 @@ public class DirectorService {
                                  .orElseThrow(() -> new DirectorNotFoundException("Director with ID: " + directorId + " not found"));
     }
 
+    /// Retrieves a paginated list of directors, optionally filtered by name.
+    ///
+    /// @param page The page number to retrieve.
+    /// @param limit The number of directors per page.
+    /// @param name The optional name filter for the directors.
+    /// @return A page of Director entities.
     public Page<Director> getDirectors(Integer page, Integer limit, String name) {
         log.info("retrieving directors with page: {}, limit: {}, name: {}", page, limit, name);
 
@@ -80,6 +116,13 @@ public class DirectorService {
         return directorRepository.findAllByName(name, pageable);
     }
 
+    /// Updates an existing director's details.
+    /// Throws a DirectorNotFoundException if the director does not exist.
+    /// Throws a DirectorAlreadyExistsException if the updated name already exists.
+    ///
+    /// @param directorId The ID of the director to update.
+    /// @param incomingDirector The Director entity containing the new details.
+    /// @return The updated Director entity.
     public Director updateDirector(UUID directorId, Director incomingDirector) {
         log.info("updating director: {}", directorId);
 

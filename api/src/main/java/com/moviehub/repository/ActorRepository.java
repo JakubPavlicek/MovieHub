@@ -9,6 +9,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Repository interface for managing Actor entities.
 @Repository
 public interface ActorRepository extends JpaRepository<Actor, UUID> {
 

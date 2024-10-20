@@ -20,10 +20,14 @@ import lombok.Setter;
 
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Entity class representing a comment reaction.
 @Entity
 @Table(
     uniqueConstraints = @UniqueConstraint(
-        columnNames = {"comment_info_id", "user_id"},
+        columnNames = { "comment_info_id", "user_id" },
         name = "uq_comment_user"
     )
 )

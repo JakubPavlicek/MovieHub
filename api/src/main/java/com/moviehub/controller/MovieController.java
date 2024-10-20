@@ -23,10 +23,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Controller class for managing movies.
+/// It provides endpoints for performing operations related to movies.
 @RestController
 @RequiredArgsConstructor
 public class MovieController implements MoviesApi {
 
+    /// Service for handling operations related to movies.
     private final MovieService movieService;
 
     @Override

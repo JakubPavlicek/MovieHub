@@ -9,16 +9,23 @@ import com.moviehub.dto.UpdateMovieRequest;
 import com.moviehub.dto.YearListResponse;
 import com.moviehub.entity.Movie;
 import org.springframework.data.domain.Page;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Mapper class for converting between Movie entities and Data Transfer Objects (DTOs).
 public class MovieMapper {
 
+    // Private constructor to prevent instantiation.
     private MovieMapper() {
     }
 
+    /// Maps an AddMovieRequest DTO to a Movie entity.
+    ///
+    /// @param addMovieRequest The AddMovieRequest DTO to map.
+    /// @return A Movie entity created from the provided request.
     public static Movie mapToMovie(AddMovieRequest addMovieRequest) {
         return Movie.builder()
                     .name(addMovieRequest.getName())
@@ -36,6 +43,10 @@ public class MovieMapper {
                     .build();
     }
 
+    /// Maps an UpdateMovieRequest DTO to a Movie entity.
+    ///
+    /// @param updateMovieRequest The UpdateMovieRequest DTO to map.
+    /// @return A Movie entity created from the provided request.
     public static Movie mapToMovie(UpdateMovieRequest updateMovieRequest) {
         return Movie.builder()
                     .name(updateMovieRequest.getName())
@@ -53,6 +64,10 @@ public class MovieMapper {
                     .build();
     }
 
+    /// Maps a Movie entity to a MoviePreviewResponse DTO.
+    ///
+    /// @param movie The Movie entity to map.
+    /// @return A MoviePreviewResponse DTO containing the movie's preview information.
     public static MoviePreviewResponse mapToMoviePreviewResponse(Movie movie) {
         return MoviePreviewResponse.builder()
                                    .id(movie.getId())
@@ -64,6 +79,10 @@ public class MovieMapper {
                                    .build();
     }
 
+    /// Maps a Movie entity to a MovieDetailsResponse DTO.
+    ///
+    /// @param movie The Movie entity to map.
+    /// @return A MovieDetailsResponse DTO containing the movie's detailed information.
     public static MovieDetailsResponse mapToMovieDetailsResponse(Movie movie) {
         return MovieDetailsResponse.builder()
                                    .id(movie.getId())
@@ -84,6 +103,10 @@ public class MovieMapper {
                                    .build();
     }
 
+    /// Maps a Page of Movie entities to a MoviePage DTO.
+    ///
+    /// @param movies A Page of Movie entities to map.
+    /// @return A MoviePage DTO containing the paginated movie information.
     public static MoviePage mapToMoviePage(Page<Movie> movies) {
         return MoviePage.builder()
                         .content(mapToMoviePreviewResponseList(movies))
@@ -100,18 +123,30 @@ public class MovieMapper {
                         .build();
     }
 
+    /// Maps a Page of Movie entities to a list of MoviePreviewResponse DTOs.
+    ///
+    /// @param movies A Page of Movie entities to map.
+    /// @return A list of MoviePreviewResponse DTOs containing preview information for each movie.
     private static List<MoviePreviewResponse> mapToMoviePreviewResponseList(Page<Movie> movies) {
         return movies.stream()
                      .map(MovieMapper::mapToMoviePreviewResponse)
                      .toList();
     }
 
+    /// Maps a list of years to a YearListResponse DTO.
+    ///
+    /// @param years A list of years to map.
+    /// @return A YearListResponse DTO containing the list of years.
     public static YearListResponse mapToYearListResponse(List<Integer> years) {
         return YearListResponse.builder()
                                .years(years)
                                .build();
     }
 
+    /// Maps a rating value to a MovieUserRating DTO.
+    ///
+    /// @param rating The rating value to map.
+    /// @return A MovieUserRating DTO containing the rating information.
     public static MovieUserRating mapToMovieUserRating(Double rating) {
         return MovieUserRating.builder()
                               .rating(rating)

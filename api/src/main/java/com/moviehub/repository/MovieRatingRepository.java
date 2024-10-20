@@ -10,6 +10,10 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Repository interface for managing MovieRating entities.
 @Repository
 public interface MovieRatingRepository extends JpaRepository<MovieRating, UUID> {
 

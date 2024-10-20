@@ -20,11 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Controller class for managing actors.
+/// It provides endpoints to add, retrieve, update actors and get movies associated with a specific actor.
 @RestController
 @RequiredArgsConstructor
 public class ActorController implements ActorsApi {
 
+    /// Service for handling actor-related operations.
     private final ActorService actorService;
+    /// Service for handling movie-related operations.
     private final MovieService movieService;
 
     @Override

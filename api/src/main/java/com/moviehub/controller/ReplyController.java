@@ -11,10 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Controller class for managing replies to comments in the movie hub application.
+/// It provides endpoints for performing operations related to comment replies.
 @RestController
 @RequiredArgsConstructor
 public class ReplyController implements RepliesApi {
 
+    /// Service for handling operations related to comment information and replies.
     private final CommentInfoService commentInfoService;
 
     @Override

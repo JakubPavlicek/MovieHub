@@ -7,6 +7,10 @@ import org.springframework.stereotype.Repository;
 
 import java.util.UUID;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// Repository interface for managing MovieCast entities.
 @Repository
 public interface MovieCastRepository extends JpaRepository<MovieCast, UUID> {
 

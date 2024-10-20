@@ -7,6 +7,12 @@ import org.springframework.security.config.annotation.web.socket.AbstractSecurit
 import static com.moviehub.entity.Role.ADMIN;
 import static com.moviehub.entity.Role.USER;
 
+/// @author Jakub Pavlíček
+/// @version 1.0
+///
+/// WebSocket security configuration class that handles the authorization of WebSocket
+/// messages and subscriptions using Spring Security's message broker support.
+///
 /// Using a deprecated approach because the non-deprecated one requires a CSRF token to be sent with every WebSocket message.
 /// In the non-deprecated version, there is no easy way to disable CSRF.
 /// Authorization is handled in the {@link com.moviehub.config.WebSocketAuthorizationInterceptor} using an Auth0 Access Token (JWT), so CSRF is not required.
