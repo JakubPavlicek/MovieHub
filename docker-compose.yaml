@@ -22,10 +22,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.api
+    env_file:
+      - .env
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/${POSTGRES_DB}
-      - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
-      - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
     healthcheck:
       test: ["CMD-SHELL", "wget -T5 -qO- http://localhost:8080/actuator/health | grep UP || exit 1"]
       interval: 10s
@@ -42,6 +44,8 @@ services:
   moviehub-client:
     image: moviehub-client
     container_name: moviehub-client
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: Dockerfile.client
