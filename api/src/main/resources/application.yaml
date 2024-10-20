@@ -1,19 +1,13 @@
-logging:
-  level:
-    org:
-      springframework:
-        security: DEBUG
-        messaging: DEBUG
-        data:
-          jpa: DEBUG
-#        web: DEBUG
 # used for CORS and JWT claims retrieval
 client:
   url: http://localhost:5173
+
+# used for Auth0 authentication and authorization
 okta:
   oauth2:
     audience: http://movie-hub-api
     issuer: https://dev-bzrzau6cj3i0m33i.us.auth0.com/
+
 spring:
   docker:
     compose:
@@ -25,14 +19,12 @@ spring:
   jpa:
     hibernate:
       ddl-auto: validate
-    show-sql: true
     open-in-view: false
     properties:
       hibernate:
-#        generate_statistics: true
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
 
+# SpringDoc configuration for generating OpenAPI documentation
 springdoc:
   api-docs:
     version: openapi_3_0
