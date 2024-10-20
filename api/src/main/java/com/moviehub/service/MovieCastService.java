@@ -6,6 +6,7 @@ import com.moviehub.entity.MovieCast;
 import com.moviehub.repository.MovieCastRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
+@Log4j2
 @RequiredArgsConstructor
 public class MovieCastService {
 
@@ -22,6 +24,8 @@ public class MovieCastService {
     private final ActorService actorService;
 
     public List<MovieCast> getSavedMovieCasts(List<MovieCast> movieCasts, Movie movie) {
+        log.info("retrieving saved countries");
+
         return movieCasts.stream()
                          .map(movieCast -> getSavedMovieCast(movieCast, movie))
                          .collect(Collectors.toCollection(ArrayList::new));

@@ -20,9 +20,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
-@Log4j2
 @Service
 @Transactional
+@Log4j2
 @RequiredArgsConstructor
 public class CommentInfoService {
 
@@ -32,12 +32,16 @@ public class CommentInfoService {
     private final UserService userService;
 
     public void deleteComment(UUID commentId) {
+        log.info("deleting comment: {}", commentId);
+
         User user = userService.getUser();
 
         commentService.deleteComment(commentId, user);
     }
 
     public void deleteReply(UUID replyId) {
+        log.info("deleting reply: {}", replyId);
+
         User user = userService.getUser();
 
         replyService.deleteReply(replyId, user);

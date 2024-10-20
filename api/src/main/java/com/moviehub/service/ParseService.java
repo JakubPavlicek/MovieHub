@@ -4,6 +4,7 @@ import com.moviehub.entity.Movie;
 import com.moviehub.mapper.entity.CommentFieldMapper;
 import com.moviehub.mapper.entity.MovieFieldMapper;
 import com.moviehub.specification.MovieSpecification;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 @Service
+@Log4j2
 public class ParseService {
 
     private static final String COMMA_DELIMITER = ",";
@@ -39,10 +41,12 @@ public class ParseService {
     }
 
     public Sort parseMovieSort(String sort) {
+        log.debug("parsing movie sort: {}", sort);
         return parseSort(sort, MovieFieldMapper::mapToMovieField);
     }
 
     public Sort parseCommentSort(String sort) {
+        log.debug("parsing comment sort: {}", sort);
         return parseSort(sort, CommentFieldMapper::mapToCommentField);
     }
 
@@ -59,14 +63,17 @@ public class ParseService {
     }
 
     public Specification<Movie> parseReleaseYear(String releaseYear) {
+        log.debug("parsing release year: {}", releaseYear);
         return parseFilter(releaseYear, MovieSpecification::releaseYearIn, Integer::parseInt);
     }
 
     public Specification<Movie> parseGenre(String genre) {
+        log.debug("parsing genre: {}", genre);
         return parseFilter(genre, MovieSpecification::genreIn, Function.identity());
     }
 
     public Specification<Movie> parseCountry(String country) {
+        log.debug("parsing country: {}", country);
         return parseFilter(country, MovieSpecification::countryIn, Function.identity());
     }
 

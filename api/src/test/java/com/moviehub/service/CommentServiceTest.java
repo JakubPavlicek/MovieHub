@@ -112,16 +112,4 @@ class CommentServiceTest {
         assertThat(resultPage.getContent()).containsExactlyInAnyOrder(comment1, comment2);
     }
 
-    @Test
-    void shouldGetCommentById() {
-        Comment comment = (Comment) createComment(null, null, COMMENT_TEXT);
-
-        when(commentRepository.findById(COMMENT_ID)).thenReturn(Optional.of(comment));
-
-        Optional<Comment> result = commentService.getCommentById(COMMENT_ID);
-
-        assertThat(result).isPresent();
-        assertThat(result.get().getText()).isEqualTo(COMMENT_TEXT);
-    }
-
 }

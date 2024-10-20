@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.UUID;
 
-@Log4j2
 @Service
 @Transactional
+@Log4j2
 @RequiredArgsConstructor
 public class MovieRatingService {
 
@@ -23,7 +23,7 @@ public class MovieRatingService {
     private final UserService userService;
 
     public boolean saveRating(Movie movie, Double rating) {
-        log.info("Saving rating {} for movie {}", rating, movie.getId());
+        log.info("saving rating: {} for movie: {}", rating, movie.getId());
 
         User user = userService.getUser();
         Optional<MovieRating> existingMovieRating = ratingRepository.findByMovieAndUser(movie, user);
@@ -39,11 +39,15 @@ public class MovieRatingService {
     }
 
     private void updateExistingRating(MovieRating existingRating, Double rating) {
+        log.debug("updating existing rating: {} to new rating: {}", existingRating.getRating(), rating);
+
         existingRating.setRating(rating);
         ratingRepository.save(existingRating);
     }
 
     private void createNewRating(Movie movie, User user, Double rating) {
+        log.info("creating new rating: {} for movie: {}", rating, movie.getId());
+
         MovieRating movieRating = MovieRating.builder()
                                              .movie(movie)
                                              .user(user)
@@ -54,6 +58,8 @@ public class MovieRatingService {
     }
 
     public Double calculateRating(UUID movieId) {
+        log.debug("calculating average rating for movie: {}", movieId);
+
         return ratingRepository.getAverageRatingByMovieId(movieId);
     }
 

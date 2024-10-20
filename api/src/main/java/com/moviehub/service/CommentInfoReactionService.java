@@ -7,6 +7,7 @@ import com.moviehub.entity.User;
 import com.moviehub.repository.CommentReactionRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,12 +16,15 @@ import java.util.UUID;
 
 @Service
 @Transactional
+@Log4j2
 @RequiredArgsConstructor
 public class CommentInfoReactionService {
 
     private final CommentReactionRepository reactionRepository;
 
     public void addCommentInfoReaction(CommentInfo commentInfo, ReactionType reactionType, User user) {
+        log.info("adding reaction: {} for comment info: {}", reactionType, commentInfo.getId());
+
         Optional<CommentReaction> existingReaction = reactionRepository.findByCommentInfoIdAndUserId(commentInfo.getId(), user.getId());
 
         existingReaction.ifPresentOrElse(
@@ -32,6 +36,8 @@ public class CommentInfoReactionService {
     }
 
     private void updateExistingReaction(CommentReaction reaction, CommentInfo commentInfo, ReactionType newReaction) {
+        log.debug("updating existing reaction: {}, with new reaction: {}", reaction.getReactionType(), newReaction);
+
         updateCommentInfoReactions(commentInfo, reaction.getReactionType(), newReaction);
 
         // user wants to delete their reaction
@@ -49,6 +55,8 @@ public class CommentInfoReactionService {
             return;
         }
 
+        log.debug("updating reaction count for comment info: {}", commentInfo.getId());
+
         // decrement old reaction count
         adjustReactionCount(commentInfo, previousReaction, -1);
         // increment new reaction count
@@ -65,6 +73,8 @@ public class CommentInfoReactionService {
     }
 
     private void saveNewReaction(CommentInfo commentInfo, User user, ReactionType reactionType) {
+        log.debug("saving new reaction: {} for comment info: {}", reactionType, commentInfo.getId());
+
         CommentReaction reaction = CommentReaction.builder()
                                                   .commentInfo(commentInfo)
                                                   .user(user)

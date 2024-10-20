@@ -1,7 +1,9 @@
 package com.moviehub.mapper.entity;
 
 import com.moviehub.entity.Movie_;
+import lombok.extern.log4j.Log4j2;
 
+@Log4j2
 public class MovieFieldMapper {
 
     private MovieFieldMapper() {
@@ -29,6 +31,7 @@ public class MovieFieldMapper {
     }
 
     public static String mapToMovieField(String field) {
+        log.debug("mapping movie field: {}", field);
         // replaceAll: insert "_" before every uppercased letter
         Field movieField = Field.valueOf(field.replaceAll("([A-Z])", "_$1").toUpperCase());
 

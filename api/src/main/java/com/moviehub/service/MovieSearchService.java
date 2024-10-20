@@ -18,9 +18,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.UUID;
 
-@Log4j2
 @Service
 @Transactional
+@Log4j2
 @RequiredArgsConstructor
 public class MovieSearchService {
 
@@ -101,9 +101,13 @@ public class MovieSearchService {
     }
 
     private PageImpl<Movie> getMoviePage(Specification<Movie> specification, Pageable pageable) {
+        log.debug("retrieving movie page based on the ids");
+
         Page<Movie> movies = movieRepository.findAll(specification, pageable);
         List<UUID> movieIds = movies.getContent().stream().map(Movie::getId).toList();
         List<Movie> movieList = movieRepository.findMoviesWithGenresByIds(movieIds);
+
+        log.debug("movie page retrieved successfully by ids");
 
         return new PageImpl<>(movieList, pageable, movies.getTotalElements());
     }

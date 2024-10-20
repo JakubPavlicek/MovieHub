@@ -11,12 +11,14 @@ import com.moviehub.exception.MovieNotFoundException;
 import com.moviehub.repository.MovieRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Log4j2
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -30,6 +32,8 @@ public class MovieService {
     private final MovieInteractionService interactionService;
 
     public Movie addMovie(Movie movie) {
+        log.info("adding movie");
+
         Director savedDirector = crewService.getSavedDirector(movie.getDirector());
         movie.setDirector(savedDirector);
 
@@ -52,6 +56,8 @@ public class MovieService {
     }
 
     public Movie getMovie(UUID movieId) {
+        log.info("retrieving movie: {}", movieId);
+
         return movieRepository.findById(movieId)
                               .orElseThrow(() -> new MovieNotFoundException("Movie with ID: " + movieId + " not found"));
     }
@@ -60,6 +66,8 @@ public class MovieService {
         if (!movieRepository.existsById(movieId)) {
             throw new MovieNotFoundException("Movie with ID: " + movieId + " not found");
         }
+
+        log.info("retrieving movie with details: {}", movieId);
 
         // only fetch data that are needed
         Movie movie = movieRepository.getMovieWithDirector(movieId);
@@ -72,11 +80,15 @@ public class MovieService {
     }
 
     public void deleteMovie(UUID movieId) {
+        log.info("deleting movie: {}", movieId);
+
         Movie movie = getMovie(movieId);
         movieRepository.delete(movie);
     }
 
     public Movie updateMovie(UUID movieId, Movie incomingMovie) {
+        log.info("updating movie: {}", movieId);
+
         Movie existingMovie = getMovie(movieId);
 
         updateMovieFields(existingMovie, incomingMovie);
@@ -86,6 +98,8 @@ public class MovieService {
     }
 
     private static void updateMovieFields(Movie existingMovie, Movie incomingMovie) {
+        log.debug("updating movie fields");
+
         existingMovie.setName(incomingMovie.getName());
         existingMovie.setFilename(incomingMovie.getFilename());
         existingMovie.setReleaseDate(incomingMovie.getReleaseDate());
@@ -96,6 +110,8 @@ public class MovieService {
     }
 
     private void updateMovieRelatedEntities(Movie existingMovie, Movie incomingMovie) {
+        log.debug("updating movie related entities");
+
         updateDirector(existingMovie, incomingMovie);
         updateCast(existingMovie, incomingMovie);
         updateProduction(existingMovie, incomingMovie);
@@ -107,6 +123,7 @@ public class MovieService {
         if (incomingMovie.getDirector() == null) {
             return;
         }
+        log.debug("updating director");
 
         Director savedDirector = crewService.getSavedDirector(incomingMovie.getDirector());
         existingMovie.setDirector(savedDirector);
@@ -116,6 +133,8 @@ public class MovieService {
         if (incomingMovie.getCast() == null || incomingMovie.getCast().isEmpty()) {
             return;
         }
+
+        log.debug("updating cast");
 
         crewService.deleteAllMovieCastsByMovie(existingMovie);
         List<MovieCast> savedMovieCasts = crewService.getSavedMovieCasts(incomingMovie.getCast(), existingMovie);
@@ -127,6 +146,8 @@ public class MovieService {
             return;
         }
 
+        log.debug("updating production companies");
+
         List<ProductionCompany> savedProduction = metadataService.getSavedProductions(incomingMovie.getProduction());
         existingMovie.setProduction(savedProduction);
     }
@@ -135,6 +156,8 @@ public class MovieService {
         if (incomingMovie.getGenres() == null || incomingMovie.getGenres().isEmpty()) {
             return;
         }
+
+        log.debug("updating genres");
 
         List<Genre> savedGenres = metadataService.getSavedGenres(incomingMovie.getGenres());
         existingMovie.setGenres(savedGenres);
@@ -145,31 +168,43 @@ public class MovieService {
             return;
         }
 
+        log.debug("updating countries");
+
         List<Country> savedCountries = metadataService.getSavedCountries(incomingMovie.getCountries());
         existingMovie.setCountries(savedCountries);
     }
 
     public Page<Movie> getMoviesWithGenre(UUID genreId, Integer page, Integer limit) {
+        log.info("retrieving movies with genre: {}, page: {}, limit: {}", genreId, page, limit);
+
         metadataService.getGenre(genreId);
         return searchService.getMoviesWithGenre(genreId, page, limit);
     }
 
     public Page<Movie> getMoviesWithCountry(UUID countryId, Integer page, Integer limit) {
+        log.info("retrieving movies with country: {}, page: {}, limit: {}", countryId, page, limit);
+
         metadataService.getCountry(countryId);
         return searchService.getMoviesWithCountry(countryId, page, limit);
     }
 
     public Page<Movie> getMoviesWithProductionCompany(UUID companyId, Integer page, Integer limit) {
+        log.info("retrieving movies with production company: {}, page: {}, limit: {}", companyId, page, limit);
+
         metadataService.getProductionCompany(companyId);
         return searchService.getMoviesWithProductionCompany(companyId, page, limit);
     }
 
     public Page<Movie> getMoviesWithDirector(UUID directorId, Integer page, Integer limit) {
+        log.info("retrieving movies with director: {}, page: {}, limit: {}", directorId, page, limit);
+
         crewService.getDirector(directorId);
         return searchService.getMoviesWithDirector(directorId, page, limit);
     }
 
     public Page<Movie> getMoviesWithActor(UUID actorId, Integer page, Integer limit) {
+        log.info("retrieving movies with actor: {}, page: {}, limit: {}", actorId, page, limit);
+
         crewService.getActor(actorId);
         return searchService.getMoviesWithActor(actorId, page, limit);
     }
@@ -186,6 +221,8 @@ public class MovieService {
     }
 
     public void addRating(UUID movieId, Double rating) {
+        log.info("adding rating: {} for movie: {}", rating, movieId);
+
         Movie movie = getMovie(movieId);
 
         boolean wasRatingUpdated = interactionService.saveRating(movie, rating);
@@ -196,6 +233,7 @@ public class MovieService {
 
         // user rated the movie for the first time
         if (!wasRatingUpdated) {
+            log.debug("incrementing review count for movie: {}", movieId);
             movie.setReviewCount(movie.getReviewCount() + 1);
         }
 
@@ -203,19 +241,24 @@ public class MovieService {
     }
 
     public Double getRating(UUID movieId) {
+        log.info("retrieving rating for movie: {}", movieId);
+
         Movie movie = getMovie(movieId);
         return interactionService.getRating(movie);
     }
 
     public Page<Movie> getMovies(Integer page, Integer limit, String sort) {
+        log.info("retrieving movies with page: {}, limit: {}, sort: {}", page, limit, sort);
         return searchService.getMovies(page, limit, sort);
     }
 
     public Page<Movie> filterMovies(Integer page, Integer limit, String sort, String releaseYear, String genre, String country) {
+        log.info("filtering movies with page: {}, limit: {}, sort: {}, releaseYear: {}, genre: {}, country: {}", page, limit, sort, releaseYear, genre, country);
         return searchService.filterMovies(page, limit, sort, releaseYear, genre, country);
     }
 
     public Page<Movie> searchMovies(Integer page, Integer limit, String sort, String keyword) {
+        log.info("searching movies with page: {}, limit: {}, sort: {}, keyword: {}", page, limit, sort, keyword);
         return searchService.searchMovies(page, limit, sort, keyword);
     }
 

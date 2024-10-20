@@ -9,7 +9,7 @@ import static com.moviehub.entity.Role.USER;
 
 /// Using a deprecated approach because the non-deprecated one requires a CSRF token to be sent with every WebSocket message.
 /// In the non-deprecated version, there is no easy way to disable CSRF.
-/// Authorization is handled in the `AuthorizationSocketInterceptor` using an Auth0 Access Token (JWT), so CSRF is not required.
+/// Authorization is handled in the {@link com.moviehub.config.WebSocketAuthorizationInterceptor} using an Auth0 Access Token (JWT), so CSRF is not required.
 ///
 /// @see <a href="https://docs.spring.io/spring-security/reference/servlet/integrations/websocket.html">WebSocket Security</a>
 /// @see <a href="https://docs.spring.io/spring-framework/reference/web/websocket/stomp/authentication-token-based.html">Token Authentication</a>

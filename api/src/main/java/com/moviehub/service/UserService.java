@@ -25,13 +25,13 @@ public class UserService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (!(authentication instanceof JwtAuthenticationToken)) {
-            log.info("user is not authenticated, returning null");
+            log.debug("user is not authenticated, returning null");
             return null;
         }
 
         String userId = authentication.getName();
 
-        log.info("retrieving user with ID: {}", userId);
+        log.info("retrieving user from database");
 
         return userRepository.findById(userId)
                              .orElseThrow(() -> new UserNotFoundException("User with ID: " + userId + " not found"));
@@ -39,6 +39,7 @@ public class UserService {
 
     public void saveAuthenticatedUser(String userId, String accessToken) {
         if (!userRepository.existsById(userId)) {
+            log.info("saving user");
             UserInfo userInfo = auth0Service.fetchUserInfo(accessToken);
             saveUserFromInfo(userInfo);
         }
@@ -53,6 +54,8 @@ public class UserService {
                         .build();
 
         userRepository.save(user);
+
+        log.info("user saved");
     }
 
 }

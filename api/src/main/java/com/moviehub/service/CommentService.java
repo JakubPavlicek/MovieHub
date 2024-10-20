@@ -12,7 +12,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Log4j2
@@ -35,7 +34,15 @@ public class CommentService {
                                 .orElseThrow(() -> new CommentNotFoundException("Comment with ID: " + commentId + " not found"));
     }
 
+    public Page<Comment> getComments(UUID movieId, Pageable pageable) {
+        log.info("fetching comments for movie: {}", movieId);
+
+        return commentRepository.findCommentsByMovieId(movieId, pageable);
+    }
+
     public void addComment(Movie movie, String text, User user) {
+        log.info("adding comment to movie: {}", movie.getId());
+
         Comment comment = new Comment();
 
         comment.setMovie(movie);
@@ -45,12 +52,6 @@ public class CommentService {
         commentRepository.save(comment);
     }
 
-    public Page<Comment> getComments(UUID movieId, Pageable pageable) {
-        log.info("fetching comments for movie with ID: {}", movieId);
-
-        return commentRepository.findCommentsByMovieId(movieId, pageable);
-    }
-
     public void deleteComment(UUID commentId, User user) {
         Comment comment = getCommentByUser(commentId, user);
 
@@ -58,10 +59,6 @@ public class CommentService {
         comment.setIsDeleted(true);
 
         commentRepository.save(comment);
-    }
-
-    public Optional<Comment> getCommentById(UUID commentId) {
-        return commentRepository.findById(commentId);
     }
 
 }
