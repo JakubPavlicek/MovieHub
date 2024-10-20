@@ -1,0 +1,9 @@
+FROM node:23-alpine3.19
+WORKDIR /app
+COPY client/package.json client/package-lock.json ./
+RUN npm install
+COPY openapi.yaml .
+RUN npm run generate
+COPY client .
+EXPOSE 5173
+CMD ["npm", "run", "dev", "--", "--host"]

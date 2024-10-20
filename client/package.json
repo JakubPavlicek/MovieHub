@@ -8,7 +8,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "generate": "npx openapi-typescript ./../api/src/main/resources/static/openapi.yaml -o ./src/api/api.ts"
+    "generate": "npx openapi-typescript ./openapi.yaml -o ./src/api/api.ts"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.2.4",

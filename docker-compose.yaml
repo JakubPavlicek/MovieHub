@@ -14,31 +14,47 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - spring-net
+      - moviehub-net
 
-  moviehub:
-    image: moviehub
-    container_name: moviehub
+  moviehub-api:
+    image: moviehub-api
+    container_name: moviehub-api
     build:
       context: .
-    develop:
-      watch:
-        - action: rebuild
-          path: .
+      dockerfile: Dockerfile.api
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/${POSTGRES_DB}
       - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
       - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
+    healthcheck:
+      test: ["CMD-SHELL", "wget -T5 -qO- http://localhost:8080/actuator/health | grep UP || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     depends_on:
       db:
         condition: service_healthy
     ports:
       - "8088:8080"
     networks:
-      - spring-net
+      - moviehub-net
+
+  moviehub-client:
+    image: moviehub-client
+    container_name: moviehub-client
+    build:
+      context: .
+      dockerfile: Dockerfile.client
+    depends_on:
+      moviehub-api:
+        condition: service_healthy
+    ports:
+      - "5173:5173"
+    networks:
+      - moviehub-net
 
 networks:
-  spring-net:
+  moviehub-net:
 
 volumes:
   postgres_data:

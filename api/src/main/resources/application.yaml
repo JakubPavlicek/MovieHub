@@ -8,10 +8,14 @@ okta:
     audience: http://movie-hub-api
     issuer: https://dev-bzrzau6cj3i0m33i.us.auth0.com/
 
+# used for healthcheck of the API in the docker-compose
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
 spring:
-  docker:
-    compose:
-      file: api/docker-compose.yaml
   datasource:
     driver-class-name: org.postgresql.Driver
   liquibase:
