@@ -44,6 +44,7 @@
         <li><a href="#unit-testing">Unit Testing</a></li>
         <li><a href="#integration-testing">Integration Testing</a></li>
         <li><a href="#slice-testing">Slice Testing</a></li>
+        <li><a href="#warning-testcontainers-and-docker-in-docker-limitation">⚠️ Warning: Testcontainers and Docker-in-Docker Limitation</a></li>
       </ul>
     </li>
     <li>
@@ -173,6 +174,19 @@ In Spring Boot, **slice tests** are used to isolate specific layers of the appli
 By using slice tests, the application avoids unnecessary initialization of unrelated beans, speeding up the testing process while maintaining high test coverage.
 
 This comprehensive testing approach ensures that both individual components and their interactions are functioning as expected, helping to maintain a reliable and high-performing application.
+
+### ⚠️ Warning: Testcontainers and Docker-in-Docker Limitation
+
+To run the tests, you can't run them inside Docker because the tests rely on Testcontainers, which requires access to Docker, and Docker doesn't run well inside another Docker container. While "Docker-in-Docker" (DinD) is technically possible, it's not recommended for most use cases. The solution would be to use hosted Docker Testcontainers (in the cloud).
+
+Therefore, if you want to run the tests, you’ll need to ensure that Docker is running, manually copy the `openapi.yaml` file to the `/api/src/main/resources/static` folder, and then run `mvn test` from the `/api` folder.
+
+If you prefer not to run the tests yourself, the test results are displayed below.
+
+<img src="tests.png" alt="tests" width="500">
+
+<img src="coverage.png" alt="tests" width="400">
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
