@@ -60,6 +60,15 @@ The client interacts with the Movie Hub API to retrieve and display movie data, 
 The client currently supports actions performed by users with the role of **USER**.
 There are no **ADMIN** functionalities implemented at this time, ensuring that all users have a consistent experience focused on movie exploration and community interaction.
 
+The system already has the following existing user which u can use:
+
+- user with role USER
+  - username: user
+  - password: User123!
+- user with role ADMIN
+  - username: admin
+  - password: Admin123!
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## i18next
