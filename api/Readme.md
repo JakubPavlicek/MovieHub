@@ -46,6 +46,9 @@
         <li><a href="#slice-testing">Slice Testing</a></li>
       </ul>
     </li>
+    <li>
+      <a href="#running-the-application">Running the Application</a>
+    </li>
   </ol>
 </details>
 
@@ -170,5 +173,11 @@ In Spring Boot, **slice tests** are used to isolate specific layers of the appli
 By using slice tests, the application avoids unnecessary initialization of unrelated beans, speeding up the testing process while maintaining high test coverage.
 
 This comprehensive testing approach ensures that both individual components and their interactions are functioning as expected, helping to maintain a reliable and high-performing application.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Running the Application
+
+The API can be accessed at http://localhost:8080.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

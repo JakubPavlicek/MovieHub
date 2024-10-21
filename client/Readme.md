@@ -29,10 +29,13 @@
       </ul>
     </li>
     <li>
-      <a href="#websockets-–-stomp">WebSockets – STOMP</a>
+      <a href="#websockets---stomp">WebSockets – STOMP</a>
     </li>
     <li>
       <a href="#openapi-typescript">OpenAPI TypeScript</a>
+    </li>
+    <li>
+      <a href="#running-the-application">Running the Application</a>
     </li>
   </ol>
 </details>
@@ -91,5 +94,11 @@ The STOMP client manages WebSocket connections and message handling, ensuring a 
 The client leverages **OpenAPI TypeScript** to generate TypeScript definitions from the OpenAPI specification of the Movie Hub API.
 This integration simplifies the process of interacting with the API, as it provides strong typing and autocompletion features, reducing the likelihood of errors when making API calls.
 By using OpenAPI TypeScript, I maintained consistency between the API and client code, improving overall development efficiency.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Running the Application
+
+The client UI can be accessed at http://localhost:5173.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
