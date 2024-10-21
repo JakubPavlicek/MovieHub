@@ -49,11 +49,14 @@ Make sure you have the following installed to run this project:
 
 ### Installation
 
-Build and run the Docker containers using Docker Compose:
-
-```sh
-docker-compose up -d --build
-```
+1. First, clone the repository:
+    ```sh
+    git clone https://github.com/JakubPavlicek/MovieHub.git
+    ```
+2. Then, build and run the Docker containers using Docker Compose:
+    ```sh
+    docker-compose up -d --build
+    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
