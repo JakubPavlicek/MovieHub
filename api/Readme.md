@@ -31,7 +31,12 @@
         <li><a href="#how-it-works">How It Works</a></li>
       </ul>
     </li>
-    <li><a href="#websockets">WebSockets</a></li>
+    <li>
+      <a href="#websockets">WebSockets</a>
+      <ul>
+        <li><a href="#user-role-authorization">User Role Authorization</a></li>
+      </ul>
+    </li>
     <li><a href="#api">API</a></li>
     <li>
       <a href="#testing">Testing</a>
@@ -100,7 +105,7 @@ By integrating Auth0, the application ensures that only authenticated users can 
 ### Key Features of Auth0 Integration:
 - **OAuth 2.0 and OpenID Connect:** Auth0 supports industry-standard protocols, ensuring a secure and robust authentication flow.
 - **JWT (JSON Web Tokens):** Auth0 generates JWTs that securely pass user data between the client and server, enabling stateless authentication.
-- **Role-Based Access Control (RBAC):** Different user roles (e.g., ADMIN, USER) are defined to restrict access to specific features or resources within the application.
+- **Role-Based Access Control (RBAC):** Different user roles (ADMIN, USER) are defined to restrict access to specific features or resources within the application.
 
 By leveraging Auth0’s features, the application maintains a high level of security while ensuring that users have a smooth and easy login experience.
 
@@ -120,7 +125,9 @@ This allows users to chat without needing to constantly refresh or make repeated
 
 With WebSockets, the server can push updates to the client as soon as they happen, creating a more interactive and responsive user experience.
 
-WebSockets provide a more efficient way of handling live communication compared to traditional polling methods, reducing latency and network overhead.
+### User Role Authorization
+WebSocket functionality is authorized only for users with the roles of **USER** or **ADMIN**.
+This ensures that only authenticated users can participate in live discussions and engage with others in the community.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -137,6 +144,8 @@ This interface provides a user-friendly way to explore the available API endpoin
 The OpenAPI Specification file can be found here:
 
 [openapi.yaml](../openapi.yaml)
+
+This file is used to generate the Spring Boot Controllers (interfaces).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

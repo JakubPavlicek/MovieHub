@@ -14,16 +14,26 @@
       <a href="#built-with">Built With</a>
     </li>
     <li>
-      <a href="#architecture">Architecture</a>
-    </li>
-    <li>
-      <a href="#database">Database</a>
+      <a href="#about-the-client">About The Client</a>
       <ul>
-        <li><a href="#optimization">Optimization</a></li>
+        <li><a href="#user-role-support">User Role Support</a></li>
       </ul>
     </li>
-    <li><a href="#websockets">WebSockets</a></li>
-    <li><a href="#api">API</a></li>
+    <li>
+      <a href="#i18next">i18next</a>
+    </li>
+    <li>
+      <a href="#authorization">Authorization</a>
+      <ul>
+        <li><a href="#login-options">Login Options</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#websockets-–-stomp">WebSockets – STOMP</a>
+    </li>
+    <li>
+      <a href="#openapi-typescript">OpenAPI TypeScript</a>
+    </li>
   </ol>
 </details>
 
@@ -34,3 +44,53 @@
 - [![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 - [![Vite](https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E)](https://vite.dev/)
 - <a href="https://auth0.com/"><img width="150" height="50" alt="JWT Auth for open source projects" src="https://cdn.auth0.com/oss/badges/a0-badge-light.png"></a>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## About The Client
+
+The **Movie Hub Client** is a web application designed to provide users with a seamless interface for exploring, rating, and discussing movies.
+Built with modern web technologies, it offers a responsive and intuitive user experience across various devices.
+The client interacts with the Movie Hub API to retrieve and display movie data, enabling users to access up-to-date information about their favorite films.
+
+### User Role Support
+The client currently supports actions performed by users with the role of **USER**.
+There are no **ADMIN** functionalities implemented at this time, ensuring that all users have a consistent experience focused on movie exploration and community interaction.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## i18next
+
+The client utilizes **i18next** for internationalization (i18n), allowing for easy localization of the application.
+This enables users from different regions to interact with the application in their preferred languages.
+The i18next library provides powerful features for translating text, managing language detection, and dynamically loading language resources, making it easy to support multiple languages.
+Supported languages are English and Czech.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## Authorization
+
+The client application utilizes **Auth0** for user authentication and authorization, providing a secure and streamlined login experience.
+By integrating Auth0, the Movie Hub Client ensures that only authenticated users can access certain features, enhancing the overall security of the application.
+
+### Login Options:
+Users can log in using their existing accounts from **Google** or **GitHub**, or they can choose to create an account using their email and password or username and password combination.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## WebSockets – STOMP
+
+To enhance user interaction and provide real-time communication, the client implements **WebSockets** using the STOMP protocol for chat functionality.
+This enables users to participate in live discussions about movies, share opinions, and send messages to one another instantly.
+The STOMP client manages WebSocket connections and message handling, ensuring a smooth and responsive chat experience.
+This real-time feature allows users to engage with the community, making the Movie Hub more interactive and fostering lively conversations around their favorite films.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+## OpenAPI TypeScript
+
+The client leverages **OpenAPI TypeScript** to generate TypeScript definitions from the OpenAPI specification of the Movie Hub API.
+This integration simplifies the process of interacting with the API, as it provides strong typing and autocompletion features, reducing the likelihood of errors when making API calls.
+By using OpenAPI TypeScript, I maintained consistency between the API and client code, improving overall development efficiency.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
