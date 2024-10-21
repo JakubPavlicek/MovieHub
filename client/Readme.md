@@ -83,7 +83,6 @@ Users can log in using their existing accounts from **Google** or **GitHub**, or
 To enhance user interaction and provide real-time communication, the client implements **WebSockets** using the STOMP protocol for chat functionality.
 This enables users to participate in live discussions about movies, share opinions, and send messages to one another instantly.
 The STOMP client manages WebSocket connections and message handling, ensuring a smooth and responsive chat experience.
-This real-time feature allows users to engage with the community, making the Movie Hub more interactive and fostering lively conversations around their favorite films.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
