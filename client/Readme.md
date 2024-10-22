@@ -100,9 +100,11 @@ The STOMP client manages WebSocket connections and message handling, ensuring a 
 
 ## OpenAPI TypeScript
 
-The client leverages **OpenAPI TypeScript** to generate TypeScript definitions from the OpenAPI specification of the Movie Hub API.
+The client leverages **OpenAPI TypeScript** to generate TypeScript definitions from the OpenAPI Specification of the Movie Hub API.
 This integration simplifies the process of interacting with the API, as it provides strong typing and autocompletion features, reducing the likelihood of errors when making API calls.
 By using OpenAPI TypeScript, I maintained consistency between the API and client code, improving overall development efficiency.
+
+To generate the TypeScript definitions from the OpenAPI Specification, you will need to manually copy the `openapi.yaml` file to the `/client` folder, and then run `npm run generate` from the `/client` folder.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

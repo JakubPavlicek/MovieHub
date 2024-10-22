@@ -149,7 +149,7 @@ The OpenAPI Specification file can be found here:
 
 [openapi.yaml](../openapi.yaml)
 
-This file is used to generate the Spring Boot Controllers (interfaces).
+To generate the Spring Boot Controllers and DTOs from the OpenAPI Specification, you will need to manually copy the `openapi.yaml` file to the `/api/src/main/resources/static` folder, and then run `mvn compile` from the `/api` folder. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
