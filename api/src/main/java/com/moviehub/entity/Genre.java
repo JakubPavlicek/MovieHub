@@ -25,10 +25,12 @@ import java.util.UUID;
 @Builder
 public class Genre {
 
+    /// Unique identifier for the genre.
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    /// The name of the genre.
     @Column(
         length = 15,
         nullable = false,

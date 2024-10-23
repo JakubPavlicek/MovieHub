@@ -15,5 +15,6 @@ public enum Gender {
     FEMALE("Female"),
     NON_BINARY("Non-binary");
 
+    /// The string value associated with the gender.
     private final String value;
 }

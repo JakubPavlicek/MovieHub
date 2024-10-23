@@ -25,10 +25,12 @@ import java.util.UUID;
 @Builder
 public class ProductionCompany {
 
+    /// Unique identifier for the production company.
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    /// The name of the production company.
     @Column(
         length = 100,
         nullable = false,

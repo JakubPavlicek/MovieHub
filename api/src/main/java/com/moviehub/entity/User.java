@@ -23,20 +23,24 @@ import lombok.Setter;
 @Builder
 public class User {
 
+    /// Unique identifier for the user (unique user's id from the Auth0).
     @Id
     private String id;
 
+    /// The name of the user.
     @Column(
         nullable = false
     )
     private String name;
 
+    /// The email address of the user.
     @Column(
         length = 320,
         nullable = false
     )
     private String email;
 
+    /// The URL of the user's profile picture.
     @Column(
         nullable = false
     )

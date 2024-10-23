@@ -25,10 +25,12 @@ import java.util.UUID;
 @Builder
 public class Country {
 
+    /// Unique identifier for the country.
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    /// The name of the country.
     @Column(
         length = 15,
         nullable = false,

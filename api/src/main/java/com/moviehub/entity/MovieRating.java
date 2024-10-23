@@ -37,10 +37,12 @@ import java.util.UUID;
 @Builder
 public class MovieRating {
 
+    /// Unique identifier for the movie rating.
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    /// The movie that is being rated.
     @ManyToOne(
         fetch = FetchType.LAZY
     )
@@ -52,6 +54,7 @@ public class MovieRating {
     )
     private Movie movie;
 
+    /// The user who provided the rating.
     @ManyToOne(
         fetch = FetchType.LAZY
     )
@@ -63,6 +66,7 @@ public class MovieRating {
     )
     private User user;
 
+    /// The rating given by the user to the movie.
     @Column(
         nullable = false
     )

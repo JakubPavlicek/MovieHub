@@ -29,6 +29,7 @@ import java.util.List;
 @Builder
 public class Comment extends CommentInfo {
 
+    /// The movie associated with the comment.
     @ManyToOne(
         fetch = FetchType.LAZY
     )
@@ -40,6 +41,7 @@ public class Comment extends CommentInfo {
     )
     private Movie movie;
 
+    /// A list of replies to the comment.
     @OneToMany(
         mappedBy = "comment",
         fetch = FetchType.LAZY,

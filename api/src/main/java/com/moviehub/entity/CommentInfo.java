@@ -36,10 +36,12 @@ import java.util.UUID;
 @Setter
 public abstract class CommentInfo {
 
+    /// Unique identifier for the comment/reply.
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    /// The user who created the comment/reply.
     @ManyToOne(
         fetch = FetchType.LAZY
     )
@@ -51,6 +53,7 @@ public abstract class CommentInfo {
     )
     private User user;
 
+    /// The timestamp when the comment/reply was created.
     @CreationTimestamp
     @Column(
         updatable = false,
@@ -58,38 +61,48 @@ public abstract class CommentInfo {
     )
     private LocalDateTime createdAt;
 
+    /// The content of the comment/reply.
     @Column(
         nullable = false
     )
     private String text;
 
+    /// Indicates whether the comment/reply is deleted.
     @Column(
         nullable = false
     )
     private Boolean isDeleted = false;
 
+    /// The number of likes for the comment/reply.
     @Column(
         nullable = false
     )
     Long likes = 0L;
 
+    /// The number of dislikes for the comment/reply.
     @Column(
         nullable = false
     )
     Long dislikes = 0L;
 
+    /// List of reactions to the comment/reply.
     @OneToMany(
         mappedBy = "commentInfo",
         fetch = FetchType.LAZY
     )
     List<CommentReaction> reactions = new ArrayList<>();
 
+    /// The user's reaction type to the comment/reply.
     @Transient
     private ReactionType userReaction = ReactionType.NONE;
 
+    /// Indicates if the user is the author of the comment/reply.
     @Transient
     private boolean isAuthor = false;
 
+    /// Sets the user's reaction based on the list of reactions.
+    ///
+    /// @param reactions the list of reactions to process
     public void setUserReaction(List<CommentReaction> reactions) {
         userReaction = reactions.stream()
                                 .filter(r -> r.getCommentInfo()
@@ -100,6 +113,9 @@ public abstract class CommentInfo {
                                 .orElse(ReactionType.NONE);
     }
 
+    /// Sets the author status for the current user.
+    ///
+    /// @param currentUser the user to compare with the comment's/reply's author
     public void setIsAuthor(User currentUser) {
         isAuthor = user.getId().equals(currentUser.getId());
     }

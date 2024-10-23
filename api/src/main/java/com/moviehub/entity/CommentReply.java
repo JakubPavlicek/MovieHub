@@ -23,6 +23,7 @@ import lombok.Setter;
 @Builder
 public class CommentReply extends CommentInfo {
 
+    /// The comment to which this reply belongs.
     @ManyToOne(
         fetch = FetchType.LAZY
     )

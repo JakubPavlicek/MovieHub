@@ -29,10 +29,12 @@ import java.util.UUID;
 @Builder
 public class MovieCast {
 
+    /// Unique identifier for the movie cast.
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    /// The movie associated with the cast member.
     @ManyToOne(
         fetch = FetchType.LAZY
     )
@@ -44,6 +46,7 @@ public class MovieCast {
     )
     private Movie movie;
 
+    /// The actor associated with the role in the movie.
     @ManyToOne(
         fetch = FetchType.LAZY
     )
@@ -55,6 +58,7 @@ public class MovieCast {
     )
     private Actor actor;
 
+    /// The role of the actor in the movie.
     @Column(
         nullable = false,
         length = 100

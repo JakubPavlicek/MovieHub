@@ -27,10 +27,12 @@ import java.util.UUID;
 @Builder
 public class Actor {
 
+    /// Unique identifier for the actor.
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    /// The name of the actor.
     @Column(
         length = 50,
         nullable = false,
@@ -38,24 +40,38 @@ public class Actor {
     )
     private String name;
 
+    /// A brief biography of the actor.
     private String bio;
 
+    /// The gender of the actor.
     @Enumerated(EnumType.STRING)
     @Builder.Default
     private Gender gender = Gender.UNSPECIFIED;
 
+    /// Sets the name of the actor.
+    /// If the provided name is null, it will not be updated.
+    ///
+    /// @param newName the new name of the actor
     public void setName(String newName) {
         if (newName != null) {
             name = newName;
         }
     }
 
+    /// Sets the biography of the actor.
+    /// If the provided biography is null, it will not be updated.
+    ///
+    /// @param newBio the new biography of the actor
     public void setBio(String newBio) {
         if (newBio != null) {
             bio = newBio;
         }
     }
 
+    /// Sets the gender of the actor.
+    /// If the provided gender is null, it will not be updated.
+    ///
+    /// @param newGender the new gender of the actor
     public void setGender(Gender newGender) {
         if (newGender != null) {
             gender = newGender;

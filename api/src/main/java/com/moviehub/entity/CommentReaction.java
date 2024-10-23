@@ -38,10 +38,12 @@ import java.util.UUID;
 @Builder
 public class CommentReaction {
 
+    /// Unique identifier for the comment reaction.
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    /// The comment associated with this reaction.
     @ManyToOne(
         fetch = FetchType.LAZY
     )
@@ -53,6 +55,7 @@ public class CommentReaction {
     )
     private CommentInfo commentInfo;
 
+    /// The user who created this reaction.
     @ManyToOne(
         fetch = FetchType.LAZY
     )
@@ -64,6 +67,7 @@ public class CommentReaction {
     )
     private User user;
 
+    /// The type of reaction given by the user for the comment.
     @Enumerated(EnumType.STRING)
     private ReactionType reactionType;
 
