@@ -179,7 +179,8 @@ This comprehensive testing approach ensures that both individual components and 
 
 To run the tests, you can't run them inside Docker because the tests rely on Testcontainers, which requires access to Docker, and Docker doesn't run well inside another Docker container. While "Docker-in-Docker" (DinD) is technically possible, it's not recommended for most use cases. The solution would be to use hosted Docker Testcontainers (in the cloud).
 
-Therefore, if you want to run the tests, you’ll need to ensure that Docker is running, manually copy the `openapi.yaml` file to the `/api/src/main/resources/static` folder, and then run `mvn test` from the `/api` folder.
+Therefore, if you want to run the tests, you’ll need to ensure that you have Maven `mvn` and Java 23 installed, and that Docker is running.
+Once those prerequisites are met, manually copy the `openapi.yaml` file to the `/api/src/main/resources/static` folder, and then run `mvn test` from the `/api` folder.
 
 If you prefer not to run the tests yourself, the test results are displayed below.
 
