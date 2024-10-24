@@ -55,7 +55,7 @@ Make sure you have the following installed to run this project:
     ```
 2. Then, build and run the Docker containers using Docker Compose:
     ```sh
-    docker-compose up -d --build
+    docker compose up -d --build
     ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

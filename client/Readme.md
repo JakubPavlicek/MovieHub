@@ -56,6 +56,11 @@ The **Movie Hub Client** is a web application designed to provide users with a s
 Built with modern web technologies, it offers a responsive and intuitive user experience across various devices.
 The client interacts with the Movie Hub API to retrieve and display movie data, enabling users to access up-to-date information about their favorite films.
 
+If you'd like to install all the necessary libraries for the client, use the following command in the /client folder:
+```shell
+npm install
+```
+
 ### User Role Support
 The client currently supports actions performed by users with the role of **USER**.
 There are no **ADMIN** functionalities implemented at this time, ensuring that all users have a consistent experience focused on movie exploration and community interaction.
