@@ -19,8 +19,8 @@ import org.springframework.stereotype.Service;
 /// This class handles retrieving and saving authenticated users.
 @Service
 @Transactional
-@RequiredArgsConstructor
 @Log4j2
+@RequiredArgsConstructor
 public class UserService {
 
     /// Repository for handling user entities in the database.

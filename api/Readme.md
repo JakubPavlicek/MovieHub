@@ -14,6 +14,9 @@
   <ol>
     <li>
       <a href="#built-with">Built With</a>
+      <ul>
+        <li><a href="#spring-modules">Spring Modules</a></li>
+      </ul>
     </li>
     <li>
       <a href="#architecture">Architecture</a>
@@ -44,7 +47,7 @@
         <li><a href="#unit-testing">Unit Testing</a></li>
         <li><a href="#integration-testing">Integration Testing</a></li>
         <li><a href="#slice-testing">Slice Testing</a></li>
-        <li><a href="#warning-testcontainers-and-docker-in-docker-limitation">⚠️ Warning: Testcontainers and Docker-in-Docker Limitation</a></li>
+        <li><a href="#testcontainers">⚠️ Warning: Testcontainers and Docker-in-Docker Limitation</a></li>
       </ul>
     </li>
     <li>
@@ -62,6 +65,19 @@
 - [![Liquibase](https://img.shields.io/badge/Liquibase-2962FF.svg?style=for-the-badge&logo=Liquibase&logoColor=white)](https://www.liquibase.org)
 - [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1.svg?style=for-the-badge&logo=PostgreSQL&logoColor=white)](https://www.postgresql.org)
 - <a href="https://auth0.com/"><img width="150" height="50" alt="JWT Auth for open source projects" src="https://cdn.auth0.com/oss/badges/a0-badge-light.png"></a>
+
+### Spring Modules
+
+- Spring Data JPA
+- Spring Web
+- Spring Security
+- Okta (for Auth0)
+- WebSocket
+- Spring Boot Actuator
+- Liquibase Migration
+- PostgreSQL Driver
+- Testcontainers
+- Lombok
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -175,6 +191,7 @@ By using slice tests, the application avoids unnecessary initialization of unrel
 
 This comprehensive testing approach ensures that both individual components and their interactions are functioning as expected, helping to maintain a reliable and high-performing application.
 
+<a id="testcontainers" name="testcontainers"></a>
 ### ⚠️ Warning: Testcontainers and Docker-in-Docker Limitation
 
 To run the tests, you can't run them inside Docker because the tests rely on Testcontainers, which requires access to Docker, and Docker doesn't run well inside another Docker container. While "Docker-in-Docker" (DinD) is technically possible, it's not recommended for most use cases. The solution would be to use hosted Docker Testcontainers (in the cloud).

@@ -32,21 +32,21 @@ public class CommentReplyService {
     private static final String REPLY_DELETED = "Reply deleted.";
 
     /// Retrieves a reply by its ID.
-    /// Throws a ReplyNotFoundException if the reply does not exist.
     ///
     /// @param replyId The ID of the reply to retrieve.
     /// @return The CommentReply associated with the specified ID.
+    /// @throws ReplyNotFoundException if the reply does not exist.
     public CommentReply getReply(UUID replyId) {
         return replyRepository.findById(replyId)
                               .orElseThrow(() -> new ReplyNotFoundException("Reply with ID: " + replyId + " not found"));
     }
 
     /// Retrieves a reply by its ID and the associated user.
-    /// Throws a ReplyNotFoundException if the reply does not exist for the specified user.
     ///
     /// @param replyId The ID of the reply to retrieve.
     /// @param user The user associated with the reply.
     /// @return The CommentReply associated with the specified ID and user.
+    /// @throws ReplyNotFoundException if the reply does not exist for the specified user.
     public CommentReply getReplyByUser(UUID replyId, User user) {
         return replyRepository.findByIdAndUser(replyId, user)
                               .orElseThrow(() -> new ReplyNotFoundException("Reply with ID: " + replyId + " not found"));

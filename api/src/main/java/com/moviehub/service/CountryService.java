@@ -43,10 +43,10 @@ public class CountryService {
     }
 
     /// Retrieves a saved country by its name.
-    /// Throws a CountryNotFoundException if the country does not exist.
     ///
     /// @param country The country to check.
     /// @return The Country entity associated with the specified name.
+    /// @throws CountryNotFoundException if the country does not exist.
     private Country getSavedCountry(Country country) {
         return countryRepository.findByName(country.getName())
                                 .orElseThrow(() -> new CountryNotFoundException("Country with name: " + country.getName() + " not found"));
@@ -64,10 +64,10 @@ public class CountryService {
     }
 
     /// Retrieves a country by its ID.
-    /// Throws a CountryNotFoundException if the country does not exist.
     ///
     /// @param countryId The ID of the country to retrieve.
     /// @return The Country entity associated with the specified ID.
+    /// @throws CountryNotFoundException if the country does not exist.
     public Country getCountry(UUID countryId) {
         log.info("retrieving country: {}", countryId);
 
@@ -76,10 +76,10 @@ public class CountryService {
     }
 
     /// Adds a new country to the database.
-    /// Throws a CountryAlreadyExistsException if a country with the same name already exists.
     ///
     /// @param name The name of the country to add.
     /// @return The newly created Country entity.
+    /// @throws CountryAlreadyExistsException if a country with the same name already exists.
     public Country addCountry(String name) {
         if (countryRepository.existsByName(name)) {
             throw new CountryAlreadyExistsException("Country with name: " + name + " already exists");
@@ -94,11 +94,11 @@ public class CountryService {
     }
 
     /// Updates the name of an existing country.
-    /// Throws a CountryNotFoundException if the country does not exist.
     ///
     /// @param countryId The ID of the country to update.
     /// @param name The new name for the country.
     /// @return The updated Country entity.
+    /// @throws CountryNotFoundException if the country does not exist.
     public Country updateCountry(UUID countryId, String name) {
         log.info("updating country: {} to name: {}", countryId, name);
 

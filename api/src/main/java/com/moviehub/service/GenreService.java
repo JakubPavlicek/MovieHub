@@ -5,6 +5,7 @@ import com.moviehub.entity.Genre_;
 import com.moviehub.exception.GenreAlreadyExistsException;
 import com.moviehub.exception.GenreNotFoundException;
 import com.moviehub.repository.GenreRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Sort;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 /// Service class for managing genres.
 /// This class provides methods for adding, retrieving, and updating genre entities.
 @Service
+@Transactional
 @Log4j2
 @RequiredArgsConstructor
 public class GenreService {

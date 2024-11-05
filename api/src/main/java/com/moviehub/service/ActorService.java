@@ -54,9 +54,9 @@ public class ActorService {
     }
 
     /// Verifies the uniqueness of the Actor's name.
-    /// Throws an exception if an Actor with the same name already exists.
     ///
     /// @param actorName The name of the Actor to verify.
+    /// @throws ActorAlreadyExistsException if an Actor with the same name already exists.
     private void verifyActorUniqueness(String actorName) {
         log.debug("verifying actor uniqueness: {}", actorName);
 
@@ -75,10 +75,10 @@ public class ActorService {
     }
 
     /// Retrieves an Actor by their ID.
-    /// Throws an exception if the Actor is not found.
     ///
     /// @param actorId The ID of the Actor to retrieve.
     /// @return The retrieved Actor entity.
+    /// @throws ActorNotFoundException if the Actor is not found.
     public Actor getActor(UUID actorId) {
         log.info("retrieving actor: {}", actorId);
 

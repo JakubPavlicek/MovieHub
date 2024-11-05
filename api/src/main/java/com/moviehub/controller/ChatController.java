@@ -17,8 +17,8 @@ import java.time.format.DateTimeFormatter;
 ///
 /// Controller class for handling chat messages.
 /// It listens for incoming chat messages and broadcasts them to all connected clients.
-@Log4j2
 @Controller
+@Log4j2
 @RequiredArgsConstructor
 public class ChatController {
 
@@ -28,6 +28,10 @@ public class ChatController {
     /// Formatter for formatting the current time in HH:mm format.
     private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
+    /// Handles incoming chat messages and broadcasts them to all subscribed clients.
+    ///
+    /// @param message The chat message sent by the client.
+    /// @return A {@link ChatMessage} object containing the user information, the message, and the current time.
     @MessageMapping("/chat")
     @SendTo("/topic/chat")
     public ChatMessage sendMessage(String message) {

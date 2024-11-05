@@ -19,9 +19,9 @@ import java.util.UUID;
 ///
 /// Service class for managing comments.
 /// This class provides methods for adding, retrieving, and deleting comments on movies.
-@Log4j2
 @Service
 @Transactional
+@Log4j2
 @RequiredArgsConstructor
 public class CommentService {
 
@@ -32,21 +32,21 @@ public class CommentService {
     private static final String COMMENT_DELETED = "Comment deleted.";
 
     /// Retrieves a comment by its ID.
-    /// Throws a CommentNotFoundException if the comment does not exist.
     ///
     /// @param commentId The ID of the comment to retrieve.
     /// @return The Comment associated with the specified ID.
+    /// @throws CommentNotFoundException if the comment does not exist.
     public Comment getComment(UUID commentId) {
         return commentRepository.findById(commentId)
                                 .orElseThrow(() -> new CommentNotFoundException("Comment with ID: " + commentId + " not found"));
     }
 
     /// Retrieves a comment by its ID and the associated user.
-    /// Throws a CommentNotFoundException if the comment does not exist for the specified user.
     ///
     /// @param commentId The ID of the comment to retrieve.
     /// @param user The user associated with the comment.
     /// @return The Comment associated with the specified ID and user.
+    /// @throws CommentNotFoundException if the comment does not exist for the specified user.
     public Comment getCommentByUser(UUID commentId, User user) {
         return commentRepository.findByIdAndUser(commentId, user)
                                 .orElseThrow(() -> new CommentNotFoundException("Comment with ID: " + commentId + " not found"));

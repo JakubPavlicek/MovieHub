@@ -42,10 +42,10 @@ public class DirectorService {
     }
 
     /// Adds a new director to the database.
-    /// Throws a DirectorAlreadyExistsException if a director with the same name already exists.
     ///
     /// @param director The Director entity to add.
     /// @return The newly created Director entity.
+    /// @throws DirectorAlreadyExistsException if a director with the same name already exists.
     public Director addDirector(Director director) {
         log.info("adding director: {}", director.getName());
 
@@ -55,10 +55,10 @@ public class DirectorService {
     }
 
     /// Verifies the uniqueness of the director's name.
-    /// Throws a DirectorAlreadyExistsException if a director with the same name exists.
     ///
     /// @param directorName The name of the director to check.
     /// @param directorId The ID of the director (if updating).
+    /// @throws DirectorAlreadyExistsException if a director with the same name already exists.
     private void verifyDirectorUniqueness(String directorName, UUID directorId) {
         log.debug("verifying director uniqueness: {}", directorName);
 
@@ -86,10 +86,10 @@ public class DirectorService {
     }
 
     /// Retrieves a director by their ID.
-    /// Throws a DirectorNotFoundException if the director does not exist.
     ///
     /// @param directorId The ID of the director to retrieve.
     /// @return The Director entity associated with the specified ID.
+    /// @throws DirectorAlreadyExistsException if the director does not exist.
     public Director getDirector(UUID directorId) {
         log.info("retrieving director: {}", directorId);
 
@@ -117,12 +117,12 @@ public class DirectorService {
     }
 
     /// Updates an existing director's details.
-    /// Throws a DirectorNotFoundException if the director does not exist.
-    /// Throws a DirectorAlreadyExistsException if the updated name already exists.
     ///
     /// @param directorId The ID of the director to update.
     /// @param incomingDirector The Director entity containing the new details.
     /// @return The updated Director entity.
+    /// @throws DirectorNotFoundException if the director does not exist.
+    /// @throws DirectorAlreadyExistsException if the updated name already exists.
     public Director updateDirector(UUID directorId, Director incomingDirector) {
         log.info("updating director: {}", directorId);
 

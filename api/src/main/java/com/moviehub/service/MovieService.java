@@ -24,9 +24,9 @@ import java.util.UUID;
 /// Service class for managing movie-related operations in the MovieHub application.
 /// This class handles adding, retrieving, updating, deleting, and filtering movies,
 /// as well as managing movie metadata, interactions, and comments.
-@Log4j2
 @Service
 @Transactional
+@Log4j2
 @RequiredArgsConstructor
 public class MovieService {
 
